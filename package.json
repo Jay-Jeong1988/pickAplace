@@ -4,8 +4,15 @@
   "description": "Application that shows a ranked list of commercial places by detailed search options",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
   },
   "author": "Jay Jeong",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "morgan": "^1.9.0"
+  }
 }
