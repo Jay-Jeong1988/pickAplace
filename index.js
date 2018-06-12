@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const logger = require('morgan');
+app.set('view engine','ejs');
 
 app.get('/hello-world', (req, res)=>{
-    res.send('Hello, world!');
+    res.render('index')
 } )
 
 app.use((req, res, next) => {
