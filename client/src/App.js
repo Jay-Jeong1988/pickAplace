@@ -22,6 +22,11 @@ class App extends Component {
     return body;
   };
 
+  // callApi = function(){
+  //   return fetch('/hello-world').then( res => res.json() );
+  // }
+
+
   render() {
     return (
       <div className="App">
