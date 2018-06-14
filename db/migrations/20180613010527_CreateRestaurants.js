@@ -41,6 +41,7 @@ exports.up = function(knex, Promise) {
       t.string('last_name').notNullable();
       t.string('email').notNullable();
       t.string('password_digest').notNullable();
+      t.string('address').notNullable();
       t.timestamps(false, true);
     })
   ])

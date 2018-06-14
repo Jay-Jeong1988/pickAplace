@@ -1,6 +1,6 @@
-const BASE = 'http://localhost:5000/';
 
-Restaurant = {
+
+const Restaurant = {
     all() {
         fetch('/restaurants').then( res => res.json() )
     }
@@ -12,3 +12,15 @@ Restaurant = {
     //     return body;
     // }
 }
+
+const User = {
+    create(params) {
+        return fetch('/sign-up', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(params)
+            }).then( res => res.json() ).then( (res) => console.log(res))
+        }
+}
+
+export { User };

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import SignUpPage from './components/pages/sign-up';
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
     return (
       <div className="App">
         <p className="App-intro">{this.state.response}</p>
+        <SignUpPage />
       </div>
     );
   }

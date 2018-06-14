@@ -23,7 +23,8 @@ app.post('/sign-up', (req, res) => {
         'first_name': req.body.first_name,
         'last_name': req.body.last_name,
         'email': req.body.email,
-        'password': req.body.password
+        'password': req.body.password,
+        'address': req.body.address
     }).then( () => res.sendStatus(200))
 })
 
