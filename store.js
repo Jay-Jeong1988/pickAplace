@@ -1,4 +1,5 @@
 const knex = require('./db/index.js');
+const crypto = require('crypto');
 
 module.exports = {
     saltHashPassword,
@@ -16,8 +17,11 @@ module.exports = {
     }
 }
 
+const randomString = () => {
+    return crypto.randomBytes(4).toString('hex');
+}
 
-const saltHashPassword = (password) => {
+function saltHashPassword(password) {
     const secret_key = randomString();
     const hash = crypto.createHmac('sha256', secret_key).update(password).digest('hex');
 
@@ -26,6 +30,3 @@ const saltHashPassword = (password) => {
     }
 }
 
-const randomString = () => {
-    return crypto.randomBytes(4).toString('hex');
-}
