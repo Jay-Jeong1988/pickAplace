@@ -37,10 +37,10 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable('users', t => {
       t.increments('id').primary;
-      t.string('first name').notNullable();
+      t.string('first_name').notNullable();
       t.string('last_name').notNullable();
       t.string('email').notNullable();
-      t.string('password_digest').notNullable();
+      t.string('password').notNullable();
       t.string('address').notNullable();
       t.timestamps(false, true);
     })

@@ -17,9 +17,10 @@ const User = {
     create(params) {
         return fetch('/sign-up', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Accept': 'application/json',
+                'Content-Type': 'application/json' },
                 body: JSON.stringify(params)
-            }).then( res => res.json() ).then( (res) => console.log(res))
+            }).then( res => res.json() )
         }
 }
 

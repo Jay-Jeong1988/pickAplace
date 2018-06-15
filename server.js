@@ -25,7 +25,14 @@ app.post('/sign-up', (req, res) => {
         'email': req.body.email,
         'password': req.body.password,
         'address': req.body.address
-    }).then( () => res.sendStatus(200))
+    }).then( () => {
+        console.log(`user created: 
+            ${req.body.first_name} ${req.body.last_name}, 
+            email: ${req.body.email} 
+            password: ${req.body.password} 
+            address: ${req.body.address}`)
+        res.sendStatus(200);
+    })
 })
 
 const DOMAIN = 'localhost';
