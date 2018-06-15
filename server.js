@@ -35,6 +35,21 @@ app.post('/sign-up', (req, res) => {
     })
 })
 
+app.post('/sign-in', (req, res) => {
+    store.authenticate_user({
+        'email': req.body.email,
+        'password': req.body.password
+    }).then( ({ success }) => {
+        if(success) {
+            console.log(`${req.body.email} has signed in`);
+            res.sendStatus(200);
+        }else {
+            console.log(`authentication denied`);
+            res.sendStatus(401);
+        }
+    })
+})
+
 const DOMAIN = 'localhost';
 const PORT = 5000;
 
