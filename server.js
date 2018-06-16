@@ -4,7 +4,7 @@ const logger = require('morgan');
 const knex = require('./db/index.js');
 const bodyParser = require('body-parser');
 const store = require('./store.js');
-const { check, validationResult } = require('express-validator/check')
+const { check, validationResult, body } = require('express-validator/check')
 // app.set('view engine','ejs');
 app.use(logger(':method :url :status :date[clf]'));
 app.use(express.static("public"));
@@ -21,28 +21,35 @@ app.get('/restaurants', (req, res) => {
 
 app.post('/sign-up', [ 
         check('email').isEmail(),
-        check('password').isLength({ min: 5 })
+        check('password').isLength({ min: 5 }),
+        body('email').custom( value => {
+            return knex('users').select().where({ email: value })
+                .then( ([user]) => {
+                    if (user) return Promise.reject('E-mail already in use');
+                })
+        })
     ], (req, res) => {
-    store.createUser({
-        'first_name': req.body.first_name,
-        'last_name': req.body.last_name,
-        'email': req.body.email,
-        'password': req.body.password,
-        'address': req.body.address
-    }).then( () => {
         const errors = validationResult(req);
+        
         if( !errors.isEmpty() ){
+            errors.array().forEach( error => console.log(error.msg) ) 
             return res.status(422).json({ errors: errors.array() });
-            console.log('invalid email or password')
         }else{
-            console.log(`user created: 
+            store.createUser({
+                'first_name': req.body.first_name,
+                'last_name': req.body.last_name,
+                'email': req.body.email,
+                'password': req.body.password,
+                'address': req.body.address
+            }).then( () => {
+                console.log(`user created: 
                 ${req.body.first_name} ${req.body.last_name}, 
                 email: ${req.body.email} 
                 password: ${req.body.password} 
                 address: ${req.body.address}`)
             res.sendStatus(200);
+            })
         }
-    })
 })
 
 app.post('/sign-in', (req, res) => {

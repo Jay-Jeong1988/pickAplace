@@ -34,10 +34,13 @@ function authenticate_user({ email, password }) {
     console.log(`Authenticating user ${ email } `);
     return knex('users').where({ email })
         .then( ([user]) => {
-            if(!user) return { success: false }
-            
-            const { hash } = saltHashPassword({ password, secret_key: user.salt })
-            
-            return { success: hash === user.encrypted_password }
+            if(!user) {
+                console.log('User does not exist');
+                return { success: false }
+            }else{
+                const { hash } = saltHashPassword({ password, secret_key: user.salt })
+                
+                return { success: hash === user.encrypted_password }
+            }
         })
 }
