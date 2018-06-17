@@ -16,7 +16,9 @@ app.get('/hello-world', (req, res) => {
 } )
 
 app.get('/restaurants', (req, res) => {
-    
+
+    knex('restaurants').select().then( restaurants => res.send(restaurants) );
+
 })
 
 app.post('/sign-up', [ 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SignUpPage from './components/pages/sign-up';
 import SignInPage from './components/pages/sign-in';
+import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
         <p className="App-intro">{this.state.response}</p>
         <SignUpPage />
         <SignInPage />
+        <SearchRestaurantsPage />
       </div>
     );
   }
