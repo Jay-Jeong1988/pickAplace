@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
+import 'react-select/dist/react-select';
 import { Restaurant } from '../../lib/requests';
+
 
 class SearchRestaurantPage extends Component {
 
@@ -33,7 +35,7 @@ class SearchRestaurantPage extends Component {
                         name="restaurants"
                         value={selectedOption}
                         onChange={this.handleChange}
-                        options={Restaurant.all()}
+                        options={['asdfasdf','asdgasdgasdg','dfs']}
                     />
                 </div>
             </main>
