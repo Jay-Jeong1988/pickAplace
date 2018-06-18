@@ -6,19 +6,29 @@ import "chosen-js/chosen.css";
 
 class Chosen extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
-
     componentDidMount(){
         this.$el = $(this.el);
         this.$el.chosen();
+
+        this.handleChange = this.handleChange.bind(this);
+        this.$el.on('change', this.handleChange);
     }
 
     componentWillUnmount(){
+        this.$el.off('change', this.handleChange);
         this.$el.chosen('destroy');
     }
+
+    componentDidUpdate(prevProps) {
+        if( prevProps.childeren !== this.props.childeren ){
+            this.$el.trigger('chosen:updated');
+        }
+    }
+
+    handleChange(event){
+        this.props.onChange(event.target.value)
+    }
+    
     render() {
         return (
             <div>

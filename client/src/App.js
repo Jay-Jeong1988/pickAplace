@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
-import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage';
-import Restaurants from './components/Restaurants';
+import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chosen-js)';
 
 class App extends Component {
 
@@ -37,7 +36,7 @@ class App extends Component {
         <p className="App-intro">{this.state.response}</p>
         <SignUpPage />
         <SignInPage />
-        <Restaurants />
+        <SearchRestaurantsPage />
       </div>
     );
   }

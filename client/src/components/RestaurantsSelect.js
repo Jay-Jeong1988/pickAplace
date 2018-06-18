@@ -2,7 +2,7 @@ import React from 'react';
 import Chosen from './Chosen';
 import { Restaurant } from '../lib/requests';
 
-function Restaurants(props) {
+function RestaurantsSelect() {
 
     return (
         <Chosen className="Chosen-select" onChange={ value => console.log(value) }>
@@ -18,4 +18,4 @@ function Restaurants(props) {
     );
 }
 
-export default Restaurants;
+export default RestaurantsSelect;
