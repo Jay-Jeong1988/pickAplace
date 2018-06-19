@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chosen from '../Chosen';
+import $ from 'jquery';
 import { Restaurant } from '../../lib/requests';
 import { Button } from 'reactstrap';
 
@@ -22,6 +23,26 @@ class SearchRestaurantsPage extends Component {
         })
     }
 
+    changePhrase(event){
+       event.target.innerHTML = 'OK'
+    }
+    changePhraseBack(event){
+        const small = document.createElement('small');
+        small.innerHTML = 'Evaluate the restaurant?';
+        event.target.replaceChild(small, event.target.lastChild);
+    }
+
+    redirectToEvalPage(event){
+        event.preventDefault();
+        const selectedIndex = document.getElementsByClassName('Chosen-select')[0].options.selectedIndex
+        const restaurantId = document.getElementsByClassName('Chosen-select')[0].options[selectedIndex].getAttribute('data-key');
+        const fetchedRestaurant = Restaurant.one(restaurantId);
+        fetchedRestaurant.then( data => { 
+            localStorage.setItem('restaurant', JSON.stringify(data) );
+        // this.props.history.push('/eval_restaurant');
+        })
+    }
+
     render() {
         const { restaurants } = this.state;
 
@@ -37,7 +58,7 @@ class SearchRestaurantsPage extends Component {
 
                                 return restaurant ?
                                     ( 
-                                    <option key={restaurant.id} style={{backgroundImage: `url(${restaurant.imgUrl})`, backgroundSize: '18px', backgroundPosition: '97%', backgroundRepeat: 'no-repeat'}}>
+                                    <option key={restaurant.id} data-key={restaurant.id} style={{backgroundImage: `url(${restaurant.imgUrl})`, backgroundSize: '18px', backgroundPosition: '97%', backgroundRepeat: 'no-repeat'}}>
                                         { `${restaurant.name.charAt(0).toUpperCase() + restaurant.name.slice(1)}`}
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {restaurant.address}
@@ -49,7 +70,9 @@ class SearchRestaurantsPage extends Component {
 
                         }
                     </Chosen>
-                    <Button color='danger'><input type="submit" value="Want to evaluate the restaurant?"/></Button>
+                    
+                    <Button color='success' type="submit" style={{width: '20%', marginTop: '2em'}} onMouseOver={this.changePhrase} onMouseLeave={this.changePhraseBack}><small>Evaluate the restaurant?</small></Button>
+                    
                 </form>
             </main>
         );

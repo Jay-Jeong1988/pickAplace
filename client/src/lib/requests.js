@@ -3,7 +3,7 @@
 const Restaurant = {
     all() {
         return fetch('/restaurants').then( res => res.json() )
-    }
+    },
     // all = async() => {
     //     const res = await fetch('/restaurants');
     //     const body = await res.json();
@@ -11,6 +11,9 @@ const Restaurant = {
     //     if ( res.status !== 200 ) throw Error(body.message);
     //     return body;
     // }
+    one(id) {
+        return fetch(`/restaurants/${id}`).then( res => res.json() )
+    }
 }
 
 const User = {

@@ -16,9 +16,11 @@ app.get('/hello-world', (req, res) => {
 } )
 
 app.get('/restaurants', (req, res) => {
-
     knex('restaurants').select().then( restaurants => res.send(restaurants) );
+})
 
+app.get('/restaurants/:id', (req, res) => {
+    knex('restaurants').where({id: req.params.id}).first().then( restaurant => res.send(restaurant) );
 })
 
 app.post('/sign-up', [ 

@@ -35,7 +35,7 @@ class Chosen extends Component {
     render() {
         return (
             <div>
-                <select className="Chosen-select" ref={ el => this.el = el }
+                <select name="restaurant" className="Chosen-select" ref={ el => this.el = el }
                         data-placeholder="Search for a restaurant..">
                     { this.props.children }
                 </select>
