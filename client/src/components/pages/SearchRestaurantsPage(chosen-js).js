@@ -35,7 +35,7 @@ class SearchRestaurantsPage extends Component {
 
                             return restaurant ?
                                 ( 
-                                <option key={restaurant.id}>
+                                <option key={restaurant.id} style={{backgroundImage: `url(${restaurant.imgUrl})`, backgroundSize: '18px', backgroundPosition: '97%', backgroundRepeat: 'no-repeat'}}>
                                     { `${restaurant.name.charAt(0).toUpperCase() + restaurant.name.slice(1)}`}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {restaurant.address}
