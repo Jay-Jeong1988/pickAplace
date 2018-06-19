@@ -29,11 +29,18 @@ class SearchRestaurantsPage extends Component {
         return (
             <main className="SearchRestaurantsPage" style={{textAlign: 'center'}}>
                 <Chosen className="Chosen-select" onChange={ value => console.log(value) }>
+                    <option></option>
                     {    
                         restaurants.map( restaurant => {
 
                             return restaurant ?
-                                ( <option key={restaurant.id}>{ restaurant.name }</option> )
+                                ( 
+                                <option key={restaurant.id}>
+                                    { `${restaurant.name.charAt(0).toUpperCase() + restaurant.name.slice(1)}`}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {restaurant.address}
+                                </option> 
+                                )
                                 :
                                 null
                         })
