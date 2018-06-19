@@ -2,7 +2,7 @@
 
 const Restaurant = {
     all() {
-        fetch('/restaurants').then( res => res.json() )
+        return fetch('/restaurants').then( res => res.json() )
     }
     // all = async() => {
     //     const res = await fetch('/restaurants');
