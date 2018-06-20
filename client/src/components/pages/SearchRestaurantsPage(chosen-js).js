@@ -12,6 +12,7 @@ class SearchRestaurantsPage extends Component {
         this.state = {
             restaurants: null
         }
+        this.redirectToEvalPage = this.redirectToEvalPage.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +40,7 @@ class SearchRestaurantsPage extends Component {
         const fetchedRestaurant = Restaurant.one(restaurantId);
         fetchedRestaurant.then( data => { 
             localStorage.setItem('restaurant', JSON.stringify(data) );
-        // this.props.history.push('/eval_restaurant');
+            this.props.history.push('/eval_rest');
         })
     }
 
