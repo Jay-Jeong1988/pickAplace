@@ -35,4 +35,14 @@ const User = {
     }
 }
 
+const Eval = {
+    create(id, params) {
+        return fetch(`/eval_rest/${id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(params)
+        }).then( res => res.json() )
+    }
+}
+
 export { User, Restaurant };

@@ -40,7 +40,7 @@ class SearchRestaurantsPage extends Component {
         const fetchedRestaurant = Restaurant.one(restaurantId);
         fetchedRestaurant.then( data => { 
             localStorage.setItem('restaurant', JSON.stringify(data) );
-            this.props.history.push('/eval_rest');
+            this.props.history.push(`/eval_rest/${restaurantId}`);
         })
     }
 

@@ -18,6 +18,7 @@ class EvalRestaurantPage extends Component {
         console.log(formData.entries())
         e.currentTarget.reset()
         alert('successfully evaluated');
+        localStorage.removeItem('restaurant');
         this.props.history.push('/search_rests');
 
     }

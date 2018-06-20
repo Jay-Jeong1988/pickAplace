@@ -23,6 +23,44 @@ app.get('/restaurants/:id', (req, res) => {
     knex('restaurants').where({id: req.params.id}).first().then( restaurant => res.send(restaurant) );
 })
 
+app.post('/eval_rests/:id', (req, res) => {
+    knex('evaluations').insert({ 
+        restaurant_id: req.params.id,
+        price: req.body.price,
+        cozy: req.body.cozy,
+        luxury: req.body.luxury,
+        modern: req.body.modern,
+        taste: req.body.taste,
+        loud: req.body.loud,
+        services: req.body.services,
+        recurrence: req.body.recurrence
+    }).then( () => {
+        const eval_temp = {};
+        const knexWhere = knex('evaluations').where({restaurant_id: req.params.id})
+        const total_count_recur = 0;
+        const countTrue = 0; 
+        knexWhere.first().count('recurrence').then( data => {
+            total_count_recur = data.count;
+        })
+        knexWhere.where({recurrence: true}).first().count('recurrence').then( data => {
+            countTrue = data.count;
+        })
+        knex('restaurants').where({id: req.params.id}).first().update({
+            price: knexWhere.first(knex.raw('ROUND(AVG(price), 2)')).price,
+            cozy: knexWhere.first(knex.raw('ROUND(AVG(cozy), 2)')).cozy,
+            luxury: knexWhere.first(knex.raw('ROUND(AVG(luxury), 2')).luxury,
+            modern: knexWhere.first(knex.raw('ROUND(AVG(modern), 2')).modern,
+            taste: knexwhere.first(knex.raw('ROUND(AVG(taste), 2')).taste,
+            loud: knexWhere.first(knex.raw('ROUND(AVG(loud), 2')).loud,
+            services: knexWhere.first(knex.raw('ROUND(AVG(loud), 2')).services,
+            recurrence: countTrue/total_count_recur * 100
+        })
+    }).then( () => {
+        
+        res.sendStatus(201);
+    })
+})
+
 app.post('/sign-up', [ 
         check('email').isEmail(),
         check('password').isLength({ min: 5 }),

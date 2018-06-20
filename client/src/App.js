@@ -36,7 +36,7 @@ class App extends Component {
           <Route path="/sign_up" exact component={SignUpPage} />
           <Route path="/sign_in" exact component={SignInPage} />
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
-          <Route path="/eval_rest" exact component={EvalRestaurantsPage} />
+          <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
         </div>
       </Router>
     );
