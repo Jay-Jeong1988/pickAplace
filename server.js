@@ -36,26 +36,63 @@ app.post('/eval_rest/:id', (req, res) => {
         services: req.body.services,
         recurrence: req.body.recurrence
     }).then( () => {
-        const eval_temp = {};
         const knexWhere = knex('evaluations').where({restaurant_id: req.params.id})
-        const total_count_recur = 0;
-        const countTrue = 0; 
+        let total_count_recur = 0;
+        let countTrue = 0;
+        let avg_price = 0;
+        let avg_cozy = 0;
+        let avg_luxury = 0;
+        let avg_modern = 0;
+        let avg_taste = 0;
+        let avg_loud = 0;
+        let avg_services = 0; 
         knexWhere.first().count('recurrence').then( data => {
             total_count_recur = data.count;
-        })
-        knexWhere.where({recurrence: true}).first().count('recurrence').then( data => {
-            countTrue = data.count;
-        })
-        knex('restaurants').where({id: req.params.id}).first().update({
-            price: knexWhere.first(knex.raw('ROUND(AVG(price), 2)')).price,
-            cozy: knexWhere.first(knex.raw('ROUND(AVG(cozy), 2)')).cozy,
-            luxury: knexWhere.first(knex.raw('ROUND(AVG(luxury), 2')).luxury,
-            modern: knexWhere.first(knex.raw('ROUND(AVG(modern), 2')).modern,
-            taste: knexWhere.first(knex.raw('ROUND(AVG(taste), 2')).taste,
-            loud: knexWhere.first(knex.raw('ROUND(AVG(loud), 2')).loud,
-            services: knexWhere.first(knex.raw('ROUND(AVG(loud), 2')).services,
-            recurrence: countTrue/total_count_recur * 100
-        })
+        }).then( () => {
+            knexWhere.where({recurrence: true}).first().count('recurrence').then( data => {
+                countTrue = data.count;
+            })
+        }).then( () => {  
+            knexWhere.first(knex.raw('ROUND(AVG(price), 2)')).then( data => {
+                avg_price = data.price;
+            })
+        }).then( () => {
+            knexWhere.first(knex.raw('ROUND(AVG(cozy), 2)')).then( data => {
+                avg_cozy = data.cozy;
+            })
+        }).then( () => {
+            knexWhere.first(knex.raw('ROUND(AVG(luxury), 2)')).then( data => {
+                avg_luxury = data.luxury;
+            })
+        }).then( () => {
+            knexWhere.first(knex.raw('ROUND(AVG(modern), 2)')).then( data => {
+                avg_modern = data.modern;
+            })
+        }).then( () => {
+            knexWhere.first(knex.raw('ROUND(AVG(taste), 2)')).then( data => {
+                avg_taste = data.taste;
+            })
+        }).then( () => {
+            knexWhere.first(knex.raw('ROUND(AVG(loud), 2)')).then( data => {
+                avg_loud = data.loud;
+            })
+        }).then( () => {
+            knexWhere.first(knex.raw('ROUND(AVG(services), 2)')).then( data => {
+                avg_services = data.services;
+            })
+        }).then( () => {
+            knex('restaurants').where({id: req.params.id}).first().update({
+                price: avg_price,
+                cozy: avg_cozy,
+                luxury: avg_luxury,
+                modern: avg_modern,
+                taste: avg_taste,
+                loud: avg_loud,
+                services: avg_services,
+                // recurrence: countTrue/total_count_recur * 100
+            }).then( res => {
+            console.log(res);
+        }); 
     }).then( () => {
         
         res.sendStatus(201);
