@@ -4,6 +4,6 @@ import App from './App';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<App />, div); // render <App/> into a DOM element(div)
   ReactDOM.unmountComponentAtNode(div);
 });

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chosen-js)';
+import EvalRestaurantsPage from './components/pages/EvalRestaurantPage';
 
 class App extends Component {
 
@@ -25,19 +27,18 @@ class App extends Component {
     return body;
   };
 
-  // callApi = function(){
-  //   return fetch('/hello-world').then( res => res.json() );
-  // }
-
 
   render() {
     return (
-      <div className="App">
-        <p className="App-intro">{this.state.response}</p>
-        <SignUpPage />
-        <SignInPage />
-        <SearchRestaurantsPage />
-      </div>
+      <Router>
+        <div className="App">
+          <Route path="/" exact render={ res => <h1>Hi</h1>}/>
+          <Route path="/sign_up" exact component={SignUpPage} />
+          <Route path="/sign_in" exact component={SignInPage} />
+          <Route path="/search_rests" exact component={SearchRestaurantsPage} />
+          <Route path="/eval_rest" exact component={EvalRestaurantsPage} />
+        </div>
+      </Router>
     );
   }
 }
