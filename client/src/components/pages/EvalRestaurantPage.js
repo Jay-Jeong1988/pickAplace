@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Evaluation } from '../../lib/requests';
 
 class EvalRestaurantPage extends Component {
 
@@ -14,12 +14,29 @@ class EvalRestaurantPage extends Component {
 
     evaluate(e) {
         e.preventDefault();
+        const restaurantId = this.props.match.params.id;
         const formData = new FormData(e.currentTarget);
-        console.log(formData.entries())
-        e.currentTarget.reset()
-        alert('successfully evaluated');
-        localStorage.removeItem('restaurant');
-        this.props.history.push('/search_rests');
+        const isTrueSet = ( formData.get('recurrence') === 'true' );
+        const evaluation_score = {
+            price: formData.get('price'),
+            luxury: formData.get('luxury'),
+            cozy: formData.get('cozy'),
+            modern: formData.get('modern'),
+            loud: formData.get('loud'),
+            taste: formData.get('taste'),
+            services: formData.get('services'),
+            recurrence: isTrueSet
+        }
+        // for(let entry of formData.entries()){
+        //     console.log(`${entry[0]}: ${entry[1]}`)
+        // }
+        Evaluation.create(restaurantId, evaluation_score).then( data => {
+            console.log(data);
+        })
+        // e.currentTarget.reset()
+        // alert('successfully evaluated');
+        // localStorage.removeItem('restaurant');
+        // this.props.history.push('/search_rests');
 
     }
 
@@ -29,7 +46,7 @@ class EvalRestaurantPage extends Component {
         return (
             <main className="EvalRestaurantPage">
                 <div className="restaurant_" >
-                    <img src={restaurant.imgUrl}/>
+                    <img src={restaurant.imgUrl} alt="brand_logo"/>
                     <h5>{restaurant.type} restaurant</h5>
                     <h5>{restaurant.address}</h5>
                     <h5>{restaurant["phone number"]}</h5>
@@ -46,10 +63,10 @@ class EvalRestaurantPage extends Component {
                     <label>services<input type="number" name="services"/></label>
                     <h4> Do you think you will go to this restaurant again?</h4>
                     <div>
-                        <label><input type="radio" name="recurrence"/>yes</label>
+                        <label><input type="radio" name="recurrence" value="true"/>yes</label>
                     </div>
                     <div>
-                        <label><input type="radio" name="recurrence"/>no</label>
+                        <label><input type="radio" name="recurrence" value="false"/>no</label>
                     </div>
 
                     <input className="btn btn-primary" type="submit" value="Done"/>

@@ -35,7 +35,7 @@ const User = {
     }
 }
 
-const Eval = {
+const Evaluation = {
     create(id, params) {
         return fetch(`/eval_rest/${id}`, {
             method: 'POST',
@@ -45,4 +45,4 @@ const Eval = {
     }
 }
 
-export { User, Restaurant };
+export { User, Restaurant, Evaluation };

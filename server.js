@@ -23,9 +23,10 @@ app.get('/restaurants/:id', (req, res) => {
     knex('restaurants').where({id: req.params.id}).first().then( restaurant => res.send(restaurant) );
 })
 
-app.post('/eval_rests/:id', (req, res) => {
+app.post('/eval_rest/:id', (req, res) => {
     knex('evaluations').insert({ 
         restaurant_id: req.params.id,
+        user_id: 1,
         price: req.body.price,
         cozy: req.body.cozy,
         luxury: req.body.luxury,
@@ -50,7 +51,7 @@ app.post('/eval_rests/:id', (req, res) => {
             cozy: knexWhere.first(knex.raw('ROUND(AVG(cozy), 2)')).cozy,
             luxury: knexWhere.first(knex.raw('ROUND(AVG(luxury), 2')).luxury,
             modern: knexWhere.first(knex.raw('ROUND(AVG(modern), 2')).modern,
-            taste: knexwhere.first(knex.raw('ROUND(AVG(taste), 2')).taste,
+            taste: knexWhere.first(knex.raw('ROUND(AVG(taste), 2')).taste,
             loud: knexWhere.first(knex.raw('ROUND(AVG(loud), 2')).loud,
             services: knexWhere.first(knex.raw('ROUND(AVG(loud), 2')).services,
             recurrence: countTrue/total_count_recur * 100
