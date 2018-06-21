@@ -36,70 +36,57 @@ app.post('/eval_rest/:id', (req, res) => {
         services: req.body.services,
         recurrence: req.body.recurrence
     }).then( () => {
-        const restaurant_temp = {};
-        return restaurant_temp;
+        // const knexWhere = knex('evaluations').where({restaurant_id: req.params.id}) <---- why wouldn't this work ???? 
+        const getAvg = entry => {
+            return knex('evaluations')
+            .where({restaurant_id: req.params.id})
+            .first(knex.raw(`ROUND(AVG(${entry}))`))
+            .then( data => data.round );
+        }
+        const getAvgRecurrence = () => {
+            const total_count_recur = () => { 
+                    knex('evaluations')
+                    .where({restaurant_id: req.params.id})
+                    .first()
+                    .count('recurrence')
+                    .then( data => {
+                        return data.count;
+                    } )
+            }
+            console.log(total_count_recur())
+            const total_count_true_recur = knex('evaluations')
+                .where({restaurant_id: req.params.id})
+                .where({recurrence: true})
+                .first()
+                .count('recurrence').then( data => data.count)
+
+            return Math.round(parseInt(total_count_true_recur) / parseInt(total_count_recur) * 100);
+        }
+        return Promise.all([
+            getAvg('price'),
+            getAvg('cozy'),
+            getAvg('luxury'),
+            getAvg('modern'),
+            getAvg('taste'),
+            getAvg('loud'),
+            getAvg('services'),
+            getAvgRecurrence()
+        ])
     }).then( rest_temp => {
-        const knexWhere = knex('evaluations').where({restaurant_id: req.params.id});
-        knexWhere.first().count('recurrence').then( data => {
-            rest_temp.total_count_recur = data.count;
-            return rest_temp;
-        }).then( rest_temp => {
-            knexWhere.where({recurrence: true}).first().count('recurrence').then( data => {
-                rest_temp.countTrue = data.count;
-                return rest_temp;
-            }).then( rest_temp => {
-                const knexWhere = knex('evaluations').where({restaurant_id: req.params.id}); // It is weird that knexWhere variable must be assigned again at this point. Otherwise it won't know that it should load data from 'evaluations' table.
-                knexWhere.first(knex.raw('ROUND(AVG(price))')).then( data => {
-                    rest_temp.avg_price = data.round;
-                    return rest_temp;
-                }).then( rest_temp => {
-                    knexWhere.first(knex.raw('ROUND(AVG(cozy))')).then( data => {
-                        rest_temp.avg_cozy = data.round;
-                        return rest_temp;
-                    }).then( rest_temp => {
-                        knexWhere.first(knex.raw('ROUND(AVG(luxury))')).then( data => {
-                            rest_temp.avg_luxury = data.round;
-                            return rest_temp;
-                        }).then( rest_temp => {
-                            knexWhere.first(knex.raw('ROUND(AVG(modern))')).then( data => {
-                                rest_temp.avg_modern = data.round;
-                                return rest_temp;
-                            }).then( rest_temp => {
-                                knexWhere.first(knex.raw('ROUND(AVG(taste))')).then( data => {
-                                    rest_temp.avg_taste = data.round;
-                                    return rest_temp;    
-                                }).then( rest_temp => {
-                                    knexWhere.first(knex.raw('ROUND(AVG(loud))')).then( data => {
-                                        rest_temp.avg_loud = data.round;
-                                        return rest_temp;    
-                                    }).then( rest_temp => {
-                                        knexWhere.first(knex.raw('ROUND(AVG(services))')).then( data => {
-                                            rest_temp.avg_services = data.round;
-                                            return rest_temp;
-                                        }).then( rest_temp => {
-                                            console.log(rest_temp)
-                                            knex('restaurants').where({id: req.params.id}).first().update({
-                                                price: rest_temp.avg_price,
-                                                cozy: rest_temp.avg_cozy,
-                                                luxury: rest_temp.avg_luxury,
-                                                modern: rest_temp.avg_modern,
-                                                taste: rest_temp.avg_taste,
-                                                loud: rest_temp.avg_loud,
-                                                services: rest_temp.avg_services,
-                                                recurrence: Math.round(parseInt(rest_temp.countTrue)/parseInt(rest_temp.total_count_recur) * 100)
-                                            }).then( res => {
-                                                knex('restaurants').select().then( res => console.log(res) )
-                                            })
-                                        })
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })                            
-    }).then( res => res.sendStatus(201) );
+        console.log(rest_temp)
+        // knex('restaurants').where({id: req.params.id}).first().update({
+        //     price: rest_temp.avg_price,
+        //     cozy: rest_temp.avg_cozy,
+        //     luxury: rest_temp.avg_luxury,
+        //     modern: rest_temp.avg_modern,
+        //     taste: rest_temp.avg_taste,
+        //     loud: rest_temp.avg_loud,
+        //     services: rest_temp.avg_services,
+        //     recurrence: Math.round(parseInt(rest_temp.countTrue)/parseInt(rest_temp.total_count_recur) * 100)
+        // }).then( res => {
+        //     knex('restaurants').select().then( res => console.log(res) )                                                          
+        // }).then( result => res.sendStatus(201) );
+    })
 })
 
 app.post('/sign-up', [ 
