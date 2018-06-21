@@ -24,6 +24,7 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 app.post('/eval_rest/:id', (req, res) => {
+    
     knex('evaluations').insert({ 
         restaurant_id: req.params.id,
         user_id: 1,
@@ -35,7 +36,8 @@ app.post('/eval_rest/:id', (req, res) => {
         loud: req.body.loud,
         services: req.body.services,
         recurrence: req.body.recurrence
-    }).then( () => {
+    })
+    .then( () => {
         // const knexWhere = knex('evaluations').where({restaurant_id: req.params.id}) <---- why wouldn't this work ???? 
         const getAvg = entry => {
             return knex('evaluations')
@@ -43,25 +45,31 @@ app.post('/eval_rest/:id', (req, res) => {
             .first(knex.raw(`ROUND(AVG(${entry}))`))
             .then( data => data.round );
         }
-        const getAvgRecurrence = () => {
-            const total_count_recur = () => { 
-                    knex('evaluations')
-                    .where({restaurant_id: req.params.id})
-                    .first()
-                    .count('recurrence')
-                    .then( data => {
-                        return data.count;
-                    } )
-            }
-            console.log(total_count_recur())
-            const total_count_true_recur = knex('evaluations')
+
+        const total_count_recur = () => { 
+            return  knex('evaluations')
+                .where({restaurant_id: req.params.id})
+                .first()
+                .count('recurrence')
+                .then( data => data.count )
+        }
+
+        const total_count_true_recur = () => { 
+            return knex('evaluations')
                 .where({restaurant_id: req.params.id})
                 .where({recurrence: true})
                 .first()
                 .count('recurrence').then( data => data.count)
-
-            return Math.round(parseInt(total_count_true_recur) / parseInt(total_count_recur) * 100);
         }
+
+        const getAvgRecurrence = () => {
+                return total_count_true_recur().then( true_recur => {
+                    return total_count_recur().then( total_recur => {
+                        return Math.round(parseInt(true_recur) / parseInt(total_recur) * 100);
+                    })
+                })
+        }
+
         return Promise.all([
             getAvg('price'),
             getAvg('cozy'),
@@ -70,24 +78,28 @@ app.post('/eval_rest/:id', (req, res) => {
             getAvg('taste'),
             getAvg('loud'),
             getAvg('services'),
-            getAvgRecurrence()
+            getAvgRecurrence(),
         ])
-    }).then( rest_temp => {
-        console.log(rest_temp)
-        // knex('restaurants').where({id: req.params.id}).first().update({
-        //     price: rest_temp.avg_price,
-        //     cozy: rest_temp.avg_cozy,
-        //     luxury: rest_temp.avg_luxury,
-        //     modern: rest_temp.avg_modern,
-        //     taste: rest_temp.avg_taste,
-        //     loud: rest_temp.avg_loud,
-        //     services: rest_temp.avg_services,
-        //     recurrence: Math.round(parseInt(rest_temp.countTrue)/parseInt(rest_temp.total_count_recur) * 100)
-        // }).then( res => {
-        //     knex('restaurants').select().then( res => console.log(res) )                                                          
-        // }).then( result => res.sendStatus(201) );
     })
-})
+    .then(([avg_price, avg_cozy, avg_luxury, avg_modern, avg_taste, avg_loud, avg_services, avg_recurrence]) => {
+
+        return knex('restaurants').where({id: req.params.id}).first().update({
+            price: avg_price,
+            cozy: avg_cozy,
+            luxury: avg_luxury,
+            modern: avg_modern,
+            taste: avg_taste,
+            loud: avg_loud,
+            services: avg_services,
+            recurrence: avg_recurrence
+        });
+    })
+    .then( result => { 
+        knex('restaurants').first().where({id: req.params.id})
+        .then( data => console.log(data))
+        .then( () => res.sendStatus(201) );
+    });
+});
 
 app.post('/sign-up', [ 
         check('email').isEmail(),
