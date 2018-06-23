@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Chosen from '../Chosen';
-import $ from 'jquery';
 import { Restaurant } from '../../lib/requests';
 import { Button } from 'reactstrap';
 
