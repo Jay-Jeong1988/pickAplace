@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import { Restaurant } from '../lib/requests';
 
-const margin = { top: 20, right: 20, bottom: 70, left: 40};
-const width = 700 - margin.left - margin.right;
-const height = 500 - margin.top - margin.bottom;
+const margin = { top: 50, right: 55, bottom: 100, left: 75};
+const width = 900 - margin.left - margin.right;
+const height = 600 - margin.top - margin.bottom;
 
 
 class Graphics extends Component {
@@ -17,7 +17,7 @@ class Graphics extends Component {
         }
         
         
-        this.x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1);
+        this.x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
         this.y = d3.scaleLinear().range([height, 0]);
         this.xAxis = d3.axisBottom(this.x).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
@@ -109,7 +109,7 @@ class Graphics extends Component {
         
         this.svg = d3.select(this.refs.container)
             .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom + 30)
+            .attr("height", height + margin.top + margin.bottom)
         .append("g")
             .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
