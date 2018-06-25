@@ -24,16 +24,10 @@ class Graphics extends Component {
         this.renderAxis = this.renderAxis.bind(this);
         this.renderBars = this.renderBars.bind(this);
         
+        
     }
     
-    componentDidMount() {
-        
-        this.svg = d3.select(this.refs.container)
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-            .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
-        
+    componentWillMount() {
         this.setState({
             dummyData: [
                 {
@@ -45,7 +39,8 @@ class Graphics extends Component {
                     loud: 90,
                     modern: 30,
                     services: 100,
-                    recurrence: 70
+                    recurrence: 70,
+                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
                 },
                 {
                     name: 'second',
@@ -56,26 +51,74 @@ class Graphics extends Component {
                     loud: 30,
                     modern: 80,
                     services: 10,
-                    recurrence: 10
+                    recurrence: 10,
+                    imgUrl: 'https://seeklogo.com/images/R/restaurant-chief-food-hotel-logo-9DE9D03812-seeklogo.com.png'
                 },
                 {
-                    name: 'third',
+                    name: 'fouthrd',
                     price: 20,
                     cozy: 10,
-                    luxury: 70,
+                    luxury: 30,
                     taste: 10,
                     loud: 30,
                     modern: 80,
                     services: 10,
-                    recurrence: 10
-                }
+                    recurrence: 10,
+                    imgUrl: 'http://3.bp.blogspot.com/-Oz5XdPqGddQ/ULy9zwbIDXI/AAAAAAAAPio/HZwYtIr7DfE/s1600/22-restaurant-logo-design.jpg'
+                },
+                {
+                    name: 'sdgso',
+                    price: 80,
+                    cozy: 70,
+                    luxury: 60,
+                    taste: 80,
+                    loud: 90,
+                    modern: 30,
+                    services: 100,
+                    recurrence: 70,
+                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
+                },
+                {
+                    name: 'pdsgsgsoto',
+                    price: 80,
+                    cozy: 70,
+                    luxury: 60,
+                    taste: 80,
+                    loud: 90,
+                    modern: 30,
+                    services: 100,
+                    recurrence: 70,
+                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
+                },
+                {
+                    name: 'psgsdoto',
+                    price: 80,
+                    cozy: 70,
+                    luxury: 60,
+                    taste: 80,
+                    loud: 90,
+                    modern: 30,
+                    services: 100,
+                    recurrence: 70,
+                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
+                },
             ]
-        });
+        })
+    }
+    componentDidMount() {
+        
+        this.svg = d3.select(this.refs.container)
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom + 30)
+        .append("g")
+            .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        
+        this.renderAxis();
     }
     
     componentDidUpdate(){
         
-        this.renderAxis();
         this.renderBars();
     }
     
@@ -104,10 +147,34 @@ class Graphics extends Component {
             .attr('class', 'x axis')
             .attr('transform', `translate( 0 , ${height})`)
             .call(this.xAxis)
-        .selectAll('text')
-            .style("text-anchor", "end")
-            .attr("dx", ".8em")
-            .attr("dy", "2em");
+
+
+
+            this.svg.select('.x.axis')
+            .selectAll('.tick')
+            .data(this.state.dummyData)
+            .append('foreignObject')
+                .attr('transform','translate(-20, 20)')
+            .append('xhtml:div')
+                .style('width','60px')
+                .style('height','40px')
+                .style('background-image', d => `url(${d.imgUrl})`)
+                .style('background-size','40px')
+                .style('background-repeat', 'no-repeat')
+
+
+
+            this.svg.select('.x.axis')
+            .selectAll('.tick')
+            .selectAll('text')
+                .style('font-weight','bold')
+                .style("font-size", '15px')
+                .attr('fill', 'darkgray')
+                .attr("dy", "4em")
+
+
+
+
         
         const yColor = ['#FFC36F', '#FFC84D', '#FFC240', '#FFAB34', '#FF9127',
         '#FF761B', '#FF5B13', '#FF4C0B', '#FF4A0B', '#FF3A06', '#FF0303']
