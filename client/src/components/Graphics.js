@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import { Restaurant } from '../lib/requests';
 
-const margin = { top: 50, right: 55, bottom: 100, left: 75};
-const width = 900 - margin.left - margin.right;
-const height = 600 - margin.top - margin.bottom;
+const margin = { top: 150, right: 55, bottom: 100, left: 220};
+const width = 1250 - margin.left - margin.right;
+const height = 800 - margin.top - margin.bottom;
 
 
 class Graphics extends Component {
@@ -17,13 +17,15 @@ class Graphics extends Component {
         }
         
         
-        this.x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
+        this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
+        this.x1 = d3.scaleBand();
         this.y = d3.scaleLinear().range([height, 0]);
-        this.xAxis = d3.axisBottom(this.x).ticks(10);
+        this.z = d3.scaleOrdinal()
+        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+        this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
         this.renderBars = this.renderBars.bind(this);
-        
         
     }
     
@@ -57,7 +59,7 @@ class Graphics extends Component {
                 {
                     name: 'fouthrd',
                     price: 20,
-                    cozy: 10,
+                    cozy: 90,
                     luxury: 30,
                     taste: 10,
                     loud: 30,
@@ -69,7 +71,7 @@ class Graphics extends Component {
                 {
                     name: 'sdgso',
                     price: 80,
-                    cozy: 70,
+                    cozy: 10,
                     luxury: 60,
                     taste: 80,
                     loud: 90,
@@ -81,7 +83,7 @@ class Graphics extends Component {
                 {
                     name: 'pdsgsgsoto',
                     price: 80,
-                    cozy: 70,
+                    cozy: 30,
                     luxury: 60,
                     taste: 80,
                     loud: 90,
@@ -93,7 +95,7 @@ class Graphics extends Component {
                 {
                     name: 'psgsdoto',
                     price: 80,
-                    cozy: 70,
+                    cozy: 60,
                     luxury: 60,
                     taste: 80,
                     loud: 90,
@@ -108,11 +110,13 @@ class Graphics extends Component {
     componentDidMount() {
         
         this.svg = d3.select(this.refs.container)
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
         .append("g")
-            .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
+        this.keys = Object.keys(this.state.dummyData[0]);
+        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
         
         this.renderAxis();
     }
@@ -124,55 +128,93 @@ class Graphics extends Component {
     
     renderBars() {
         
-        this.svg.selectAll('bar')
+        // this.svg.selectAll('bar')
+        //     .data(this.state.dummyData)
+        //     .enter()
+        // .append('g')
+        // .append('rect')
+        //     .style('fill', 'steelblue')
+        //     .attr('x', d => this.x0(d.name))
+        //     .attr('width', this.x0.bandwidth())
+        //     .attr('y', d => this.y(d.price))
+        //     .attr('height', d => ( height - this.y(d.price)) )
+       
+        this.svg.append('g')
+        .selectAll('g')
             .data(this.state.dummyData)
             .enter()
+        .append('g')
+            .attr('transform', d => { 
+                return 'translate(' + this.x0(d.name) + ', 0)';
+            })
+        .selectAll('rect')
+            .data( d => { 
+                return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
+            .enter()
         .append('rect')
-            .style('fill', 'steelblue')
-            .attr('x', d => this.x(d.name))
-            .attr('width', this.x.bandwidth())
-            .attr('y', d => this.y(d.price))
-            .attr('height', d => ( height - this.y(d.price)) )
+            .attr('x', d => this.x1(d.key) )
+            .attr('y', d => this.y(d.value) )
+            .attr('width', this.x1.bandwidth())
+            .attr('height', d => height - this.y(d.value) )
+            .attr('fill', d => this.z(d.key) );
 
-
+        // this.svg.selectAll('g')
+        // this.svg.selectAll('bar')
+        //     .data(this.state.dummyData)
+        //     .enter()
+        // .append('rect')
+        //     .style('fill', 'orange')
+        //     .attr('x', d => this.x0(d.name))
+        //     .attr('width', this.x0.bandwidth())
+        //     .attr('y', d => this.y(d.cozy))
+        //     .attr('height', d => ( height - this.y(d.cozy)) )
+        
+        
     }
+
     
     renderAxis() {
         
-        this.x.domain(this.state.dummyData.map( d => d.name ));
+
+        this.x0.domain(this.state.dummyData.map( d => d.name ));
+        this.x1.domain(this.keysWithNumVal).rangeRound([0, this.x0.bandwidth()])
         this.y.domain([0, 100]);
         
         this.svg
         .append('g')
-            .attr('class', 'x axis')
-            .attr('transform', `translate( 0 , ${height})`)
-            .call(this.xAxis)
+        .attr('class', 'x axis')
+        .attr('transform', `translate( 0 , ${height})`)
+        .call(this.x0Axis)
+        .select('path')
+        .style('display','none')
+        
 
 
-
-            this.svg.select('.x.axis')
-            .selectAll('.tick')
-            .data(this.state.dummyData)
-            .append('foreignObject')
-                .attr('transform','translate(-20, 20)')
-            .append('xhtml:div')
-                .style('width','60px')
-                .style('height','40px')
-                .style('background-image', d => `url(${d.imgUrl})`)
-                .style('background-size','40px')
-                .style('background-repeat', 'no-repeat')
-
+        this.svg.select('.x.axis')
+        .selectAll('.tick')
+        .data(this.state.dummyData)
+        .append('foreignObject')
+            .attr('transform','translate(-20, 20)')
+        .append('xhtml:div')
+            .style('width','60px')
+            .style('height','40px')
+            .style('background-image', d => `url(${d.imgUrl})`)
+            .style('background-size','40px')
+            .style('background-repeat', 'no-repeat')
 
 
-            this.svg.select('.x.axis')
-            .selectAll('.tick')
-            .selectAll('text')
-                .style('font-weight','bold')
-                .style("font-size", '15px')
-                .attr('fill', 'darkgray')
-                .attr("dy", "4em")
+        this.svg.select('.x.axis')
+        .selectAll('.tick')
+        .selectAll('text')
+            .style('font-weight','bold')
+            .style("font-size", '15px')
+            .attr('fill', 'darkgray')
+            .attr("dy", "4em")
 
 
+        this.svg.select('.x.axis')
+        .selectAll('line')
+        .attr('y2','9')
 
 
         
@@ -186,19 +228,13 @@ class Graphics extends Component {
         .selectAll('text')
             .data(yColor)
             .style('fill', c => c)
-            .style('font-size', '15px')
+            .style('font-size', '22px')
             .style('font-weight', 'bold')
 
-        
-        //     this.svg.append("g")
-        //     .attr("class", "y axis")
-        //     .call(this.yAxis)
-        //     .append("text")
-        //     .attr("transform", "rotate(-90)")
-        //     .attr("y", 6)
-        //     .attr("dy", ".71em")
-        //     .style("text-anchor", "end")
-        //     .text("Value ($)");
+        this.svg
+        .select('.y.axis')
+        .select('path')
+            .style('display','none')
         
         
     }
