@@ -18,10 +18,10 @@ class Graphics extends Component {
         
         
         this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
-        this.x1 = d3.scaleBand();
+        this.x1 = d3.scaleBand().paddingInner(0.05);
         this.y = d3.scaleLinear().range([height, 0]);
         this.z = d3.scaleOrdinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+        .range([ "#993069", "#D8384F", "#E1714F", "#F3DA7B", "#4E9397", "#194B8D", "#8DAD9D", "#A3DDE3"  ]);
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
@@ -121,23 +121,16 @@ class Graphics extends Component {
         this.renderAxis();
     }
     
+
+
     componentDidUpdate(){
         
         this.renderBars();
     }
     
+
+
     renderBars() {
-        
-        // this.svg.selectAll('bar')
-        //     .data(this.state.dummyData)
-        //     .enter()
-        // .append('g')
-        // .append('rect')
-        //     .style('fill', 'steelblue')
-        //     .attr('x', d => this.x0(d.name))
-        //     .attr('width', this.x0.bandwidth())
-        //     .attr('y', d => this.y(d.price))
-        //     .attr('height', d => ( height - this.y(d.price)) )
        
         this.svg.append('g')
         .selectAll('g')
@@ -157,17 +150,6 @@ class Graphics extends Component {
             .attr('width', this.x1.bandwidth())
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) );
-
-        // this.svg.selectAll('g')
-        // this.svg.selectAll('bar')
-        //     .data(this.state.dummyData)
-        //     .enter()
-        // .append('rect')
-        //     .style('fill', 'orange')
-        //     .attr('x', d => this.x0(d.name))
-        //     .attr('width', this.x0.bandwidth())
-        //     .attr('y', d => this.y(d.cozy))
-        //     .attr('height', d => ( height - this.y(d.cozy)) )
         
         
     }
