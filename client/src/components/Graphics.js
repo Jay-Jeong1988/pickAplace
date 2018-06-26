@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import { Restaurant } from '../lib/requests';
 
-const margin = { top: 150, right: 55, bottom: 100, left: 220};
+const margin = { top: 200, right: 55, bottom: 100, left: 180};
 const width = 1250 - margin.left - margin.right;
-const height = 800 - margin.top - margin.bottom;
+const height = 850 - margin.top - margin.bottom;
 
 
 class Graphics extends Component {
@@ -19,7 +19,7 @@ class Graphics extends Component {
         
         this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
         this.x1 = d3.scaleBand().paddingInner(0.05);
-        this.y = d3.scaleLinear().range([height, 0]);
+        this.y = d3.scaleLinear().range([parseInt(height - 50), 0]);
         this.z = d3.scaleOrdinal()
         .range([ "#993069", "#D8384F", "#E1714F", "#F3DA7B", "#4E9397", "#194B8D", "#8DAD9D", "#A3DDE3"  ]);
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
@@ -126,6 +126,7 @@ class Graphics extends Component {
     componentDidUpdate(){
         
         this.renderBars();
+        this.renderLegends();
     }
     
 
@@ -219,6 +220,33 @@ class Graphics extends Component {
             .style('display','none')
         
         
+    }
+
+    renderLegends() {
+
+        const legend = d3.select(this.refs.container)
+        .append("g")
+            .attr('transform','translate(-550,70)')
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 15)
+            .attr("text-anchor", "end")
+        .selectAll("g")
+            .data(this.keysWithNumVal)
+            .enter()
+        .append("g")
+            .attr("transform", function(d, i) { return "translate(" + i * 100 + ",0 )"; });
+
+        legend.append("rect")
+            .attr("x", width - 19)
+            .attr("width", 19)
+            .attr("height", 19)
+            .attr("fill", this.z);
+      
+        legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9.5)
+                .attr("dy", "0.32em")
+                .text(function(d) { return d; });
     }
 
     render() {
