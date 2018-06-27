@@ -377,6 +377,7 @@ class Graphics extends Component {
         options.attr("class", "option").on("click", function() { 
             document.getElementById("selectColor").setAttribute('fill', this.getElementsByClassName("optionColor")[0].getAttribute('fill')); 
             document.getElementById("mydropdown").innerHTML = this.getElementsByTagName("text")[0].innerHTML;
+            document.getElementById('mydropdown').setAttribute('x', '60');
             d3.event.stopPropagation();
         });
 
