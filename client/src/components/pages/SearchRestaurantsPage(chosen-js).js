@@ -15,8 +15,7 @@ class SearchRestaurantsPage extends Component {
     }
 
     componentDidMount() {
-        const restaurants = Restaurant.all()
-        restaurants.then( rests => {
+        Restaurant.all().then( rests => {
             this.setState({
                 restaurants: rests
             })
@@ -51,7 +50,7 @@ class SearchRestaurantsPage extends Component {
         return (
             <main className="SearchRestaurantsPage" style={{textAlign: 'center'}}>
                 <form className="evalRestaurant" onSubmit={this.redirectToEvalPage}>
-                    <Chosen className="Chosen-select" onChange={ value => console.log(value) }>
+                    <Chosen placeholder="Search for restaurant.." className="Chosen-select" onChange={ value => console.log(value) }>
                         <option></option>
                         {    
                             restaurants.map( restaurant => {

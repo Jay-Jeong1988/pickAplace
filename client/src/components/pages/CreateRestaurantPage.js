@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Restaurant } from '../../lib/requests';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Chosen from '../Chosen';
 
 class CreateRestaurantPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            restaurant_types: []
+            restaurant_types: null
         }
         this.createRestaurant = this.createRestaurant.bind(this);
     }
@@ -30,6 +31,8 @@ class CreateRestaurantPage extends Component {
     render(){
         const {restaurant_types} = this.state;
 
+        if(!restaurant_types) return null;
+
         return (
 
             <main className="CreateRestaurantPage">
@@ -40,7 +43,8 @@ class CreateRestaurantPage extends Component {
                         </label>
                     </div>
                     <div className="form-group">
-                        <select className="Chosen-select" name="type">
+                        <Chosen placeholder="Select type" className="Chosen-select" name="type" onChange={ value => console.log(value) } >
+                            <option></option>
                             {   
                                 restaurant_types.map( data => {
                                     return data ?
@@ -53,7 +57,7 @@ class CreateRestaurantPage extends Component {
                                     null
                                 })
                             }
-                        </select>
+                        </Chosen>
                     </div>
                     <div className="form-group">
                         <label htmlFor="address">Restaurant Address
