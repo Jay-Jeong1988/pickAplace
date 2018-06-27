@@ -1,0 +1,17 @@
+.legendsRect {
+    stroke-width:0.5;
+    stroke: rgb(0,0,0);
+}
+.dropdown .option {
+  display:none;
+}
+.dropdown rect{
+  stroke-width:0.5;
+  stroke:rgb(0,0,0)
+}
+.dropdown:hover .option {
+  display:unset;
+}
+.dropdown {
+  cursor:pointer;
+}
