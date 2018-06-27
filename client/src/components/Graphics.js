@@ -29,6 +29,8 @@ class Graphics extends Component {
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
         this.renderBars = this.renderBars.bind(this);
+
+        
         
     }
     

@@ -15,6 +15,21 @@ app.get('/hello-world', (req, res) => {
     // res.render('index');
 } )
 
+app.post('/add_restaurant', (req, res) => {
+    knex('restaurants').insert({ 
+        name: req.body.name,
+        type: req.body.type,
+        address: req.body.address,
+        'phone number': req.body.phone_number,
+        website_url: req.body.website_url,
+        imgUrl: req.body.imgUrl
+    }).then( () => res.sendStatus(200))
+})
+
+app.get('/restaurants/types', (req, res) => {
+    knex('restaurants').select('type').then( types => res.send(types) );
+})
+
 app.get('/restaurants', (req, res) => {
     knex('restaurants').select().then( restaurants => res.send(restaurants) );
 })

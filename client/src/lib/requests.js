@@ -13,6 +13,10 @@ const Restaurant = {
     // }
     one(id) {
         return fetch(`/restaurants/${id}`).then( res => res.json() )
+    },
+
+    types() {
+        return fetch('/restaurants/types').then( res => res.json() )
     }
 }
 

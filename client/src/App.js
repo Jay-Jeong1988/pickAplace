@@ -6,6 +6,7 @@ import SignInPage from './components/pages/SignInPage';
 import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chosen-js)';
 import EvalRestaurantsPage from './components/pages/EvalRestaurantPage';
 import Graphics from './components/Graphics';
+import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
 
 class App extends Component {
 
@@ -39,6 +40,7 @@ class App extends Component {
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
           <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
           <Route path="/restaurants" exact component={Graphics} />
+          <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
         </div>
       </Router>
     );
