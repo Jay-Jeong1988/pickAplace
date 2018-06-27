@@ -24,7 +24,7 @@ class Graphics extends Component {
         this.x1 = d3.scaleBand().paddingInner(0.05);
         this.y = d3.scaleLinear().range([parseInt(height - 50), 0]);
         this.z = d3.scaleOrdinal()
-        .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#8DAD9D", "#A3DDE3"  ]);
+        .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
@@ -283,7 +283,6 @@ class Graphics extends Component {
             .attr('transform','translate(-550,70)')
             .attr("font-family", "sans-serif")
             .attr("font-size", 15)
-            .attr("text-anchor", "end")
         .selectAll("g")
             .data(['price', 'taste', 'services', 'revisit'])
             .enter()
@@ -292,13 +291,13 @@ class Graphics extends Component {
 
         legend.append("rect")
             .attr('class','legendsRect')
-            .attr("x", width - 19)
+            .attr("x", width - 80)
             .attr("width", 19)
             .attr("height", 19)
             .attr("fill", this.z);
       
         legend.append("text")
-                .attr("x", width - 24)
+                .attr("x", width - 50)
                 .attr("y", 9.5)
                 .attr("dy", "0.32em")
                 .text(function(d) { return d; });
@@ -357,10 +356,10 @@ class Graphics extends Component {
                 
             select.append('rect')
                 .attr('id', 'selectColor')
-                .attr('x', 20)
-                .attr('y', 20)
-                .attr('width', 10)
-                .attr('height', 10)
+                .attr('x', 17)
+                .attr('y', 17)
+                .attr('width', 15)
+                .attr('height', 15)
                 .attr('fill', 'white')
             
             select.append("text")
@@ -390,12 +389,12 @@ class Graphics extends Component {
             .attr('fill', 'white');
 
         options.append('rect')
-            .attr('x', 20)
+            .attr('x', 17)
             .attr('y', function( d, i ){
-                return 50 + i*30;
+                return 48 + i*30;
             })
-            .attr('width', 10)
-            .attr('height', 10)
+            .attr('width', 15)
+            .attr('height', 15)
             .attr('class', 'optionColor')
             .attr('fill', this.z)
 
