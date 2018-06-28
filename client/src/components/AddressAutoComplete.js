@@ -1,8 +1,8 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RenderRestaurantDetail from './RenderRestaurantDetail';
 
 const google = window.google;
-
 
 
 class AddressAutoComplete extends React.Component {
@@ -46,7 +46,10 @@ class AddressAutoComplete extends React.Component {
     let address = addressObject.address_components;
     let phone_number = addressObject.formatted_phone_number;
     let website_url = addressObject.website || null;
-    console.log(addressObject)
+    this.photos = addressObject.photos;
+    this.props.callbackFromParent(this.photos);
+    // console.log(addressObject.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}))
+
     function extractAddressData( component, inputType) {
       for( let property of component ){
         for( let type of property.types ) {
@@ -81,7 +84,6 @@ class AddressAutoComplete extends React.Component {
   render() {
     return(
       <main className="AddressAutoComplete">
-
           <div className="form-group">
             <input id="autocomplete"
               className="input-field form-control"
@@ -158,7 +160,6 @@ class AddressAutoComplete extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          
       </main>
     )
   }

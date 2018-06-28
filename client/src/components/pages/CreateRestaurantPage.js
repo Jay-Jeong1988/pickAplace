@@ -3,15 +3,24 @@ import { Restaurant } from '../../lib/requests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Chosen from '../Chosen';
 import AddressAutoComplete from '../AddressAutoComplete';
+import RenderRestaurantDetail from '../RenderRestaurantDetail';
 
 class CreateRestaurantPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            restaurant_types: null
+            restaurant_types: null,
+            photos: null
         }
         this.createRestaurant = this.createRestaurant.bind(this);
+    }
+
+    getPhotos =  dataFromAddressAutoComplete  => {
+        this.setState({
+            restaurant_types: this.state.restaurant_types,
+            photos: dataFromAddressAutoComplete
+        })
     }
 
     componentDidMount(){
@@ -47,12 +56,13 @@ class CreateRestaurantPage extends Component {
 
     render(){
         const {restaurant_types} = this.state;
+        const { photos } = this.state;
 
         if(!restaurant_types) return null;
 
         return (
 
-            <main className="CreateRestaurantPage container" style={{margin: '30px'}}>
+            <main className="CreateRestaurantPage container d-flex" style={{margin: '30px'}}>
                 <form onSubmit={this.createRestaurant} className="" style={{width: '60%'}}>
                     <div className="form-group">
                         <label className="form-control" htmlFor="name"><h3>Restaurant Name</h3>
@@ -78,7 +88,7 @@ class CreateRestaurantPage extends Component {
                     </div>
                     <div className="form-group">
                         <label className="form-control" htmlFor="address"><h3>Restaurant Address</h3>
-                            <AddressAutoComplete className="form-control" />
+                            <AddressAutoComplete callbackFromParent={this.getPhotos}/>
                         </label>
                     </div>
                     <div className="form-group">
@@ -89,6 +99,8 @@ class CreateRestaurantPage extends Component {
 
                     <input className="form-control btn btn-outline-success" type='submit' value="Add restaurant" />
                 </form>
+
+                <RenderRestaurantDetail photos={photos} />
             </main>
         )
     }
