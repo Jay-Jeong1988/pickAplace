@@ -50,7 +50,7 @@ class SearchRestaurantsPage extends Component {
         return (
             <main className="SearchRestaurantsPage" style={{textAlign: 'center'}}>
                 <form className="evalRestaurant" onSubmit={this.redirectToEvalPage}>
-                    <Chosen placeholder="Search for restaurant.." className="Chosen-select" onChange={ value => console.log(value) }>
+                    <Chosen w="60%" placeholder="Search for restaurant.." className="Chosen-select" onChange={ value => console.log(value) }>
                         <option></option>
                         {    
                             restaurants.map( restaurant => {

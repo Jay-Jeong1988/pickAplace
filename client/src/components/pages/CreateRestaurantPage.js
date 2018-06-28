@@ -15,6 +15,7 @@ class CreateRestaurantPage extends Component {
     }
 
     componentDidMount(){
+
         Restaurant.types().then( data => {
             this.setState({
                 restaurant_types: ['izakaya','french','chinese','korean','japanese','asian','dimsum','pho','vietnamese','spanish','brazilian','bistro','fine dining','trattoria','seafood','barbeque','fast food','pizzeria','greek','ramen','buffet','food court','steak house','all you can eat','food truck','mongolian']
@@ -51,15 +52,15 @@ class CreateRestaurantPage extends Component {
 
         return (
 
-            <main className="CreateRestaurantPage container mx-auto" style={{margin: '30px'}}>
-                <form onSubmit={this.createRestaurant} className="mx-auto" style={{width: '60%'}}>
+            <main className="CreateRestaurantPage container" style={{margin: '30px'}}>
+                <form onSubmit={this.createRestaurant} className="" style={{width: '60%'}}>
                     <div className="form-group">
                         <label className="form-control" htmlFor="name"><h3>Restaurant Name</h3>
                             <input className="form-control" type='text' name="name"/>
                         </label>
                     </div>
                     <div className="form-group text-center">
-                        <Chosen placeholder="select restaurant type" className="Chosen-select" name="type" onChange={ value => console.log(value) } >
+                        <Chosen w="100%" placeholder="select restaurant type" className="Chosen-select" name="type" onChange={ value => console.log(value) } >
                             <option></option>
                             {   
                                 restaurant_types.map( data => {

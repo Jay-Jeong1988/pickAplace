@@ -6,9 +6,14 @@ import "chosen-js/chosen.css";
 
 class Chosen extends Component {
 
+    constructor(props) {
+        super(props);
+
+    }
+
     componentDidMount(){
         this.$el = $(this.el);
-        this.$el.chosen({width: '60%', 
+        this.$el.chosen({width: this.props.w, 
                         allow_single_deselect: true,
                         no_results_text: 'Oops, nothing found!',
                         });
