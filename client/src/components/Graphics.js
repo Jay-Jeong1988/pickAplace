@@ -25,12 +25,14 @@ class Graphics extends Component {
         this.y = d3.scaleLinear().range([parseInt(height - 50), 0]);
         this.z = d3.scaleOrdinal()
         .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
+        this.zz = d3.scaleOrdinal()
+        .range([ "#BA96AD", "#B2CCCD", "#F4A790", "#FBECB6", "#E37B89", "#5288D3", "#FFD7E8", "#D9F3F6"]);
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
         this.renderBars = this.renderBars.bind(this);
 
-        
+
         
     }
     
@@ -188,6 +190,23 @@ class Graphics extends Component {
 
 
     renderBars() {
+
+        // d3.select('svg')
+        // .append('filter')
+        //     .attr('id', 'glow')
+        // .append('feGaussianBlur')
+        //     .attr('stdDeviation','0.5')
+        //     .attr('result','coloredBlur')
+        
+        // d3.select('filter')
+        // .append('feMerge')
+        // .append('feMergeNode')
+        //     .attr('in','coloredBlur')
+
+        // d3.select('feMerge')
+        // .append('feMergeNode')
+        //     .attr('in','SourceGraphic')             //option for 'glow'
+
        
         this.svg.append('g')
         .selectAll('g')
@@ -206,7 +225,9 @@ class Graphics extends Component {
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth())
             .attr('height', d => height - this.y(d.value) )
-            .attr('fill', d => this.z(d.key) );
+            .attr('fill', d => this.z(d.key) )
+            .attr('stroke-width','2px')
+            .attr('stroke', d => this.zz(d.key))
         
         
     }
