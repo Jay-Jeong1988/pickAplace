@@ -7,6 +7,7 @@ import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chos
 import EvalRestaurantsPage from './components/pages/EvalRestaurantPage';
 import Graphics from './components/Graphics';
 import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
+import AddressAutoComplete from './components/AddressAutoComplete';
 
 class App extends Component {
 
@@ -41,6 +42,7 @@ class App extends Component {
           <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
           <Route path="/restaurants" exact component={Graphics} />
           <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
+          <Route path="/address" exact component={AddressAutoComplete} />
         </div>
       </Router>
     );
