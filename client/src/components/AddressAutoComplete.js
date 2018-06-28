@@ -11,7 +11,6 @@ class AddressAutoComplete extends React.Component {
 
     this.state = this.initialState()
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handlePlaceSelect = this.handlePlaceSelect.bind(this)
     this.autoComplete = null;
   }
@@ -39,10 +38,6 @@ class AddressAutoComplete extends React.Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.clearForm();
-  }
 
   handlePlaceSelect(){
     let addressObject = this.autoComplete.getPlace();
@@ -80,15 +75,14 @@ class AddressAutoComplete extends React.Component {
 
   render() {
     return(
-      <main className="AddressAutoComplete container">
-        <form onSubmit={this.handleSubmit}>
+      <main className="AddressAutoComplete">
 
           <div className="form-group">
-          <input id="autocomplete"
-            className="input-field form-control"
-            ref="input"
-            type="text"
-            />
+            <input id="autocomplete"
+              className="input-field form-control"
+              ref="input"
+              type="text"
+              />
           </div>
 
           <div className="form-group">
@@ -139,15 +133,7 @@ class AddressAutoComplete extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="form-group">
-            <input
-            type="submit"
-            className="btn btn-outline-success form-control" 
-            value="Submit"
-            onSubmit={this.handleSubmit}
-            />
-          </div>
-        </form>
+          
       </main>
     )
   }

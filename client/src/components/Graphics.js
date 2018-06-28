@@ -226,7 +226,7 @@ class Graphics extends Component {
             .attr('width', this.x1.bandwidth())
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke-width','2px')
+            .attr('stroke-width','1px')
             .attr('stroke', d => this.zz(d.key))
         
         

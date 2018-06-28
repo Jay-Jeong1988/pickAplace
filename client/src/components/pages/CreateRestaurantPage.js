@@ -36,15 +36,15 @@ class CreateRestaurantPage extends Component {
 
         return (
 
-            <main className="CreateRestaurantPage">
-                <form onSubmit={this.createRestaurant} className="container">
+            <main className="CreateRestaurantPage container mx-auto" style={{margin: '30px'}}>
+                <form onSubmit={this.createRestaurant} className="mx-auto" style={{width: '60%'}}>
                     <div className="form-group">
-                        <label htmlFor="name">Restaurant Name
+                        <label className="form-control" htmlFor="name"><h3>Restaurant Name</h3>
                             <input className="form-control" type='text' name="name"/>
                         </label>
                     </div>
-                    <div className="form-group">
-                        <Chosen placeholder="Select type" className="Chosen-select" name="type" onChange={ value => console.log(value) } >
+                    <div className="form-group text-center">
+                        <Chosen placeholder="select restaurant type" className="Chosen-select" name="type" onChange={ value => console.log(value) } >
                             <option></option>
                             {   
                                 restaurant_types.map( data => {
@@ -61,25 +61,25 @@ class CreateRestaurantPage extends Component {
                         </Chosen>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="address">Restaurant Address
-                            <input className="form-control" type='text' name="address"/>
+                        <label className="form-control" htmlFor="address"><h3>Restaurant Address</h3>
+                            <AddressAutoComplete name="address" className="form-control" />
                         </label>
                     </div>
-                        <label htmlFor="phone_number">Restaurant Phone Number
+                        <label className="form-control" htmlFor="phone_number"><h3>Restaurant Phone Number</h3>
                             <input className="form-control" type='text' name="phone_number"/>
                         </label>
                     <div className="form-group">
-                        <label htmlFor="website_url">Restaurant Website Url
+                        <label className="form-control" htmlFor="website_url"><h3>Restaurant Website Url</h3>
                             <input className="form-control" type='text' name="website_url"/>
                         </label>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="imgUrl">Restaurant Logo Url
+                        <label className="form-control" htmlFor="imgUrl"><h3>Restaurant Logo Url</h3>
                             <input className="form-control" type='text' name="imgUrl"/>
                         </label>
                     </div>
 
-                    <input type='submit' value="Add restaurant" />
+                    <input className="form-control btn btn-outline-success" type='submit' value="Add restaurant" />
                 </form>
             </main>
         )
