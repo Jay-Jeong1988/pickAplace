@@ -80,14 +80,6 @@ class CreateRestaurantPage extends Component {
                             <AddressAutoComplete className="form-control" />
                         </label>
                     </div>
-                        <label className="form-control" htmlFor="phone_number"><h3>Restaurant Phone Number</h3>
-                            <input className="form-control" type='text' name="phone_number"/>
-                        </label>
-                    <div className="form-group">
-                        <label className="form-control" htmlFor="website_url"><h3>Restaurant Website Url</h3>
-                            <input className="form-control" type='text' name="website_url"/>
-                        </label>
-                    </div>
                     <div className="form-group">
                         <label className="form-control" htmlFor="imgUrl"><h3>Restaurant Logo Url</h3>
                             <input className="form-control" type='text' name="imgUrl"/>

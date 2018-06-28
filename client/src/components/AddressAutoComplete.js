@@ -30,6 +30,8 @@ class AddressAutoComplete extends React.Component {
       state: '',
       country: '',
       zip_code: '',
+      phone_number: '',
+      website_url: '',
       googleMapLink: ''
     }
   }
@@ -42,7 +44,9 @@ class AddressAutoComplete extends React.Component {
   handlePlaceSelect(){
     let addressObject = this.autoComplete.getPlace();
     let address = addressObject.address_components;
-   
+    let phone_number = addressObject.formatted_phone_number;
+    let website_url = addressObject.website || null;
+    console.log(addressObject)
     function extractAddressData( component, inputType) {
       for( let property of component ){
         for( let type of property.types ) {
@@ -66,6 +70,8 @@ class AddressAutoComplete extends React.Component {
       state: returnLongName(extractAddressData( address, ['administrative_area_level_1'])),
       country: returnLongName(extractAddressData( address, ['country'])),
       zip_code:  returnLongName(extractAddressData( address, ['postal_code'])),
+      phone_number: phone_number,
+      website_url: website_url,
       googleMapLink: addressObject.url
     })
   }
@@ -129,6 +135,26 @@ class AddressAutoComplete extends React.Component {
               className="form-control"
               value={this.state.zip_code}
               placeholder="Zipcode"
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <input 
+              name="phone_number"
+              className="form-control"
+              value={this.state.phone_number}
+              placeholder="Phone Number"
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <input 
+              name="website_url"
+              className="form-control"
+              value={this.state.website_url}
+              placeholder="Website Url"
               onChange={this.handleChange}
             />
           </div>
