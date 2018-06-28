@@ -43,7 +43,6 @@ class AddressAutoComplete extends React.Component {
     let addressObject = this.autoComplete.getPlace();
     let address = addressObject.address_components;
    
-    console.log(address)
     function extractAddressData( component, inputType) {
       for( let property of component ){
         for( let type of property.types ) {

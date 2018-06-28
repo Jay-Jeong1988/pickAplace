@@ -23,7 +23,14 @@ app.post('/add_restaurant', (req, res) => {
         'phone number': req.body.phone_number,
         website_url: req.body.website_url,
         imgUrl: req.body.imgUrl
-    }).then( () => res.sendStatus(200))
+    }).then( () => {
+        knex('restaurants').first().where({ address: req.body.address })
+        .then( restaurant => {
+            console.log(restaurant);
+            res.sendStatus(200);
+        });
+    });
+
 })
 
 app.get('/restaurants/types', (req, res) => {
@@ -38,10 +45,10 @@ app.get('/restaurants/:id', (req, res) => {
     knex('restaurants').where({id: req.params.id}).first().then( restaurant => res.send(restaurant) );
 })
 
-app.post('/eval_rest/:id', (req, res) => {
+app.post('/eval_rest/:restaurant_id', (req, res) => {
     
     knex('evaluations').insert({ 
-        restaurant_id: req.params.id,
+        restaurant_id: req.params.restaurant_id,
         user_id: 1,
         price: req.body.price,
         cozy: req.body.cozy,
@@ -56,14 +63,14 @@ app.post('/eval_rest/:id', (req, res) => {
         // const knexWhere = knex('evaluations').where({restaurant_id: req.params.id}) <---- why wouldn't this work ???? 
         const getAvg = entry => {
             return knex('evaluations')
-            .where({restaurant_id: req.params.id})
+            .where({restaurant_id: req.params.restaurant_id})
             .first(knex.raw(`ROUND(AVG(${entry}))`))
             .then( data => data.round );
         }
 
         const total_count_recur = () => { 
             return  knex('evaluations')
-                .where({restaurant_id: req.params.id})
+                .where({restaurant_id: req.params.restaurant_id})
                 .first()
                 .count('recurrence')
                 .then( data => data.count )
@@ -71,7 +78,7 @@ app.post('/eval_rest/:id', (req, res) => {
 
         const total_count_true_recur = () => { 
             return knex('evaluations')
-                .where({restaurant_id: req.params.id})
+                .where({restaurant_id: req.params.restaurant_id})
                 .where({recurrence: true})
                 .first()
                 .count('recurrence').then( data => data.count)
@@ -98,7 +105,7 @@ app.post('/eval_rest/:id', (req, res) => {
     })
     .then(([avg_price, avg_cozy, avg_luxury, avg_modern, avg_taste, avg_loud, avg_services, avg_recurrence]) => {
 
-        return knex('restaurants').where({id: req.params.id}).first().update({
+        return knex('restaurants').where({id: req.params.restaurant_id}).first().update({
             price: avg_price,
             cozy: avg_cozy,
             luxury: avg_luxury,
@@ -110,7 +117,7 @@ app.post('/eval_rest/:id', (req, res) => {
         });
     })
     .then( result => { 
-        knex('restaurants').first().where({id: req.params.id})
+        knex('restaurants').first().where({id: req.params.restaurant_id})
         .then( data => console.log(data))
         .then( () => res.sendStatus(201) );
     });

@@ -17,14 +17,29 @@ class CreateRestaurantPage extends Component {
     componentDidMount(){
         Restaurant.types().then( data => {
             this.setState({
-                restaurant_types: data
+                restaurant_types: ['izakaya','french','chinese','korean','japanese','asian','dimsum','pho','vietnamese','spanish','brazilian','bistro','fine dining','trattoria','seafood','barbeque','fast food','pizzeria','greek','ramen','buffet','food court','steak house','all you can eat','food truck','mongolian']
             })
         })
 
     }
 
-    createRestaurant() {
+    createRestaurant(event) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const params = {
+            name: formData.get('name'),
+            type: formData.get('type'),
+            address: `${formData.get('street_address')}, ${formData.get('city')}, ${formData.get('state')}, ${formData.get('country')}, ${formData.get('zip_code')}`,
+            phone_number: formData.get('phone_number'),
+            website_url: formData.get('website_url'),
+            imgUrl: formData.get('imgUrl')
+        }
+    
+        Restaurant.create(params).then( data => {
+            console.log(data);
+            console.log('successfully added a restaurant to database');
 
+        })
 
     }
 
@@ -51,7 +66,7 @@ class CreateRestaurantPage extends Component {
                                     return data ?
                                     (
                                         <option key={restaurant_types.indexOf(data)}>
-                                            { data.type.charAt(0).toUpperCase() + data.type.slice(1) }
+                                            { data.charAt(0).toUpperCase() + data.slice(1) }
                                         </option>
                                     )
                                     :
@@ -62,7 +77,7 @@ class CreateRestaurantPage extends Component {
                     </div>
                     <div className="form-group">
                         <label className="form-control" htmlFor="address"><h3>Restaurant Address</h3>
-                            <AddressAutoComplete name="address" className="form-control" />
+                            <AddressAutoComplete className="form-control" />
                         </label>
                     </div>
                         <label className="form-control" htmlFor="phone_number"><h3>Restaurant Phone Number</h3>
