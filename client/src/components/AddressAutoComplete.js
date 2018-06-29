@@ -1,6 +1,5 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import RenderRestaurantDetail from './RenderRestaurantDetail';
 
 const google = window.google;
 
@@ -87,7 +86,7 @@ class AddressAutoComplete extends React.Component {
   }
 
   preventEnterKey = (event) => {
-    if( event.which == 13 ) event.preventDefault();
+    if( event.which === 13 ) event.preventDefault();
   }
 
 

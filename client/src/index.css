@@ -17,11 +17,26 @@ body {
   
 }
 
+.slick-prev.removeFont:before {
+  font-size: 0;
+}
+.slick-next.removeFont:before {
+  font-size: 0;
+}
+
+.slick-prev > img {
+  height: 30px;
+}
+.slick-next > img {
+  height: 30px;
+}
+
 @media only screen and (min-width: 900px) {
   
   .CreateRestaurantPage {
     
     display: flex;
+    justify-content: space-around;
     flex-direction: row-reverse;
   }
   
@@ -60,6 +75,16 @@ body {
     display: flex;
     justify-content: center;
   }
+
+  .slick-prev > img {
+    width: 30px;
+    height: 45px;
+  }
+  .slick-next > img {
+    width: 30px;
+    height: 45px;
+  }
+
 }
 
 @media only screen and (max-width: 459px) {
