@@ -8,12 +8,11 @@ function RenderRestaurantDetail(props) {
 
     return (
         <main className="RenderRestaurantDetail">
-            <div className="form-group">
-                <div className="form-group container photos"
-                    style={{width: '400px', height: '250px', 
+            <div className="photo_container d-flex justify-content-center">
+                <div className="photos"
+                    style={{
                     backgroundImage: `url(${photos[0].getUrl({'maxWidth': 400, 'maxHeight': 240})}`, 
-                    backgroundSize: 'cover'}}>sdfsdf
-                    <input type='text' className="form-control"/>
+                    backgroundSize: 'cover'}}>
                 </div>
             </div>
         </main>

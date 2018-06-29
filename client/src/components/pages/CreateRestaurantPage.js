@@ -65,8 +65,8 @@ class CreateRestaurantPage extends Component {
 
         return (
 
-            <main className="CreateRestaurantPage d-flex justify-content-around" style={{margin: '30px'}}>
-                <form onSubmit={this.createRestaurant} className="" style={{width: '500px'}}>
+            <main className="CreateRestaurantPage">
+                <form onSubmit={this.createRestaurant} className="restaurant_form">
                     <div className="form-group">
                         <label className="form-control" htmlFor="name"><h3>Restaurant Name</h3>
                             <input className="form-control" type='text' name="name"/>

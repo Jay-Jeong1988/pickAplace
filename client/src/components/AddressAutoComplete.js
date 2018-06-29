@@ -45,14 +45,14 @@ class AddressAutoComplete extends React.Component {
     let addressObject = this.autoComplete.getPlace();
     let address = addressObject.address_components;
     let phone_number = addressObject.formatted_phone_number;
-    let website_url = addressObject.website || null;
+    let website_url = addressObject.website || '';
     const sendingDataToParent = { 
       photos: addressObject.photos,
       geometry: addressObject.geometry,
       opening_hours: addressObject.opening_hours,
       google_rating: addressObject.rating
     }
-    
+
     this.props.callbackFromParent(sendingDataToParent);
 
 
