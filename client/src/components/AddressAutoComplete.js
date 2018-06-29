@@ -46,9 +46,15 @@ class AddressAutoComplete extends React.Component {
     let address = addressObject.address_components;
     let phone_number = addressObject.formatted_phone_number;
     let website_url = addressObject.website || null;
-    this.photos = addressObject.photos;
-    this.props.callbackFromParent(this.photos);
-    // console.log(addressObject.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}))
+    const sendingDataToParent = { 
+      photos: addressObject.photos,
+      geometry: addressObject.geometry,
+      opening_hours: addressObject.opening_hours,
+      google_rating: addressObject.rating
+    }
+    
+    this.props.callbackFromParent(sendingDataToParent);
+
 
     function extractAddressData( component, inputType) {
       for( let property of component ){

@@ -19,7 +19,10 @@ class CreateRestaurantPage extends Component {
     getPhotos =  dataFromAddressAutoComplete  => {
         this.setState({
             restaurant_types: this.state.restaurant_types,
-            photos: dataFromAddressAutoComplete
+            photos: dataFromAddressAutoComplete.photos,
+            geometry: dataFromAddressAutoComplete.geometry,
+            opening_hours: dataFromAddressAutoComplete.opening_hours,
+            google_rating: dataFromAddressAutoComplete.google_rating
         })
     }
 
@@ -56,14 +59,14 @@ class CreateRestaurantPage extends Component {
 
     render(){
         const {restaurant_types} = this.state;
-        const { photos } = this.state;
+        const { photos, geometry, google_rating, opening_hours } = this.state;
 
         if(!restaurant_types) return null;
 
         return (
 
-            <main className="CreateRestaurantPage container d-flex" style={{margin: '30px'}}>
-                <form onSubmit={this.createRestaurant} className="" style={{width: '60%'}}>
+            <main className="CreateRestaurantPage d-flex justify-content-around" style={{margin: '30px'}}>
+                <form onSubmit={this.createRestaurant} className="" style={{width: '500px'}}>
                     <div className="form-group">
                         <label className="form-control" htmlFor="name"><h3>Restaurant Name</h3>
                             <input className="form-control" type='text' name="name"/>
@@ -100,7 +103,7 @@ class CreateRestaurantPage extends Component {
                     <input className="form-control btn btn-outline-success" type='submit' value="Add restaurant" />
                 </form>
 
-                <RenderRestaurantDetail photos={photos} />
+                <RenderRestaurantDetail photos={photos} geometry={geometry} google_rating={google_rating} opening_hours={opening_hours} />
             </main>
         )
     }

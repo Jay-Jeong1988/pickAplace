@@ -7,13 +7,13 @@ function RenderRestaurantDetail(props) {
     if( !photos ) return null;
 
     return (
-        <main className="RenderRestaurantDetail container">
+        <main className="RenderRestaurantDetail">
             <div className="form-group">
                 <div className="form-group container photos"
                     style={{width: '400px', height: '250px', 
                     backgroundImage: `url(${photos[0].getUrl({'maxWidth': 400, 'maxHeight': 240})}`, 
-                    backgroundSize: 'cover'}}>
-                    
+                    backgroundSize: 'cover'}}>sdfsdf
+                    <input type='text' className="form-control"/>
                 </div>
             </div>
         </main>
