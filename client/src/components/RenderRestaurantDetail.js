@@ -10,14 +10,17 @@ class RenderRestaurantDetail extends Component {
     constructor(props) {
         super(props);
 
-        this.slideIt = this.slideIt.bind(this);
+        this.slideArrow = this.slideArrow.bind(this);
     }
 
     componentDidUpdate() {
-        this.slideIt();
+        this.slideArrow();
     }
     
-    slideIt() {
+    slideArrow() {
+        if( $('.slick-prev > img ') ) $('.slick-prev > img ').remove();
+        if( $('.slick-next > img ') ) $('.slick-next > img ').remove();
+
         $('.photo_container > .slick-next')
         .css({visibility: 'hidden'})
         .css('right','-14px')
