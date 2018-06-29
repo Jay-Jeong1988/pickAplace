@@ -62,10 +62,13 @@ class CreateRestaurantPage extends Component {
         const { photos, geometry, google_rating, opening_hours } = this.state;
 
         if(!restaurant_types) return null;
-
+        
         return (
-
+            
             <main className="CreateRestaurantPage">
+
+                <RenderRestaurantDetail photos={photos} geometry={geometry} google_rating={google_rating} opening_hours={opening_hours} />
+
                 <form onSubmit={this.createRestaurant} className="restaurant_form">
                     <div className="form-group">
                         <label className="form-control" htmlFor="name"><h3>Restaurant Name</h3>
@@ -103,7 +106,6 @@ class CreateRestaurantPage extends Component {
                     <input className="form-control btn btn-outline-success" type='submit' value="Add restaurant" />
                 </form>
 
-                <RenderRestaurantDetail photos={photos} geometry={geometry} google_rating={google_rating} opening_hours={opening_hours} />
             </main>
         )
     }
