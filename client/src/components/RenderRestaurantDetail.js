@@ -80,6 +80,11 @@ class RenderRestaurantDetail extends Component {
                         })
                     }
                 </Slider>
+                <div className="placeData">
+                    <div className="g-rating">
+                        <small style={{display:'inline'}}>Google Rating </small><h1 style={{display:'inline'}}>{google_rating} / 5</h1>
+                    </div>    
+                </div>
             </main>
         )
     }

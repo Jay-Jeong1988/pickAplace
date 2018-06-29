@@ -31,6 +31,12 @@ body {
   height: 30px;
 }
 
+.placeData {
+  padding: 40px 20px;
+  text-align: end;
+
+}
+
 @media only screen and (min-width: 900px) {
   
   .CreateRestaurantPage {
