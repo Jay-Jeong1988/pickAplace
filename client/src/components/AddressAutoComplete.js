@@ -46,6 +46,7 @@ class AddressAutoComplete extends React.Component {
     let address = addressObject.address_components;
     let phone_number = addressObject.formatted_phone_number;
     let website_url = addressObject.website || '';
+
     const sendingDataToParent = { 
       photos: addressObject.photos,
       geometry: addressObject.geometry,
@@ -56,7 +57,7 @@ class AddressAutoComplete extends React.Component {
     this.props.callbackFromParent(sendingDataToParent);
 
 
-    function extractAddressData( component, inputType) {
+    function extractAddressData( component = [], inputType) {
       for( let property of component ){
         for( let type of property.types ) {
           for( let t of inputType ){
@@ -85,6 +86,10 @@ class AddressAutoComplete extends React.Component {
     })
   }
 
+  preventEnterKey = (event) => {
+    if( event.which == 13 ) event.preventDefault();
+  }
+
 
 
   render() {
@@ -95,6 +100,7 @@ class AddressAutoComplete extends React.Component {
               className="input-field form-control"
               ref="input"
               type="text"
+              onKeyDown={this.preventEnterKey}
               />
           </div>
 
