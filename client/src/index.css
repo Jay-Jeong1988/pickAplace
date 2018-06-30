@@ -32,9 +32,13 @@ body {
 }
 
 .placeData {
-  padding: 40px 20px;
+  padding: 0 20px;
+  margin: 7%;
   text-align: end;
 
+}
+.photo_container .slick-dots {
+  width: inherit;
 }
 
 @media only screen and (min-width: 900px) {
@@ -61,6 +65,17 @@ body {
     width: 100%;
     height: 240px;
   }
+  .photo_container .slick-dots {
+    width: 88%;
+  }
+  .photo_container .slick-dots li {
+    margin: 0 4px;
+  }
+
+  .placeData {
+    margin: 0;
+    padding: 40px 20px;
+  }
   
 }
 
@@ -74,7 +89,6 @@ body {
   .photo_container {
     padding: 30px;
     margin-top: 30px;
-    width: 70%;
   }
 
   .RenderRestaurantDetail {
@@ -90,6 +104,11 @@ body {
     width: 30px;
     height: 45px;
   }
+  .photo_container {
+    width: 86%;
+    margin: 7%;
+  }
+  
 
 }
 
@@ -102,7 +121,12 @@ body {
 
   .photo_container {
     margin-top: 30px;
+    margin-left: 7%;
     width: 86%;
+  }
+
+  .photo_container .slick-dots li {
+    margin: 0 3px;
   }
   .photos {
     width: 100%;

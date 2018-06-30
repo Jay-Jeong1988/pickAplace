@@ -53,6 +53,7 @@ class AddressAutoComplete extends React.Component {
       google_rating: addressObject.rating
     }
 
+    
     this.props.callbackFromParent(sendingDataToParent);
     console.log(addressObject)
 
