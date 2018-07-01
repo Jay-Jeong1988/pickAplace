@@ -417,13 +417,16 @@ class Graphics extends Component {
             if( l < this.moodKeys[i].length ) l = this.moodKeys[i].length
         };
         l=l*10;
+
         var svg = d3.select(this.refs.container)
             .append("g")
                 .attr("class","dropdown")
         
         let select = svg.append("g")
             .attr("class","select")
-            .attr("transform", "translate(800, 55)");
+            .attr("transform", "translate(800, 55)")
+            .on("mouseover", (d, i) => options.attr('visibility', 'visible'))
+            .on("mouseout", (d, i) => options.attr('visibility', 'hidden'));
         
             select.append("rect")
                 .attr("x", 10)
@@ -450,6 +453,7 @@ class Graphics extends Component {
             .data(this.moodKeys)
             .enter()
         .append("g")
+            .attr('visibility', 'hidden');
         
 
         options.append("rect").attr("x", 10)
@@ -459,6 +463,7 @@ class Graphics extends Component {
             .attr("width", l + 70)
             .attr("height", 30)
             .attr('fill', 'white')
+
             
 
         options.append('rect')
