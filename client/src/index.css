@@ -41,6 +41,23 @@ body {
   width: inherit;
 }
 
+/* .backgroundImage {
+  background-image: url(https://kontenta.co.uk/designroom/wp-content/uploads/2015/10/variety-paint.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  filter: hue-rotate(240deg);
+  filter: opacity(30%);
+  z-index: -1;
+  position: fixed;
+  width: 1280px;
+  height: 800px;
+} */
+
+.restaurant_form > .submit {
+  background-color: white;
+}
+
 @media only screen and (min-width: 900px) {
   
   .CreateRestaurantPage {

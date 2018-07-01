@@ -66,6 +66,7 @@ class CreateRestaurantPage extends Component {
         return (
             
             <main className="CreateRestaurantPage">
+                <div className="backgroundImage"></div>
 
                 <RenderRestaurantDetail photos={photos} geometry={geometry} google_rating={google_rating} opening_hours={opening_hours} />
 
@@ -103,7 +104,7 @@ class CreateRestaurantPage extends Component {
                         </label>
                     </div>
 
-                    <input className="form-control btn btn-outline-success" type='submit' value="Add restaurant" />
+                    <input className="form-control btn btn-outline-success submit" type='submit' value="Add restaurant" />
                 </form>
 
             </main>
