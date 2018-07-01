@@ -140,6 +140,7 @@ class Graphics extends Component {
         .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
         this.zz = d3.scaleOrdinal()
         .range([ "#BA96AD", "#B2CCCD", "#F4A790", "#FBECB6", "#E37B89", "#5288D3", "#FFD7E8", "#D9F3F6"]);
+        
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
@@ -186,27 +187,34 @@ class Graphics extends Component {
     }
     
     renderBars() {
+        // var glowOn = true;
+
+        // function switchGlow(d, i) {
+        //     d3.event.target.style.filter = glowOn ? "none" : "url(#glow)";
+        //     glowOn = glowOn ? false : true;
+        // }
+    
+        d3.select('svg')
+        .append('filter')
+            .attr('id', 'glow')
+        .append('feGaussianBlur')
+            .attr('stdDeviation','2.5')
+            .attr('result','coloredBlur')
         
-        // d3.select('svg')
-        // .append('filter')
-        //     .attr('id', 'glow')
-        // .append('feGaussianBlur')
-        //     .attr('stdDeviation','0.5')
-        //     .attr('result','coloredBlur')
+        d3.select('filter')
+        .append('feMerge')
+        .append('feMergeNode')
+            .attr('in','coloredBlur')
         
-        // d3.select('filter')
-        // .append('feMerge')
-        // .append('feMergeNode')
-        //     .attr('in','coloredBlur')
+        d3.select('feMerge')
+        .append('feMergeNode')
+            .attr('in','SourceGraphic')             //option for 'glow'
         
-        // d3.select('feMerge')
-        // .append('feMergeNode')
-        //     .attr('in','SourceGraphic')             //option for 'glow'
-        
+
         this.keys = Object.keys(this.state.dummyData[0]);
         this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
         
-        this.svg.append('g')
+        const bars = this.svg.append('g')
         .attr('class','bars')
         .selectAll('g')
         .data(this.state.dummyData)
@@ -218,21 +226,35 @@ class Graphics extends Component {
         .selectAll('rect')
             .data( d => { 
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
-            .enter()
-        .append('rect')
+            .enter();
+        
+        bars.append('rect')
             .attr('y', height)
-        .transition()
-        .duration(1500)
+            .transition()
+            .duration(1500)
             .attr('x', d => this.x1(d.key) )
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
-            .attr('fill', d => this.z(d.key) )
             .attr('height', d => height - this.y(d.value) )
-            .attr('stroke-width', d => this.x1.bandwidth()/10 )
-            .attr('stroke', d => this.zz(d.key))
-            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` );
+            .attr('fill', d => this.z(d.key) )
+            .attr('stroke', d => this.z(d.key))
+            .attr('stroke-width', d => this.x1.bandwidth()/15 )
+            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
 
-        
+        bars.append('rect')
+            .attr('y', height)
+            .transition()
+            .duration(1500)
+            .attr('x', d => this.x1(d.key) )
+            .attr('y', d => this.y(d.value) )
+            .attr('width', this.x1.bandwidth() )
+            .attr('height', d => height - this.y(d.value) )
+            .attr('fill', d => this.z(d.key) )
+            .attr('stroke', d => this.z(d.key))
+            .attr('stroke-width', d => this.x1.bandwidth()/15 )
+            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
+            .style('filter','url(#glow)')
+                
         
     }
 
