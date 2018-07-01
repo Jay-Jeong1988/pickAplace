@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Chosen from '../Chosen';
 import AddressAutoComplete from '../AddressAutoComplete';
 import RenderRestaurantDetail from '../RenderRestaurantDetail';
+import $ from 'jquery';
 
 class CreateRestaurantPage extends Component {
 
@@ -30,7 +31,7 @@ class CreateRestaurantPage extends Component {
 
         Restaurant.types().then( data => {
             this.setState({
-                restaurant_types: ['izakaya','french','chinese','korean','japanese','asian','dimsum','pho','vietnamese','spanish','brazilian','bistro','fine dining','trattoria','seafood','barbeque','fast food','pizzeria','greek','ramen','buffet','food court','steak house','all you can eat','food truck','mongolian']
+                restaurant_types: ['izakaya','french','chinese','korean','franchise','japanese','asian','dimsum','pho','vietnamese','spanish','brazilian','bistro','fine dining','trattoria','seafood','barbeque','fast food','pizzeria','greek','ramen','buffet','food court','steak house','all you can eat','food truck','mongolian', 'breakfast & brunch', 'hamburgers', 'italian']
             })
         })
 
@@ -47,12 +48,13 @@ class CreateRestaurantPage extends Component {
             website_url: formData.get('website_url'),
             imgUrl: formData.get('imgUrl')
         }
-    
+      
         Restaurant.create(params).then( data => {
-            console.log(data);
             console.log('successfully added a restaurant to database');
-
+            console.log(data);
         })
+        event.currentTarget.reset();
+        
 
     }
 

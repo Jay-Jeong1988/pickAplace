@@ -32,11 +32,10 @@ class EvalRestaurantPage extends Component {
         // }
         Evaluation.create(restaurantId, evaluation_score).then( data => {
             console.log(data);
+            alert('successfully evaluated');
+            localStorage.removeItem('restaurant');
+            this.props.history.push('/search_rests');
         })
-        // e.currentTarget.reset()
-        // alert('successfully evaluated');
-        // localStorage.removeItem('restaurant');
-        // this.props.history.push('/search_rests');
 
     }
 

@@ -37,7 +37,7 @@ class Chosen extends Component {
         return (
             <div>
                 <select className="Chosen-select" ref={ el => this.el = el }
-                        data-placeholder={this.props.placeholder}>
+                        data-placeholder={this.props.placeholder} name={this.props.name}>
                     { this.props.children }
                 </select>
             </div>

@@ -55,7 +55,7 @@ class AddressAutoComplete extends React.Component {
 
     
     this.props.callbackFromParent(sendingDataToParent);
-    console.log(addressObject)
+
 
     function extractAddressData( component = [], inputType) {
       for( let property of component ){

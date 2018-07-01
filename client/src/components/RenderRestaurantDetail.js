@@ -58,30 +58,32 @@ class RenderRestaurantDetail extends Component {
         let closestDate = new Date();
         let smallestTimeGap = 86400000;
         
-        for( let i of periods ){
-            let timeDiffer = i[`${OoC}`].nextDate - now.getTime();
-            if( timeDiffer < smallestTimeGap ) {
-                smallestTimeGap = timeDiffer
-                closestDate = i[`${OoC}`].nextDate; 
+        if( periods ){
+            for( let i of periods ){
+                let timeDiffer = i[`${OoC}`].nextDate - now.getTime();
+                if( timeDiffer < smallestTimeGap ) {
+                    smallestTimeGap = timeDiffer
+                    closestDate = i[`${OoC}`].nextDate; 
+                }
             }
-        }
 
-        for( let i of periods ){
-            if( i[`${OoC}`].nextDate === closestDate ) OoC_at = [ i[`${OoC}`].hours, i[`${OoC}`].minutes ];
-        }
-        
-        if( OoC_at[0].toString() && OoC_at[1].toString() ) {
-            hours = OoC_at[0];
-            minutes = OoC_at[1];
-        }
-        if( minutes === 0 ) minutes = '00';
+            for( let i of periods ){
+                if( i[`${OoC}`].nextDate === closestDate ) OoC_at = [ i[`${OoC}`].hours, i[`${OoC}`].minutes ];
+            }
+            
+            if( OoC_at[0].toString() && OoC_at[1].toString() ) {
+                hours = OoC_at[0];
+                minutes = OoC_at[1];
+            }
+            if( minutes === 0 ) minutes = '00';
 
-        if( hours >= 12 && hours < 24 ){
-            if( hours > 12 ) hours -= 12
+            if( hours >= 12 && hours < 24 ){
+                if( hours > 12 ) hours -= 12
 
-            return `${hours}:${minutes} p.m.`;
-        }else {
-            return `${hours}:${minutes} a.m.`;
+                return `${hours}:${minutes} p.m.`;
+            }else {
+                return `${hours}:${minutes} a.m.`;
+            }
         }
     }
 
@@ -95,8 +97,8 @@ class RenderRestaurantDetail extends Component {
             slidesToShow: 1,
             slidesToScroll: 1
         };
-        const { photos, geometry, opening_hours = '', google_rating = '' } = this.props;
-        
+        const { photos, geometry, opening_hours = '', google_rating = '0' } = this.props;
+
         if( !photos ) return null;
         return (
             <main className="RenderRestaurantDetail">
@@ -130,9 +132,9 @@ class RenderRestaurantDetail extends Component {
                         <div className="opening-hours">
                             {
                                 opening_hours.open_now ? 
-                                <small style={{color: 'blue'}}>Open now ∙ <span style={{color: 'red'}}>Closes at { this.getOpenOrCloseTime(this.props.opening_hours.periods, 'close') }</span></small>
+                                <small style={{color: 'blue'}}>Open now ∙ <span style={{color: 'red'}}>Closes at { this.getOpenOrCloseTime(opening_hours.periods, 'close') }</span></small>
                                 :
-                                <small style={{color: 'red'}}>Closed now ∙ <span style={{color: 'blue'}}>Opens at { this.getOpenOrCloseTime(this.props.opening_hours.periods, 'open') }</span></small>
+                                <small style={{color: 'red'}}>Closed now ∙ <span style={{color: 'blue'}}>Opens at { this.getOpenOrCloseTime(opening_hours.periods, 'open') }</span></small>
                             }
 
                         </div>

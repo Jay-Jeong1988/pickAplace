@@ -35,8 +35,7 @@ class SearchRestaurantsPage extends Component {
         event.preventDefault();
         const selectedIndex = document.getElementsByClassName('Chosen-select')[0].options.selectedIndex
         const restaurantId = document.getElementsByClassName('Chosen-select')[0].options[selectedIndex].getAttribute('data-key');
-        const fetchedRestaurant = Restaurant.one(restaurantId);
-        fetchedRestaurant.then( data => { 
+        Restaurant.one(restaurantId).then( data => { 
             localStorage.setItem('restaurant', JSON.stringify(data) );
             this.props.history.push(`/eval_rest/${restaurantId}`);
         })

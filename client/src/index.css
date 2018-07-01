@@ -8,6 +8,12 @@ body {
 
   margin: 30px;
 }
+.restaurant.container {
+  border: 0.5px lightgray solid;
+  border-radius: 5px;
+  background-color:white;
+
+}
 
 .photo_container {
   border: 0.5px lightgray solid;
@@ -41,18 +47,17 @@ body {
   width: inherit;
 }
 
-/* .backgroundImage {
-  background-image: url(https://kontenta.co.uk/designroom/wp-content/uploads/2015/10/variety-paint.jpg);
+.backgroundImage {
+  background-image: url(https://st.depositphotos.com/3046849/3951/i/950/depositphotos_39515525-stock-photo-large-collage-of-many-different.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 
-  filter: hue-rotate(240deg);
-  filter: opacity(30%);
+  filter: contrast(30%);
   z-index: -1;
   position: fixed;
   width: 1280px;
   height: 800px;
-} */
+}
 
 .restaurant_form > .submit {
   background-color: white;
@@ -126,6 +131,10 @@ body {
     margin: 7%;
   }
   
+  .restaurant.container {
+    padding-right: 0;
+    padding-left: 0;
+  }
 
 }
 
