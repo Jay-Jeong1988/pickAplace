@@ -5,9 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './style.css';
 
-const margin = { top: 200, right: 55, bottom: 150, left: 180};
+const margin = { top: 120, right: 55, bottom: 150, left: 180};
 const width = 1250 - margin.left - margin.right;
-const height = 800 - margin.top - margin.bottom;
+const height = 850 - margin.top - margin.bottom;
 
 
 class Graphics extends Component {
@@ -225,13 +225,15 @@ class Graphics extends Component {
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter()
         .append('rect')
+        .transition()
+        .duration(2000)
             .attr('x', d => this.x1(d.key) )
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth())
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke-width','1px')
-            .attr('stroke', d => this.zz(d.key));
+            // .attr('stroke-width','1px')
+            // .attr('stroke', d => this.zz(d.key));
 
         
         
@@ -451,13 +453,7 @@ class Graphics extends Component {
             .data(this.moodKeys)
             .enter()
         .append("g")
-	
-        options.attr("class", "option").on("click", function() { 
-            document.getElementById("selectColor").setAttribute('fill', this.getElementsByClassName("optionColor")[0].getAttribute('fill')); 
-            document.getElementById("mydropdown").innerHTML = this.getElementsByTagName("text")[0].innerHTML;
-            document.getElementById('mydropdown').setAttribute('x', '60');
-            d3.event.stopPropagation();
-        });
+        
 
         options.append("rect").attr("x", 10)
             .attr("y", function(d,i){ 
@@ -465,7 +461,8 @@ class Graphics extends Component {
             })
             .attr("width", l + 70)
             .attr("height", 30)
-            .attr('fill', 'white');
+            .attr('fill', 'white')
+            
 
         options.append('rect')
             .attr('x', 17)
@@ -476,13 +473,26 @@ class Graphics extends Component {
             .attr('height', 15)
             .attr('class', 'optionColor')
             .attr('fill', this.z)
+            .on('click', (d, i) => {
+                select.select('#selectColor')
+                    .attr('fill', `${d3.event.target.getAttribute('fill')}`);
+                select.select("#mydropdown")
+                    .text(`${d3.event.target.nextSibling.innerHTML}`);
+            });
+            
 
         options.append("text")
             .attr("x", 40)
 	        .attr("y", function(d,i){ 
                 return 60 + i*30;
             })
-	        .text(d => d);
+            .text(d => d)
+            .on('click', (d, i) => {
+                select.select('#selectColor')
+                    .attr('fill', `${d3.event.target.parentNode.childNodes[1].getAttribute('fill')}`);
+                select.select("#mydropdown")
+                    .text(`${d3.event.target.innerHTML}`);
+            });;
 
    
     }
