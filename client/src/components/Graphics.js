@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './style.css';
 
-const margin = { top: 200, right: 55, bottom: 100, left: 180};
+const margin = { top: 200, right: 55, bottom: 150, left: 180};
 const width = 1250 - margin.left - margin.right;
 const height = 800 - margin.top - margin.bottom;
 
@@ -22,7 +22,7 @@ class Graphics extends Component {
         
         this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
         this.x1 = d3.scaleBand().paddingInner(0.05);
-        this.y = d3.scaleLinear().range([parseInt(height - 50), 0]);
+        this.y = d3.scaleLinear().range([parseInt(height), 0]);
         this.z = d3.scaleOrdinal()
         .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
         this.zz = d3.scaleOrdinal()
@@ -40,124 +40,116 @@ class Graphics extends Component {
         this.setState({
             dummyData: [
                 {
-                    name: 'proto',
-                    price: 80,
-                    cozy: 70,
-                    luxury: 60,
-                    taste: 80,
-                    loud: 90,
-                    modern: 30,
-                    services: 100,
-                    revisit: 70,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'second',
-                    price: 30,
-                    cozy: 20,
-                    luxury: 50,
-                    taste: 10,
-                    loud: 30,
-                    modern: 80,
-                    services: 10,
-                    revisit: 10,
-                    imgUrl: 'https://seeklogo.com/images/R/restaurant-chief-food-hotel-logo-9DE9D03812-seeklogo.com.png'
-                },
-                {
-                    name: 'fouthrd',
-                    price: 20,
-                    cozy: 90,
-                    luxury: 30,
-                    taste: 10,
-                    loud: 30,
-                    modern: 80,
-                    services: 10,
-                    revisit: 10,
-                    imgUrl: 'http://3.bp.blogspot.com/-Oz5XdPqGddQ/ULy9zwbIDXI/AAAAAAAAPio/HZwYtIr7DfE/s1600/22-restaurant-logo-design.jpg'
-                },
-                {
-                    name: 'sdgso',
-                    price: 20,
-                    cozy: 10,
-                    luxury: 60,
-                    taste: 80,
-                    loud: 90,
-                    modern: 30,
-                    services: 20,
-                    revisit: 70,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'pdsgsgsoto',
-                    price: 10,
-                    cozy: 30,
-                    luxury: 20,
-                    taste: 30,
-                    loud: 90,
-                    modern: 30,
-                    services: 20,
-                    revisit: 20,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'to',
-                    price: 20,
-                    cozy: 60,
-                    luxury: 25,
-                    taste: 10,
-                    loud: 37,
-                    modern: 30,
-                    services: 22,
-                    revisit: 5,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'pdoto',
+                    name: 'idealio',
                     price: 0,
-                    cozy: 20,
-                    luxury: 30,
-                    taste: 40,
-                    loud: 10,
-                    modern: 30,
-                    services: 20,
-                    revisit: 10,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
                 },
                 {
-                    name: 'pto',
-                    price: 40,
-                    cozy: 60,
-                    luxury: 50,
-                    taste: 30,
-                    loud: 20,
-                    modern: 30,
-                    services: 22,
-                    revisit: 40,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'gwgsdoto',
-                    price: 30,
-                    cozy: 33,
-                    luxury: 35,
-                    taste: 36,
-                    loud: 38,
-                    modern: 41,
-                    services: 32,
-                    revisit: 25,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'psato',
-                    price: 20,
-                    cozy: 40,
-                    luxury: 50,
-                    taste: 70,
-                    loud: 20,
-                    modern: 30,
-                    services: 100,
-                    revisit: 60,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
+                    name: 'idealio ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio  ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio   ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio    ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio     ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio      ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio       ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio        ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
+                },{
+                    name: 'idealio         ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    revisit: 0,
+                    imgUrl: '/assets/images/idealio.png'
                 },
             ]
         })
@@ -170,27 +162,36 @@ class Graphics extends Component {
         .append("g")
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
-        this.keys = Object.keys(this.state.dummyData[0]);
-        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
-
+        
         this.moodKeys = ["cozy","luxury","loud","modern"];
         
         this.renderAxis();
     }
     
 
-
+    
     componentDidUpdate(){
-        
+        this.removeAxis();
+        this.renderAxis();
+
         this.renderBars();
+        this.removeBars();
+
         this.renderLegends();
         this.renderOptions();
     }
     
-
-
+    removeAxis = () => {
+        this.svg.select('.x.axis').remove();
+        this.svg.select('.y.axis').remove();
+    }
+    
+    removeBars = () => {
+        this.svg.select('.bars').selectAll('rect').remove();
+    }
+    
     renderBars() {
-
+        
         // d3.select('svg')
         // .append('filter')
         //     .attr('id', 'glow')
@@ -202,16 +203,19 @@ class Graphics extends Component {
         // .append('feMerge')
         // .append('feMergeNode')
         //     .attr('in','coloredBlur')
-
+        
         // d3.select('feMerge')
         // .append('feMergeNode')
         //     .attr('in','SourceGraphic')             //option for 'glow'
-
-       
+        
+        this.keys = Object.keys(this.state.dummyData[0]);
+        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
+        
         this.svg.append('g')
+        .attr('class','bars')
         .selectAll('g')
-            .data(this.state.dummyData)
-            .enter()
+        .data(this.state.dummyData)
+        .enter()
         .append('g')
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
@@ -227,7 +231,8 @@ class Graphics extends Component {
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) )
             .attr('stroke-width','1px')
-            .attr('stroke', d => this.zz(d.key))
+            .attr('stroke', d => this.zz(d.key));
+
         
         
     }
@@ -235,6 +240,8 @@ class Graphics extends Component {
     
     renderAxis() {
         
+        this.keys = Object.keys(this.state.dummyData[0]);
+        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
 
         this.x0.domain(this.state.dummyData.map( d => d.name ));
         this.x1.domain(this.keysWithNumVal).rangeRound([0, this.x0.bandwidth()])
@@ -245,8 +252,10 @@ class Graphics extends Component {
         .attr('class', 'x axis')
         .attr('transform', `translate( 0 , ${height})`)
         .call(this.x0Axis)
-        .select('path')
-        .style('display','none')
+        .selectAll('.tick text')
+        .each(insertLineBreaks)
+        // .select('path')
+        // .style('display','none')
         
 
 
@@ -270,6 +279,44 @@ class Graphics extends Component {
             .style("font-size", '15px')
             .attr('fill', 'darkgray')
             .attr("dy", "4em")
+            // .call(insertLineBreaks);
+
+        function insertLineBreaks(d) {
+            const el = d3.select(this);
+            const words = d.split(' ');
+            el.text('');
+            for(let i = 0; i < words.length; i++){
+                let tspan = el.append('tspan').text(words[i]);
+                if( i > 0 ){
+                    tspan.attr('x',0).attr('dy',15);
+                }
+            }
+        }
+        // .call(wrap, this.x0.rangeBand());
+
+        // function wrap(text, width) {
+        //     text.each(function() {
+        //       var text = d3.select(this),
+        //           words = text.text().split(/\s+/).reverse(),
+        //           word,
+        //           line = [],
+        //           lineNumber = 0,
+        //           lineHeight = 1.1, // ems
+        //           y = text.attr("y"),
+        //           dy = parseFloat(text.attr("dy")),
+        //           tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+        //       while (word = words.pop()) {
+        //         line.push(word);
+        //         tspan.text(line.join(" "));
+        //         if (tspan.node().getComputedTextLength() > width) {
+        //           line.pop();
+        //           tspan.text(line.join(" "));
+        //           line = [word];
+        //           tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+        //         }
+        //       }
+        //     });
+        //   }
 
 
         this.svg.select('.x.axis')
@@ -291,10 +338,10 @@ class Graphics extends Component {
             .style('font-size', '22px')
             .style('font-weight', 'bold')
 
-        this.svg
-        .select('.y.axis')
-        .select('path')
-            .style('display','none')
+        // this.svg
+        // .select('.y.axis')
+        // .select('path')
+            // .style('display','none')
         
         
     }
@@ -314,10 +361,19 @@ class Graphics extends Component {
 
         legend.append("rect")
             .attr('class','legendsRect')
+            .attr('id', d => d)
             .attr("x", width - 80)
             .attr("width", 19)
             .attr("height", 19)
-            .attr("fill", this.z);
+            .attr("fill", this.z)
+            .on('click', (d,i) => {
+                Restaurant.request_ten(d3.event.target.id).then( data => {
+                    this.setState({
+                        dummyData: data
+                    })   
+                    console.log(data);
+                })
+            });
       
         legend.append("text")
                 .attr("x", width - 50)
