@@ -16,28 +16,6 @@ class Graphics extends Component {
         super(props);
         
         this.state = {
-            dummyData: []
-        }
-        
-        
-        this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
-        this.x1 = d3.scaleBand().paddingInner(0.05);
-        this.y = d3.scaleLinear().range([parseInt(height), 0]);
-        this.z = d3.scaleOrdinal()
-        .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
-        this.zz = d3.scaleOrdinal()
-        .range([ "#BA96AD", "#B2CCCD", "#F4A790", "#FBECB6", "#E37B89", "#5288D3", "#FFD7E8", "#D9F3F6"]);
-        this.x0Axis = d3.axisBottom(this.x0).ticks(10);
-        this.yAxis = d3.axisLeft(this.y).ticks(10);
-        this.renderAxis = this.renderAxis.bind(this);
-        this.renderBars = this.renderBars.bind(this);
-
-
-        
-    }
-    
-    componentWillMount() {
-        this.setState({
             dummyData: [
                 {
                     name: 'idealio',
@@ -152,8 +130,25 @@ class Graphics extends Component {
                     imgUrl: '/assets/images/idealio.png'
                 },
             ]
-        })
+        }
+        
+        
+        this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
+        this.x1 = d3.scaleBand().paddingInner(0.05);
+        this.y = d3.scaleLinear().range([parseInt(height), 0]);
+        this.z = d3.scaleOrdinal()
+        .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
+        this.zz = d3.scaleOrdinal()
+        .range([ "#BA96AD", "#B2CCCD", "#F4A790", "#FBECB6", "#E37B89", "#5288D3", "#FFD7E8", "#D9F3F6"]);
+        this.x0Axis = d3.axisBottom(this.x0).ticks(10);
+        this.yAxis = d3.axisLeft(this.y).ticks(10);
+        this.renderAxis = this.renderAxis.bind(this);
+        this.renderBars = this.renderBars.bind(this);
+
+
+        
     }
+    
     componentDidMount() {
         
         this.svg = d3.select(this.refs.container)
@@ -165,7 +160,6 @@ class Graphics extends Component {
         
         this.moodKeys = ["cozy","luxury","loud","modern"];
         
-        this.renderAxis();
     }
     
 
@@ -174,8 +168,8 @@ class Graphics extends Component {
         this.removeAxis();
         this.renderAxis();
 
-        this.renderBars();
         this.removeBars();
+        this.renderBars();
 
         this.renderLegends();
         this.renderOptions();
@@ -187,7 +181,8 @@ class Graphics extends Component {
     }
     
     removeBars = () => {
-        this.svg.select('.bars').selectAll('rect').remove();
+        this.svg.selectAll('.bars')
+        .remove();
     }
     
     renderBars() {
@@ -225,15 +220,17 @@ class Graphics extends Component {
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter()
         .append('rect')
+            .attr('y', height)
         .transition()
-        .duration(2000)
+        .duration(1500)
             .attr('x', d => this.x1(d.key) )
             .attr('y', d => this.y(d.value) )
-            .attr('width', this.x1.bandwidth())
-            .attr('height', d => height - this.y(d.value) )
+            .attr('width', this.x1.bandwidth() )
             .attr('fill', d => this.z(d.key) )
-            // .attr('stroke-width','1px')
-            // .attr('stroke', d => this.zz(d.key));
+            .attr('height', d => height - this.y(d.value) )
+            .attr('stroke-width', d => this.x1.bandwidth()/10 )
+            .attr('stroke', d => this.zz(d.key))
+            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` );
 
         
         
