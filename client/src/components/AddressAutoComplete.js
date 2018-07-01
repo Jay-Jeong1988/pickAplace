@@ -1,6 +1,5 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import RenderRestaurantDetail from './RenderRestaurantDetail';
 
 const google = window.google;
 
@@ -46,6 +45,7 @@ class AddressAutoComplete extends React.Component {
     let address = addressObject.address_components;
     let phone_number = addressObject.formatted_phone_number;
     let website_url = addressObject.website || '';
+
     const sendingDataToParent = { 
       photos: addressObject.photos,
       geometry: addressObject.geometry,
@@ -53,10 +53,11 @@ class AddressAutoComplete extends React.Component {
       google_rating: addressObject.rating
     }
 
+    
     this.props.callbackFromParent(sendingDataToParent);
 
 
-    function extractAddressData( component, inputType) {
+    function extractAddressData( component = [], inputType) {
       for( let property of component ){
         for( let type of property.types ) {
           for( let t of inputType ){
@@ -72,6 +73,11 @@ class AddressAutoComplete extends React.Component {
       else return addressData;
     }
 
+    function getInternationalPhoneNumber( address, addressObject ){
+      if ( returnLongName(extractAddressData( address, ['country'] ) ) !== "Canada" ) return addressObject.international_phone_number || '';
+      else return addressObject.formatted_phone_number;
+    }
+
     this.setState({
       name: addressObject.name,
       street_address: `${returnLongName(extractAddressData( address, ['street_number','sublocality_level_2']))} - ${returnLongName(extractAddressData( address, ['street_name', 'route', 'sublocality_level_1']))}`,
@@ -79,10 +85,14 @@ class AddressAutoComplete extends React.Component {
       state: returnLongName(extractAddressData( address, ['administrative_area_level_1'])),
       country: returnLongName(extractAddressData( address, ['country'])),
       zip_code:  returnLongName(extractAddressData( address, ['postal_code'])),
-      phone_number: phone_number,
+      phone_number: getInternationalPhoneNumber( address, addressObject ),
       website_url: website_url,
       googleMapLink: addressObject.url
     })
+  }
+
+  preventEnterKey = (event) => {
+    if( event.which === 13 ) event.preventDefault();
   }
 
 
@@ -95,6 +105,7 @@ class AddressAutoComplete extends React.Component {
               className="input-field form-control"
               ref="input"
               type="text"
+              onKeyDown={this.preventEnterKey}
               />
           </div>
 

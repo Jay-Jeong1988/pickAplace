@@ -27,7 +27,7 @@ app.post('/add_restaurant', (req, res) => {
         knex('restaurants').first().where({ address: req.body.address })
         .then( restaurant => {
             console.log(restaurant);
-            res.sendStatus(200);
+            res.send(restaurant);
         });
     });
 
@@ -118,10 +118,22 @@ app.post('/eval_rest/:restaurant_id', (req, res) => {
     })
     .then( result => { 
         knex('restaurants').first().where({id: req.params.restaurant_id})
-        .then( data => console.log(data))
-        .then( () => res.sendStatus(201) );
+        .then( data => {
+            console.log(data);
+            res.send(data)
+        });
     });
 });
+
+app.get('/top_ten/:eval_type', (req, res) => {
+    knex('restaurants').orderBy(`${req.params.eval_type}`, 'desc')
+    .select(['name',`${req.params.eval_type}`,'imgUrl']).limit(10)
+    .then( data => {
+        console.log(data);
+        res.send(data);
+    })
+})
+
 
 app.post('/sign-up', [ 
         check('email').isEmail(),

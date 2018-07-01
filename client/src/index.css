@@ -8,6 +8,12 @@ body {
 
   margin: 30px;
 }
+.restaurant.container {
+  border: 0.5px lightgray solid;
+  border-radius: 5px;
+  background-color:white;
+
+}
 
 .photo_container {
   border: 0.5px lightgray solid;
@@ -17,11 +23,52 @@ body {
   
 }
 
+.slick-prev.removeFont:before {
+  font-size: 0;
+}
+.slick-next.removeFont:before {
+  font-size: 0;
+}
+
+.slick-prev > img {
+  height: 30px;
+}
+.slick-next > img {
+  height: 30px;
+}
+
+.placeData {
+  padding: 0 20px;
+  margin: 7%;
+  text-align: end;
+
+}
+.photo_container .slick-dots {
+  width: inherit;
+}
+
+.backgroundImage {
+  background-image: url(https://st.depositphotos.com/3046849/3951/i/950/depositphotos_39515525-stock-photo-large-collage-of-many-different.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  filter: contrast(30%);
+  z-index: -1;
+  position: fixed;
+  width: 1280px;
+  height: 800px;
+}
+
+.restaurant_form > .submit {
+  background-color: white;
+}
+
 @media only screen and (min-width: 900px) {
   
   .CreateRestaurantPage {
     
     display: flex;
+    justify-content: space-around;
     flex-direction: row-reverse;
   }
   
@@ -40,6 +87,17 @@ body {
     width: 100%;
     height: 240px;
   }
+  .photo_container .slick-dots {
+    width: 88%;
+  }
+  .photo_container .slick-dots li {
+    margin: 0 4px;
+  }
+
+  .placeData {
+    margin: 0;
+    padding: 40px 20px;
+  }
   
 }
 
@@ -53,13 +111,31 @@ body {
   .photo_container {
     padding: 30px;
     margin-top: 30px;
-    width: 70%;
   }
 
   .RenderRestaurantDetail {
     display: flex;
     justify-content: center;
   }
+
+  .slick-prev > img {
+    width: 30px;
+    height: 45px;
+  }
+  .slick-next > img {
+    width: 30px;
+    height: 45px;
+  }
+  .photo_container {
+    width: 86%;
+    margin: 7%;
+  }
+  
+  .restaurant.container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
 }
 
 @media only screen and (max-width: 459px) {
@@ -71,7 +147,12 @@ body {
 
   .photo_container {
     margin-top: 30px;
+    margin-left: 7%;
     width: 86%;
+  }
+
+  .photo_container .slick-dots li {
+    margin: 0 3px;
   }
   .photos {
     width: 100%;

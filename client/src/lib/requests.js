@@ -25,6 +25,10 @@ const Restaurant = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params)
         }).then( res => res.json() )
+    },
+
+    request_ten( eval_types ) {
+        return fetch(`/top_ten/${eval_types}`).then( res => res.json() )
     }
 }
 
