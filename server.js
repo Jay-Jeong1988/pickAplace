@@ -125,13 +125,27 @@ app.post('/eval_rest/:restaurant_id', (req, res) => {
     });
 });
 
-app.get('/top_ten/:eval_type', (req, res) => {
-    knex('restaurants').orderBy(`${req.params.eval_type}`, 'desc')
-    .select(['name',`${req.params.eval_type}`,'imgUrl']).limit(10)
-    .then( data => {
-        console.log(data);
-        res.send(data);
-    })
+app.get('/top_ten/:eval_types', (req, res) => {
+    const receivedDataArray = req.params.eval_types.split(',');
+    let sendingDataArray = req.params.eval_types.split(',');
+    sendingDataArray.unshift('name');
+    sendingDataArray.push('imgUrl');
+    let queryString = "(";
+
+    for(let i=0; i < receivedDataArray.length; i++){
+        if (i >= receivedDataArray.length - 1) queryString += `${receivedDataArray[i]} )`;
+        else queryString += `${receivedDataArray[i]} + `;
+    }
+    // console.log(receivedDataArray)
+    // console.log(`(${queryString}/${receivedDataArray.length}) desc`)
+    knex('restaurants')
+        .select(sendingDataArray)
+        .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
+        .limit(10)
+        .then( data => {
+            console.log(data);
+            res.send(data);
+        });
 })
 
 

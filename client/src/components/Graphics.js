@@ -198,7 +198,7 @@ class Graphics extends Component {
         .append('filter')
             .attr('id', 'glow')
         .append('feGaussianBlur')
-            .attr('stdDeviation','2.5')
+            .attr('stdDeviation','5.0')
             .attr('result','coloredBlur')
         
         d3.select('filter')
@@ -254,6 +254,7 @@ class Graphics extends Component {
             .attr('stroke-width', d => this.x1.bandwidth()/15 )
             .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
             .style('filter','url(#glow)')
+            .style('opacity','0.3')
                 
         
     }
@@ -275,8 +276,11 @@ class Graphics extends Component {
         .call(this.x0Axis)
         .selectAll('.tick text')
         .each(insertLineBreaks)
-        // .select('path')
-        // .style('display','none')
+        
+        this.svg
+        .select('.x.axis')
+        .select('path')
+        .style('display','none')
         
 
 
@@ -300,7 +304,7 @@ class Graphics extends Component {
             .style("font-size", '15px')
             .attr('fill', 'darkgray')
             .attr("dy", "4em")
-            // .call(insertLineBreaks);
+
 
         function insertLineBreaks(d) {
             const el = d3.select(this);
@@ -313,36 +317,11 @@ class Graphics extends Component {
                 }
             }
         }
-        // .call(wrap, this.x0.rangeBand());
-
-        // function wrap(text, width) {
-        //     text.each(function() {
-        //       var text = d3.select(this),
-        //           words = text.text().split(/\s+/).reverse(),
-        //           word,
-        //           line = [],
-        //           lineNumber = 0,
-        //           lineHeight = 1.1, // ems
-        //           y = text.attr("y"),
-        //           dy = parseFloat(text.attr("dy")),
-        //           tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-        //       while (word = words.pop()) {
-        //         line.push(word);
-        //         tspan.text(line.join(" "));
-        //         if (tspan.node().getComputedTextLength() > width) {
-        //           line.pop();
-        //           tspan.text(line.join(" "));
-        //           line = [word];
-        //           tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-        //         }
-        //       }
-        //     });
-        //   }
 
 
         this.svg.select('.x.axis')
         .selectAll('line')
-        .attr('y2','9')
+        .attr('y2','9')  //lengthen ticks
 
 
         
@@ -359,15 +338,16 @@ class Graphics extends Component {
             .style('font-size', '22px')
             .style('font-weight', 'bold')
 
-        // this.svg
-        // .select('.y.axis')
-        // .select('path')
-            // .style('display','none')
+        this.svg
+        .select('.y.axis')
+        .select('path')
+            .style('display','none')
         
         
     }
 
     renderLegends() {
+        this.selected_options = [];
 
         const legend = d3.select(this.refs.container)
         .append("g")
@@ -388,12 +368,7 @@ class Graphics extends Component {
             .attr("height", 19)
             .attr("fill", this.z)
             .on('click', (d,i) => {
-                Restaurant.request_ten(d3.event.target.id).then( data => {
-                    this.setState({
-                        dummyData: data
-                    })   
-                    console.log(data);
-                })
+                this.selected_options.push(d3.event.target.id);
             });
       
         legend.append("text")
@@ -406,16 +381,27 @@ class Graphics extends Component {
 
     renderOptions(){
 
-        // const container = d3.select(this.refs.container)
-        // .append('g')
-        //     .attr('transform','translate(100,500)')
-        // .append('foreignObject')
-        //     .attr('width','200px')
-        //     .attr('height','200px')
-        // .append('xhtml:div')
-        //     .attr('class','dropdown');
+        const container = d3.select(this.refs.container)
+        .append('g')
+            .attr('transform','translate(980,60)')
+        .append('foreignObject')   //foreign object must be given w&h to be rendered
+            .attr('width','200px')
+            .attr('height','200px')
+        .append('xhtml:div')
+            .attr('class','getList');
 
-        // container.append('xhtml:button')
+        container.append('xhtml:button')
+            .attr('class','btn btn-success')
+            .html('Show me the result!')
+            .on('click', (d,i) => {
+                Restaurant.request_ten(this.selected_options).then( data => {
+                    this.setState({
+                        dummyData: data
+                    })   
+                    console.log(data);
+                })
+            });
+            
         //     .attr('class','btn btn-primary dropdown-toggle')
         //     .attr('id','dropdownMenuButton')
         //     .attr('type','button')
@@ -440,11 +426,11 @@ class Graphics extends Component {
         };
         l=l*10;
 
-        var svg = d3.select(this.refs.container)
+        var dropdown = d3.select(this.refs.container)
             .append("g")
                 .attr("class","dropdown")
         
-        let select = svg.append("g")
+        let select = dropdown.append("g")
             .attr("class","select")
             .attr("transform", "translate(800, 55)")
             .on("mouseover", (d, i) => options.attr('visibility', 'visible'))
@@ -516,10 +502,8 @@ class Graphics extends Component {
                     .attr('fill', `${d3.event.target.parentNode.childNodes[1].getAttribute('fill')}`);
                 select.select("#mydropdown")
                     .text(`${d3.event.target.innerHTML}`);
-            });;
-
-   
-    }
+            });
+        }
 
     render() {
 
@@ -535,3 +519,6 @@ class Graphics extends Component {
 }
 
 export default Graphics;
+
+
+
