@@ -146,7 +146,6 @@ class Graphics extends Component {
         this.renderAxis = this.renderAxis.bind(this);
         this.renderBars = this.renderBars.bind(this);
 
-
         
     }
     
@@ -160,7 +159,9 @@ class Graphics extends Component {
         
         
         this.moodKeys = ["cozy","luxury","loud","modern"];
-        
+        this.renderButton();
+        this.renderDropdown();
+        this.renderLegends();
     }
     
 
@@ -172,8 +173,6 @@ class Graphics extends Component {
         this.removeBars();
         this.renderBars();
 
-        this.renderLegends();
-        this.renderOptions();
     }
     
     removeAxis = () => {
@@ -182,9 +181,17 @@ class Graphics extends Component {
     }
     
     removeBars = () => {
-        this.svg.selectAll('.bars')
-        .remove();
+        this.svg.selectAll('.bars').remove();
     }
+
+    removeLegends = () => {
+        this.svg.selectAll('.legends').remove();
+    }
+
+    removeDropdown = () => {
+        this.svg.select('.dropdown').remove();
+    }
+
     
     renderBars() {
         // var glowOn = true;
@@ -351,51 +358,75 @@ class Graphics extends Component {
 
         const legend = d3.select(this.refs.container)
         .append("g")
-            .attr('transform','translate(-550,70)')
+            .attr('class','legends')
+            .attr('transform','translate(380,70)')
             .attr("font-family", "sans-serif")
             .attr("font-size", 15)
         .selectAll("g")
             .data(['price', 'taste', 'services', 'revisit'])
             .enter()
         .append("g")
+            .attr('id', d => d + '-graphic')
             .attr("transform", function(d, i) { return "translate(" + i * 100 + ",0 )"; });
-
+            
         legend.append("rect")
             .attr('class','legendsRect')
             .attr('id', d => d)
-            .attr("x", width - 80)
             .attr("width", 19)
             .attr("height", 19)
             .attr("fill", this.z)
-            .on('click', (d,i) => {
-                this.selected_options.push(d3.event.target.id);
-                
-            });
+            .on('click', this.checkUncheck);
       
         legend.append("text")
-                .attr("x", width - 50)
-                .attr("y", 9.5)
-                .attr("dy", "0.32em")
-                .text(function(d) { return d; });
-
+            .attr("x", 30)
+            .attr("y", 9.5)
+            .attr("dy", "0.32em")
+            .text(function(d) { return d; });
+        
+        
     }
 
-    renderOptions(){
+    checkUncheck = () => {
+        const rect_id = d3.event.target.id; 
+        const thisLegend = d3.select(`#${rect_id}-graphic`);
+            
+            thisLegend.append('foreignObject')
+                .attr('class','fObject')
+                .attr('width','22')
+                .attr('height','27')
+                .attr('y', -8)
+            .append('xhtml:img')
+                .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
+                .attr('width', '22')
+                .attr('height', '22')
+                .style('filter', () => 'brightness(200%) invert(200%)')
+                .on('click', () => {
+                    d3.event.target.remove();
+                    thisLegend.select('.fObject').remove();
+                    this.selected_options.splice( this.selected_options.indexOf(rect_id), 1);
+                    console.log(`${rect_id} is removed!`);
+                })
 
+            this.selected_options.push(rect_id);
+            console.log(`${rect_id} is selected!`);
+    }
+
+    renderButton(){
+        
         const container = d3.select(this.refs.container)
         .append('g')
             .attr('transform','translate(980,60)')
+            .attr('class','submitButton')
         .append('foreignObject')   //foreign object must be given w&h to be rendered
             .attr('width','200px')
             .attr('height','200px')
         .append('xhtml:div')
             .attr('class','getList');
-
+    
         container.append('xhtml:button')
             .attr('class','btn btn-success')
             .html('Show me the result!')
             .on('click', (d,i) => {
-                console.log(this.selected_options);
                 if(!this.selected_options[0]) this.selected_options = ['empty'];
                 Restaurant.request_ten(this.selected_options).then( data => {
                     if(data.errors) {
@@ -408,24 +439,9 @@ class Graphics extends Component {
                     }
                 })
             });
-            
-        //     .attr('class','btn btn-primary dropdown-toggle')
-        //     .attr('id','dropdownMenuButton')
-        //     .attr('type','button')
-        //     .attr('data-toggle','dropdown')
-        //     .html('Select mood')
-        // .append('xhtml:span')
-        //     .attr('class','caret')
 
-        // container.append('xhtml:div')
-        //     .attr('class','dropdown-menu')
-        //     .attr('aria-labelledby','dropdownMenuButton')
-        // .selectAll('option')
-        //     .data(this.moodKeys)
-        //     .enter()
-        // .append('xhtml:a')
-        //     .attr('class','dropdown-item')
-        //     .html( d => d )                           // bootstrap dropdown
+    }
+    renderDropdown(){
 
         var l=4;
         for(let i=0; i< this.moodKeys.length; i++){
