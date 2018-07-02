@@ -139,7 +139,7 @@ class Graphics extends Component {
         this.z = d3.scaleOrdinal()
         .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
         this.zz = d3.scaleOrdinal()
-        .range([ "#BA96AD", "#B2CCCD", "#F4A790", "#FBECB6", "#E37B89", "#5288D3", "#FFD7E8", "#D9F3F6"]);
+        .range([ "#8F2B6A", "#1E7075", "#D3451A", "#D9B021", "#C8041F", "#042757", "#EC5192", "#54C7D5"]);
         
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
@@ -237,8 +237,8 @@ class Graphics extends Component {
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke', d => this.z(d.key))
-            .attr('stroke-width', d => this.x1.bandwidth()/15 )
+            .attr('stroke', d => this.zz(d.key))
+            .attr('stroke-width', d => this.x1.bandwidth()/20 )
             .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
 
         bars.append('rect')
@@ -251,10 +251,10 @@ class Graphics extends Component {
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) )
             .attr('stroke', d => this.z(d.key))
-            .attr('stroke-width', d => this.x1.bandwidth()/15 )
+            .attr('stroke-width', d => this.x1.bandwidth()/20 )
             .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
             .style('filter','url(#glow)')
-            .style('opacity','0.3')
+            .style('opacity','0.4')
                 
         
     }
@@ -302,7 +302,7 @@ class Graphics extends Component {
         .selectAll('text')
             .style('font-weight','bold')
             .style("font-size", '15px')
-            .attr('fill', 'darkgray')
+            .attr('fill', '#635252')
             .attr("dy", "4em")
 
 
@@ -369,6 +369,7 @@ class Graphics extends Component {
             .attr("fill", this.z)
             .on('click', (d,i) => {
                 this.selected_options.push(d3.event.target.id);
+                
             });
       
         legend.append("text")
@@ -394,11 +395,17 @@ class Graphics extends Component {
             .attr('class','btn btn-success')
             .html('Show me the result!')
             .on('click', (d,i) => {
+                console.log(this.selected_options);
+                if(!this.selected_options[0]) this.selected_options = ['empty'];
                 Restaurant.request_ten(this.selected_options).then( data => {
-                    this.setState({
-                        dummyData: data
-                    })   
-                    console.log(data);
+                    if(data.errors) {
+                        console.log(data.errors);
+                        this.selected_options.shift();
+                    }else { 
+                        this.setState({
+                            dummyData: data
+                        })
+                    }
                 })
             });
             
