@@ -151,10 +151,26 @@ class Graphics extends Component {
     
     componentDidMount() {
         
+        d3.select(this.refs.container)
+        .append('defs')
+        .append('pattern')
+        .attr('id','img1')
+        .attr('patternUnits','userSpaceOnUse') 
+        .attr('width','100%')
+        .attr('height','700')
+        .append('xhtml:image')
+        .attr('xlink:href','https://previews.123rf.com/images/hilmawan/hilmawan1803/hilmawan180300088/97196617-red-brick-wall-background-lot-of-gradation-and-color-horizontal-alignment.jpg')
+        .attr('x','0')
+        .attr('y','0')
+        .attr('width','100%')
+        .attr('height','700')
+
+        
         this.svg = d3.select(this.refs.container)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
+        .attr('fill','url(#img1)')
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
         
@@ -188,34 +204,37 @@ class Graphics extends Component {
         this.svg.selectAll('.legends').remove();
     }
 
-    removeDropdown = () => {
-        this.svg.select('.dropdown').remove();
-    }
 
     
     renderBars() {
+        let focusOn = true;
+
+        function focusBar(d, i) {
+            d3.event.target.style.filter = focusOn ? "none" : "brightness(200%)";
+            focusOn = focusOn ? false : true;
+        }
         // var glowOn = true;
 
         // function switchGlow(d, i) {
         //     d3.event.target.style.filter = glowOn ? "none" : "url(#glow)";
         //     glowOn = glowOn ? false : true;
         // }
-    
-        d3.select('svg')
-        .append('filter')
-            .attr('id', 'glow')
-        .append('feGaussianBlur')
-            .attr('stdDeviation','5.0')
-            .attr('result','coloredBlur')
+
+        // d3.select('svg')
+        // .append('filter')
+        //     .attr('id', 'glow')
+        // .append('feGaussianBlur')
+        //     .attr('stdDeviation','4.0')
+        //     .attr('result','coloredBlur')
         
-        d3.select('filter')
-        .append('feMerge')
-        .append('feMergeNode')
-            .attr('in','coloredBlur')
+        // d3.select('filter')
+        // .append('feMerge')
+        // .append('feMergeNode')
+        //     .attr('in','coloredBlur')
         
-        d3.select('feMerge')
-        .append('feMergeNode')
-            .attr('in','SourceGraphic')             //option for 'glow'
+        // d3.select('feMerge')
+        // .append('feMergeNode')
+        //     .attr('in','SourceGraphic')             //option for 'glow'
         
 
         this.keys = Object.keys(this.state.dummyData[0]);
@@ -234,8 +253,9 @@ class Graphics extends Component {
             .data( d => { 
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter();
-        
-        bars.append('rect')
+                
+
+            bars.append('rect')
             .attr('x', d => this.x1(d.key))
             .attr('y', height)
             .transition()
@@ -245,23 +265,27 @@ class Graphics extends Component {
             .attr('height', d => height - this.y(d.value) )
             .attr('fill', d => this.z(d.key) )
             .attr('stroke', d => this.zz(d.key))
-            .attr('stroke-width', d => this.x1.bandwidth()/20 )
-            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
+            .attr('stroke-width', d => this.x1.bandwidth()/70 )
+            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` );
 
-        bars.append('rect')
-            .attr('x', d => this.x1(d.key) )
-            .attr('y', height)
-            .transition()
-            .duration(1500)
-            .attr('y', d => this.y(d.value) )
-            .attr('width', this.x1.bandwidth() )
-            .attr('height', d => height - this.y(d.value) )
-            .attr('fill', d => this.z(d.key) )
-            .attr('stroke', d => this.z(d.key))
-            .attr('stroke-width', d => this.x1.bandwidth()/20 )
-            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
-            .style('filter','url(#glow)')
-            .style('opacity','0.4')
+            
+            // bars.append('rect')
+            // .on('click', (d,i) => {
+
+            // })
+            //     .attr('x', d => this.x1(d.key) )
+            //     .attr('y', height)
+            //     .transition()
+            //     .duration(1500)
+            //     .attr('y', d => this.y(d.value) )
+            //     .attr('width', this.x1.bandwidth() )
+            //     .attr('height', d => height - this.y(d.value) )
+            //     .attr('fill', d => this.z(d.key) )
+            //     .attr('stroke', d => this.zz(d.key))
+            //     .attr('stroke-width', d => this.x1.bandwidth()/70 )
+            //     .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
+                // .style('filter','url(#glow)')
+                // .style('opacity','0.6')
                 
         
     }
@@ -318,7 +342,7 @@ class Graphics extends Component {
             const words = d.split(' ');
             el.text('');
             for(let i = 0; i < words.length; i++){
-                let tspan = el.append('tspan').text(words[i]);
+                let tspan = el.append('tspan').text(words[i]).attr('fill','white');
                 if( i > 0 ){
                     tspan.attr('x',0).attr('dy',15);
                 }
@@ -341,6 +365,8 @@ class Graphics extends Component {
             .call(this.yAxis)
         .selectAll('text')
             .data(yColor)
+            .attr('stroke','white')
+            .attr('stroke-width','0.3px')
             .style('fill', c => c)
             .style('font-size', '22px')
             .style('font-weight', 'bold')
@@ -381,6 +407,7 @@ class Graphics extends Component {
             .attr("x", 30)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
+            .attr('fill','white')
             .text(function(d) { 
                 if(d === 'recurrence') return 'revisit';
                 else return d; 
@@ -403,7 +430,7 @@ class Graphics extends Component {
                 .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
                 .attr('width', '22')
                 .attr('height', '22')
-                .style('filter', () => 'brightness(200%) invert(200%)')
+                .style('filter', () => 'brightness(200%)')
                 .on('click', () => {
                     d3.event.target.remove();
                     thisLegend.select('.fObject').remove();
@@ -574,8 +601,14 @@ class Graphics extends Component {
 
         return (
             <main>
-
+                <div className="svg-background"></div>
                 <svg ref="container">
+                    <defs>
+                        <pattern id="svgbg" patternUnits="userSpaceOnUse" width="100%" height="700">
+                            <image href="http://pluspng.com/img-png/brick-hd-png-brick-wallpaper-red-awesome-1920.jpg"
+                            width="100%" height="700" x="0" y="0"/>
+                        </pattern>
+                    </defs>
                 </svg>
 
             </main>
