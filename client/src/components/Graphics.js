@@ -26,7 +26,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },
                 {
@@ -38,7 +38,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio  ',
@@ -49,7 +49,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio   ',
@@ -60,7 +60,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio    ',
@@ -71,7 +71,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio     ',
@@ -82,7 +82,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio      ',
@@ -93,7 +93,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio       ',
@@ -104,7 +104,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio        ',
@@ -115,7 +115,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },{
                     name: 'idealio         ',
@@ -126,7 +126,7 @@ class Graphics extends Component {
                     loud: 0,
                     modern: 0,
                     services: 0,
-                    revisit: 0,
+                    recurrence: 0,
                     imgUrl: '/assets/images/idealio.png'
                 },
             ]
@@ -137,10 +137,10 @@ class Graphics extends Component {
         this.x1 = d3.scaleBand().paddingInner(0.05);
         this.y = d3.scaleLinear().range([parseInt(height), 0]);
         this.z = d3.scaleOrdinal()
-        .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
+        .range([ "#4E9397", "#E1714F", "#D8384F", "#194B8D", "#AA528A", "#F3DA7B", "#FFA4CC", "#A3DDE3"  ]);
         this.zz = d3.scaleOrdinal()
-        .range([ "#8F2B6A", "#1E7075", "#D3451A", "#D9B021", "#C8041F", "#042757", "#EC5192", "#54C7D5"]);
-        
+        .range([ "#8F2B6A", "#1E7075", "#D3451A", "#D9B021", "#C8041F", "#042757", "#EC5192", "#5AC2CE" ]);
+
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
@@ -295,12 +295,12 @@ class Graphics extends Component {
         .selectAll('.tick')
         .data(this.state.dummyData)
         .append('foreignObject')
-            .attr('transform','translate(-20, 20)')
+            .attr('transform','translate(-28, 20)')
         .append('xhtml:div')
             .style('width','60px')
             .style('height','40px')
             .style('background-image', d => `url(${d.imgUrl})`)
-            .style('background-size','40px')
+            .style('background-size','60px')
             .style('background-repeat', 'no-repeat')
 
 
@@ -310,7 +310,7 @@ class Graphics extends Component {
             .style('font-weight','bold')
             .style("font-size", '15px')
             .attr('fill', '#635252')
-            .attr("dy", "4em")
+            .attr("dy", "4.5em")
 
 
         function insertLineBreaks(d) {
@@ -485,7 +485,7 @@ class Graphics extends Component {
 	            .text('select mood');
   
         var options = select.selectAll(".myBars")
-            .data(this.moodKeys)
+            .data(["cozy","luxury","loud","modern"])
             .enter()
         .append("g")
             .attr('id', d => d + '-graphic')
