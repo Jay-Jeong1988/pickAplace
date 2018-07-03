@@ -236,10 +236,10 @@ class Graphics extends Component {
             .enter();
         
         bars.append('rect')
+            .attr('x', d => this.x1(d.key))
             .attr('y', height)
             .transition()
             .duration(1500)
-            .attr('x', d => this.x1(d.key) )
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
@@ -249,10 +249,10 @@ class Graphics extends Component {
             .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
 
         bars.append('rect')
+            .attr('x', d => this.x1(d.key) )
             .attr('y', height)
             .transition()
             .duration(1500)
-            .attr('x', d => this.x1(d.key) )
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
@@ -363,7 +363,7 @@ class Graphics extends Component {
             .attr("font-family", "sans-serif")
             .attr("font-size", 15)
         .selectAll("g")
-            .data(['price', 'taste', 'services', 'revisit'])
+            .data(['price', 'taste', 'services', 'recurrence'])
             .enter()
         .append("g")
             .attr('id', d => d + '-graphic')
@@ -381,7 +381,10 @@ class Graphics extends Component {
             .attr("x", 30)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
-            .text(function(d) { return d; });
+            .text(function(d) { 
+                if(d === 'recurrence') return 'revisit';
+                else return d; 
+            });
         
         
     }
@@ -392,6 +395,7 @@ class Graphics extends Component {
             
             thisLegend.append('foreignObject')
                 .attr('class','fObject')
+                .attr('id',`${rect_id}-fObject`)
                 .attr('width','22')
                 .attr('height','27')
                 .attr('y', -8)
@@ -460,7 +464,7 @@ class Graphics extends Component {
             .on("mouseout", (d, i) => options.attr('visibility', 'hidden'));
         
             select.append("rect")
-                .attr("x", 10)
+
 	            .attr("y",  10 )
 	            .attr("width", l + 70)
                 .attr("height", 30)
@@ -468,14 +472,14 @@ class Graphics extends Component {
                 
             select.append('rect')
                 .attr('id', 'selectColor')
-                .attr('x', 17)
-                .attr('y', 17)
-                .attr('width', 15)
-                .attr('height', 15)
+                .attr('x', 7)
+                .attr('y', 16)
+                .attr('width', 19)
+                .attr('height', 19)
                 .attr('fill', 'white')
             
             select.append("text")
-                .attr("x", 40)
+                .attr("x", 34)
 	            .attr("y",30 )
                 .attr("id","mydropdown")
 	            .text('select mood');
@@ -484,38 +488,76 @@ class Graphics extends Component {
             .data(this.moodKeys)
             .enter()
         .append("g")
+            .attr('id', d => d + '-graphic')
             .attr('visibility', 'hidden');
         
 
-        options.append("rect").attr("x", 10)
+        options.append("rect")
             .attr("y", function(d,i){ 
                 return 40 + i*30;
             })
             .attr("width", l + 70)
             .attr("height", 30)
             .attr('fill', 'white')
-
             
-
-        options.append('rect')
-            .attr('x', 17)
+            this.previousElement = null;
+            this.previousElementId = '';
+            this.newArray = [];
+            
+            options.append('rect')
+            .attr('id',d => d)
+            .attr('x', 7)
             .attr('y', function( d, i ){
-                return 48 + i*30;
+                return 46 + i*30;
             })
-            .attr('width', 15)
-            .attr('height', 15)
+            .attr('width', 19)
+            .attr('height', 19)
             .attr('class', 'optionColor')
             .attr('fill', this.z)
             .on('click', (d, i) => {
                 select.select('#selectColor')
-                    .attr('fill', `${d3.event.target.getAttribute('fill')}`);
+                .attr('fill', `${d3.event.target.getAttribute('fill')}`);
                 select.select("#mydropdown")
-                    .text(`${d3.event.target.nextSibling.innerHTML}`);
+                .text(`${d3.event.target.nextSibling.innerHTML}`);
+                
+                
+                this.checkUncheck();
+                // When a box is checked...
+                if(options.select(`#${d3.event.target.id}-fObject`)) {
+                    options.select(`#${d3.event.target.id}-fObject`)
+                    .attr('x', d3.event.target.getAttribute('x'))
+                    .attr('y', d3.event.target.getAttribute('y')-8)
+                }
+
+                
+                this.newArray.push(d3.event.target);
+
+                if( this.newArray.length <= 1) {
+                    this.previousElement = d3.event.target;
+                    this.previousElementId = d3.event.target.id;
+                }else {
+                    const prevRectSelection = options.select(`#${this.previousElementId}`)._groups[0];
+                    const prevRectIndex = prevRectSelection.indexOf(this.previousElement);
+                    const prevRect = prevRectSelection[prevRectIndex];
+                    this.newArray.shift();
+
+                    if( d3.event.target !== prevRect ){
+                        options.select(`#${this.previousElementId}-fObject`).remove();
+                        this.selected_options.splice( this.selected_options.indexOf(this.previousElementId), 1);
+                        console.log(`${this.previousElementId} is removed!`);
+                        console.log(this.selected_options)
+                    }
+
+                    this.previousElementId = d3.event.target.id;
+                }
+
+
             });
+
             
 
         options.append("text")
-            .attr("x", 40)
+            .attr("x", 34)
 	        .attr("y", function(d,i){ 
                 return 60 + i*30;
             })
