@@ -65,7 +65,7 @@ body {
 }
 
 .svg-background {
-  background-image: url(https://png.pngtree.com/element_origin_min_pic/16/10/12/2257fe47d343f1f.jpg);
+  background-image: url(https://coolbackgrounds.io/images/backgrounds/sea-edge-311c5cd5.png);
   /* background-color: white; */
   background-size: cover;
   background-repeat: no-repeat;
@@ -74,7 +74,7 @@ body {
   height: 100%;
   z-index: -1;
   
-  filter: hue-rotate(200deg) saturate(10) contrast(140%) invert(90%)
+  /* filter: hue-rotate(200deg) saturate(10) contrast(140%) invert(90%) */
 }
 
 @media only screen and (min-width: 900px) {

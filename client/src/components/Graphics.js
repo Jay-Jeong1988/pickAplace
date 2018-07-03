@@ -263,7 +263,7 @@ class Graphics extends Component {
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
-            .attr('fill', d => this.z(d.key) )
+            .attr('fill', d => this.zz(d.key) )
             .attr('stroke', d => this.zz(d.key))
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
             .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` );
@@ -430,7 +430,7 @@ class Graphics extends Component {
                 .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
                 .attr('width', '22')
                 .attr('height', '22')
-                .style('filter', () => 'brightness(200%)')
+                .style('filter', () => 'brightness(200%) invert(200%)')
                 .on('click', () => {
                     d3.event.target.remove();
                     thisLegend.select('.fObject').remove();
