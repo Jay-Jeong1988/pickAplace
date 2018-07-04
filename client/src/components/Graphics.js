@@ -139,7 +139,7 @@ class Graphics extends Component {
         this.z = d3.scaleOrdinal()
         .range([ "#0E89A4", "#DDFE8E", "#E00351", "#0552BC", "#8F2B6A", "#D9B021", "#EC5192", "#04DD50" ]);
         this.zz = d3.scaleOrdinal()
-        .range([ "#0E89A4", "#DDFE8E", "#E00351", "#0552BC", "#8F2B6A", "#D9B021", "#EC5192", "#04DD50" ]);
+        .range(["#FF6C36","#60FFAA","#000062","#00FFDC","#FFDA06","#001EFF","#00DC5A","#FF00DE"]);
 
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
@@ -150,7 +150,7 @@ class Graphics extends Component {
     }
     
     componentDidMount() {
-    
+        
         this.svg = d3.select(this.refs.container)
         .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom)
@@ -159,23 +159,24 @@ class Graphics extends Component {
         
         
         this.moodKeys = ["cozy","luxury","loud","modern"];
-        this.renderButton();
         this.renderLegends();
         this.renderDropdown();
+        this.renderButton();
     }
     
-
+    
     
     componentDidUpdate(){
+
         this.removeMeasureLines();
         this.renderMeasureLines();
-
+        
         this.removeAxis();
         this.renderAxis();
-
+        
         this.removeBars();
         this.renderBars();
-
+        
     }
     
     removeAxis = () => {
@@ -213,34 +214,54 @@ class Graphics extends Component {
     }
 
     renderBars() {
-        let focusOn = true;
 
-        function focusBar(d, i) {
-            d3.event.target.style.filter = focusOn ? "none" : "brightness(200%)";
-            focusOn = focusOn ? false : true;
-        }
-        // var glowOn = true;
+        const rg = d3.select('svg')
+        .append('defs')
+        .selectAll('radialGradient')
+            .data(this.keysWithNumVal)
+            .enter()
+        .append('radialGradient')
+        .attr('id', d => `glow-${d}`)
+            .attr('cx','50%')
+            .attr('cy','50%')
+            .attr('fx','50%')
+            .attr('fy','50%')
+            .attr('r','70%')
 
-        // function switchGlow(d, i) {
-        //     d3.event.target.style.filter = glowOn ? "none" : "url(#glow)";
-        //     glowOn = glowOn ? false : true;
-        // }
+        rg.append('stop')
+            .attr('offset','0%')
+            .attr('stop-color','#FFF')
+            .attr('stop-opacity','1')
 
-        // d3.select('svg')
+        rg.append('stop')
+            .attr('offset','100%')
+            .attr('stop-color', d => this.z(d) )
+            .attr('stop-opacity', '1')
+//////////////////////////////////////////////////////////////'radial Gradient'
+
+        // const rect_offset = d3.select('svg')
+        // .append('defs')
         // .append('filter')
-        //     .attr('id', 'glow')
-        // .append('feGaussianBlur')
-        //     .attr('stdDeviation','4.0')
-        //     .attr('result','coloredBlur')
+        //     .attr('id','f1')
+        //     .attr('x', '0')
+        //     .attr('y', '0')
+        //     .attr('width', '300%')
+        //     .attr('height', '300%')
+
+        // rect_offset
+        // .append('feOffset')
+        //     .attr('result', 'offOut')
+        //     .attr('in', 'SourceGraphic')
+        //     .attr('dx','30')
+        //     .attr('dy','30')
+
+        // rect_offset
+        // .append('feBlend')
+        //     .attr('in','SourceGraphic')
+        //     .attr('in2','offOut')
+        //     .attr('mode','normal')
+        ///////////////////////////////feoffset
         
-        // d3.select('filter')
-        // .append('feMerge')
-        // .append('feMergeNode')
-        //     .attr('in','coloredBlur')
-        
-        // d3.select('feMerge')
-        // .append('feMergeNode')
-        //     .attr('in','SourceGraphic')             //option for 'glow'
         
 
         this.keys = Object.keys(this.state.dummyData[0]);
@@ -261,7 +282,7 @@ class Graphics extends Component {
                 }else {
                     newName = d.name;
                 }
-                    return `tooltip-container-${newName}`;
+                    return `bar-container-${newName}`;
             })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
@@ -271,8 +292,25 @@ class Graphics extends Component {
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter()
         .append('rect')
-            .on('mouseover', showTooltip)
-            .on('mouseout', hideTooltip)
+            .on('mouseover', d => {
+                const barId = d3.event.target.parentNode.getAttribute('id');
+                const restaurant_name = barId.split('-')[barId.split('-').length - 1];
+
+                // d3.event.target.style.fill = `url(#glow-${d.key})`;
+                d3.event.target.style.fill = this.zz(d.key)
+
+                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                    .attr('visibility','visible')
+            })
+            .on('mouseout', d => {
+                const barId = d3.event.target.parentNode.getAttribute('id');
+                const restaurant_name = barId.split('-')[barId.split('-').length - 1];
+
+                d3.event.target.style.fill = this.z(d.key)
+            
+                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                    .attr('visibility','hidden')
+            })
             .attr('class','animate-bars-stroke')
             .attr('x', d => this.x1(d.key))
             .attr('y', height)
@@ -281,8 +319,8 @@ class Graphics extends Component {
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
-            .attr('rx', this.x1.bandwidth()/ 2)
-            .attr('ry',this.x1.bandwidth()/ 2)
+            .attr('rx', this.x1.bandwidth()* Math.pow(0.87, 5))
+            .attr('ry',this.x1.bandwidth()* Math.pow(0.87, 5))
             .attr('fill', d => this.z(d.key) )
             .attr('stroke', 'white')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
@@ -315,24 +353,8 @@ class Graphics extends Component {
                 return this.parentNode.id + '_' + d.key;
             })
             .attr('d', d => { 
-                return `M${this.x1(d.key)},${this.y(d.value) - 100 }h70v40h-70v-40`
+                return `M${this.x1(d.key) + 10},${this.y(d.value) - 100 }h100v70h-60l-10,17l2,-17h-32v-70`
             })
-
-        function showTooltip(d,i) {
-            const barId = d3.event.target.parentNode.getAttribute('id');
-            const restaurant_name = barId.split('-')[barId.split('-').length - 1];
-
-            d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
-                .attr('visibility','visible')
-        }
-
-        function hideTooltip(d,i) {
-            const barId = d3.event.target.parentNode.getAttribute('id');
-            const restaurant_name = barId.split('-')[barId.split('-').length - 1];
-
-            d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
-                .attr('visibility','hidden')
-        }
 
         
         // bars.append('rect')
@@ -502,9 +524,12 @@ class Graphics extends Component {
             .attr('height', '22')
             .style('filter', () => 'brightness(200%) invert(200%)')
             .on('click', () => {
+                if(d3.event.target.parentNode.parentNode.className.animVal === 'options') {
+                    d3.selectAll('#displayfObject').remove();
+                    console.log(d3.event.target.parentNode.parentNode.className.animVal);
+                }
                 d3.event.target.remove();
                 thisLegend.select('.fObject').remove();
-                d3.select('#displayfObject').remove();
 
                 this.selected_options.splice( this.selected_options.indexOf(rect_id), 1);
                 console.log(`${rect_id} is removed!`);
@@ -598,6 +623,7 @@ class Graphics extends Component {
             .data(["cozy","luxury","loud","modern"])
             .enter()
         .append("g")
+            .attr('class','options')
             .attr('id', d => d + '-graphic')
             .attr('visibility', 'hidden');
         
@@ -701,7 +727,7 @@ class Graphics extends Component {
         return (
             <main >
                 <div className="svg-background"></div>
-                <svg ref="container" style={{filter: 'contrast(150%)'}}></svg>
+                <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
             </main>
         )
