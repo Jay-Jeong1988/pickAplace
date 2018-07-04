@@ -240,6 +240,7 @@ class Graphics extends Component {
                 
 
         bars.append('rect')
+            .attr('id','testing')
             .attr('x', d => this.x1(d.key))
             .attr('y', height)
             .transition()
@@ -247,29 +248,27 @@ class Graphics extends Component {
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
+            .attr('rx', this.x1.bandwidth()/ 2)
+            .attr('ry',this.x1.bandwidth()/ 2)
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke', d => this.z(d.key))
+            .attr('stroke', 'white')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
-            .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` );
 
-            
-            // bars.append('rect')
-            // .on('click', (d,i) => {
 
-            // })
-            //     .attr('x', d => this.x1(d.key) )
-            //     .attr('y', height)
-            //     .transition()
-            //     .duration(1500)
-            //     .attr('y', d => this.y(d.value) )
-            //     .attr('width', this.x1.bandwidth() )
-            //     .attr('height', d => height - this.y(d.value) )
-            //     .attr('fill', d => this.z(d.key) )
-            //     .attr('stroke', d => this.zz(d.key))
-            //     .attr('stroke-width', d => this.x1.bandwidth()/70 )
-            //     .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
-                // .style('filter','url(#glow)')
-                // .style('opacity','0.6')
+        // bars.append('rect')
+        //     .attr('x', d => this.x1(d.key) )
+        //     .attr('y', height)
+        //     .transition()
+        //     .duration(1500)
+        //     .attr('y', d => this.y(d.value) )
+        //     .attr('width', this.x1.bandwidth() )
+        //     .attr('height', d => height - this.y(d.value) * 2 )
+        //     .attr('fill', d => this.z(d.key) )
+        //     .attr('stroke', 'white')
+        //     .attr('stroke-width', d => this.x1.bandwidth()/70 )
+        //     .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
+            // .style('filter','url(#glow)')
+            // .style('opacity','0.6')
                 
         
     }
