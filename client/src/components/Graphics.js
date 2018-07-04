@@ -137,9 +137,9 @@ class Graphics extends Component {
         this.x1 = d3.scaleBand().paddingInner(0.05);
         this.y = d3.scaleLinear().range([parseInt(height), 0]);
         this.z = d3.scaleOrdinal()
-        .range([ "#4E9397", "#E1714F", "#D8384F", "#194B8D", "#AA528A", "#F3DA7B", "#FFA4CC", "#A3DDE3"  ]);
+        .range([ "#4E9397", "#E1714F", "#D8384F", "#194B8D", "#AA528A", "#F3DA7B", "#FFA4CC", "#04DD50"  ]);
         this.zz = d3.scaleOrdinal()
-        .range([ "#8F2B6A", "#1E7075", "#D3451A", "#D9B021", "#C8041F", "#042757", "#EC5192", "#5AC2CE" ]);
+        .range([ "#8F2B6A", "#1E7075", "#D3451A", "#D9B021", "#C8041F", "#042757", "#EC5192", "#04DD50" ]);
 
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
@@ -487,7 +487,10 @@ class Graphics extends Component {
             .on("mouseover", (d, i) => options.attr('visibility', 'visible'))
             .on("mouseout", (d, i) => options.attr('visibility', 'hidden'));
         
-        select.append("rect")
+        let displaySelect = select.append('g')
+        .attr('id','displaySelect')
+
+        displaySelect.append("rect")
             .attr('stoke','white')
             .attr('x', -8)
             .attr("y",  10 )
@@ -495,14 +498,14 @@ class Graphics extends Component {
             .attr("height", 40)
             .attr('fill', 'transparent');
             
-        select.append('rect')
+        displaySelect.append('rect')
             .attr('id', 'selectColor')
             .attr('y', 20)
             .attr('width', 19)
             .attr('height', 19)
             .attr('fill', 'white')
         
-        select.append("text")
+        displaySelect.append("text")
             .attr("x", 30)
             .attr("y",38 )
             .style('font-size','28px')
@@ -546,40 +549,50 @@ class Graphics extends Component {
                     .attr('fill', `${d3.event.target.getAttribute('fill')}`);
                     select.select("#mydropdown")
                     .text(`${d3.event.target.nextSibling.innerHTML}`);
+                    select.select("#displaySelect")
+                    .append('foreignObject')
+                        .attr('width','22')
+                        .attr('height','27')
+                        .attr('y', 10)
+                    .append('xhtml:img')
+                        .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
+                        .attr('width', '22')
+                        .attr('height', '22')
+                        .style('filter', () => 'brightness(200%) invert(200%)')
                 
                 
-                this.checkUncheck();
-                // When a box is checked...
-                if(options.select(`#${d3.event.target.id}-fObject`)) {
-                    options.select(`#${d3.event.target.id}-fObject`)
-                    .attr('x', d3.event.target.getAttribute('x'))
-                    .attr('y', d3.event.target.getAttribute('y')-8)
-                }
-
-                
-                this.newArray.push(d3.event.target);
-
-                if( this.newArray.length <= 1) {
-                    this.previousElement = d3.event.target;
-                    this.previousElementId = d3.event.target.id;
-                }else {
-                    const prevRectSelection = options.select(`#${this.previousElementId}`)._groups[0];
-                    const prevRectIndex = prevRectSelection.indexOf(this.previousElement);
-                    const prevRect = prevRectSelection[prevRectIndex];
-                    this.newArray.shift();
-
-                    if( d3.event.target !== prevRect ){
-                        options.select(`#${this.previousElementId}-fObject`).remove();
-                        this.selected_options.splice( this.selected_options.indexOf(this.previousElementId), 1);
-                        console.log(`${this.previousElementId} is removed!`);
-                        console.log(this.selected_options)
+                    this.checkUncheck();
+                    // When a box is checked...
+                    if(options.select(`#${d3.event.target.id}-fObject`)) {
+                        options.select(`#${d3.event.target.id}-fObject`)
+                        .attr('x', d3.event.target.getAttribute('x'))
+                        .attr('y', d3.event.target.getAttribute('y')-8)
                     }
 
-                    this.previousElementId = d3.event.target.id;
-                }
+                    
+                    this.newArray.push(d3.event.target);
+
+                    if( this.newArray.length <= 1) {
+                        this.previousElement = d3.event.target;
+                        this.previousElementId = d3.event.target.id;
+                    }else {
+                        const prevRectSelection = options.select(`#${this.previousElementId}`)._groups[0];
+                        const prevRectIndex = prevRectSelection.indexOf(this.previousElement);
+                        const prevRect = prevRectSelection[prevRectIndex];
+                        this.newArray.shift();
+
+                        if( d3.event.target !== prevRect ){
+                            options.select(`#${this.previousElementId}-fObject`).remove();
+                            this.selected_options.splice( this.selected_options.indexOf(this.previousElementId), 1);
+                            console.log(`${this.previousElementId} is removed!`);
+                            console.log(this.selected_options)
+                        }
+                        this.previousElement = d3.event.target;
+                        this.previousElementId = d3.event.target.id;
+                    }
 
 
-            });
+                });
 
             
 
