@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './style.css';
 
-const margin = { top: 120, right: 55, bottom: 150, left: 75};
-const width = 1265 - margin.left - margin.right;
+const margin = { top: 120, right: 55, bottom: 150, left: 85};
+const width = 1275 - margin.left - margin.right;
 const height = 850 - margin.top - margin.bottom;
 
 
@@ -137,9 +137,9 @@ class Graphics extends Component {
         this.x1 = d3.scaleBand().paddingInner(0.05);
         this.y = d3.scaleLinear().range([parseInt(height), 0]);
         this.z = d3.scaleOrdinal()
-        .range([ "#4E9397", "#E1714F", "#D8384F", "#194B8D", "#AA528A", "#F3DA7B", "#FFA4CC", "#04DD50"  ]);
+        .range([ "#0E89A4", "#DDFE8E", "#E00351", "#0552BC", "#8F2B6A", "#D9B021", "#EC5192", "#04DD50" ]);
         this.zz = d3.scaleOrdinal()
-        .range([ "#8F2B6A", "#1E7075", "#D3451A", "#D9B021", "#C8041F", "#042757", "#EC5192", "#04DD50" ]);
+        .range([ "#0E89A4", "#DDFE8E", "#E00351", "#0552BC", "#8F2B6A", "#D9B021", "#EC5192", "#04DD50" ]);
 
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
@@ -152,7 +152,7 @@ class Graphics extends Component {
     componentDidMount() {
     
         this.svg = d3.select(this.refs.container)
-        .attr("width", width + margin.left + margin.right + 150)
+        .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -160,8 +160,8 @@ class Graphics extends Component {
         
         this.moodKeys = ["cozy","luxury","loud","modern"];
         this.renderButton();
-        this.renderDropdown();
         this.renderLegends();
+        this.renderDropdown();
     }
     
 
@@ -247,8 +247,8 @@ class Graphics extends Component {
             .attr('y', d => this.y(d.value) )
             .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
-            .attr('fill', d => this.zz(d.key) )
-            .attr('stroke', d => this.zz(d.key))
+            .attr('fill', d => this.z(d.key) )
+            .attr('stroke', d => this.z(d.key))
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
             .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` );
 
@@ -549,8 +549,10 @@ class Graphics extends Component {
                     .attr('fill', `${d3.event.target.getAttribute('fill')}`);
                     select.select("#mydropdown")
                     .text(`${d3.event.target.nextSibling.innerHTML}`);
+                    
                     select.select("#displaySelect")
                     .append('foreignObject')
+                        .attr('id','displayfObject')
                         .attr('width','22')
                         .attr('height','27')
                         .attr('y', 10)
@@ -559,6 +561,10 @@ class Graphics extends Component {
                         .attr('width', '22')
                         .attr('height', '22')
                         .style('filter', () => 'brightness(200%) invert(200%)')
+                        .on('click', () => {
+                            d3.event.target.remove();
+                            displaySelect.select('#displayfObject').remove();
+                        })
                 
                 
                     this.checkUncheck();
@@ -569,7 +575,7 @@ class Graphics extends Component {
                         .attr('y', d3.event.target.getAttribute('y')-8)
                     }
 
-                    
+
                     this.newArray.push(d3.event.target);
 
                     if( this.newArray.length <= 1) {
@@ -615,16 +621,9 @@ class Graphics extends Component {
     render() {
 
         return (
-            <main>
+            <main >
                 <div className="svg-background"></div>
-                <svg ref="container">
-                    <defs>
-                        <pattern id="svgbg" patternUnits="userSpaceOnUse" width="100%" height="700">
-                            <image href="http://pluspng.com/img-png/brick-hd-png-brick-wallpaper-red-awesome-1920.jpg"
-                            width="100%" height="700" x="0" y="0"/>
-                        </pattern>
-                    </defs>
-                </svg>
+                <svg ref="container" style={{filter: 'contrast(150%)'}}></svg>
 
             </main>
         )
