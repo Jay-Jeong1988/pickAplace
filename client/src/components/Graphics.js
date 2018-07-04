@@ -239,8 +239,26 @@ class Graphics extends Component {
             .enter();
                 
 
+        bars.append('path')
+            .attr('class','animate-path')
+            .attr('stroke','white')
+            .attr('stroke-width','0.5')
+            .attr('d','M10,0h160')
+        
+        bars.append('path')
+            .attr('class','animate-path')
+            .attr('stroke','white')
+            .attr('stroke-width','0.5')
+            .attr('d','M10,233h160')
+
+        bars.append('path')
+            .attr('class','animate-path')
+            .attr('stroke','white')
+            .attr('stroke-width','0.5')
+            .attr('d','M10,466h160')
+
         bars.append('rect')
-            .attr('id','testing')
+            .attr('class','animate-bars-stroke')
             .attr('x', d => this.x1(d.key))
             .attr('y', height)
             .transition()
@@ -254,7 +272,7 @@ class Graphics extends Component {
             .attr('stroke', 'white')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
 
-
+        
         // bars.append('rect')
         //     .attr('x', d => this.x1(d.key) )
         //     .attr('y', height)

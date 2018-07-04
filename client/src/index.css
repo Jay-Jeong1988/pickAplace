@@ -4,9 +4,15 @@ body {
   font-family: sans-serif;
 }
 
-#testing {
+.animate-bars-stroke {
   stroke-dasharray: 1257;
   stroke-dashoffset: 1257;
+  animation: dash 3s linear forwards;
+}
+
+.animate-path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
   animation: dash 3s linear forwards;
 }
 
