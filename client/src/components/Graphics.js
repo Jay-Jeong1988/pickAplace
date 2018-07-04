@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './style.css';
 
-const margin = { top: 120, right: 55, bottom: 150, left: 180};
-const width = 1250 - margin.left - margin.right;
+const margin = { top: 120, right: 55, bottom: 150, left: 75};
+const width = 1265 - margin.left - margin.right;
 const height = 850 - margin.top - margin.bottom;
 
 
@@ -152,7 +152,7 @@ class Graphics extends Component {
     componentDidMount() {
     
         this.svg = d3.select(this.refs.container)
-        .attr("width", width + margin.left + margin.right)
+        .attr("width", width + margin.left + margin.right + 150)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -375,7 +375,7 @@ class Graphics extends Component {
         const legend = d3.select(this.refs.container)
         .append("g")
             .attr('class','legends')
-            .attr('transform','translate(380,70)')
+            .attr('transform','translate(1220,70)')
             .attr("font-family", "sans-serif")
             .attr("font-size", 15)
         .selectAll("g")
@@ -383,7 +383,7 @@ class Graphics extends Component {
             .enter()
         .append("g")
             .attr('id', d => d + '-graphic')
-            .attr("transform", function(d, i) { return "translate(" + i * 100 + ",0 )"; });
+            .attr("transform", function(d, i) { return "translate(0 ," + i * 50 + ")" });
             
         legend.append("rect")
             .attr('class','legendsRect')
@@ -398,9 +398,10 @@ class Graphics extends Component {
             .attr("y", 9.5)
             .attr("dy", "0.32em")
             .attr('fill','white')
-            .text(function(d) { 
-                if(d === 'recurrence') return 'revisit';
-                else return d; 
+            .style('font-size','30px')
+            .text( d => { 
+                if(d === 'recurrence') return 'Revisit';
+                else return `${d.charAt(0).toUpperCase() + d.slice(1)}`; 
             });
         
         
@@ -436,7 +437,7 @@ class Graphics extends Component {
         
         const container = d3.select(this.refs.container)
         .append('g')
-            .attr('transform','translate(980,60)')
+            .attr('transform','translate(1220,360)')
             .attr('class','submitButton')
         .append('foreignObject')   //foreign object must be given w&h to be rendered
             .attr('width','200px')
@@ -479,29 +480,32 @@ class Graphics extends Component {
         
         let select = dropdown.append("g")
             .attr("class","select")
-            .attr("transform", "translate(800, 55)")
+            .attr("transform", "translate(1220, 250)")
             .on("mouseover", (d, i) => options.attr('visibility', 'visible'))
             .on("mouseout", (d, i) => options.attr('visibility', 'hidden'));
         
         select.append("rect")
+            .attr('stoke','white')
+            .attr('x', -8)
             .attr("y",  10 )
-            .attr("width", l + 70)
-            .attr("height", 30)
-            .attr('fill', 'white');
+            .attr("width", l + 141)
+            .attr("height", 40)
+            .attr('fill', 'transparent');
             
         select.append('rect')
             .attr('id', 'selectColor')
-            .attr('x', 7)
-            .attr('y', 16)
+            .attr('y', 20)
             .attr('width', 19)
             .attr('height', 19)
             .attr('fill', 'white')
         
         select.append("text")
-            .attr("x", 34)
-            .attr("y",30 )
+            .attr("x", 30)
+            .attr("y",38 )
+            .style('font-size','28px')
             .attr("id","mydropdown")
-            .text('select mood');
+            .attr('fill','white')
+            .text('Select mood')
   
         var options = select.selectAll(".myBars")
             .data(["cozy","luxury","loud","modern"])
@@ -512,12 +516,13 @@ class Graphics extends Component {
         
 
         options.append("rect")
+            .attr('x', -8)
             .attr("y", function(d,i){ 
-                return 40 + i*30;
+                return 51 + i*40;
             })
-            .attr("width", l + 70)
-            .attr("height", 30)
-            .attr('fill', 'white')
+            .attr("width", l + 141)
+            .attr("height", 40)
+            .attr('fill', '#847FC3')
             
             this.previousElement = null;
             this.previousElementId = '';
@@ -525,9 +530,8 @@ class Graphics extends Component {
             
             options.append('rect')
                 .attr('id',d => d)
-                .attr('x', 7)
                 .attr('y', function( d, i ){
-                    return 46 + i*30;
+                    return 61 + i*40;
                 })
                 .attr('width', 19)
                 .attr('height', 19)
@@ -576,11 +580,13 @@ class Graphics extends Component {
             
 
         options.append("text")
-            .attr("x", 34)
+            .style('font-size','28px')
+            .style('fill','white')
+            .attr("x", 30)
 	        .attr("y", function(d,i){ 
-                return 60 + i*30;
+                return 78 + i*40;
             })
-            .text(d => d)
+            .text(d => d.charAt(0).toUpperCase() + d.slice(1) )
             .on('click', (d, i) => {
                 select.select('#selectColor')
                     .attr('fill', `${d3.event.target.parentNode.childNodes[1].getAttribute('fill')}`);
