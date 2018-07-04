@@ -192,7 +192,7 @@ class Graphics extends Component {
     }
     
     removeMeasureLines = () => {
-        this.svg.selectAll('.animate-path').remove();
+        this.svg.selectAll('.measureLines').remove();
     }
 
 
@@ -251,18 +251,23 @@ class Graphics extends Component {
         .selectAll('g')
         .data(this.state.dummyData)
         .enter()
-        .append('g')
-            .attr('class','bar-container')
+        
+
+        bars.append('g')
+            .attr('id', d => {
+                let newName = '';
+                if( d.name.split(" ")[1] ) newName = d.name.split(" ").join("_");
+                else newName = d.name;
+                return `bar-container-${newName}`;
+            })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
             })
         .selectAll('rect')
             .data( d => { 
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
-            .enter();
-
-
-        bars.append('rect')
+            .enter()
+        .append('rect')
             .on('mouseover', showTooltip)
             .on('mouseout', hideTooltip)
             .attr('class','animate-bars-stroke')
@@ -279,17 +284,47 @@ class Graphics extends Component {
             .attr('stroke', 'white')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
 
-        const tooltip = bars.append('path')
-            .attr('stroke','white')
+
+        const tooltip = bars.append('g')
+            .attr('id', d => {
+                let newName = '';
+                if( d.name.split(" ")[1] ) newName = d.name.split(" ").join("_");
+                else newName = d.name;
+                return `tooltip-container-${newName}`;
+            })
+            .attr('transform', d => { 
+                return 'translate(' + this.x0(d.name) + ', 0)';
+            })
+            .attr('stroke','transparent')
             .attr('fill','none')
-            .attr('d','M0,0h70v40h-70v-40')
+        .selectAll('path')
+            .data( d => { 
+                return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
+            .enter()
+            
+        tooltip.append('path')
+            .attr('class','animate-tips-stroke')
+            .attr('id', function(d) {
+                return this.parentNode.id + '_' + d.key;
+            })
+            .attr('d', d => { 
+                return `M${this.x1(d.key)},0h70v40h-70v-40`
+            })
 
         function showTooltip(d,i) {
-            tooltip.attr('visibility', 'visible');
+            const barId = d3.event.target.parentNode.getAttribute('id');
+            const restaurant_name = barId.split('-')[barId.split('-').length - 1];
+
+            d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                .attr('stroke','white')
         }
 
         function hideTooltip(d,i) {
-            tooltip.attr('visibility', 'hide');
+            const barId = d3.event.target.parentNode.getAttribute('id');
+            const restaurant_name = barId.split('-')[barId.split('-').length - 1];
+
+            d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                .attr('stroke','transparent')
         }
 
         
