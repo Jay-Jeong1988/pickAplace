@@ -139,6 +139,7 @@ app.get("/top_ten/:eval_types", (req, res) => {
             else queryString += `${receivedDataArray[i]} + `;
         }
         // console.log(`(${queryString}/${receivedDataArray.length}) desc`)
+        
         knex('restaurants')
             .select(sendingDataArray)
             .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')

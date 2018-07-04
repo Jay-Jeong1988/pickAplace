@@ -27,7 +27,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },
                 {
                     name: 'idealio ',
@@ -39,7 +39,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio  ',
                     price: 0,
@@ -50,7 +50,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio   ',
                     price: 0,
@@ -61,7 +61,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio    ',
                     price: 0,
@@ -72,7 +72,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio     ',
                     price: 0,
@@ -83,7 +83,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio      ',
                     price: 0,
@@ -94,7 +94,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio       ',
                     price: 0,
@@ -105,7 +105,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio        ',
                     price: 0,
@@ -116,7 +116,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },{
                     name: 'idealio         ',
                     price: 0,
@@ -127,7 +127,7 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: '/assets/images/idealio.png'
+                    imgUrl: ''
                 },
             ]
         }
@@ -150,27 +150,11 @@ class Graphics extends Component {
     }
     
     componentDidMount() {
-        
-        d3.select(this.refs.container)
-        .append('defs')
-        .append('pattern')
-        .attr('id','img1')
-        .attr('patternUnits','userSpaceOnUse') 
-        .attr('width','100%')
-        .attr('height','700')
-        .append('xhtml:image')
-        .attr('xlink:href','https://previews.123rf.com/images/hilmawan/hilmawan1803/hilmawan180300088/97196617-red-brick-wall-background-lot-of-gradation-and-color-horizontal-alignment.jpg')
-        .attr('x','0')
-        .attr('y','0')
-        .attr('width','100%')
-        .attr('height','700')
-
-        
+    
         this.svg = d3.select(this.refs.container)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr('fill','url(#img1)')
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
         
@@ -255,7 +239,7 @@ class Graphics extends Component {
             .enter();
                 
 
-            bars.append('rect')
+        bars.append('rect')
             .attr('x', d => this.x1(d.key))
             .attr('y', height)
             .transition()
@@ -331,10 +315,9 @@ class Graphics extends Component {
         this.svg.select('.x.axis')
         .selectAll('.tick')
         .selectAll('text')
-            .style('font-weight','bold')
-            .style("font-size", '15px')
+            .style("font-size", '25px')
             .attr('fill', '#635252')
-            .attr("dy", "4.5em")
+            .attr("dy", "3.5em")
 
 
         function insertLineBreaks(d) {
@@ -352,7 +335,9 @@ class Graphics extends Component {
 
         this.svg.select('.x.axis')
         .selectAll('line')
-        .attr('y2','9')  //lengthen ticks
+            .attr('stroke','white')
+            .attr('stroke-width','2px')
+            .attr('y2','9')  //lengthen ticks
 
 
         
@@ -368,13 +353,18 @@ class Graphics extends Component {
             .attr('stroke','white')
             .attr('stroke-width','0.3px')
             .style('fill', c => c)
-            .style('font-size', '22px')
+            .style('font-size', '23px')
             .style('font-weight', 'bold')
 
         this.svg
         .select('.y.axis')
         .select('path')
             .style('display','none')
+
+        this.svg.select('.y.axis')
+        .selectAll('line')
+            .attr('stroke','white')
+            .attr('stroke-width','2px')
         
         
     }
@@ -420,26 +410,26 @@ class Graphics extends Component {
         const rect_id = d3.event.target.id; 
         const thisLegend = d3.select(`#${rect_id}-graphic`);
             
-            thisLegend.append('foreignObject')
-                .attr('class','fObject')
-                .attr('id',`${rect_id}-fObject`)
-                .attr('width','22')
-                .attr('height','27')
-                .attr('y', -8)
-            .append('xhtml:img')
-                .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
-                .attr('width', '22')
-                .attr('height', '22')
-                .style('filter', () => 'brightness(200%) invert(200%)')
-                .on('click', () => {
-                    d3.event.target.remove();
-                    thisLegend.select('.fObject').remove();
-                    this.selected_options.splice( this.selected_options.indexOf(rect_id), 1);
-                    console.log(`${rect_id} is removed!`);
-                })
+        thisLegend.append('foreignObject')
+            .attr('class','fObject')
+            .attr('id',`${rect_id}-fObject`)
+            .attr('width','22')
+            .attr('height','27')
+            .attr('y', -8)
+        .append('xhtml:img')
+            .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
+            .attr('width', '22')
+            .attr('height', '22')
+            .style('filter', () => 'brightness(200%) invert(200%)')
+            .on('click', () => {
+                d3.event.target.remove();
+                thisLegend.select('.fObject').remove();
+                this.selected_options.splice( this.selected_options.indexOf(rect_id), 1);
+                console.log(`${rect_id} is removed!`);
+            })
 
-            this.selected_options.push(rect_id);
-            console.log(`${rect_id} is selected!`);
+        this.selected_options.push(rect_id);
+        console.log(`${rect_id} is selected!`);
     }
 
     renderButton(){
@@ -464,6 +454,9 @@ class Graphics extends Component {
                         console.log(data.errors);
                         this.selected_options.shift();
                     }else { 
+                        data.forEach( d => {
+                            d.name = d.name.charAt(0).toUpperCase() + d.name.slice(1);
+                        })
                         this.setState({
                             dummyData: data
                         })
@@ -481,8 +474,8 @@ class Graphics extends Component {
         l=l*10;
 
         var dropdown = d3.select(this.refs.container)
-            .append("g")
-                .attr("class","dropdown")
+        .append("g")
+            .attr("class","dropdown")
         
         let select = dropdown.append("g")
             .attr("class","select")
@@ -490,26 +483,25 @@ class Graphics extends Component {
             .on("mouseover", (d, i) => options.attr('visibility', 'visible'))
             .on("mouseout", (d, i) => options.attr('visibility', 'hidden'));
         
-            select.append("rect")
-
-	            .attr("y",  10 )
-	            .attr("width", l + 70)
-                .attr("height", 30)
-                .attr('fill', 'white');
-                
-            select.append('rect')
-                .attr('id', 'selectColor')
-                .attr('x', 7)
-                .attr('y', 16)
-                .attr('width', 19)
-                .attr('height', 19)
-                .attr('fill', 'white')
+        select.append("rect")
+            .attr("y",  10 )
+            .attr("width", l + 70)
+            .attr("height", 30)
+            .attr('fill', 'white');
             
-            select.append("text")
-                .attr("x", 34)
-	            .attr("y",30 )
-                .attr("id","mydropdown")
-	            .text('select mood');
+        select.append('rect')
+            .attr('id', 'selectColor')
+            .attr('x', 7)
+            .attr('y', 16)
+            .attr('width', 19)
+            .attr('height', 19)
+            .attr('fill', 'white')
+        
+        select.append("text")
+            .attr("x", 34)
+            .attr("y",30 )
+            .attr("id","mydropdown")
+            .text('select mood');
   
         var options = select.selectAll(".myBars")
             .data(["cozy","luxury","loud","modern"])
@@ -532,20 +524,20 @@ class Graphics extends Component {
             this.newArray = [];
             
             options.append('rect')
-            .attr('id',d => d)
-            .attr('x', 7)
-            .attr('y', function( d, i ){
-                return 46 + i*30;
-            })
-            .attr('width', 19)
-            .attr('height', 19)
-            .attr('class', 'optionColor')
-            .attr('fill', this.z)
-            .on('click', (d, i) => {
-                select.select('#selectColor')
-                .attr('fill', `${d3.event.target.getAttribute('fill')}`);
-                select.select("#mydropdown")
-                .text(`${d3.event.target.nextSibling.innerHTML}`);
+                .attr('id',d => d)
+                .attr('x', 7)
+                .attr('y', function( d, i ){
+                    return 46 + i*30;
+                })
+                .attr('width', 19)
+                .attr('height', 19)
+                .attr('class', 'optionColor')
+                .attr('fill', this.z)
+                .on('click', (d, i) => {
+                    select.select('#selectColor')
+                    .attr('fill', `${d3.event.target.getAttribute('fill')}`);
+                    select.select("#mydropdown")
+                    .text(`${d3.event.target.nextSibling.innerHTML}`);
                 
                 
                 this.checkUncheck();
