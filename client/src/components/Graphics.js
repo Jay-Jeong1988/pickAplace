@@ -440,14 +440,17 @@ class Graphics extends Component {
             .attr('transform','translate(1220,360)')
             .attr('class','submitButton')
         .append('foreignObject')   //foreign object must be given w&h to be rendered
-            .attr('width','200px')
-            .attr('height','200px')
+            .attr('width','195px')
+            .attr('height','45px')
         .append('xhtml:div')
             .attr('class','getList');
     
         container.append('xhtml:button')
             .attr('class','btn btn-success')
+            .style('width','100%')
+            .style('height','45px')
             .html('Show me the result!')
+            .style('font-size','20px')
             .on('click', (d,i) => {
                 if(!this.selected_options[0]) this.selected_options = ['empty'];
                 Restaurant.request_ten(this.selected_options).then( data => {
@@ -516,9 +519,9 @@ class Graphics extends Component {
         
 
         options.append("rect")
-            .attr('x', -8)
+            .attr('x', -209)
             .attr("y", function(d,i){ 
-                return 51 + i*40;
+                return 10 + i*40;
             })
             .attr("width", l + 141)
             .attr("height", 40)
@@ -529,9 +532,10 @@ class Graphics extends Component {
             this.newArray = [];
             
             options.append('rect')
+                .attr('x', -201)
                 .attr('id',d => d)
                 .attr('y', function( d, i ){
-                    return 61 + i*40;
+                    return 19 + i*40;
                 })
                 .attr('width', 19)
                 .attr('height', 19)
@@ -582,9 +586,9 @@ class Graphics extends Component {
         options.append("text")
             .style('font-size','28px')
             .style('fill','white')
-            .attr("x", 30)
+            .attr("x", -171)
 	        .attr("y", function(d,i){ 
-                return 78 + i*40;
+                return 37 + i*40;
             })
             .text(d => d.charAt(0).toUpperCase() + d.slice(1) )
             .on('click', (d, i) => {
