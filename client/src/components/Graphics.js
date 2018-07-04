@@ -350,10 +350,10 @@ class Graphics extends Component {
             .call(this.yAxis)
         .selectAll('text')
             .data(yColor)
-            .attr('stroke','white')
-            .attr('stroke-width','0.3px')
-            .style('fill', c => c)
-            .style('font-size', '23px')
+            .attr('stroke', c => c)
+            .attr('stroke-width','2px')
+            .style('fill', 'white')
+            .style('font-size', '30px')
             .style('font-weight', 'bold')
 
         this.svg
