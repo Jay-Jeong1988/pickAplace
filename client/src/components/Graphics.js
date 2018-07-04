@@ -425,6 +425,8 @@ class Graphics extends Component {
             .on('click', () => {
                 d3.event.target.remove();
                 thisLegend.select('.fObject').remove();
+                d3.select('#displayfObject').remove();
+
                 this.selected_options.splice( this.selected_options.indexOf(rect_id), 1);
                 console.log(`${rect_id} is removed!`);
             })
@@ -561,10 +563,7 @@ class Graphics extends Component {
                         .attr('width', '22')
                         .attr('height', '22')
                         .style('filter', () => 'brightness(200%) invert(200%)')
-                        .on('click', () => {
-                            d3.event.target.remove();
-                            displaySelect.select('#displayfObject').remove();
-                        })
+                        
                 
                 
                     this.checkUncheck();
