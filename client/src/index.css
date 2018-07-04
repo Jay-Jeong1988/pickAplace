@@ -11,8 +11,8 @@ body {
 }
 
 .animate-path {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
+  stroke-dasharray: 1100;
+  stroke-dashoffset: 1100;
   animation: dash 3s linear forwards;
 }
 

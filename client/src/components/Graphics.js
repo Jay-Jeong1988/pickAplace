@@ -167,6 +167,9 @@ class Graphics extends Component {
 
     
     componentDidUpdate(){
+        this.removeMeasureLines();
+        this.renderMeasureLines();
+
         this.removeAxis();
         this.renderAxis();
 
@@ -183,13 +186,32 @@ class Graphics extends Component {
     removeBars = () => {
         this.svg.selectAll('.bars').remove();
     }
-
+    
     removeLegends = () => {
         this.svg.selectAll('.legends').remove();
     }
-
-
     
+    removeMeasureLines = () => {
+        this.svg.selectAll('.animate-path').remove();
+    }
+
+
+    renderMeasureLines() {
+
+        const measureLines = this.svg.append('g')
+            .attr('class','measureLines')
+        .selectAll('g')
+            .data(['M10,0h1100','M10,233h1100','M10,466h1100'])
+            .enter()
+        .append('g')
+            .attr('stroke','white')
+            .attr('stroke-width','0.7')
+        
+        measureLines.append('path')
+            .attr('class','animate-path')
+            .attr('d', d => d)
+    }
+
     renderBars() {
         let focusOn = true;
 
@@ -230,6 +252,7 @@ class Graphics extends Component {
         .data(this.state.dummyData)
         .enter()
         .append('g')
+            .attr('class','bar-container')
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
             })
@@ -237,27 +260,11 @@ class Graphics extends Component {
             .data( d => { 
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter();
-                
 
-        bars.append('path')
-            .attr('class','animate-path')
-            .attr('stroke','white')
-            .attr('stroke-width','0.5')
-            .attr('d','M10,0h160')
-        
-        bars.append('path')
-            .attr('class','animate-path')
-            .attr('stroke','white')
-            .attr('stroke-width','0.5')
-            .attr('d','M10,233h160')
-
-        bars.append('path')
-            .attr('class','animate-path')
-            .attr('stroke','white')
-            .attr('stroke-width','0.5')
-            .attr('d','M10,466h160')
 
         bars.append('rect')
+            .on('mouseover', showTooltip)
+            .on('mouseout', hideTooltip)
             .attr('class','animate-bars-stroke')
             .attr('x', d => this.x1(d.key))
             .attr('y', height)
@@ -271,6 +278,19 @@ class Graphics extends Component {
             .attr('fill', d => this.z(d.key) )
             .attr('stroke', 'white')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
+
+        const tooltip = bars.append('path')
+            .attr('stroke','white')
+            .attr('fill','none')
+            .attr('d','M0,0h70v40h-70v-40')
+
+        function showTooltip(d,i) {
+            tooltip.attr('visibility', 'visible');
+        }
+
+        function hideTooltip(d,i) {
+            tooltip.attr('visibility', 'hide');
+        }
 
         
         // bars.append('rect')
