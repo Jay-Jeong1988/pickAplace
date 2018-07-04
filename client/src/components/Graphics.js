@@ -256,9 +256,12 @@ class Graphics extends Component {
         bars.append('g')
             .attr('id', d => {
                 let newName = '';
-                if( d.name.split(" ")[1] ) newName = d.name.split(" ").join("_");
-                else newName = d.name;
-                return `bar-container-${newName}`;
+                if( d.name.includes('\'') || d.name.split(" ")[1] ){
+                    newName = d.name.split('\'').join('').split(' ').join('_');
+                }else {
+                    newName = d.name;
+                }
+                    return `tooltip-container-${newName}`;
             })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
@@ -288,15 +291,19 @@ class Graphics extends Component {
         const tooltip = bars.append('g')
             .attr('id', d => {
                 let newName = '';
-                if( d.name.split(" ")[1] ) newName = d.name.split(" ").join("_");
-                else newName = d.name;
-                return `tooltip-container-${newName}`;
+                if( d.name.includes('\'') || d.name.split(" ")[1] ){
+                    newName = d.name.split('\'').join('').split(' ').join('_');
+                }else {
+                    newName = d.name;
+                }
+                    return `tooltip-container-${newName}`;
             })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
             })
-            .attr('stroke','transparent')
-            .attr('fill','none')
+            .attr('visibility','hidden')
+            .attr('stroke','white')
+            .attr('fill','rgba(0,0,0,0.7)')
         .selectAll('path')
             .data( d => { 
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
@@ -308,7 +315,7 @@ class Graphics extends Component {
                 return this.parentNode.id + '_' + d.key;
             })
             .attr('d', d => { 
-                return `M${this.x1(d.key)},0h70v40h-70v-40`
+                return `M${this.x1(d.key)},${this.y(d.value) - 100 }h70v40h-70v-40`
             })
 
         function showTooltip(d,i) {
@@ -316,7 +323,7 @@ class Graphics extends Component {
             const restaurant_name = barId.split('-')[barId.split('-').length - 1];
 
             d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
-                .attr('stroke','white')
+                .attr('visibility','visible')
         }
 
         function hideTooltip(d,i) {
@@ -324,7 +331,7 @@ class Graphics extends Component {
             const restaurant_name = barId.split('-')[barId.split('-').length - 1];
 
             d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
-                .attr('stroke','transparent')
+                .attr('visibility','hidden')
         }
 
         
