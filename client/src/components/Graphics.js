@@ -27,7 +27,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },
                 {
                     name: 'idealio ',
@@ -39,7 +40,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio  ',
                     price: 0,
@@ -50,7 +52,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio   ',
                     price: 0,
@@ -61,7 +64,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio    ',
                     price: 0,
@@ -72,7 +76,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio     ',
                     price: 0,
@@ -83,7 +88,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio      ',
                     price: 0,
@@ -94,7 +100,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio       ',
                     price: 0,
@@ -105,7 +112,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio        ',
                     price: 0,
@@ -116,7 +124,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },{
                     name: 'idealio         ',
                     price: 0,
@@ -127,7 +136,8 @@ class Graphics extends Component {
                     modern: 0,
                     services: 0,
                     recurrence: 0,
-                    imgUrl: ''
+                    imgUrl: '',
+                    count: 0
                 },
             ]
         }
@@ -215,28 +225,28 @@ class Graphics extends Component {
 
     renderBars() {
 
-        const rg = d3.select('svg')
-        .append('defs')
-        .selectAll('radialGradient')
-            .data(this.keysWithNumVal)
-            .enter()
-        .append('radialGradient')
-        .attr('id', d => `glow-${d}`)
-            .attr('cx','50%')
-            .attr('cy','50%')
-            .attr('fx','50%')
-            .attr('fy','50%')
-            .attr('r','70%')
+        // const rg = d3.select('svg')
+        // .append('defs')
+        // .selectAll('radialGradient')
+        //     .data(this.keysWithNumVal)
+        //     .enter()
+        // .append('radialGradient')
+        // .attr('id', d => `glow-${d}`)
+        //     .attr('cx','50%')
+        //     .attr('cy','50%')
+        //     .attr('fx','50%')
+        //     .attr('fy','50%')
+        //     .attr('r','70%')
 
-        rg.append('stop')
-            .attr('offset','0%')
-            .attr('stop-color','#FFF')
-            .attr('stop-opacity','1')
+        // rg.append('stop')
+        //     .attr('offset','0%')
+        //     .attr('stop-color','#FFF')
+        //     .attr('stop-opacity','1')
 
-        rg.append('stop')
-            .attr('offset','100%')
-            .attr('stop-color', d => this.z(d) )
-            .attr('stop-opacity', '1')
+        // rg.append('stop')
+        //     .attr('offset','100%')
+        //     .attr('stop-color', d => this.z(d) )
+        //     .attr('stop-opacity', '1')
 //////////////////////////////////////////////////////////////'radial Gradient'
 
         // const rect_offset = d3.select('svg')
@@ -264,8 +274,7 @@ class Graphics extends Component {
         
         
 
-        this.keys = Object.keys(this.state.dummyData[0]);
-        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
+        
         
         const bars = this.svg.append('g')
         .attr('class','bars')
@@ -460,16 +469,17 @@ class Graphics extends Component {
         //     .attr('stroke-width', d => this.x1.bandwidth()/70 )
         //     .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
             // .style('filter','url(#glow)')
-            // .style('opacity','0.6')
+            // .style('opacity','0.6')  
+            
+/*                                         double rect for more effects(if needed)   */
                 
         
     }
 
     
     renderAxis() {
-        
         this.keys = Object.keys(this.state.dummyData[0]);
-        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
+        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 2);
 
         this.x0.domain(this.state.dummyData.map( d => d.name ));
         this.x1.domain(this.keysWithNumVal).rangeRound([0, this.x0.bandwidth()])
