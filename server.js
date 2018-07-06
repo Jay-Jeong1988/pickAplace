@@ -126,31 +126,144 @@ app.post('/eval_rest/:restaurant_id', (req, res) => {
 });
 
 app.get("/top_ten/:eval_types", (req, res) => {
-    if(req.params.eval_types.split(',').includes('empty')) res.send({'errors': 'no data'});
-    else {
-        const receivedDataArray = req.params.eval_types.split(',');
-        let sendingDataArray = req.params.eval_types.split(',');
-        sendingDataArray.unshift('name');
-        sendingDataArray.push('imgUrl');
-        let queryString = "(";
 
-        for(let i=0; i < receivedDataArray.length; i++){
-            if (i >= receivedDataArray.length - 1) queryString += `${receivedDataArray[i]} )`;
-            else queryString += `${receivedDataArray[i]} + `;
+    const getData = () => {
+        if(req.params.eval_types.split(',').includes('empty')) res.send({'errors': 'no data'});
+        else {
+            const receivedDataArray = req.params.eval_types.split(',');
+            let receivedParams = req.params.eval_types.split(',');
+            receivedParams.unshift('name');
+            receivedParams.push('imgUrl');
+            let queryString = "(";
+
+            for(let i=0; i < receivedDataArray.length; i++){
+                if (i >= receivedDataArray.length - 1) queryString += `${receivedDataArray[i]} )`;
+                else queryString += `${receivedDataArray[i]} + `;
+            }
+            // console.log(`(${queryString}/${receivedDataArray.length}) desc`)
+            return knex('restaurants')
+                .select(receivedParams)
+                .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
+                .limit(10)
+                .then( data => console.log(data) )
         }
-        // console.log(`(${queryString}/${receivedDataArray.length}) desc`)
-        
-        knex('restaurants')
-            .select(sendingDataArray)
-            .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
-            .limit(10)
-            .then( data => {
-                console.log(data);
-                res.send(data);
-            });
+    }
+
+    const getCount = () => {
+        if(req.params.eval_types.split(',').includes('empty')) res.send({'errors': 'no data'});
+        else {
+            const receivedDataArray = req.params.eval_types.split(',');
+            let selectCount = '';
+            let orderQuery = "(";
+            for(let i=0; i < receivedDataArray.length; i++){
+                selectCount += `count(${receivedDataArray[i]}) as ${receivedDataArray[i]}_count,`;
+                if(receivedDataArray[i] !== 'recurrence'){
+                    if (i >= receivedDataArray.length - 1) orderQuery += `avg(${receivedDataArray[i]}) ) / ${receivedDataArray.length} `;
+                    else orderQuery += `avg(${receivedDataArray[i]}) +`;
+                }else{
+
+                }
+            }
+            return knex('evaluations')
+                .select(['restaurant_id', knex.raw(selectCount.slice(0,-1)) ])
+                .orderBy(knex.raw(orderQuery), 'desc')
+                .groupBy('restaurant_id')
+                .limit(10)
+                .then( data => console.log(data) )
         }
+    }
+    getCount();
+
+    const total_count_recur = () => { 
+        return  knex('evaluations')
+            .where({restaurant_id: req.params.restaurant_id})
+            .first()
+            .count('recurrence')
+            .then( data => data.count )
+    }
+
+    const total_count_true_recur = () => { 
+        return knex('evaluations')
+            .where({restaurant_id: req.params.restaurant_id})
+            .where({recurrence: true})
+            .first()
+            .count('recurrence').then( data => data.count)
+    }
+
+    const getAvgRecurrence = () => {
+            return total_count_true_recur().then( true_recur => {
+                return total_count_recur().then( total_recur => {
+                    return Math.round(parseInt(true_recur) / parseInt(total_recur) * 100);
+                })
+            })
+    }
+        // const getAverageData = () => {
+        //     let selectQuery = "";
+        //     let orderQuery = "(";
+        //     for(let i=0; i < receivedDataArray.length; i++){
+        //         if(receivedDataArray[i] !== 'recurrence'){
+        //             selectQuery += `round(avg(${receivedDataArray[i]})) as ${receivedDataArray[i]},`;
+        //             if (i >= receivedDataArray.length - 1) orderQuery += `avg(${receivedDataArray[i]}) ) / ${receivedDataArray.length} `;
+        //             else orderQuery += `avg(${receivedDataArray[i]}) +`;
+        //         }
+        //     }
+        //     return knex('evaluations')
+        //         .select(['restaurant_id', knex.raw(selectQuery.slice(0, -1)) ])
+        //         .orderBy(knex.raw(orderQuery), 'desc')
+        //         .groupBy('restaurant_id')
+        //         .limit(10)
+        //         .then( data => data );
+        // }
+
+
+        // getCount()
+
+
+        // const sendingData = [];
+        // let eachDataTemp = {};
+
+        // for(let d of getAverageData()){
+        //     for(let key of d){
+        //         eachDataTemp.key = d.key;
+        //     }
+        //     sendingData.push(eachDataTemp);
+        // }
+
+        // knex('evaluations')
+        //     .select(['restaurant_id', knex.raw(`round(avg(${`)])
+        // const getTenRests = (queryKeys, query) => {
+        //     return knex('restaurants')
+        //         .select(queryKeys)
+        //         .orderBy(knex.raw(`${query}/${receivedDataArray.length}`),'desc')
+        //         .limit(10)
+        //         .then( data => data )
+        // }
+
+        // const getCount = (queryKeys) => {
+        //     return knex('evaluations')
+        //         .select()
+        //     let keys = [];
+        //     for(let d of data) {
+        //         for(let key in d){
+        //             if( key !== 'name' || key !== 'imgUrl'){
+        //                 knex('evaluations').count({count_label: key})
+
+        //             }
+        //         }
+        //     }
+                    
+        //             for(let key of keys) {
+        //                 let count_as = `${key}_count`;
+        //                 if(key){
+        //                 }
+        //             }
+        //     })
+            // .then( data => {
+            //     console.log(data);
+            //     res.send(data);
+            // });
+    
 })
-
 
 app.post('/sign-up', [ 
         check('email').isEmail(),
