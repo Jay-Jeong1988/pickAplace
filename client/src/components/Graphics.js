@@ -667,7 +667,6 @@ class Graphics extends Component {
             .style('font-size','30px')
             .text( d => { 
                 if(d === 'recurrence') return 'Revisit';
-                else if(d === 'luxury') return 'Sanitation';
                 else return `${d.charAt(0).toUpperCase() + d.slice(1)}`; 
             });
         
@@ -879,7 +878,10 @@ class Graphics extends Component {
 	        .attr("y", function(d,i){ 
                 return 37 + i*40;
             })
-            .text(d => d.charAt(0).toUpperCase() + d.slice(1) )
+            .text(d => {
+                if(d === 'luxury') return 'Sanitation';
+                else return d.charAt(0).toUpperCase() + d.slice(1) 
+            })
             .on('click', (d, i) => {
                 select.select('#selectColor')
                     .attr('fill', `${d3.event.target.parentNode.childNodes[1].getAttribute('fill')}`);
