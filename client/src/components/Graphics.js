@@ -553,6 +553,7 @@ class Graphics extends Component {
         .selectAll('.tick')
         .selectAll('text')
             .style("font-size", '25px')
+            .style('font-family', 'initial')
             .attr('fill', '#635252')
             .attr("dy", "3.5em")
 
