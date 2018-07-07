@@ -196,6 +196,7 @@ class Graphics extends Component {
     
     removeBars = () => {
         this.svg.selectAll('.bars').remove();
+        this.svg.select('#lg1').remove();
     }
     
     removeLegends = () => {
@@ -225,28 +226,28 @@ class Graphics extends Component {
 
     renderBars() {
 
-        // const rg = d3.select('svg')
-        // .append('defs')
-        // .selectAll('radialGradient')
-        //     .data(this.keysWithNumVal)
-        //     .enter()
-        // .append('radialGradient')
-        // .attr('id', d => `glow-${d}`)
-        //     .attr('cx','50%')
-        //     .attr('cy','50%')
-        //     .attr('fx','50%')
-        //     .attr('fy','50%')
-        //     .attr('r','70%')
+        const lg = d3.select('svg')
+        .append('defs')
+        .selectAll('linearGradient')
+            .data(['red','orange','yellow','seagreen', 'limegreen', 'lightgreen', 'springgreen'])
+            .enter()
+        .append('linearGradient')
+            .attr('id', d => `lg-${d}`)
+            .attr('x1','0%')
+            .attr('y1','50%')
+            .attr('x2','0%')
+            .attr('y2','0%')
+        .append('stop')
+            .attr('offset','0%')
+            .attr('stop-color', d => d)
+            .attr('stop-opacity','1')
 
-        // rg.append('stop')
-        //     .attr('offset','0%')
-        //     .attr('stop-color','#FFF')
-        //     .attr('stop-opacity','1')
+        d3.selectAll('defs linearGradient')
+        .append('stop')
+            .attr('offset','100%')
+            .attr('stop-color', 'rgba(255,255,255)')
+            .attr('stop-opacity', '1')
 
-        // rg.append('stop')
-        //     .attr('offset','100%')
-        //     .attr('stop-color', d => this.z(d) )
-        //     .attr('stop-opacity', '1')
 //////////////////////////////////////////////////////////////'radial Gradient'
 
         // const rect_offset = d3.select('svg')
@@ -466,9 +467,33 @@ class Graphics extends Component {
         });
         
         tooltip.selectAll('text').each(insertLineBreaks);
-        tooltip.selectAll('text tspan:first-of-type').attr('dx', 9);
-        tooltip.selectAll('text tspan:not(:first-child)').attr('x', 9)
-        .attr('dy','18');
+
+        tooltip.selectAll('text tspan:first-of-type')
+            .attr('dx', 9)
+            .attr('fill','white')
+            .attr('stroke', function(d){
+                if(d.value > 95) return `url(#lg-springgreen)`;
+                else if(d.value > 86) return `url(#lg-lightwgreen)`;
+                else if(d.value > 65) return `url(#lg-limegreen)`;
+                else if(d.value >= 50) return `url(#lg-seagreen)`;
+                else if(d.value > 37) return `url(#lg-yellow)`;
+                else if(d.value > 20) return `url(#lg-orange)`;
+                else if(d.value > 0) return `url(#lg-red)`;
+            });
+
+        tooltip.selectAll('text tspan:not(:first-child)')
+            .attr('x', 9)
+            .attr('fill','white')
+            .attr('dy','18')
+            .attr('stroke', function(d){
+                if(d.value > 95) return `url(#lg-springgreen)`;
+                else if(d.value > 86) return `url(#lg-lightgreen)`;
+                else if(d.value > 65) return `url(#lg-limegreen)`;
+                else if(d.value >= 50) return `url(#lg-seagreen)`;
+                else if(d.value > 37) return `url(#lg-yellow)`;
+                else if(d.value > 20) return `url(#lg-orange)`;
+                else if(d.value > 0) return `url(#lg-red)`;
+            });
         
 
         function insertLineBreaks(d) {
@@ -553,7 +578,10 @@ class Graphics extends Component {
         .selectAll('.tick')
         .selectAll('text')
             .style("font-size", '25px')
-            .style('font-family', 'initial')
+            .style('font-family', 'tahoma')
+            .style('font-weight', 200)
+            .attr('stroke','#396392')
+            .attr('stroke-width', '0.2')
             .attr('fill', '#635252')
             .attr("dy", "3.5em")
 
@@ -565,7 +593,7 @@ class Graphics extends Component {
             for(let i = 0; i < words.length; i++){
                 let tspan = el.append('tspan').text(words[i]).attr('fill','white');
                 if( i > 0 ){
-                    tspan.attr('x',0).attr('dy',15);
+                    tspan.attr('x',0).attr('dy',20);
                 }
             }
         }
