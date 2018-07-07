@@ -346,114 +346,122 @@ class Graphics extends Component {
                     return `tooltip-container-${newName}`;
             })
             .attr('transform', d => { 
-                return 'translate(' + this.x0(d.name) + ', 0)';
+                return `translate(${this.x0(d.name)}, 0)`;
             })
             .attr('visibility','hidden')
             .attr('stroke','white')
             .attr('fill','rgba(0,0,0,0.7)')
-        .selectAll('path')
+        .selectAll('g')
             .data( d => { 
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter()
-            
+        .append('g')
+            .attr('id', function(d) {
+                return `${this.parentNode.id}_${d.key}`;
+            })
+            .attr('transform', d => 'translate(0,' + (this.y(d.value) + -100) + ')')
+
         tooltip.append('path')
             .attr('class','animate-tips-stroke')
             .attr('id', function(d) {
-                return this.parentNode.id + '_' + d.key;
+                return `tooltip-${this.parentNode.id.split('-')[this.parentNode.id.split('-').length - 1]}`;
             })
             .attr('d', d => { 
-                return `M${this.x1(d.key) + 10},${this.y(d.value) - 100 }h110v80h-60l-10,17l2,-17h-42v-80`
+                return `M${this.x1(d.key) - 5},0h110v80h-60l-10,17l2,-17h-42v-80`
             })
 
-        // tooltip.append('text')
-        //     .attr('fill','white')
-        // .text( function(d) {
-        //     const name = this.parentNode.id.split('-')[this.parentNode.id.split('-').length - 1];
-        //     const Lv = '';
-        //     switch( d.key ) {
-        //         case 'price': 
-        //             if(d.value > 95) Lv = "Almost free";
-        //             else if(d.value > 86) Lv = "Very cheap";
-        //             else if(d.value > 65) Lv = "Cheap";
-        //             else if(d.value > 50) Lv = "Fair";
-        //             else if(d.value > 37) Lv = "Little pricy";
-        //             else if(d.value > 20) Lv = "Pricy";
-        //             else if(d.value > 0) Lv = "Very pricy";
-        //             break;
+        tooltip.append('text')
+            .style('font-size','14px')
+            .style('font-weight','lighter')
+            .attr('fill','white')
+        .text( function(d) {
+            const name = this.parentNode.parentNode.id.split('-')[this.parentNode.parentNode.id.split('-').length - 1];
+            let Lv = '';
+            switch( d.key ) {
+                case 'price': 
+                    if(d.value > 95) Lv = "Almost free";
+                    else if(d.value > 86) Lv = "Very cheap";
+                    else if(d.value > 65) Lv = "Cheap";
+                    else if(d.value > 50) Lv = "Fair";
+                    else if(d.value > 37) Lv = "Little pricy";
+                    else if(d.value > 20) Lv = "Pricy";
+                    else if(d.value > 0) Lv = "Very pricy";
+                    break;
                 
-        //         case 'taste':
-        //             if(d.value > 95) Lv = "Unbelievable";
-        //             else if(d.value > 86) Lv = "Very delicious";
-        //             else if(d.value > 65) Lv = "Tasty";
-        //             else if(d.value > 50) Lv = "Fair";
-        //             else if(d.value > 37) Lv = "Not bad";
-        //             else if(d.value > 20) Lv = "Not good";
-        //             else if(d.value > 0) Lv = "Awful";
-        //             break;
+                case 'taste':
+                    if(d.value > 95) Lv = "Unbelievable";
+                    else if(d.value > 86) Lv = "Very delicious";
+                    else if(d.value > 65) Lv = "Tasty";
+                    else if(d.value > 50) Lv = "Fair";
+                    else if(d.value > 37) Lv = "Not bad";
+                    else if(d.value > 20) Lv = "Not good";
+                    else if(d.value > 0) Lv = "Awful";
+                    break;
 
-        //         case 'services':
-        //             if(d.value > 95) Lv = "Best services ever";
-        //             else if(d.value > 86) Lv = "Very nice";
-        //             else if(d.value > 65) Lv = "Good";
-        //             else if(d.value > 50) Lv = "Fair";
-        //             else if(d.value > 37) Lv = "Hard to say";
-        //             else if(d.value > 20) Lv = "Definitely not good";
-        //             else if(d.value > 0) Lv = "Awful";
-        //             break;
+                case 'services':
+                    if(d.value > 95) Lv = "Best services ever";
+                    else if(d.value > 86) Lv = "Very nice";
+                    else if(d.value > 65) Lv = "Good";
+                    else if(d.value > 50) Lv = "Fair";
+                    else if(d.value > 37) Lv = "Hard to say";
+                    else if(d.value > 20) Lv = "Definitely not good";
+                    else if(d.value > 0) Lv = "Awful";
+                    break;
                 
-        //         case 'revisit':
-        //             if(d.value > 95) Lv = "Favorite place";
-        //             else if(d.value > 86) Lv = "Definitely going again";
-        //             else if(d.value > 65) Lv = "I will go again";
-        //             else if(d.value > 50) Lv = "Not sure";
-        //             else if(d.value > 37) Lv = "Probably not going again";
-        //             else if(d.value > 20) Lv = "Not going there again";
-        //             else if(d.value > 0) Lv = "No one wants to go there";
-        //             break; 
+                case 'revisit':
+                    if(d.value > 95) Lv = "Favorite place";
+                    else if(d.value > 86) Lv = "Definitely going again";
+                    else if(d.value > 65) Lv = "I will go again";
+                    else if(d.value > 50) Lv = "Not sure";
+                    else if(d.value > 37) Lv = "Probably not going again";
+                    else if(d.value > 20) Lv = "Not going there again";
+                    else if(d.value > 0) Lv = "No one wants to go there";
+                    break; 
 
-        //         case 'cozy':
-        //             if(d.value > 95) Lv = "My second home";
-        //             else if(d.value > 86) Lv = "Very cozy";
-        //             else if(d.value > 65) Lv = "Cozy";
-        //             else if(d.value > 50) Lv = "So so";
-        //             else if(d.value > 37) Lv = "Not really cozy";
-        //             else if(d.value > 20) Lv = "Uncomfortable";
-        //             else if(d.value > 0) Lv = "Not going there again";
-        //             break; 
+                case 'cozy':
+                    if(d.value > 95) Lv = "My second home";
+                    else if(d.value > 86) Lv = "Very cozy";
+                    else if(d.value > 65) Lv = "Cozy";
+                    else if(d.value > 50) Lv = "So so";
+                    else if(d.value > 37) Lv = "Not really cozy";
+                    else if(d.value > 20) Lv = "Uncomfortable";
+                    else if(d.value > 0) Lv = "Not going there again";
+                    break; 
 
-        //         case 'luxury': //sanitation
-        //             if(d.value > 95) Lv = "Like white room";
-        //             else if(d.value > 86) Lv = "Very clean";
-        //             else if(d.value > 65) Lv = "Clean";
-        //             else if(d.value > 50) Lv = "Normal";
-        //             else if(d.value > 37) Lv = "Not so clean";
-        //             else if(d.value > 20) Lv = "Needs to be cleaned";
-        //             else if(d.value > 0) Lv = "Very unsanitary";
-        //             break; 
+                case 'luxury': //sanitation
+                    if(d.value > 95) Lv = "Like white room";
+                    else if(d.value > 86) Lv = "Very clean";
+                    else if(d.value > 65) Lv = "Clean";
+                    else if(d.value > 50) Lv = "Normal";
+                    else if(d.value > 37) Lv = "Not so clean";
+                    else if(d.value > 20) Lv = "Needs to be cleaned";
+                    else if(d.value > 0) Lv = "Very unsanitary";
+                    break; 
 
-        //         case 'modern':
-        //             if(d.value > 95) Lv = "The future";
-        //             else if(d.value > 86) Lv = "Very fancy";
-        //             else if(d.value > 65) Lv = "Fancy";
-        //             else if(d.value > 50) Lv = "Ordinary";
-        //             else if(d.value > 37) Lv = "Classic";
-        //             else if(d.value > 20) Lv = "Old";
-        //             else if(d.value > 0) Lv = "Middle Ages";
-        //             break; 
+                case 'modern':
+                    if(d.value > 95) Lv = "The future";
+                    else if(d.value > 86) Lv = "Very fancy";
+                    else if(d.value > 65) Lv = "Fancy";
+                    else if(d.value > 50) Lv = "Ordinary";
+                    else if(d.value > 37) Lv = "Classic";
+                    else if(d.value > 20) Lv = "Old";
+                    else if(d.value > 0) Lv = "Middle Ages";
+                    break; 
 
-        //         case 'loud':
-        //             if(d.value > 95) Lv = "Heavy metal concert";
-        //             else if(d.value > 86) Lv = "Cannot hear";
-        //             else if(d.value > 65) Lv = "Loud";
-        //             else if(d.value > 50) Lv = "Normal";
-        //             else if(d.value > 37) Lv = "Quiet";
-        //             else if(d.value > 20) Lv = "Peaceful";
-        //             else if(d.value > 0) Lv = "Silence";
-        //             break; 
+                case 'loud':
+                    if(d.value > 95) Lv = "Heavy metal concert";
+                    else if(d.value > 86) Lv = "Cannot hear";
+                    else if(d.value > 65) Lv = "Loud";
+                    else if(d.value > 50) Lv = "Normal";
+                    else if(d.value > 37) Lv = "Quiet";
+                    else if(d.value > 20) Lv = "Peaceful";
+                    else if(d.value > 0) Lv = "Silence";
+                    break; 
 
-        //         }
+            }
 
-        //     return `name:${name} ${d.key}:${d.value}% '${Lv}' 
+            return `${name} ${d.key}:${d.value}% '${Lv}'`;
+        }); 
 
         
         // bars.append('rect')
