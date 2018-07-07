@@ -359,110 +359,138 @@ class Graphics extends Component {
             .attr('id', function(d) {
                 return `${this.parentNode.id}_${d.key}`;
             })
-            .attr('transform', d => 'translate(0,' + (this.y(d.value) + -100) + ')')
+            .attr('transform', d => 'translate(' + this.x1(d.key) +',' + (this.y(d.value) + -100) + ')')
+
 
         tooltip.append('path')
             .attr('class','animate-tips-stroke')
             .attr('id', function(d) {
                 return `tooltip-${this.parentNode.id.split('-')[this.parentNode.id.split('-').length - 1]}`;
             })
-            .attr('d', d => { 
-                return `M${this.x1(d.key) - 5},0h110v80h-60l-10,17l2,-17h-42v-80`
-            })
+            
 
         tooltip.append('text')
-            .style('font-size','14px')
+            .style('font-size','15px')
             .style('font-weight','lighter')
+            .attr('y', '15')
             .attr('fill','white')
+            .attr('x', 0)
         .text( function(d) {
             const name = this.parentNode.parentNode.id.split('-')[this.parentNode.parentNode.id.split('-').length - 1];
             let Lv = '';
             switch( d.key ) {
                 case 'price': 
-                    if(d.value > 95) Lv = "Almost free";
-                    else if(d.value > 86) Lv = "Very cheap";
-                    else if(d.value > 65) Lv = "Cheap";
-                    else if(d.value > 50) Lv = "Fair";
-                    else if(d.value > 37) Lv = "Little pricy";
-                    else if(d.value > 20) Lv = "Pricy";
-                    else if(d.value > 0) Lv = "Very pricy";
+                    if(d.value > 95) Lv = "is almost free";
+                    else if(d.value > 86) Lv = "is very cheap";
+                    else if(d.value > 65) Lv = "is cheap";
+                    else if(d.value >= 50) Lv = "is fair";
+                    else if(d.value > 37) Lv = "is little pricy";
+                    else if(d.value > 20) Lv = "is pricy";
+                    else if(d.value > 0) Lv = "is very pricy";
                     break;
                 
                 case 'taste':
-                    if(d.value > 95) Lv = "Unbelievable";
-                    else if(d.value > 86) Lv = "Very delicious";
-                    else if(d.value > 65) Lv = "Tasty";
-                    else if(d.value > 50) Lv = "Fair";
-                    else if(d.value > 37) Lv = "Not bad";
-                    else if(d.value > 20) Lv = "Not good";
-                    else if(d.value > 0) Lv = "Awful";
+                    if(d.value > 95) Lv = "serves unbelievable foods";
+                    else if(d.value > 86) Lv = "serves very delicious foods";
+                    else if(d.value > 65) Lv = "serves tasty foods";
+                    else if(d.value >= 50) Lv = "serves fair foods";
+                    else if(d.value > 37) Lv = "serves not bad foods";
+                    else if(d.value > 20) Lv = "serves not good foods";
+                    else if(d.value > 0) Lv = "serves awful foods";
                     break;
 
                 case 'services':
-                    if(d.value > 95) Lv = "Best services ever";
-                    else if(d.value > 86) Lv = "Very nice";
-                    else if(d.value > 65) Lv = "Good";
-                    else if(d.value > 50) Lv = "Fair";
-                    else if(d.value > 37) Lv = "Hard to say";
-                    else if(d.value > 20) Lv = "Definitely not good";
-                    else if(d.value > 0) Lv = "Awful";
+                    if(d.value > 95) Lv = "has the best services ever";
+                    else if(d.value > 86) Lv = "has very nice services";
+                    else if(d.value > 65) Lv = "has good sevices";
+                    else if(d.value >= 50) Lv = "has fair services";
+                    else if(d.value > 37) Lv = "does not have good sevices";
+                    else if(d.value > 20) Lv = "has definitely not good services";
+                    else if(d.value > 0) Lv = "has awful services";
                     break;
                 
-                case 'revisit':
-                    if(d.value > 95) Lv = "Favorite place";
-                    else if(d.value > 86) Lv = "Definitely going again";
-                    else if(d.value > 65) Lv = "I will go again";
-                    else if(d.value > 50) Lv = "Not sure";
-                    else if(d.value > 37) Lv = "Probably not going again";
-                    else if(d.value > 20) Lv = "Not going there again";
-                    else if(d.value > 0) Lv = "No one wants to go there";
+                case 'recurrence':
+                    d.key = 'revisit';
+                    if(d.value > 95) Lv = "is my favorite place";
+                    else if(d.value > 86) Lv = "Definitely revisiting";
+                    else if(d.value > 65) Lv = "I am going to visit again";
+                    else if(d.value >= 50) Lv = "I'm not sure revisiting";
+                    else if(d.value > 37) Lv = "Maybe I'll visit again";
+                    else if(d.value > 20) Lv = "Probably not visiting again";
+                    else if(d.value > 0) Lv = "Not visiting there again";
                     break; 
 
                 case 'cozy':
-                    if(d.value > 95) Lv = "My second home";
-                    else if(d.value > 86) Lv = "Very cozy";
-                    else if(d.value > 65) Lv = "Cozy";
-                    else if(d.value > 50) Lv = "So so";
-                    else if(d.value > 37) Lv = "Not really cozy";
-                    else if(d.value > 20) Lv = "Uncomfortable";
-                    else if(d.value > 0) Lv = "Not going there again";
+                    if(d.value > 95) Lv = "is like my second home";
+                    else if(d.value > 86) Lv = "is very cozy";
+                    else if(d.value > 65) Lv = "is cozy";
+                    else if(d.value >= 50) Lv = "is so so comfortable";
+                    else if(d.value > 37) Lv = "is not really cozy";
+                    else if(d.value > 20) Lv = "is uncomfortable";
+                    else if(d.value > 0) Lv = "is very uncomfortable";
                     break; 
 
                 case 'luxury': //sanitation
-                    if(d.value > 95) Lv = "Like white room";
-                    else if(d.value > 86) Lv = "Very clean";
-                    else if(d.value > 65) Lv = "Clean";
-                    else if(d.value > 50) Lv = "Normal";
-                    else if(d.value > 37) Lv = "Not so clean";
-                    else if(d.value > 20) Lv = "Needs to be cleaned";
-                    else if(d.value > 0) Lv = "Very unsanitary";
+                    d.key = 'sanitation';
+                    if(d.value > 95) Lv = "is like a white room";
+                    else if(d.value > 86) Lv = "is very clean";
+                    else if(d.value > 65) Lv = "is clean";
+                    else if(d.value >= 50) Lv = "is normal";
+                    else if(d.value > 37) Lv = "is not so clean";
+                    else if(d.value > 20) Lv = "needs to be cleaned";
+                    else if(d.value > 0) Lv = "is very unsanitary";
                     break; 
 
                 case 'modern':
-                    if(d.value > 95) Lv = "The future";
-                    else if(d.value > 86) Lv = "Very fancy";
-                    else if(d.value > 65) Lv = "Fancy";
-                    else if(d.value > 50) Lv = "Ordinary";
-                    else if(d.value > 37) Lv = "Classic";
-                    else if(d.value > 20) Lv = "Old";
-                    else if(d.value > 0) Lv = "Middle Ages";
+                    if(d.value > 95) Lv = "is in the future";
+                    else if(d.value > 86) Lv = "is very fancy";
+                    else if(d.value > 65) Lv = "is fancy";
+                    else if(d.value >= 50) Lv = "is ordinary";
+                    else if(d.value > 37) Lv = "is classic";
+                    else if(d.value > 20) Lv = "is old";
+                    else if(d.value > 0) Lv = "is in the Middle Ages";
                     break; 
 
                 case 'loud':
-                    if(d.value > 95) Lv = "Heavy metal concert";
-                    else if(d.value > 86) Lv = "Cannot hear";
-                    else if(d.value > 65) Lv = "Loud";
-                    else if(d.value > 50) Lv = "Normal";
-                    else if(d.value > 37) Lv = "Quiet";
-                    else if(d.value > 20) Lv = "Peaceful";
-                    else if(d.value > 0) Lv = "Silence";
+                    if(d.value > 95) Lv = "is heavy metal concert";
+                    else if(d.value > 86) Lv = "is very loud";
+                    else if(d.value > 65) Lv = "is loud";
+                    else if(d.value >= 50) Lv = "is normal";
+                    else if(d.value > 37) Lv = "is quiet";
+                    else if(d.value > 20) Lv = "is peaceful";
+                    else if(d.value > 0) Lv = "is silent";
                     break; 
 
             }
+            return `${name}-${d.key}:${d.value}%-This place -'${Lv}'`;
+        });
+        
+        tooltip.selectAll('text').each(insertLineBreaks);
+        tooltip.selectAll('text tspan:first-of-type').attr('dx', 9);
+        tooltip.selectAll('text tspan:not(:first-child)').attr('x', 9)
+        .attr('dy','18');
+        
 
-            return `${name} ${d.key}:${d.value}% '${Lv}'`;
-        }); 
+        function insertLineBreaks(d) {
+            const el = d3.select(this);
+            const text = el.text();
+            const words = text.split('-');
+            el.text('');
+            for(let i=0; i < words.length; i++){
+                const tspan = el.append('tspan').text(words[i]).attr('fill','white');
+            }
+        }
 
+        tooltip.selectAll('path')
+            .attr('d', function(d){
+                const tspans = this.nextSibling.querySelectorAll('tspan');
+                let longestWordLength = 0;
+                for(let tspan of tspans){
+                    const wordLength = tspan.innerHTML.length;
+                    if( wordLength >= longestWordLength ) longestWordLength = wordLength;
+                }
+                return `m0,0h${((longestWordLength * 7) + 5)}v80h${ - (longestWordLength * 7 * 3/5)}l-8,17l2,-17h${ - (longestWordLength * 7  * 2/5 - 1)} v-80`;
+            })
         
         // bars.append('rect')
         //     .attr('x', d => this.x1(d.key) )
