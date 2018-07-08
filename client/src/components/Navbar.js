@@ -9,12 +9,12 @@ function Navbar(props) {
         <nav className="Navbar">
         {
             [
-                <NavLink exact to="/" >🏡</NavLink>,
-                <NavLink exact to="/sign_in" >Sign In</NavLink>,
-                <NavLink exact to="/sign_up" >Sign Up</NavLink>,
-                <NavLink exact to="/search_rests" >Rate Restaurants</NavLink>,
-                <NavLink exact to="/add_restaurant" >Add Restaurant</NavLink>,
-                <NavLink exact to="/restaurants" >Look Up Restaurants</NavLink>,
+                <NavLink key={1} exact to="/" >🏡</NavLink>,
+                <NavLink key={2} exact to="/sign_in" >Sign In</NavLink>,
+                <NavLink key={3} exact to="/sign_up" >Sign Up</NavLink>,
+                <NavLink key={4} exact to="/search_rests" >Rate Restaurants</NavLink>,
+                <NavLink key={5} exact to="/add_restaurant" >Add Restaurant</NavLink>,
+                <NavLink key={6} exact to="/restaurants" >Look Up Restaurants</NavLink>,
             ]
         }
         </nav>

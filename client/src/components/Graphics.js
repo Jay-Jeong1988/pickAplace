@@ -162,8 +162,9 @@ class Graphics extends Component {
     componentDidMount() {
         
         this.svg = d3.select(this.refs.container)
-        .attr("width", "100%")
-        .attr("height", height + margin.top + margin.bottom)
+        .attr('viewBox','0 0 1500 1000')
+        // .attr("width", "100%")
+        // .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
