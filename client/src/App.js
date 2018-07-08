@@ -6,6 +6,7 @@ import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chos
 import EvalRestaurantsPage from './components/pages/EvalRestaurantPage';
 import Graphics from './components/Graphics';
 import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
+import Navbar from './components/Navbar';
 
 class App extends Component {
 
@@ -33,6 +34,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+        <Navbar />
           <Route path="/" exact render={ res => <h1>Hi</h1>}/>
           <Route path="/sign_up" exact component={SignUpPage} />
           <Route path="/sign_in" exact component={SignInPage} />
