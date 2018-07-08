@@ -125,15 +125,60 @@ app.post('/eval_rest/:restaurant_id', (req, res) => {
     });
 });
 
-app.get('/top_ten/:eval_type', (req, res) => {
-    knex('restaurants').orderBy(`${req.params.eval_type}`, 'desc')
-    .select(['name',`${req.params.eval_type}`,'imgUrl']).limit(10)
-    .then( data => {
-        console.log(data);
-        res.send(data);
-    })
-})
+app.get("/top_ten/:eval_types", (req, res) => {
 
+    const getData = () => {
+        if(req.params.eval_types.split(',').includes('empty')) res.send({'errors': 'no data'});
+        else {
+            const receivedDataArray = req.params.eval_types.split(',');
+            let receivedParams = req.params.eval_types.split(',');
+            receivedParams.unshift('name');
+            receivedParams.unshift('id');
+            receivedParams.push('imgUrl');
+            let queryString = "(";
+
+            for(let i=0; i < receivedDataArray.length; i++){
+                if (i >= receivedDataArray.length - 1) queryString += `${receivedDataArray[i]} )`;
+                else queryString += `${receivedDataArray[i]} + `;
+            }
+            // console.log(`(${queryString}/${receivedDataArray.length}) desc`)
+            return knex('restaurants')
+                .select(receivedParams)
+                .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
+                .limit(10)
+                .then( data => data )
+        }
+    }
+
+    const get_total_count = (restaurant_id) => { 
+        return  knex('evaluations')
+            .where({restaurant_id: restaurant_id})
+            .first()
+            .count('restaurant_id')
+            .then( data => data )
+    }
+
+
+    getData().then( restaurants => {
+        const passingData = [restaurants];
+
+        for(let restaurant of restaurants) {
+            passingData.push(get_total_count(restaurant.id));
+        }
+        return Promise.all(passingData);
+    }).then( (data) => {
+        const restaurantsData = data.shift();
+
+        for(let i = 0; i < restaurantsData.length; i++){
+            restaurantsData[i].count = data[i].count;
+            delete restaurantsData[i].id;
+        }
+        
+        console.log(restaurantsData);
+        res.send(restaurantsData);
+    })
+
+})
 
 app.post('/sign-up', [ 
         check('email').isEmail(),

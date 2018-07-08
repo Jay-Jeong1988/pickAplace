@@ -5,9 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './style.css';
 
-const margin = { top: 200, right: 55, bottom: 100, left: 180};
-const width = 1250 - margin.left - margin.right;
-const height = 800 - margin.top - margin.bottom;
+const margin = { top: 120, right: 55, bottom: 150, left: 85};
+const width = 1275 - margin.left - margin.right;
+const height = 850 - margin.top - margin.bottom;
 
 
 class Graphics extends Component {
@@ -16,203 +16,284 @@ class Graphics extends Component {
         super(props);
         
         this.state = {
-            dummyData: []
+            dummyData: [
+                {
+                    name: 'idealio',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },
+                {
+                    name: 'idealio ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio  ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio   ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio    ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio     ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio      ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio       ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio        ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },{
+                    name: 'idealio         ',
+                    price: 0,
+                    cozy: 0,
+                    luxury: 0,
+                    taste: 0,
+                    loud: 0,
+                    modern: 0,
+                    services: 0,
+                    recurrence: 0,
+                    imgUrl: '',
+                    count: 0
+                },
+            ]
         }
         
         
         this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
         this.x1 = d3.scaleBand().paddingInner(0.05);
-        this.y = d3.scaleLinear().range([parseInt(height - 50), 0]);
+        this.y = d3.scaleLinear().range([parseInt(height), 0]);
         this.z = d3.scaleOrdinal()
-        .range([ "#AA528A", "#4E9397", "#E1714F", "#F3DA7B", "#D8384F" , "#194B8D", "#FFA4CC", "#A3DDE3"  ]);
+        .range([ "#0E89A4", "#DDFE8E", "#E00351", "#0552BC", "#8F2B6A", "#D9B021", "#EC5192", "#04DD50" ]);
         this.zz = d3.scaleOrdinal()
-        .range([ "#BA96AD", "#B2CCCD", "#F4A790", "#FBECB6", "#E37B89", "#5288D3", "#FFD7E8", "#D9F3F6"]);
+        .range(["#FF6C36","#60FFAA","#000062","#00FFDC","#FFDA06","#001EFF","#00DC5A","#FF00DE"]);
+
         this.x0Axis = d3.axisBottom(this.x0).ticks(10);
         this.yAxis = d3.axisLeft(this.y).ticks(10);
         this.renderAxis = this.renderAxis.bind(this);
         this.renderBars = this.renderBars.bind(this);
 
-
         
     }
     
-    componentWillMount() {
-        this.setState({
-            dummyData: [
-                {
-                    name: 'proto',
-                    price: 80,
-                    cozy: 70,
-                    luxury: 60,
-                    taste: 80,
-                    loud: 90,
-                    modern: 30,
-                    services: 100,
-                    revisit: 70,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'second',
-                    price: 30,
-                    cozy: 20,
-                    luxury: 50,
-                    taste: 10,
-                    loud: 30,
-                    modern: 80,
-                    services: 10,
-                    revisit: 10,
-                    imgUrl: 'https://seeklogo.com/images/R/restaurant-chief-food-hotel-logo-9DE9D03812-seeklogo.com.png'
-                },
-                {
-                    name: 'fouthrd',
-                    price: 20,
-                    cozy: 90,
-                    luxury: 30,
-                    taste: 10,
-                    loud: 30,
-                    modern: 80,
-                    services: 10,
-                    revisit: 10,
-                    imgUrl: 'http://3.bp.blogspot.com/-Oz5XdPqGddQ/ULy9zwbIDXI/AAAAAAAAPio/HZwYtIr7DfE/s1600/22-restaurant-logo-design.jpg'
-                },
-                {
-                    name: 'sdgso',
-                    price: 20,
-                    cozy: 10,
-                    luxury: 60,
-                    taste: 80,
-                    loud: 90,
-                    modern: 30,
-                    services: 20,
-                    revisit: 70,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'pdsgsgsoto',
-                    price: 10,
-                    cozy: 30,
-                    luxury: 20,
-                    taste: 30,
-                    loud: 90,
-                    modern: 30,
-                    services: 20,
-                    revisit: 20,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'to',
-                    price: 20,
-                    cozy: 60,
-                    luxury: 25,
-                    taste: 10,
-                    loud: 37,
-                    modern: 30,
-                    services: 22,
-                    revisit: 5,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'pdoto',
-                    price: 0,
-                    cozy: 20,
-                    luxury: 30,
-                    taste: 40,
-                    loud: 10,
-                    modern: 30,
-                    services: 20,
-                    revisit: 10,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'pto',
-                    price: 40,
-                    cozy: 60,
-                    luxury: 50,
-                    taste: 30,
-                    loud: 20,
-                    modern: 30,
-                    services: 22,
-                    revisit: 40,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'gwgsdoto',
-                    price: 30,
-                    cozy: 33,
-                    luxury: 35,
-                    taste: 36,
-                    loud: 38,
-                    modern: 41,
-                    services: 32,
-                    revisit: 25,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-                {
-                    name: 'psato',
-                    price: 20,
-                    cozy: 40,
-                    luxury: 50,
-                    taste: 70,
-                    loud: 20,
-                    modern: 30,
-                    services: 100,
-                    revisit: 60,
-                    imgUrl: 'https://marketplace.canva.com/MACP0--HhzM/1/0/thumbnail_large/canva-black-circle-with-utensils-restaurant-logo-MACP0--HhzM.jpg'
-                },
-            ]
-        })
-    }
     componentDidMount() {
         
         this.svg = d3.select(this.refs.container)
-        .attr("width", width + margin.left + margin.right)
+        .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
         
-        this.keys = Object.keys(this.state.dummyData[0]);
-        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 1);
-
+        
         this.moodKeys = ["cozy","luxury","loud","modern"];
-        
-        this.renderAxis();
-    }
-    
-
-
-    componentDidUpdate(){
-        
-        this.renderBars();
         this.renderLegends();
-        this.renderOptions();
+        this.renderDropdown();
+        this.renderButton();
     }
     
+    
+    
+    componentDidUpdate(){
 
+        this.removeMeasureLines();
+        this.renderMeasureLines();
+        
+        this.removeAxis();
+        this.renderAxis();
+        
+        this.removeBars();
+        this.renderBars();
+        
+    }
+    
+    removeAxis = () => {
+        this.svg.select('.x.axis').remove();
+        this.svg.select('.y.axis').remove();
+    }
+    
+    removeBars = () => {
+        this.svg.selectAll('.bars').remove();
+        this.svg.select('#lg1').remove();
+    }
+    
+    removeLegends = () => {
+        this.svg.selectAll('.legends').remove();
+    }
+    
+    removeMeasureLines = () => {
+        this.svg.selectAll('.measureLines').remove();
+    }
+
+
+    renderMeasureLines() {
+
+        const measureLines = this.svg.append('g')
+            .attr('class','measureLines')
+        .selectAll('g')
+            .data(['M10,0h1100','M10,233h1100','M10,466h1100'])
+            .enter()
+        .append('g')
+            .attr('stroke','white')
+            .attr('stroke-width','0.7')
+        
+        measureLines.append('path')
+            .attr('class','animate-path')
+            .attr('d', d => d)
+    }
 
     renderBars() {
 
-        // d3.select('svg')
-        // .append('filter')
-        //     .attr('id', 'glow')
-        // .append('feGaussianBlur')
-        //     .attr('stdDeviation','0.5')
-        //     .attr('result','coloredBlur')
-        
-        // d3.select('filter')
-        // .append('feMerge')
-        // .append('feMergeNode')
-        //     .attr('in','coloredBlur')
-
-        // d3.select('feMerge')
-        // .append('feMergeNode')
-        //     .attr('in','SourceGraphic')             //option for 'glow'
-
-       
-        this.svg.append('g')
-        .selectAll('g')
-            .data(this.state.dummyData)
+        const lg = d3.select('svg')
+        .append('defs')
+        .selectAll('linearGradient')
+            .data(['red','orange','yellow','seagreen', 'limegreen', 'lightgreen', 'springgreen'])
             .enter()
-        .append('g')
+        .append('linearGradient')
+            .attr('id', d => `lg-${d}`)
+            .attr('x1','0%')
+            .attr('y1','50%')
+            .attr('x2','0%')
+            .attr('y2','0%')
+        .append('stop')
+            .attr('offset','0%')
+            .attr('stop-color', d => d)
+            .attr('stop-opacity','1')
+
+        d3.selectAll('defs linearGradient')
+        .append('stop')
+            .attr('offset','100%')
+            .attr('stop-color', 'rgba(255,255,255)')
+            .attr('stop-opacity', '1')
+
+//////////////////////////////////////////////////////////////'radial Gradient'
+
+        // const rect_offset = d3.select('svg')
+        // .append('defs')
+        // .append('filter')
+        //     .attr('id','f1')
+        //     .attr('x', '0')
+        //     .attr('y', '0')
+        //     .attr('width', '300%')
+        //     .attr('height', '300%')
+
+        // rect_offset
+        // .append('feOffset')
+        //     .attr('result', 'offOut')
+        //     .attr('in', 'SourceGraphic')
+        //     .attr('dx','30')
+        //     .attr('dy','30')
+
+        // rect_offset
+        // .append('feBlend')
+        //     .attr('in','SourceGraphic')
+        //     .attr('in2','offOut')
+        //     .attr('mode','normal')
+        ///////////////////////////////feoffset
+        
+        
+
+        
+        
+        const bars = this.svg.append('g')
+        .attr('class','bars')
+        .selectAll('g')
+        .data(this.state.dummyData)
+        .enter()
+        
+
+        bars.append('g')
+            .attr('id', d => {
+                let newName = '';
+                if( d.name.includes('\'') || d.name.split(" ")[1] ){
+                    newName = d.name.split('\'').join('').split(' ').join('_');
+                }else {
+                    newName = d.name;
+                }
+                    return `bar-container-${newName}`;
+            })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
             })
@@ -221,20 +302,245 @@ class Graphics extends Component {
                 return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
             .enter()
         .append('rect')
-            .attr('x', d => this.x1(d.key) )
+            .on('mouseover', d => {
+                const barId = d3.event.target.parentNode.getAttribute('id');
+                const restaurant_name = barId.split('-')[barId.split('-').length - 1];
+
+                // d3.event.target.style.fill = `url(#glow-${d.key})`;
+                d3.event.target.style.fill = this.zz(d.key)
+
+                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                    .attr('visibility','visible')
+            })
+            .on('mouseout', d => {
+                const barId = d3.event.target.parentNode.getAttribute('id');
+                const restaurant_name = barId.split('-')[barId.split('-').length - 1];
+
+                d3.event.target.style.fill = this.z(d.key)
+            
+                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                    .attr('visibility','hidden')
+            })
+            .attr('class','animate-bars-stroke')
+            .attr('x', d => this.x1(d.key))
+            .attr('y', height)
+            .transition()
+            .duration(1500)
             .attr('y', d => this.y(d.value) )
-            .attr('width', this.x1.bandwidth())
+            .attr('width', this.x1.bandwidth() )
             .attr('height', d => height - this.y(d.value) )
+            .attr('rx', this.x1.bandwidth()* Math.pow(0.87, 5))
+            .attr('ry',this.x1.bandwidth()* Math.pow(0.87, 5))
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke-width','1px')
-            .attr('stroke', d => this.zz(d.key))
+            .attr('stroke', 'white')
+            .attr('stroke-width', d => this.x1.bandwidth()/70 )
+
+
+        const tooltip = bars.append('g')
+            .attr('id', d => {
+                let newName = '';
+                if( d.name.includes('\'') || d.name.split(" ")[1] ){
+                    newName = d.name.split('\'').join('').split(' ').join('_');
+                }else {
+                    newName = d.name;
+                }
+                    return `tooltip-container-${newName}`;
+            })
+            .attr('transform', d => { 
+                return `translate(${this.x0(d.name)}, 0)`;
+            })
+            .attr('visibility','hidden')
+            .attr('stroke','white')
+            .attr('fill','rgba(0,0,0,0.7)')
+        .selectAll('g')
+            .data( d => { 
+                return this.keysWithNumVal.map( function(key){ return { key: key, value: d[key] }; }); })
+            .enter()
+        .append('g')
+            .attr('id', function(d) {
+                return `${this.parentNode.id}_${d.key}`;
+            })
+            .attr('transform', d => 'translate(' + this.x1(d.key) +',' + (this.y(d.value) + -100) + ')')
+
+
+        tooltip.append('path')
+            .attr('class','animate-tips-stroke')
+            .attr('id', function(d) {
+                return `tooltip-${this.parentNode.id.split('-')[this.parentNode.id.split('-').length - 1]}`;
+            })
+            
+
+        tooltip.append('text')
+            .style('font-size','15px')
+            .style('font-weight','lighter')
+            .attr('y', '15')
+            .attr('fill','white')
+            .attr('x', 0)
+        .text( function(d) {
+            const name = this.parentNode.parentNode.id.split('-')[this.parentNode.parentNode.id.split('-').length - 1];
+            let Lv = '';
+            switch( d.key ) {
+                case 'price': 
+                    if(d.value > 95) Lv = "is almost free";
+                    else if(d.value > 86) Lv = "is very cheap";
+                    else if(d.value > 65) Lv = "is cheap";
+                    else if(d.value >= 50) Lv = "is fair";
+                    else if(d.value > 37) Lv = "is little pricy";
+                    else if(d.value > 20) Lv = "is pricy";
+                    else if(d.value > 0) Lv = "is very pricy";
+                    break;
+                
+                case 'taste':
+                    if(d.value > 95) Lv = "serves unbelievable foods";
+                    else if(d.value > 86) Lv = "serves very delicious foods";
+                    else if(d.value > 65) Lv = "serves tasty foods";
+                    else if(d.value >= 50) Lv = "serves fair foods";
+                    else if(d.value > 37) Lv = "serves not bad foods";
+                    else if(d.value > 20) Lv = "serves not good foods";
+                    else if(d.value > 0) Lv = "serves awful foods";
+                    break;
+
+                case 'services':
+                    if(d.value > 95) Lv = "has the best services ever";
+                    else if(d.value > 86) Lv = "has very nice services";
+                    else if(d.value > 65) Lv = "has good sevices";
+                    else if(d.value >= 50) Lv = "has fair services";
+                    else if(d.value > 37) Lv = "does not have good sevices";
+                    else if(d.value > 20) Lv = "has definitely not good services";
+                    else if(d.value > 0) Lv = "has awful services";
+                    break;
+                
+                case 'recurrence':
+                    d.key = 'revisit';
+                    if(d.value > 95) Lv = "is my favorite place";
+                    else if(d.value > 86) Lv = "Definitely revisiting";
+                    else if(d.value > 65) Lv = "I am going to visit again";
+                    else if(d.value >= 50) Lv = "I'm not sure revisiting";
+                    else if(d.value > 37) Lv = "Maybe I'll visit again";
+                    else if(d.value > 20) Lv = "Probably not visiting again";
+                    else if(d.value > 0) Lv = "Not visiting there again";
+                    break; 
+
+                case 'cozy':
+                    if(d.value > 95) Lv = "is like my second home";
+                    else if(d.value > 86) Lv = "is very cozy";
+                    else if(d.value > 65) Lv = "is cozy";
+                    else if(d.value >= 50) Lv = "is so so comfortable";
+                    else if(d.value > 37) Lv = "is not really cozy";
+                    else if(d.value > 20) Lv = "is uncomfortable";
+                    else if(d.value > 0) Lv = "is very uncomfortable";
+                    break; 
+
+                case 'luxury': //sanitation
+                    d.key = 'sanitation';
+                    if(d.value > 95) Lv = "is like a white room";
+                    else if(d.value > 86) Lv = "is very clean";
+                    else if(d.value > 65) Lv = "is clean";
+                    else if(d.value >= 50) Lv = "is normal";
+                    else if(d.value > 37) Lv = "is not so clean";
+                    else if(d.value > 20) Lv = "needs to be cleaned";
+                    else if(d.value > 0) Lv = "is very unsanitary";
+                    break; 
+
+                case 'modern':
+                    if(d.value > 95) Lv = "is in the future";
+                    else if(d.value > 86) Lv = "is very fancy";
+                    else if(d.value > 65) Lv = "is fancy";
+                    else if(d.value >= 50) Lv = "is ordinary";
+                    else if(d.value > 37) Lv = "is classic";
+                    else if(d.value > 20) Lv = "is old";
+                    else if(d.value > 0) Lv = "is in the Middle Ages";
+                    break; 
+
+                case 'loud':
+                    if(d.value > 95) Lv = "is heavy metal concert";
+                    else if(d.value > 86) Lv = "is very loud";
+                    else if(d.value > 65) Lv = "is loud";
+                    else if(d.value >= 50) Lv = "is normal";
+                    else if(d.value > 37) Lv = "is quiet";
+                    else if(d.value > 20) Lv = "is peaceful";
+                    else if(d.value > 0) Lv = "is silent";
+                    break; 
+
+            }
+            return `${name}-${d.key}:${d.value}%-This place -'${Lv}'`;
+        });
         
+        tooltip.selectAll('text').each(insertLineBreaks);
+
+        tooltip.selectAll('text tspan:first-of-type')
+            .attr('dx', 9)
+            .attr('fill','white')
+            .attr('stroke', function(d){
+                if(d.value > 95) return `url(#lg-springgreen)`;
+                else if(d.value > 86) return `url(#lg-lightwgreen)`;
+                else if(d.value > 65) return `url(#lg-limegreen)`;
+                else if(d.value >= 50) return `url(#lg-seagreen)`;
+                else if(d.value > 37) return `url(#lg-yellow)`;
+                else if(d.value > 20) return `url(#lg-orange)`;
+                else if(d.value > 0) return `url(#lg-red)`;
+            });
+
+        tooltip.selectAll('text tspan:not(:first-child)')
+            .attr('x', 9)
+            .attr('fill','white')
+            .attr('dy','18')
+            .attr('stroke', function(d){
+                if(d.value > 95) return `url(#lg-springgreen)`;
+                else if(d.value > 86) return `url(#lg-lightgreen)`;
+                else if(d.value > 65) return `url(#lg-limegreen)`;
+                else if(d.value >= 50) return `url(#lg-seagreen)`;
+                else if(d.value > 37) return `url(#lg-yellow)`;
+                else if(d.value > 20) return `url(#lg-orange)`;
+                else if(d.value > 0) return `url(#lg-red)`;
+            });
+        
+
+        function insertLineBreaks(d) {
+            const el = d3.select(this);
+            const text = el.text();
+            const words = text.split('-');
+            el.text('');
+            for(let i=0; i < words.length; i++){
+                const tspan = el.append('tspan').text(words[i]).attr('fill','white');
+            }
+        }
+
+        tooltip.selectAll('path')
+            .attr('d', function(d){
+                const tspans = this.nextSibling.querySelectorAll('tspan');
+                let longestWordLength = 0;
+                for(let tspan of tspans){
+                    const wordLength = tspan.innerHTML.length;
+                    if( wordLength >= longestWordLength ) longestWordLength = wordLength;
+                }
+                return `m0,0h${((longestWordLength * 7) + 5)}v80h${ - (longestWordLength * 7 * 3/5)}l-8,17l2,-17h${ - (longestWordLength * 7  * 2/5 - 1)} v-80`;
+            })
+        
+        // bars.append('rect')
+        //     .attr('x', d => this.x1(d.key) )
+        //     .attr('y', height)
+        //     .transition()
+        //     .duration(1500)
+        //     .attr('y', d => this.y(d.value) )
+        //     .attr('width', this.x1.bandwidth() )
+        //     .attr('height', d => height - this.y(d.value) * 2 )
+        //     .attr('fill', d => this.z(d.key) )
+        //     .attr('stroke', 'white')
+        //     .attr('stroke-width', d => this.x1.bandwidth()/70 )
+        //     .attr('stroke-dasharray', d => `${this.x1.bandwidth() + height - this.y(d.value)}, ${this.x1.bandwidth()}` )
+            // .style('filter','url(#glow)')
+            // .style('opacity','0.6')  
+            
+/*                                         double rect for more effects(if needed)   */
+                
         
     }
 
     
     renderAxis() {
-        
+        this.keys = Object.keys(this.state.dummyData[0]);
+        this.keysWithNumVal = this.keys.slice(1, this.keys.length - 2);
 
         this.x0.domain(this.state.dummyData.map( d => d.name ));
         this.x1.domain(this.keysWithNumVal).rangeRound([0, this.x0.bandwidth()])
@@ -245,6 +551,11 @@ class Graphics extends Component {
         .attr('class', 'x axis')
         .attr('transform', `translate( 0 , ${height})`)
         .call(this.x0Axis)
+        .selectAll('.tick text')
+        .each(insertLineBreaks)
+        
+        this.svg
+        .select('.x.axis')
         .select('path')
         .style('display','none')
         
@@ -254,27 +565,45 @@ class Graphics extends Component {
         .selectAll('.tick')
         .data(this.state.dummyData)
         .append('foreignObject')
-            .attr('transform','translate(-20, 20)')
+            .attr('transform','translate(-28, 20)')
         .append('xhtml:div')
             .style('width','60px')
             .style('height','40px')
             .style('background-image', d => `url(${d.imgUrl})`)
-            .style('background-size','40px')
+            .style('background-size','60px')
             .style('background-repeat', 'no-repeat')
 
 
         this.svg.select('.x.axis')
         .selectAll('.tick')
         .selectAll('text')
-            .style('font-weight','bold')
-            .style("font-size", '15px')
-            .attr('fill', 'darkgray')
-            .attr("dy", "4em")
+            .style("font-size", '25px')
+            .style('font-family', 'tahoma')
+            .style('font-weight', 200)
+            .attr('stroke','#396392')
+            .attr('stroke-width', '0.2')
+            .attr('fill', '#635252')
+            .attr("dy", "3.5em")
+
+
+        function insertLineBreaks(d) {
+            const el = d3.select(this);
+            const words = d.split(' ');
+            el.text('');
+            for(let i = 0; i < words.length; i++){
+                let tspan = el.append('tspan').text(words[i]).attr('fill','white');
+                if( i > 0 ){
+                    tspan.attr('x',0).attr('dy',20);
+                }
+            }
+        }
 
 
         this.svg.select('.x.axis')
         .selectAll('line')
-        .attr('y2','9')
+            .attr('stroke','white')
+            .attr('stroke-width','2px')
+            .attr('y2','9')  //lengthen ticks
 
 
         
@@ -287,157 +616,286 @@ class Graphics extends Component {
             .call(this.yAxis)
         .selectAll('text')
             .data(yColor)
-            .style('fill', c => c)
-            .style('font-size', '22px')
+            .attr('stroke', c => c)
+            .attr('stroke-width','2px')
+            .style('fill', 'white')
+            .style('font-size', '30px')
             .style('font-weight', 'bold')
 
         this.svg
         .select('.y.axis')
         .select('path')
             .style('display','none')
+
+        this.svg.select('.y.axis')
+        .selectAll('line')
+            .attr('stroke','white')
+            .attr('stroke-width','2px')
         
         
     }
 
     renderLegends() {
+        this.selected_options = [];
 
         const legend = d3.select(this.refs.container)
         .append("g")
-            .attr('transform','translate(-550,70)')
+            .attr('class','legends')
+            .attr('transform','translate(1220,70)')
             .attr("font-family", "sans-serif")
             .attr("font-size", 15)
         .selectAll("g")
-            .data(['price', 'taste', 'services', 'revisit'])
+            .data(['price', 'taste', 'services', 'recurrence'])
             .enter()
         .append("g")
-            .attr("transform", function(d, i) { return "translate(" + i * 100 + ",0 )"; });
-
+            .attr('id', d => d + '-graphic')
+            .attr("transform", function(d, i) { return "translate(0 ," + i * 50 + ")" });
+            
         legend.append("rect")
             .attr('class','legendsRect')
-            .attr("x", width - 80)
+            .attr('id', d => d)
             .attr("width", 19)
             .attr("height", 19)
-            .attr("fill", this.z);
+            .attr("fill", this.z)
+            .on('click', this.checkUncheck);
       
         legend.append("text")
-                .attr("x", width - 50)
-                .attr("y", 9.5)
-                .attr("dy", "0.32em")
-                .text(function(d) { return d; });
-
+            .attr("x", 30)
+            .attr("y", 9.5)
+            .attr("dy", "0.32em")
+            .attr('fill','white')
+            .style('font-size','30px')
+            .text( d => { 
+                if(d === 'recurrence') return 'Revisit';
+                else return `${d.charAt(0).toUpperCase() + d.slice(1)}`; 
+            });
+        
+        
     }
 
-    renderOptions(){
+    checkUncheck = () => {
+        const rect_id = d3.event.target.id; 
+        const thisLegend = d3.select(`#${rect_id}-graphic`);
+            
+        thisLegend.append('foreignObject')
+            .attr('class','fObject')
+            .attr('id',`${rect_id}-fObject`)
+            .attr('width','22')
+            .attr('height','27')
+            .attr('y', -8)
+        .append('xhtml:img')
+            .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
+            .attr('width', '22')
+            .attr('height', '22')
+            .style('filter', () => 'brightness(200%) invert(200%)')
+            .on('click', () => {
+                if(d3.event.target.parentNode.parentNode.className.animVal === 'options') {
+                    d3.selectAll('#displayfObject').remove();
+                    console.log(d3.event.target.parentNode.parentNode.className.animVal);
+                }
+                d3.event.target.remove();
+                thisLegend.select('.fObject').remove();
 
-        // const container = d3.select(this.refs.container)
-        // .append('g')
-        //     .attr('transform','translate(100,500)')
-        // .append('foreignObject')
-        //     .attr('width','200px')
-        //     .attr('height','200px')
-        // .append('xhtml:div')
-        //     .attr('class','dropdown');
+                this.selected_options.splice( this.selected_options.indexOf(rect_id), 1);
+                console.log(`${rect_id} is removed!`);
+            })
 
-        // container.append('xhtml:button')
-        //     .attr('class','btn btn-primary dropdown-toggle')
-        //     .attr('id','dropdownMenuButton')
-        //     .attr('type','button')
-        //     .attr('data-toggle','dropdown')
-        //     .html('Select mood')
-        // .append('xhtml:span')
-        //     .attr('class','caret')
+        this.selected_options.push(rect_id);
+        console.log(`${rect_id} is selected!`);
+    }
 
-        // container.append('xhtml:div')
-        //     .attr('class','dropdown-menu')
-        //     .attr('aria-labelledby','dropdownMenuButton')
-        // .selectAll('option')
-        //     .data(this.moodKeys)
-        //     .enter()
-        // .append('xhtml:a')
-        //     .attr('class','dropdown-item')
-        //     .html( d => d )                           // bootstrap dropdown
+    renderButton(){
+        
+        const container = d3.select(this.refs.container)
+        .append('g')
+            .attr('transform','translate(1220,360)')
+            .attr('class','submitButton')
+        .append('foreignObject')   //foreign object must be given w&h to be rendered
+            .attr('width','195px')
+            .attr('height','45px')
+        .append('xhtml:div')
+            .attr('class','getList');
+    
+        container.append('xhtml:button')
+            .attr('class','btn btn-success')
+            .style('width','100%')
+            .style('height','45px')
+            .html('Show me the result!')
+            .style('font-size','20px')
+            .on('click', (d,i) => {
+                if(!this.selected_options[0]) this.selected_options = ['empty'];
+                Restaurant.request_ten(this.selected_options).then( data => {
+                    if(data.errors) {
+                        console.log(data.errors);
+                        this.selected_options.shift();
+                    }else { 
+                        data.forEach( d => {
+                            d.name = d.name.charAt(0).toUpperCase() + d.name.slice(1);
+                        })
+                        this.setState({
+                            dummyData: data
+                        })
+                    }
+                })
+            });
+
+    }
+    renderDropdown(){
 
         var l=4;
         for(let i=0; i< this.moodKeys.length; i++){
             if( l < this.moodKeys[i].length ) l = this.moodKeys[i].length
         };
         l=l*10;
-        var svg = d3.select(this.refs.container)
-            .append("g")
-                .attr("class","dropdown")
+
+        var dropdown = d3.select(this.refs.container)
+        .append("g")
+            .attr("class","dropdown")
         
-        let select = svg.append("g")
+        let select = dropdown.append("g")
             .attr("class","select")
-            .attr("transform", "translate(800, 55)");
+            .attr("transform", "translate(1220, 250)")
+            .on("mouseover", (d, i) => options.attr('visibility', 'visible'))
+            .on("mouseout", (d, i) => options.attr('visibility', 'hidden'));
         
-            select.append("rect")
-                .attr("x", 10)
-	            .attr("y",  10 )
-	            .attr("width", l + 70)
-                .attr("height", 30)
-                .attr('fill', 'white');
-                
-            select.append('rect')
-                .attr('id', 'selectColor')
-                .attr('x', 17)
-                .attr('y', 17)
-                .attr('width', 15)
-                .attr('height', 15)
-                .attr('fill', 'white')
+        let displaySelect = select.append('g')
+        .attr('id','displaySelect')
+
+        displaySelect.append("rect")
+            .attr('stoke','white')
+            .attr('x', -8)
+            .attr("y",  10 )
+            .attr("width", l + 141)
+            .attr("height", 40)
+            .attr('fill', 'transparent');
             
-            select.append("text")
-                .attr("x", 40)
-	            .attr("y",30 )
-                .attr("id","mydropdown")
-	            .text('select mood');
+        displaySelect.append('rect')
+            .attr('id', 'selectColor')
+            .attr('y', 20)
+            .attr('width', 19)
+            .attr('height', 19)
+            .attr('fill', 'white')
+        
+        displaySelect.append("text")
+            .attr("x", 30)
+            .attr("y",38 )
+            .style('font-size','28px')
+            .attr("id","mydropdown")
+            .attr('fill','white')
+            .text('Select mood')
   
         var options = select.selectAll(".myBars")
-            .data(this.moodKeys)
+            .data(["cozy","luxury","loud","modern"])
             .enter()
         .append("g")
-	
-        options.attr("class", "option").on("click", function() { 
-            document.getElementById("selectColor").setAttribute('fill', this.getElementsByClassName("optionColor")[0].getAttribute('fill')); 
-            document.getElementById("mydropdown").innerHTML = this.getElementsByTagName("text")[0].innerHTML;
-            document.getElementById('mydropdown').setAttribute('x', '60');
-            d3.event.stopPropagation();
-        });
+            .attr('class','options')
+            .attr('id', d => d + '-graphic')
+            .attr('visibility', 'hidden');
+        
 
-        options.append("rect").attr("x", 10)
+        options.append("rect")
+            .attr('x', -209)
             .attr("y", function(d,i){ 
-                return 40 + i*30;
+                return 10 + i*40;
             })
-            .attr("width", l + 70)
-            .attr("height", 30)
-            .attr('fill', 'white');
+            .attr("width", l + 141)
+            .attr("height", 40)
+            .attr('fill', '#847FC3')
+            
+            this.previousElement = null;
+            this.previousElementId = '';
+            this.newArray = [];
+            
+            options.append('rect')
+                .attr('x', -201)
+                .attr('id',d => d)
+                .attr('y', function( d, i ){
+                    return 19 + i*40;
+                })
+                .attr('width', 19)
+                .attr('height', 19)
+                .attr('class', 'optionColor')
+                .attr('fill', this.z)
+                .on('click', (d, i) => {
+                    select.select('#selectColor')
+                    .attr('fill', `${d3.event.target.getAttribute('fill')}`);
+                    select.select("#mydropdown")
+                    .text(`${d3.event.target.nextSibling.innerHTML}`);
+                    
+                    select.select("#displaySelect")
+                    .append('foreignObject')
+                        .attr('id','displayfObject')
+                        .attr('width','22')
+                        .attr('height','27')
+                        .attr('y', 10)
+                    .append('xhtml:img')
+                        .attr('src','http://icon-park.com/imagefiles/check_sign_icon_gray.png')
+                        .attr('width', '22')
+                        .attr('height', '22')
+                        .style('filter', () => 'brightness(200%) invert(200%)')
+                        
+                
+                
+                    this.checkUncheck();
+                    // When a box is checked...
+                    if(options.select(`#${d3.event.target.id}-fObject`)) {
+                        options.select(`#${d3.event.target.id}-fObject`)
+                        .attr('x', d3.event.target.getAttribute('x'))
+                        .attr('y', d3.event.target.getAttribute('y')-8)
+                    }
 
-        options.append('rect')
-            .attr('x', 17)
-            .attr('y', function( d, i ){
-                return 48 + i*30;
-            })
-            .attr('width', 15)
-            .attr('height', 15)
-            .attr('class', 'optionColor')
-            .attr('fill', this.z)
+
+                    this.newArray.push(d3.event.target);
+
+                    if( this.newArray.length <= 1) {
+                        this.previousElement = d3.event.target;
+                        this.previousElementId = d3.event.target.id;
+                    }else {
+                        const prevRectSelection = options.select(`#${this.previousElementId}`)._groups[0];
+                        const prevRectIndex = prevRectSelection.indexOf(this.previousElement);
+                        const prevRect = prevRectSelection[prevRectIndex];
+                        this.newArray.shift();
+
+                        if( d3.event.target !== prevRect ){
+                            options.select(`#${this.previousElementId}-fObject`).remove();
+                            this.selected_options.splice( this.selected_options.indexOf(this.previousElementId), 1);
+                            console.log(`${this.previousElementId} is removed!`);
+                            console.log(this.selected_options)
+                        }
+                        this.previousElement = d3.event.target;
+                        this.previousElementId = d3.event.target.id;
+                    }
+
+
+                });
+
+            
 
         options.append("text")
-            .attr("x", 40)
+            .style('font-size','28px')
+            .style('fill','white')
+            .attr("x", -171)
 	        .attr("y", function(d,i){ 
-                return 60 + i*30;
+                return 37 + i*40;
             })
-	        .text(d => d);
-
-   
-    }
+            .text(d => {
+                if(d === 'luxury') return 'Sanitation';
+                else return d.charAt(0).toUpperCase() + d.slice(1) 
+            })
+            .on('click', (d, i) => {
+                select.select('#selectColor')
+                    .attr('fill', `${d3.event.target.parentNode.childNodes[1].getAttribute('fill')}`);
+                select.select("#mydropdown")
+                    .text(`${d3.event.target.innerHTML}`);
+            });
+        }
 
     render() {
 
         return (
-            <main>
-
-                <svg ref="container">
-                </svg>
+            <main >
+                <div className="svg-background"></div>
+                <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
             </main>
         )
@@ -445,3 +903,6 @@ class Graphics extends Component {
 }
 
 export default Graphics;
+
+
+
