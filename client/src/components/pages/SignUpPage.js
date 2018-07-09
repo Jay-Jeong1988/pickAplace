@@ -6,7 +6,7 @@ class SignUpPage extends Component {
 
     constructor(props) {
         super(props);
-
+        
         this.createUser = this.createUser.bind(this);
         this.state = {
             errors: []
@@ -29,13 +29,9 @@ class SignUpPage extends Component {
 
         User.create(newUser).then( res => {
             if(!res.errors){
-                // Token.create({ email: res.email, password: newUser.password })
-                // .then( res => {
-                //     localStorage.setItem('jwt', res.jwt)
-                //     this.props.onSignUp()
-                //     this.props.history.push('/')
-                // })              
-                this.props.history.push('/')
+                localStorage.setItem('jwt', res.jwt);
+                this.props.onSignUp();
+                this.props.history.push('/');
             }else {
                 this.setState({
                     errors: res.errors

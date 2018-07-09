@@ -5,6 +5,8 @@ const knex = require('./db/index.js');
 const bodyParser = require('body-parser');
 const store = require('./store.js');
 const { check, validationResult, body } = require('express-validator/check')
+const jwt = require('jsonwebtoken');
+
 // app.set('view engine','ejs');
 app.use(logger(':method :url :status :date[clf]'));
 app.use(express.static("public"));
@@ -203,12 +205,24 @@ app.post('/sign-up', [
                 'password': req.body.password,
                 'address': req.body.address
             }).then( () => {
+                const token = jwt.sign(
+                    {
+                        jwt: { 
+                            email: req.body.email,
+                            first_name: req.body.first_name,
+                            last_name: req.body.last_name,
+                            address: req.body.address
+                        }
+                    },
+                    'secret',
+                    { expiresIn: 60 * 60 }
+                )
                 console.log(`user created: 
                 ${req.body.first_name} ${req.body.last_name}, 
                 email: ${req.body.email} 
                 password: ${req.body.password} 
                 address: ${req.body.address}`)
-            res.sendStatus(200);
+            res.status(200).send({jwt: token});
             })
         }
 })
