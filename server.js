@@ -183,14 +183,24 @@ app.get("/top_ten/:eval_types", (req, res) => {
 })
 
 app.post('/sign-up', [ 
-        check('email').isEmail(),
-        check('password').isLength({ min: 5 }),
-        body('email').custom( value => {
-            return knex('users').select().where({ email: value })
-                .then( ([user]) => {
-                    if (user) return Promise.reject('E-mail already in use');
-                })
-        })
+    check('email').isEmail(),
+    check('password').isLength({ min: 5 }),
+    body('password_confirmation').custom( (value, {req}) => {
+        if( value !== req.body.password ) {
+            throw new Error('Password confirmation does not match password');
+        }else{
+            return true
+        }
+    }),
+    body('email').custom( value => {
+        return knex('users').select().where({ email: value })
+            .then( ([user]) => {
+                if (user) return Promise.reject('E-mail already in use');
+            })
+    }),
+    body('address').custom( value => {
+        if(value === "") throw new Error('Address should not be empty');
+    })
     ], (req, res) => {
         const errors = validationResult(req);
 

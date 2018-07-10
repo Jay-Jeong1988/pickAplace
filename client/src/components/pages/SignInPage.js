@@ -51,16 +51,16 @@ class SignInPage extends Component {
                             )
                         })
                     }
-                    <div>
+                    <div className="mx-auto form-group">
                         <label htmlFor="email">Email</label>
-                        <input id='email' name="email"/>
+                        <input className="form-control" id='email' name="email"/>
                     </div>
-                    <div>
+                    <div className="mx-auto form-group">
                         <label htmlFor="password">Password</label>
-                        <input id="password" name="password"/>
+                        <input className="form-control"  id="password" name="password"/>
                     </div>
-                    <div>
-                        <input type="submit" value="Sign In"/>
+                    <div className="mx-auto form-group">
+                        <input className="form-control btn btn-outline-success" type="submit" value="Sign In"/>
                     </div>
                 </form>
             </main>
