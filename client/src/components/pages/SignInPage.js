@@ -24,7 +24,7 @@ class SignInPage extends Component {
             if(!res.errors) {
                 localStorage.setItem('jwt', res.jwt);
                 this.props.onSignIn();
-                this.props.history('/')
+                this.props.history.push('/')
             }else{
                 this.setState({
                     errors: res.errors
@@ -43,7 +43,7 @@ class SignInPage extends Component {
                         errors.map( ( error, index) => {
                             return ( 
                                 error ? 
-                                <div key={index}>
+                                <div className="mx-auto" key={index}>
                                     <p style={{color: 'red'}}>{error.unauthorized}</p>
                                 </div>
                                 :
@@ -57,7 +57,7 @@ class SignInPage extends Component {
                     </div>
                     <div className="mx-auto form-group">
                         <label htmlFor="password">Password</label>
-                        <input className="form-control"  id="password" name="password"/>
+                        <input className="form-control" type="password" id="password" name="password"/>
                     </div>
                     <div className="mx-auto form-group">
                         <input className="form-control btn btn-outline-success" type="submit" value="Sign In"/>

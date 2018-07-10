@@ -200,6 +200,7 @@ app.post('/sign-up', [
     }),
     body('address').custom( value => {
         if(value === "") throw new Error('Address should not be empty');
+        else return true;
     })
     ], (req, res) => {
         const errors = validationResult(req);
@@ -243,7 +244,7 @@ app.post('/sign-in', (req, res) => {
         'password': req.body.password
         }).then( ({ success }) => {
             if(success) {
-                knex('users').select().where({email: req.body.email}).then( user => {
+                knex('users').first().where({email: req.body.email}).then( user => {
                     const payload = {
                         email: user.email,
                         first_name: user.first_name,
