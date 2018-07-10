@@ -193,7 +193,7 @@ app.post('/sign-up', [
         })
     ], (req, res) => {
         const errors = validationResult(req);
-        
+
         if( !errors.isEmpty() ){
             errors.array().forEach( error => console.log(error.msg) ) 
             return res.status(422).json({ errors: errors.array() });
@@ -233,11 +233,27 @@ app.post('/sign-in', (req, res) => {
         'password': req.body.password
         }).then( ({ success }) => {
             if(success) {
-                console.log(`${req.body.email} has signed in`);
-                res.sendStatus(200);
+                knex('users').select().where({email: req.body.email}).then( user => {
+                    const payload = {
+                        email: user.email,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        address: user.address
+                    }
+                    const token = jwt.sign({
+                        jwt: payload
+                        },
+                        'secret',
+                        { expiresIn: '1h' }
+                    )
+                    
+                    console.log(`${req.body.email} has signed in`);
+                    res.status(200).send({jwt: token});
+                })
             }else {
-                console.log(`authentication denied`);
-                res.sendStatus(401);
+                const errors = [];
+                errors.push({ unauthorized: 'Invalid email/password. Please try again.'});
+                res.status(401).json({ errors: errors });
             }
     })
 })

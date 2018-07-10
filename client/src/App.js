@@ -31,7 +31,7 @@ class App extends Component {
     return body;
   };
 
-  onSignUp = () => {
+  saveUser = () => {
     const jwt = localStorage.getItem('jwt');
     if( jwt ){
       const payload = jwtDecode(jwt);
@@ -51,8 +51,8 @@ class App extends Component {
         <div className="App">
         <Navbar />
           <Route path="/" exact render={ res => <h1>Hi</h1>}/>
-          <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.onSignUp} /> }/>
-          <Route path="/sign_in" exact component={SignInPage} />
+          <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
+    <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
           <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
           <Route path="/restaurants" exact component={Graphics} />

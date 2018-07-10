@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { User } from '../../lib/requests';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class SignUpPage extends Component {
@@ -33,6 +34,7 @@ class SignUpPage extends Component {
                 this.props.onSignUp();
                 this.props.history.push('/');
             }else {
+                console.log(res.errors);
                 this.setState({
                     errors: res.errors
                 })
@@ -43,51 +45,96 @@ class SignUpPage extends Component {
 
     render() {
 
-        const {errors} = this.state
+        const { errors } = this.state
         return (
 
-            <div style={{textAlign:'center'}} className="SignUpPage">
-                <div className='errorContainer'>
-                    { 
-                        errors.map( (e, i) => <h4 key={i}>{e.field} {e.message}</h4> )
+            <main className="SignUpPage">
+                <form onSubmit={this.createUser}>
+
+                    <div className="form-group">
+                        <label htmlFor="first_name">First Name</label>
+                        <input className="form-control" id="first_name" name="first_name" />
+                    {
+                        errors.map( (error, index) => {
+                            return (error.param === 'first_name') ?
+                            <p>{ error.msg }</p>
+                            :
+                            ''
+                        })
                     }
-                </div>
-                <div className="flexContainer">
-                    <form onSubmit={this.createUser}>
-                        <div>
-                            <label htmlFor="first_name">First Name</label>
-                            <input id="first_name" name="first_name" />
-                        </div>
+                    </div>
 
-                        <div>
-                            <label htmlFor="last_name">Last Name</label>
-                            <input id="last_name" name="last_name"/>
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="last_name">Last Name</label>
+                        <input className="form-control" id="last_name" name="last_name"/>
+                    {
+                        errors.map( (error, index) => {
+                            return (error.param === 'last_name') ?
+                            <p>{ error.msg }</p>
+                            :
+                            ''
+                        })
+                    }
+                    </div>
 
-                        <div>
-                            <label htmlFor='email'>Email</label>
-                            <input type='email' name="email" id="email"/>
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor='email'>Email</label>
+                        <input className="form-control" type='email' name="email" id="email"/>
+                    {
+                        errors.map( (error, index) => {
+                            return (error.param === 'email') ?
+                            <p>{ error.msg }</p>
+                            :
+                            ''
+                        })
+                    }
+                    </div>
 
-                        <div>
-                            <label htmlFor="password">Password</label>
-                            <input type='password' id='password' name='password'/>
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input className="form-control" type='password' id='password' name='password'/>
+                    {
+                        errors.map( (error, index) => {
+                            return (error.param === 'password') ?
+                            <p>{ error.msg }</p>
+                            :
+                            ''
+                        })
+                    }
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="password_confirmation">Password Confirmation</label>
+                        <input className="form-control" type="password" id="password_confirmation" name="password_confirmation"/>
+                    {
+                        errors.map( (error, index) => {
+                            return (error.param === 'password_confirmation') ?
+                            <p>{ error.msg }</p>
+                            :
+                            ''
+                        })
+                    }
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="address">Address</label>
+                        <input className="form-control" type="address" id="address" name="address"/>
+                    {
+                        errors.map( (error, index) => {
+                            return (error.param === 'address') ?
+                            <p>{ error.msg }</p>
+                            :
+                            ''
+                        })
+                    }
+                    </div>
+                    
+                    <div className="form-group">
+                        <input className="form-control btn btn-success" type='submit' value="Sign Up"/>
+                    </div>
 
-                        <div>
-                            <label htmlFor="password_confirmation">Password Confirmation</label>
-                            <input type="password" id="password_confirmation" name="password_confirmation"/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="address">Address</label>
-                            <input type="address" id="address" name="address"/>
-                        </div>
-
-                        <input type='submit' value="Sign Up"/>
-                    </form>
-                </div>
-            </div>
+                </form>
+            </main>
 
         )
     }

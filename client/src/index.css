@@ -112,6 +112,13 @@ body {
   /* filter: hue-rotate(200deg) saturate(10) contrast(140%) invert(90%) */
 }
 
+.SignUpPage div {
+  margin: 20px;
+}
+.SignUpPage p {
+  color: red;
+  margin-bottom: 2px;
+}
 
 
 
