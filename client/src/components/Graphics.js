@@ -215,7 +215,7 @@ class Graphics extends Component {
         const measureLines = this.svg.append('g')
             .attr('class','measureLines')
         .selectAll('g')
-            .data(['M10,0h1100','M10,233h1100','M10,466h1100'])
+            .data(['M10,0h1100','M10,175h1100','M10,349h1100', 'M10,580h1100'])
             .enter()
         .append('g')
             .attr('stroke','white')
