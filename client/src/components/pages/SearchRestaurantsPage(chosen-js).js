@@ -27,7 +27,7 @@ class SearchRestaurantsPage extends Component {
     }
     changePhraseBack(event){
         const small = document.createElement('small');
-        small.innerHTML = 'Evaluate the restaurant?';
+        small.innerHTML = 'Rate the restaurant?';
         event.target.replaceChild(small, event.target.lastChild);
     }
 
@@ -69,7 +69,7 @@ class SearchRestaurantsPage extends Component {
                         }
                     </Chosen>
                     
-                    <Button color='success' type="submit" style={{width: '20%', marginTop: '2em'}} onMouseOver={this.changePhrase} onMouseLeave={this.changePhraseBack}><small>Evaluate the restaurant?</small></Button>
+                    <Button color='success' type="submit" style={{width: '20%', marginTop: '2em'}} onMouseOver={this.changePhrase} onMouseLeave={this.changePhraseBack}><small>Rate the restaurant?</small></Button>
                     
                 </form>
             </main>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { User } from '../../lib/requests';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const google = window.google;
 

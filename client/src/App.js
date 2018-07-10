@@ -8,6 +8,7 @@ import Graphics from './components/Graphics';
 import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
 import Navbar from './components/Navbar';
 import jwtDecode from 'jwt-decode';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
@@ -17,19 +18,22 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.callApi()
-      .then( res => this.setState({ response: res.express }))
-      .catch( err => console.log(err));
+  //   this.callApi()
+  //     .then( res => this.setState({ response: res.express }))
+  //     .catch( err => console.log(err));
+  // }
+
+  // callApi = async() => {
+  //   const response = await fetch('/hello-world');
+  //   const body = await response.json();
+
+  //   if ( response.status !== 200 ) throw Error(body.message);
+
+  //   return body;                //ANOTHER WAY TO MAKE ASYNC FUNCTION EXAMPLE
+  // };
+    
+    this.saveUser();
   }
-
-  callApi = async() => {
-    const response = await fetch('/hello-world');
-    const body = await response.json();
-
-    if ( response.status !== 200 ) throw Error(body.message);
-
-    return body;
-  };
 
   saveUser = () => {
     const jwt = localStorage.getItem('jwt');
@@ -44,12 +48,23 @@ class App extends Component {
 
   }
 
+  signOut = () => {
+    if( localStorage.getItem('jwt') ){
+      localStorage.removeItem('jwt');
+
+      this.setState({
+        response: '',
+        user: null
+      })
+    }
+  }
+
 
   render() {
     return (
       <Router>
         <div className="App">
-        <Navbar user={this.state.user}/>
+        <Navbar user={this.state.user} signOut={this.signOut}/>
           <Route path="/" exact render={ res => <h1>Hi</h1>}/>
           <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
     <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
