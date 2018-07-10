@@ -173,6 +173,8 @@ class Graphics extends Component {
         this.renderLegends();
         this.renderDropdown();
         this.renderButton();
+        this.renderMeasureLines();
+        this.renderAxis();
     }
     
     

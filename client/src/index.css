@@ -130,8 +130,17 @@ body {
   width: 70%;
 }
 
+#home_icon {
+ filter: brightness(500%) contrast(500%);
+ width: 20px;
+}
+#home_icon:hover {
+  filter: grayscale(50%) brightness(80%);
+}
 
-
+.SearchRestaurantsPage .evalRestaurant{
+  margin: 300px 100px;
+}
 
 
 

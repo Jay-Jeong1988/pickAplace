@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-        <Navbar />
+        <Navbar user={this.state.user}/>
           <Route path="/" exact render={ res => <h1>Hi</h1>}/>
           <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
     <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
