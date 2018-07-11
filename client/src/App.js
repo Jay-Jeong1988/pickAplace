@@ -8,6 +8,7 @@ import Graphics from './components/Graphics';
 import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
 import Navbar from './components/Navbar';
 import jwtDecode from 'jwt-decode';
+import HomePage from './components/pages/HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
@@ -65,7 +66,7 @@ class App extends Component {
       <Router>
         <div className="App">
         <Navbar user={this.state.user} signOut={this.signOut}/>
-          <Route path="/" exact render={ res => <h1>Hi</h1>}/>
+          <Route path="/" exact component={HomePage}/>
           <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
     <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
