@@ -1,5 +1,4 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const google = window.google;
 
@@ -17,7 +16,6 @@ class AddressAutoComplete extends React.Component {
   componentDidMount() {
     this.autoComplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
     this.autoComplete.addListener('place_changed', this.handlePlaceSelect);
-
   }
 
   initialState() {

@@ -22,6 +22,22 @@ body {
   }
 }
 
+.Navbar {
+  height: 45px;
+  background-color: #323232;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 16%;
+
+}
+.Navbar a {
+  color: white;
+}
+.Navbar a:hover {
+  color: rgb(165, 165, 165);
+  text-decoration: none;
+}
 
 .restaurant_form {
 
@@ -66,16 +82,28 @@ body {
   width: inherit;
 }
 
-.backgroundImage {
-  background-image: url(https://st.depositphotos.com/3046849/3951/i/950/depositphotos_39515525-stock-photo-large-collage-of-many-different.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  filter: contrast(30%);
+/* .CreateRestaurantPage .backgroundImage {
+  background: linear-gradient(rgb(126, 126, 126), rgb(172, 172, 172));
+  top: 0;
   z-index: -1;
   position: fixed;
   width: 1280px;
   height: 800px;
+} */
+.CreateRestaurantPage {
+  background: linear-gradient( rgb(126, 126, 126), rgb(175, 175 ,175));
+  height: 120%;
+}
+
+.CreateRestaurantPage label {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.CreateRestaurantPage .chosen-container a {
+  padding-left: 0;
+  border: solid lightgreen 2px;
 }
 
 .restaurant_form > .submit {
@@ -83,17 +111,51 @@ body {
 }
 
 .svg-background {
-  background-image: url('/assets/images/background-svg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  /* background-image: url('/assets/images/background-svg.png'); */
+  background: linear-gradient(rgb(207, 207, 207), rgb(65, 65, 65));
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
   position: fixed;
+  top: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  filter: brightness(70%) contrast(200%) grayscale(40%);
+  /* filter: grayscale(30%); */
+  /* filter: brightness(100%) contrast(50%) grayscale(100%) hue-rotate(300deg); */
   
-  /* filter: hue-rotate(200deg) saturate(10) contrast(140%) invert(90%) */
 }
+
+.SignUpPage form {
+  margin: 60px;
+}
+.SignUpPage div {
+  width: 70%;
+}
+.SignUpPage p {
+  color: red;
+  margin-bottom: 2px;
+}
+
+.SignInPage form {
+  margin: 60px;
+}
+.SignInPage div {
+  width: 70%;
+}
+
+#home_icon {
+ filter: brightness(500%) contrast(500%);
+ width: 20px;
+}
+#home_icon:hover {
+  filter: grayscale(50%) brightness(80%);
+}
+
+.SearchRestaurantsPage .evalRestaurant{
+  margin: 300px 100px;
+}
+
+
 
 @media only screen and (min-width: 900px) {
   
@@ -133,6 +195,11 @@ body {
   
 }
 
+
+
+
+
+
 @media only screen and (min-width: 460px) and (max-width: 899px) {
   
   .photos {
@@ -170,6 +237,11 @@ body {
 
 }
 
+
+
+
+
+
 @media only screen and (max-width: 459px) {
 
   .RenderRestaurantDetail {
@@ -190,6 +262,47 @@ body {
     width: 100%;
     height: 240px;
   }
+
+  
 }
 
 
+
+
+#myVideo {
+  z-index: -5;
+  position: fixed;
+  top:30px;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.HomePage .content {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 20%;
+  height: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 15px;
+  position: fixed;
+  top: 700px;
+  left: 100px;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: transparent;
+  color: gray;
+}

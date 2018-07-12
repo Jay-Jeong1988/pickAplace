@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Restaurant } from '../../lib/requests';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Chosen from '../Chosen';
 import AddressAutoComplete from '../AddressAutoComplete';
 import RenderRestaurantDetail from '../RenderRestaurantDetail';

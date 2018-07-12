@@ -5,6 +5,8 @@ const knex = require('./db/index.js');
 const bodyParser = require('body-parser');
 const store = require('./store.js');
 const { check, validationResult, body } = require('express-validator/check')
+const jwt = require('jsonwebtoken');
+
 // app.set('view engine','ejs');
 app.use(logger(':method :url :status :date[clf]'));
 app.use(express.static("public"));
@@ -181,17 +183,28 @@ app.get("/top_ten/:eval_types", (req, res) => {
 })
 
 app.post('/sign-up', [ 
-        check('email').isEmail(),
-        check('password').isLength({ min: 5 }),
-        body('email').custom( value => {
-            return knex('users').select().where({ email: value })
-                .then( ([user]) => {
-                    if (user) return Promise.reject('E-mail already in use');
-                })
-        })
+    check('email').isEmail(),
+    check('password').isLength({ min: 5 }),
+    body('password_confirmation').custom( (value, {req}) => {
+        if( value !== req.body.password ) {
+            throw new Error('Password confirmation does not match password');
+        }else{
+            return true
+        }
+    }),
+    body('email').custom( value => {
+        return knex('users').select().where({ email: value })
+            .then( ([user]) => {
+                if (user) return Promise.reject('E-mail already in use');
+            })
+    }),
+    body('address').custom( value => {
+        if(value === "") throw new Error('Address should not be empty');
+        else return true;
+    })
     ], (req, res) => {
         const errors = validationResult(req);
-        
+
         if( !errors.isEmpty() ){
             errors.array().forEach( error => console.log(error.msg) ) 
             return res.status(422).json({ errors: errors.array() });
@@ -203,12 +216,24 @@ app.post('/sign-up', [
                 'password': req.body.password,
                 'address': req.body.address
             }).then( () => {
+                const token = jwt.sign(
+                    {
+                        jwt: { 
+                            email: req.body.email,
+                            first_name: req.body.first_name,
+                            last_name: req.body.last_name,
+                            address: req.body.address
+                        }
+                    },
+                    'secret',
+                    { expiresIn: 60 * 60 }
+                )
                 console.log(`user created: 
                 ${req.body.first_name} ${req.body.last_name}, 
                 email: ${req.body.email} 
                 password: ${req.body.password} 
                 address: ${req.body.address}`)
-            res.sendStatus(200);
+            res.status(200).send({jwt: token});
             })
         }
 })
@@ -219,11 +244,27 @@ app.post('/sign-in', (req, res) => {
         'password': req.body.password
         }).then( ({ success }) => {
             if(success) {
-                console.log(`${req.body.email} has signed in`);
-                res.sendStatus(200);
+                knex('users').first().where({email: req.body.email}).then( user => {
+                    const payload = {
+                        email: user.email,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        address: user.address
+                    }
+                    const token = jwt.sign({
+                        jwt: payload
+                        },
+                        'secret',
+                        { expiresIn: '1h' }
+                    )
+                    
+                    console.log(`${req.body.email} has signed in`);
+                    res.status(200).send({jwt: token});
+                })
             }else {
-                console.log(`authentication denied`);
-                res.sendStatus(401);
+                const errors = [];
+                errors.push({ unauthorized: 'Invalid email/password. Please try again.'});
+                res.status(401).json({ errors: errors });
             }
     })
 })

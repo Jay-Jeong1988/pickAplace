@@ -7,7 +7,9 @@ class SignInPage extends Component {
         super(props)
 
         this.signIn = this.signIn.bind(this)
-        
+        this.state = {
+            errors: []
+        }
     }
 
     signIn(event) {
@@ -19,30 +21,46 @@ class SignInPage extends Component {
             password: formData.get('password')
         }
         User.signIn(login).then( res => {
-            if(res.status === 200) {
-                this.props.history('/')
+            if(!res.errors) {
+                localStorage.setItem('jwt', res.jwt);
+                this.props.onSignIn();
+                this.props.history.push('/')
             }else{
-                console.log(res.errors)
+                this.setState({
+                    errors: res.errors
+                })
             }
         })
     }
 
     render() {
-
+        const { errors } = this.state;
         return (
 
             <main className='SignInPage'>
                 <form onSubmit={this.signIn}>
-                    <div>
+                    {
+                        errors.map( ( error, index) => {
+                            return ( 
+                                error ? 
+                                <div className="mx-auto" key={index}>
+                                    <p style={{color: 'red'}}>{error.unauthorized}</p>
+                                </div>
+                                :
+                                ''
+                            )
+                        })
+                    }
+                    <div className="mx-auto form-group">
                         <label htmlFor="email">Email</label>
-                        <input id='email' name="email"/>
+                        <input className="form-control" id='email' name="email"/>
                     </div>
-                    <div>
+                    <div className="mx-auto form-group">
                         <label htmlFor="password">Password</label>
-                        <input id="password" name="password"/>
+                        <input className="form-control" type="password" id="password" name="password"/>
                     </div>
-                    <div>
-                        <input type="submit" value="Sign In"/>
+                    <div className="mx-auto form-group">
+                        <input className="form-control btn btn-outline-success" type="submit" value="Sign In"/>
                     </div>
                 </form>
             </main>

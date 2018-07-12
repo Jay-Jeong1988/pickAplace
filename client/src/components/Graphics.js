@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import { Restaurant } from '../lib/requests';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './style.css';
 
@@ -162,16 +161,20 @@ class Graphics extends Component {
     componentDidMount() {
         
         this.svg = d3.select(this.refs.container)
-        .attr("width", "100%")
-        .attr("height", height + margin.top + margin.bottom)
+        .attr('viewBox','0 0 1500 1500')
+        // .attr("width", "100%")
+        // .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr( "transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr( "transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr('id','barChart');
         
         
         this.moodKeys = ["cozy","luxury","loud","modern"];
         this.renderLegends();
         this.renderDropdown();
         this.renderButton();
+        this.renderMeasureLines();
+        this.renderAxis();
     }
     
     
@@ -213,7 +216,7 @@ class Graphics extends Component {
         const measureLines = this.svg.append('g')
             .attr('class','measureLines')
         .selectAll('g')
-            .data(['M10,0h1100','M10,233h1100','M10,466h1100'])
+            .data(['M10,0h1100','M10,175h1100','M10,349h1100', 'M10,580h1100'])
             .enter()
         .append('g')
             .attr('stroke','white')
@@ -225,7 +228,41 @@ class Graphics extends Component {
     }
 
     renderBars() {
+  
+        const media = d3.select('svg')
+        .append('defs')
+        .append('style')
+            .attr('type','text/css')
+            .html(`@media screen and (max-width: 400px) { 
+                #barChart{ 
+                    transform: translate(${margin.left + 100}px, 600px);
+                 }
+                .legends {
+                    transform: translate( 200px, 300px )
+                }
+                #taste-graphic {
+                    transform: translate( 180px, 0 )
+                }
+                #services-graphic {
+                    transform: translate( 360px, 0 )
+                }
+                #recurrence-graphic {
+                    transform: translate( 540px, 0 )
+                }
+                .legends .legendsRect {
+                    width: 50px;
+                    height: 50px;
+                }
+                .select {
+                    transform: translate( 1100px, 300px )
+                }
+                .submitButton {
+                    transform: translate( 1220px, 450px )
+                }
+            }`);
 
+
+//////////////////////////////////////////////////////////////////
         const lg = d3.select('svg')
         .append('defs')
         .selectAll('linearGradient')

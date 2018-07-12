@@ -6,36 +6,69 @@ import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chos
 import EvalRestaurantsPage from './components/pages/EvalRestaurantPage';
 import Graphics from './components/Graphics';
 import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
+import Navbar from './components/Navbar';
+import jwtDecode from 'jwt-decode';
+import HomePage from './components/pages/HomePage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
   state = {
-    response: ''
+    response: '',
+    user: null
   };
 
   componentDidMount() {
-    this.callApi()
-      .then( res => this.setState({ response: res.express }))
-      .catch( err => console.log(err));
+  //   this.callApi()
+  //     .then( res => this.setState({ response: res.express }))
+  //     .catch( err => console.log(err));
+  // }
+
+  // callApi = async() => {
+  //   const response = await fetch('/hello-world');
+  //   const body = await response.json();
+
+  //   if ( response.status !== 200 ) throw Error(body.message);
+
+  //   return body;                //ANOTHER WAY TO MAKE ASYNC FUNCTION EXAMPLE
+  // };
+    
+    this.saveUser();
   }
 
-  callApi = async() => {
-    const response = await fetch('/hello-world');
-    const body = await response.json();
+  saveUser = () => {
+    const jwt = localStorage.getItem('jwt');
+    if( jwt ){
+      const payload = jwtDecode(jwt);
 
-    if ( response.status !== 200 ) throw Error(body.message);
+      this.setState({
+        response: '',
+        user: payload
+      })
+    }
 
-    return body;
-  };
+  }
+
+  signOut = () => {
+    if( localStorage.getItem('jwt') ){
+      localStorage.removeItem('jwt');
+
+      this.setState({
+        response: '',
+        user: null
+      })
+    }
+  }
 
 
   render() {
     return (
       <Router>
         <div className="App">
-          <Route path="/" exact render={ res => <h1>Hi</h1>}/>
-          <Route path="/sign_up" exact component={SignUpPage} />
-          <Route path="/sign_in" exact component={SignInPage} />
+        <Navbar user={this.state.user} signOut={this.signOut}/>
+          <Route path="/" exact component={HomePage}/>
+          <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
+    <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
           <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
           <Route path="/restaurants" exact component={Graphics} />
