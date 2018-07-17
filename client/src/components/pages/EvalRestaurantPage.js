@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Evaluation } from '../../lib/requests';
+import Modal from '../Modal';
 
 class EvalRestaurantPage extends Component {
 
@@ -43,7 +44,7 @@ class EvalRestaurantPage extends Component {
         const { restaurant } = this.state;
 
         return (
-            <main className="EvalRestaurantPage">
+            <main className="EvalRestaurantPage container">
                 <div className="restaurant_" >
                     <img src={restaurant.imgUrl} alt="brand_logo"/>
                     <h5>{restaurant.type} restaurant</h5>
@@ -52,24 +53,8 @@ class EvalRestaurantPage extends Component {
                     <h5>{restaurant.website_url}</h5>
                 </div>
 
-                <form onSubmit={this.evaluate}>
-                    <label>price<input type="number" name="price"/></label>
-                    <label>luxury<input type="number" name="luxury"/></label>
-                    <label>taste<input type="number" name="taste"/></label>
-                    <label>cozy<input type="number" name="cozy"/></label>
-                    <label>loud<input type="number" name="loud"/></label>
-                    <label>modern<input type="number" name="modern"/></label>
-                    <label>services<input type="number" name="services"/></label>
-                    <h4> Do you think you will go to this restaurant again?</h4>
-                    <div>
-                        <label><input type="radio" name="recurrence" value="true"/>yes</label>
-                    </div>
-                    <div>
-                        <label><input type="radio" name="recurrence" value="false"/>no</label>
-                    </div>
-
-                    <input className="btn btn-primary" type="submit" value="Done"/>
-                </form>
+                <Modal evaluate={this.evaluate}/>
+                
             </main>
 
         )

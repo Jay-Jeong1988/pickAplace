@@ -306,3 +306,11 @@ body {
   background: transparent;
   color: gray;
 }
+
+/*   EvalRestaurantPage */
+.restaurant_ img {
+  display: block;
+  max-width: 50%;
+  max-height: 300px;
+  
+}
