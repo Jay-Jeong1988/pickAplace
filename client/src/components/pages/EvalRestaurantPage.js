@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Evaluation } from '../../lib/requests';
 import Modal from '../Modal';
+import {Redirect} from 'react-router-dom';
 
 class EvalRestaurantPage extends Component {
 
@@ -8,36 +9,40 @@ class EvalRestaurantPage extends Component {
         super(props);
         const restaurant = JSON.parse(localStorage.getItem('restaurant'));
         this.state = {
-            restaurant: restaurant
+            restaurant: restaurant,
+            redirect: false
         }
         this.evaluate = this.evaluate.bind(this);
     }
 
-    evaluate(e) {
-        e.preventDefault();
+    evaluate( data ) {
         const restaurantId = this.props.match.params.id;
-        const formData = new FormData(e.currentTarget);
-        const isTrueSet = ( formData.get('recurrence') === 'true' );
         const evaluation_score = {
-            price: formData.get('price'),
-            luxury: formData.get('luxury'),
-            cozy: formData.get('cozy'),
-            modern: formData.get('modern'),
-            loud: formData.get('loud'),
-            taste: formData.get('taste'),
-            services: formData.get('services'),
-            recurrence: isTrueSet
+            price: Math.round(data['price_score']),
+            luxury: Math.round(data['luxury_score']),
+            cozy: Math.round(data['cozy_score']),
+            modern: Math.round(data['modern_score']),
+            loud: Math.round(data['loud_score']),
+            taste: Math.round(data['taste_score']),
+            services: Math.round(data['services_score']),
+            recurrence: Math.round(data['recurrence_score'])
         }
-        // for(let entry of formData.entries()){
-        //     console.log(`${entry[0]}: ${entry[1]}`)
-        // }
         Evaluation.create(restaurantId, evaluation_score).then( data => {
             console.log(data);
             alert('successfully evaluated');
             localStorage.removeItem('restaurant');
-            this.props.history.push('/search_rests');
+            document.getElementsByClassName('modal-backdrop')[0].remove();
+            this.setState({
+                ...this.state,
+                redirect: true
+            })
+            // this.props.history.push('/search_rests');
         })
 
+    }
+
+    renderRedirect = () => {
+        if(this.state.redirect) return <Redirect to='/search_rests'/>;
     }
 
 
@@ -54,8 +59,8 @@ class EvalRestaurantPage extends Component {
                     <h5>{restaurant.website_url}</h5>
                 </div>
 
-                <Modal evaluate={this.evaluate} />
-                
+                <Modal id='modal' evaluate={this.evaluate} />
+                {this.renderRedirect()}
             </main>
 
         )
