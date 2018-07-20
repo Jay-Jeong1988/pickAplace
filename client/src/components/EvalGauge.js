@@ -9,9 +9,41 @@ class EvalGauge extends Component {
         super(props);
         this.state = {
             entry: this.props.entry,
-            score: 0,
-            yUP: 0,
-            x: 0
+            price: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
+            cozy: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
+            luxury: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
+            taste: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
+            loud: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
+            modern: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
+            services: { 
+                score: 0,
+                yUP: 0,
+                x: 0
+            },
         }
 
         this.x = d3.scaleLinear().range([0, 440]);
@@ -71,16 +103,92 @@ class EvalGauge extends Component {
                 const yUP = x/(440/-60) + 1.5;
                 const score = x/4.38;
 
-                self.setState({
-                    entry: self.props.entry,
-                    score: score,
-                    yUP: yUP,
-                    x: x
-                })
+                self.getValuesForGauge(x, yUP, score);
                 self.props.getScore(self.state.entry, score);
             })
         }
-
+    
+    getValuesForGauge = (x, yUP, score) => {
+        switch(this.props.entry){
+            case 'price':
+            this.setState({
+                ...this.state,
+                entry: 'price',
+                price: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+            case 'cozy':
+            this.setState({
+                ...this.state,
+                entry: 'cozy',
+                cozy: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+            case 'luxury':
+            this.setState({
+                ...this.state,
+                entry: 'luxury',
+                luxury: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+            case 'taste':
+            this.setState({
+                ...this.state,
+                entry: 'taste',
+                taste: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+            case 'loud':
+            this.setState({
+                ...this.state,
+                entry: 'loud',
+                loud: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+            case 'modern':
+            this.setState({
+                ...this.state,
+                entry: 'modern',
+                modern: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+            case 'services':
+            this.setState({
+                ...this.state,
+                entry: 'services',
+                services: { 
+                    score: score,
+                    yUP: yUP,
+                    x: x
+                }
+            })
+            break;
+        }
+    }
     renderInnerGauge = () => {
         const self = this;
 
@@ -95,13 +203,7 @@ class EvalGauge extends Component {
                 const score = x/4.38;
                 console.log(score);
 
-                self.setState({
-                    entry: self.props.entry,
-                    score: score,
-                    yUP: yUP,
-                    x: x
-                })
-
+                self.getValuesForGauge(x, yUP, score);
                 self.props.getScore(self.state.entry, score);
             })
 
@@ -128,10 +230,9 @@ class EvalGauge extends Component {
             .attr('stop-color', 'rgba(255,0,0)')
             .attr('stop-opacity', '1')
 
-
-        const x = this.state.x;
-        const yUP = this.state.yUP;
-        const self = this;
+        const entry = this.state.entry;
+        const x = this.state[`${entry}`].x;
+        const yUP = this.state[`${entry}`].yUP;
         this.svg.select('.innerGauge')
         .transition()
         .duration(300)
