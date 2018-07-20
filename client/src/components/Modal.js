@@ -10,9 +10,11 @@ function Modal( props ) {
                 Launch demo modal
             </button>
             <div id="eval_modal" className="modal" tabindex="-1" role="dialog">
-                <div className="modal-dialog" role="document" style={{marginTop: '200px', maxWidth: '700px'}}>
+                <div className="modal-dialog" role="document" style={{marginTop: '200px', maxWidth: '600px'}}>
                     <div className="modal-content bg-primary" style={{height: '350px'}}>
                         <div className="modal-body">
+                            <h1>How is price? </h1>
+                            <h5>Bad(Pricy) / Good(Cheap)</h5>
                             <EvalGauge/>
                             {/* <form onSubmit={props.evaluate}>
                                 <label>price<input type="number" name="price"/></label>

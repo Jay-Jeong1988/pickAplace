@@ -312,5 +312,16 @@ body {
   display: block;
   max-width: 50%;
   max-height: 300px;
-  
+
 }
+
+.modal-body {
+  text-align: center;
+}
+.modal-body > * {
+  color: white;
+}
+
+/* .axis g:not(:first-of-type):not(:last-of-type) {
+  display: none;
+} */
