@@ -322,6 +322,9 @@ body {
   color: white;
 }
 
+.modal-body button {
+  margin: 15px 40px;
+}
 /* .axis g:not(:first-of-type):not(:last-of-type) {
   display: none;
 } */

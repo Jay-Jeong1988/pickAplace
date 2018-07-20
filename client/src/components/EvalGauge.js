@@ -8,9 +8,16 @@ class EvalGauge extends Component {
 
         super(props);
         this.state = {
-            score: 0,
-            yUP: -60,
-            x: 440
+            price_score: 0,
+            cozy_score: 0,
+            luxury_score: 0,
+            taste_score: 0,
+            loud_score: 0,
+            modern_score: 0,
+            services_score: 0,
+            recurrence_score: 0,
+            yUP: 0,
+            x: 0
         }
 
         this.x = d3.scaleLinear().range([0, 440]);
@@ -48,7 +55,7 @@ class EvalGauge extends Component {
 
         const outerGauge = this.svg.append('path')
             .attr('class','outerGauge')
-            .attr('transform','translate(60, 75)')
+            .attr('transform','translate(60, 65)')
             .attr('stroke-width','2px')
             .attr('stroke','green')
             .attr('d','M0,0l440,-60v100h-440v-40')
@@ -58,9 +65,10 @@ class EvalGauge extends Component {
                 const score = x/4.38;
 
                 self.setState({
-                    score: score,
+                    ...self.state,
+                    price_score: score,
                     yUP: yUP,
-                    x: x
+                    x: x,
                 })
                 self.props.getScore(score);
             })
@@ -71,7 +79,7 @@ class EvalGauge extends Component {
 
         const innerGauge = this.svg.append('path')
             .attr('class','innerGauge')
-            .attr('transform','translate(60,75)')
+            .attr('transform','translate(60,65)')
             .attr('stroke','transparent')
             .attr('d','M0,0 l440,-60 v100 h-440 v-40')
             .on('click', function(d){
@@ -81,9 +89,10 @@ class EvalGauge extends Component {
                 console.log(score);
 
                 self.setState({
-                    score: score,
+                    ...self.state,
+                    price_score: score,
                     yUP: yUP,
-                    x: x
+                    x: x,
                 })
 
                 self.props.getScore(score);
@@ -129,7 +138,7 @@ class EvalGauge extends Component {
         this.svg
         .append('g')
             .attr('class', 'axis')
-            .attr('transform', `translate( 60 , 115)`)
+            .attr('transform', `translate( 60 , 105)`)
         .call(this.xAxis)
         .selectAll('text')
             .attr('font-size','15px')
