@@ -40,6 +40,7 @@ class EvalRestaurantPage extends Component {
 
     }
 
+
     render() {
         const { restaurant } = this.state;
 
@@ -53,7 +54,7 @@ class EvalRestaurantPage extends Component {
                     <h5>{restaurant.website_url}</h5>
                 </div>
 
-                <Modal evaluate={this.evaluate}/>
+                <Modal evaluate={this.evaluate} />
                 
             </main>
 
