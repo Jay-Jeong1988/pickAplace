@@ -8,14 +8,8 @@ class EvalGauge extends Component {
 
         super(props);
         this.state = {
-            price_score: 0,
-            cozy_score: 0,
-            luxury_score: 0,
-            taste_score: 0,
-            loud_score: 0,
-            modern_score: 0,
-            services_score: 0,
-            recurrence_score: 0,
+            entry: this.props.entry,
+            score: 0,
             yUP: 0,
             x: 0
         }
@@ -41,8 +35,21 @@ class EvalGauge extends Component {
 
     componentDidUpdate(){
         this.controlGauge();
+        this.removeAxis();
+        this.renderAxis();
+    }
 
-        
+    componentWillReceiveProps(nextProps){
+        if(nextProps.entry !== this.state.entry){
+            this.setState({
+                ...this.state,
+                entry: nextProps.entry
+            })
+        }
+    }
+
+    removeAxis = () => {
+        this.svg.select('.axis').remove();
     }
     
 
@@ -57,7 +64,7 @@ class EvalGauge extends Component {
             .attr('class','outerGauge')
             .attr('transform','translate(60, 65)')
             .attr('stroke-width','2px')
-            .attr('stroke','green')
+            .attr('stroke','white')
             .attr('d','M0,0l440,-60v100h-440v-40')
             .on('click', function(d){
                 const x = d3.mouse(this)[0] - 1.5;
@@ -65,12 +72,12 @@ class EvalGauge extends Component {
                 const score = x/4.38;
 
                 self.setState({
-                    ...self.state,
-                    price_score: score,
+                    entry: self.props.entry,
+                    score: score,
                     yUP: yUP,
-                    x: x,
+                    x: x
                 })
-                self.props.getScore(score);
+                self.props.getScore(self.state.entry, score);
             })
         }
 
@@ -89,13 +96,13 @@ class EvalGauge extends Component {
                 console.log(score);
 
                 self.setState({
-                    ...self.state,
-                    price_score: score,
+                    entry: self.props.entry,
+                    score: score,
                     yUP: yUP,
-                    x: x,
+                    x: x
                 })
 
-                self.props.getScore(score);
+                self.props.getScore(self.state.entry, score);
             })
 
     }
@@ -155,12 +162,39 @@ class EvalGauge extends Component {
 
         this.svg.select('.axis')
         .selectAll('text')
-        .data(['PRICY','CHEAP'])
+        .data(getEntry(this.state.entry))
         .text(d => d)
         .attr('fill','white')
         .attr('font-size','20px')
-        .attr('dy','0.8em');
+        .attr('dy','0.8em')
+        .attr('dx','0.5em');
 
+        function getEntry(entry){
+            switch(entry){
+                case 'price':
+                return ['PRICY','CHEAP']
+                break;
+                case 'cozy':
+                return ['UNCOMFORT','COZY']
+                break;
+                case 'luxury':
+                return ['DIRTY','CLEAN']
+                break;
+                case 'taste':
+                return ['BAD','GOOD']
+                break;
+                case 'loud':
+                return ['QUIET','LOUD']
+                break;
+                case 'modern':
+                return ['CLASSIC', 'MODERN']
+                break;
+                case 'services':
+                return ['BAD','GOOD']
+                break;
+            }
+
+        }
     }
     
 
