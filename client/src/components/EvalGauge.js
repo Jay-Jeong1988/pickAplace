@@ -55,7 +55,7 @@ class EvalGauge extends Component {
 
         this.svg = d3.select(this.refs.gauge_container)
             .attr('width','565')
-            .attr('height','180')
+            .attr('height','160')
         .append('g')
 
 
@@ -105,6 +105,7 @@ class EvalGauge extends Component {
 
                 self.getValuesForGauge(x, yUP, score);
                 self.props.getScore(self.state.entry, score);
+                self.props.setComment(self.state.entry, score);
             })
         }
     
@@ -205,6 +206,7 @@ class EvalGauge extends Component {
 
                 self.getValuesForGauge(x, yUP, score);
                 self.props.getScore(self.state.entry, score);
+                self.props.setComment(self.state.entry, score);
             })
 
     }
