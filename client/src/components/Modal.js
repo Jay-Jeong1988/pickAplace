@@ -72,7 +72,7 @@ class Modal extends Component {
                 services_score: score,
             })
             break;
-
+            default:
         }
     }
 
@@ -170,6 +170,7 @@ class Modal extends Component {
                     services_comment: Lv
                 })
             break;
+            default:
         }
         
        
@@ -204,10 +205,9 @@ class Modal extends Component {
                         <h3>{this.state.price_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment} entry="price" />
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 2:
             return (
                 <div className="modal-body">
@@ -217,11 +217,10 @@ class Modal extends Component {
                         <h3>{this.state.cozy_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment}entry="cozy"/>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 3:
             return (
                 <div className="modal-body">
@@ -231,11 +230,10 @@ class Modal extends Component {
                         <h3>{this.state.luxury_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment}entry="luxury"/>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 4:
             return (
                 <div className="modal-body">
@@ -245,11 +243,10 @@ class Modal extends Component {
                         <h3>{this.state.taste_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment}entry="taste"/>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 5:
             return (
                 <div className="modal-body">
@@ -259,11 +256,10 @@ class Modal extends Component {
                         <h3>{this.state.loud_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment}entry="loud"/>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 6:
             return (
                 <div className="modal-body">
@@ -273,11 +269,10 @@ class Modal extends Component {
                         <h3>{this.state.modern_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment}entry="modern"/>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 7:
             return (
                 <div className="modal-body">
@@ -287,11 +282,10 @@ class Modal extends Component {
                         <h3>{this.state.services_comment.toUpperCase()}</h3>
                     </div>
                     <EvalGauge getScore={this.setScore} setComment={this.setComment}entry="services"/>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <button className="btn btn-info nextPage" onClick={this.getNextGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow next"/>Next</button>
                 </div>
             )
-            break;
             case 8:
             return (
                 <div className="modal-body">
@@ -300,13 +294,13 @@ class Modal extends Component {
                         <button style={{fontSize: '80px', borderColor:'white'}} className="btn btn-success" onClick={this.onRecurrenceButton}>Yes</button>
                         <button style={{fontSize: '80px', borderColor:'white'}} className="btn btn-danger" onClick={this.onRecurrenceButton}>No&nbsp;</button>
                     </div>
-                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
-                    <img src="/assets/images/click_submit_hover.png" id="hoverImg" />
-                    <img src="/assets/images/click_submit.png" id="clickSubmitPng"/>
+                    <button className="btn btn-info prevPage" onClick={this.getPrevGauge}><img alt="/" src="/assets/images/navarrow.png" className="arrow prev"/>Prev</button>
+                    <img alt="/" src="/assets/images/click_submit_hover.png" id="hoverImg" />
+                    <img alt="/" src="/assets/images/click_submit.png" id="clickSubmitPng"/>
                     <button className="btn btn-lg btn-success submit" onClick={this.evaluate} onMouseEnter={this.animateImg} onMouseLeave={this.stopAnimateImg}>Submit!!</button>
                 </div>
             )
-            break;
+            default:
         }
     }
     animateImg = (e) => {
@@ -348,7 +342,7 @@ class Modal extends Component {
                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#eval_modal">
                     Rate this restaurant!
                 </button>
-                <div id="eval_modal" className="modal" tabindex="-1" role="dialog">
+                <div id="eval_modal" className="modal" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document" style={{marginTop: '200px', maxWidth: '600px'}}>
                         <div className="modal-content bg-primary" style={{height: '365px', opacity: '0.95',borderColor: 'white'}}>
                             { this.renderSwitch(this.state.page) }

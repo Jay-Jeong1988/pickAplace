@@ -3,7 +3,6 @@ import { Restaurant } from '../../lib/requests';
 import Chosen from '../Chosen';
 import AddressAutoComplete from '../AddressAutoComplete';
 import RenderRestaurantDetail from '../RenderRestaurantDetail';
-import $ from 'jquery';
 
 class CreateRestaurantPage extends Component {
 

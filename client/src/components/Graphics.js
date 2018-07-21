@@ -144,7 +144,7 @@ class Graphics extends Component {
         
         this.x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.2).paddingOuter(0.2);
         this.x1 = d3.scaleBand().paddingInner(0.05);
-        this.y = d3.scaleLinear().range([parseInt(height), 0]);
+        this.y = d3.scaleLinear().range([parseInt(height, 10), 0]);
         this.z = d3.scaleOrdinal()
         .range([ "#0E89A4", "#DDFE8E", "#E00351", "#0552BC", "#8F2B6A", "#D9B021", "#EC5192", "#04DD50" ]);
         this.zz = d3.scaleOrdinal()
@@ -229,7 +229,7 @@ class Graphics extends Component {
 
     renderBars() {
   
-        const media = d3.select('svg')
+        d3.select('svg')
         .append('defs')
         .append('style')
             .attr('type','text/css')
@@ -263,7 +263,7 @@ class Graphics extends Component {
 
 
 //////////////////////////////////////////////////////////////////
-        const lg = d3.select('svg')
+        d3.select('svg')
         .append('defs')
         .selectAll('linearGradient')
             .data(['red','orange','yellow','seagreen', 'limegreen', 'lightgreen', 'springgreen'])
@@ -498,6 +498,8 @@ class Graphics extends Component {
                     else if(d.value > 20) Lv = "is peaceful";
                     else if(d.value > 0) Lv = "is silent";
                     break; 
+                
+                default:
 
             }
             return `${name}-${d.key}:${d.value}%-This place -'${Lv}'`;
@@ -539,7 +541,7 @@ class Graphics extends Component {
             const words = text.split('-');
             el.text('');
             for(let i=0; i < words.length; i++){
-                const tspan = el.append('tspan').text(words[i]).attr('fill','white');
+                el.append('tspan').text(words[i]).attr('fill','white');
             }
         }
 

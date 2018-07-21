@@ -92,7 +92,7 @@ class EvalGauge extends Component {
     renderOuterGauge = () => {
         const self = this;
 
-        const outerGauge = this.svg.append('path')
+        this.svg.append('path')
             .attr('class','outerGauge')
             .attr('transform','translate(60, 65)')
             .attr('stroke-width','2px')
@@ -188,12 +188,13 @@ class EvalGauge extends Component {
                 }
             })
             break;
+            default:
         }
     }
     renderInnerGauge = () => {
         const self = this;
 
-        const innerGauge = this.svg.append('path')
+        this.svg.append('path')
             .attr('class','innerGauge')
             .attr('transform','translate(60,65)')
             .attr('stroke','transparent')
@@ -213,7 +214,7 @@ class EvalGauge extends Component {
 
     controlGauge = () => {
 
-        const lg = d3.select('svg')
+        d3.select('svg')
         .append('defs')
         .append('linearGradient')
             .attr('id', 'lg')
@@ -276,25 +277,19 @@ class EvalGauge extends Component {
             switch(entry){
                 case 'price':
                 return ['PRICY','CHEAP']
-                break;
                 case 'cozy':
                 return ['UNCOMFORT','COZY']
-                break;
                 case 'luxury':
                 return ['DIRTY','CLEAN']
-                break;
                 case 'taste':
                 return ['BAD','GOOD']
-                break;
                 case 'loud':
                 return ['QUIET','LOUD']
-                break;
                 case 'modern':
                 return ['CLASSIC', 'MODERN']
-                break;
                 case 'services':
                 return ['BAD','GOOD']
-                break;
+                default:
             }
 
         }

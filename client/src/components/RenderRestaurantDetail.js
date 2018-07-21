@@ -49,8 +49,6 @@ class RenderRestaurantDetail extends Component {
         
     getOpenOrCloseTime( periods, OoC ) {
         const now = new Date();
-        const today = now.getDay();
-        const tomorrow = (today === 6) ? 0 : (today + 1);
         let OoC_at = [];
         let hours = 0;
         let minutes = 0;
@@ -96,7 +94,7 @@ class RenderRestaurantDetail extends Component {
             slidesToShow: 1,
             slidesToScroll: 1
         };
-        const { photos, geometry, opening_hours = '', google_rating = '0' } = this.props;
+        const { photos, opening_hours = '', google_rating = '0' } = this.props;
 
         if( !photos ) return null;
         return (

@@ -41,7 +41,6 @@ class AddressAutoComplete extends React.Component {
   handlePlaceSelect(){
     let addressObject = this.autoComplete.getPlace();
     let address = addressObject.address_components;
-    let phone_number = addressObject.formatted_phone_number;
     let website_url = addressObject.website || '';
 
     const sendingDataToParent = { 
