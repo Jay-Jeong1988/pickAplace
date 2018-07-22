@@ -9,6 +9,7 @@ import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
 import Navbar from './components/Navbar';
 import jwtDecode from 'jwt-decode';
 import HomePage from './components/pages/HomePage';
+import { User } from './lib/requests';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
@@ -60,12 +61,28 @@ class App extends Component {
     }
   }
 
+  guestSignIn = () => {
+    const login = {
+      email: 'admin@admin.com',
+      password: 'admin'
+    }
+    User.signIn(login).then( res => {
+      if(!res.errors) {
+          localStorage.setItem('jwt', res.jwt);
+          this.saveUser();
+      }else{
+          this.setState({
+              errors: res.errors
+          })
+      }
+    })
+  }
 
   render() {
     return (
       <Router>
         <div className="App">
-        <Navbar user={this.state.user} signOut={this.signOut}/>
+        <Navbar user={this.state.user} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
           <Route path="/" exact component={HomePage}/>
           <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
     <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>

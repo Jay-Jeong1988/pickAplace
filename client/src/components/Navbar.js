@@ -18,12 +18,13 @@ function Navbar(props) {
                 :
                 [   
                     <NavLink key={1} exact to="/" ><img alt="/" id="home_icon" src="/assets/images/home_icon.png"/></NavLink>,
-                    <NavLink key={4} exact to="/restaurants" >Look Up Restaurants</NavLink>,
                     <NavLink key={5} exact to="/sign_in" >Sign In</NavLink>,
                     <NavLink key={6} exact to="/sign_up" >Sign Up</NavLink>,
+                    <button href="#" key={4} onClick={props.guestSignIn} >Guest Sign In</button>
                 ]
             
         }
+        
         </nav>
     )
 }

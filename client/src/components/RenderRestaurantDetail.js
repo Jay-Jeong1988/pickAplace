@@ -67,19 +67,20 @@ class RenderRestaurantDetail extends Component {
             for( let i of periods ){
                 if( i[`${OoC}`].nextDate === closestDate ) OoC_at = [ i[`${OoC}`].hours, i[`${OoC}`].minutes ];
             }
-            
-            if( OoC_at[0].toString() && OoC_at[1].toString() ) {
-                hours = OoC_at[0];
-                minutes = OoC_at[1];
-            }
-            if( minutes === 0 ) minutes = '00';
+            if( OoC_at[0] && OoC_at[1]){
+                if( OoC_at[0].toString() && OoC_at[1].toString() ) {
+                    hours = OoC_at[0];
+                    minutes = OoC_at[1];
+                }
+                if( minutes === 0 ) minutes = '00';
 
-            if( hours >= 12 && hours < 24 ){
-                if( hours > 12 ) hours -= 12
+                if( hours >= 12 && hours < 24 ){
+                    if( hours > 12 ) hours -= 12
 
-                return `${hours}:${minutes} p.m.`;
-            }else {
-                return `${hours}:${minutes} a.m.`;
+                    return `${hours}:${minutes} p.m.`;
+                }else {
+                    return `${hours}:${minutes} a.m.`;
+                }
             }
         }
     }

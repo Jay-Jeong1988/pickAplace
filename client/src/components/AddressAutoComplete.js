@@ -44,6 +44,7 @@ class AddressAutoComplete extends React.Component {
     let website_url = addressObject.website || '';
 
     const sendingDataToParent = { 
+      name: addressObject.name,
       photos: addressObject.photos,
       geometry: addressObject.geometry,
       opening_hours: addressObject.opening_hours,
