@@ -48,6 +48,7 @@ class SearchRestaurantsPage extends Component {
 
         return (
             <main className="SearchRestaurantsPage" style={{textAlign: 'center'}}>
+            <h6 style={{marginTop: '280px'}}>Can't find restaurant you know? You can add new restaurants <a href="/add_restaurant">here!</a></h6>
                 <form className="evalRestaurant" onSubmit={this.redirectToEvalPage}>
                     <Chosen w="60%" placeholder="Search for restaurant.." className="Chosen-select" onChange={ value => console.log(value) }>
                         <option></option>
