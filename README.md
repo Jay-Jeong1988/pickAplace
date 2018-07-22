@@ -7,11 +7,11 @@ Note:
 - Mobile compatibility has not been implemented yet.
 
 # Tech Stack
-● Node.js
-● Express.js
-● React.js
-● PostgreSQL
-● Knex
-● D3.js
-● Google Places Api
+* Node.js
+* Express.js
+* React.js
+* PostgreSQL
+* Knex
+* D3.js
+* Google Places Api
 
