@@ -23,7 +23,7 @@ class HomePage extends Component {
 
         return (
             <main className="HomePage">
-                <video autoPlay loop id="myVideo" ref="video">
+                <video autoPlay muted loop id="myVideo" ref="video">
                     <source src="/assets/videos/background_video.mp4" type="video/mp4"/>
                 </video>
 
