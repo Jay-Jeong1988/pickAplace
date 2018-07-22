@@ -103,7 +103,6 @@ body {
 
 .CreateRestaurantPage .chosen-container a {
   padding-left: 0;
-  border: solid lightgreen 2px;
 }
 
 .restaurant_form > .submit {
@@ -162,7 +161,7 @@ body {
   .CreateRestaurantPage {
     
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-direction: row-reverse;
   }
   
