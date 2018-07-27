@@ -616,7 +616,7 @@ class Graphics extends Component {
         this.svg.select('.x.axis')
         .selectAll('.tick')
         .selectAll('text')
-            .style("font-size", '25px')
+            .style("font-size", '15px')
             .style('font-family', 'tahoma')
             .style('font-weight', 200)
             .attr('stroke','#396392')
