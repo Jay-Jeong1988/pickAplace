@@ -707,7 +707,7 @@ class Graphics extends Component {
             .text( d => { 
                 if(d === 'recurrence') return 'Revisit';
                 else return `${d.charAt(0).toUpperCase() + d.slice(1)}`; 
-            });
+            })
         
         
     }
@@ -927,12 +927,15 @@ class Graphics extends Component {
                 select.select("#mydropdown")
                     .text(`${d3.event.target.innerHTML}`);
             });
-        }
+    }
+
+    
 
     render() {
 
         return (
             <main >
+                <h6 style={{position: 'absolute', left:'1050px', top: '70px'}}>Check the box(es) to look up restaurants</h6>
                 <div className="svg-background"></div>
                 <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
