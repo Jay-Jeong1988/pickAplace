@@ -76,7 +76,7 @@ class CreateRestaurantPage extends Component {
         return (
             
             <main className="CreateRestaurantPage">
-                <div className="backgroundImage"></div>
+                {/* <div className="backgroundImage"></div> */}
 
                 <RenderRestaurantDetail photos={photos} geometry={geometry} google_rating={google_rating} opening_hours={opening_hours} />
 

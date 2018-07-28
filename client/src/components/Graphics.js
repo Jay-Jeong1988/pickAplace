@@ -219,7 +219,7 @@ class Graphics extends Component {
             .data(['M10,0h1100','M10,175h1100','M10,349h1100', 'M10,580h1100'])
             .enter()
         .append('g')
-            .attr('stroke','white')
+            .attr('stroke','rgba(20,20,20,0.5)')
             .attr('stroke-width','0.7')
         
         measureLines.append('path')
@@ -541,7 +541,7 @@ class Graphics extends Component {
             const words = text.split('-');
             el.text('');
             for(let i=0; i < words.length; i++){
-                el.append('tspan').text(words[i]).attr('fill','white');
+                el.append('tspan').text(words[i]).attr('fill','rgb(40,40,40)');
             }
         }
 
@@ -630,7 +630,7 @@ class Graphics extends Component {
             const words = d.split(' ');
             el.text('');
             for(let i = 0; i < words.length; i++){
-                let tspan = el.append('tspan').text(words[i]).attr('fill','white');
+                let tspan = el.append('tspan').text(words[i]).attr('fill','rgb(30,30,30)');
                 if( i > 0 ){
                     tspan.attr('x',0).attr('dy',20);
                 }
@@ -640,7 +640,7 @@ class Graphics extends Component {
 
         this.svg.select('.x.axis')
         .selectAll('line')
-            .attr('stroke','white')
+            .attr('stroke','rgb(20,20,20)')
             .attr('stroke-width','2px')
             .attr('y2','9')  //lengthen ticks
 
@@ -657,7 +657,7 @@ class Graphics extends Component {
             .data(yColor)
             .attr('stroke', c => c)
             .attr('stroke-width','2px')
-            .style('fill', 'white')
+            .style('fill', 'rgba(30,30,30,0.5)')
             .style('font-size', '30px')
             .style('font-weight', 'bold')
 
@@ -668,7 +668,7 @@ class Graphics extends Component {
 
         this.svg.select('.y.axis')
         .selectAll('line')
-            .attr('stroke','white')
+            .attr('stroke','rgb(20,20,20)')
             .attr('stroke-width','2px')
         
         
@@ -702,7 +702,7 @@ class Graphics extends Component {
             .attr("x", 30)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
-            .attr('fill','white')
+            .attr('fill','rgb(30,30,30)')
             .style('font-size','30px')
             .text( d => { 
                 if(d === 'recurrence') return 'Revisit';
@@ -820,7 +820,7 @@ class Graphics extends Component {
             .attr("y",38 )
             .style('font-size','28px')
             .attr("id","mydropdown")
-            .attr('fill','white')
+            .attr('fill','rgb(30,30,30)')
             .text('Select mood')
   
         var options = select.selectAll(".myBars")
@@ -912,7 +912,7 @@ class Graphics extends Component {
 
         options.append("text")
             .style('font-size','28px')
-            .style('fill','white')
+            .style('fill','rgb(30,30,30)')
             .attr("x", -171)
 	        .attr("y", function(d,i){ 
                 return 37 + i*40;
@@ -936,7 +936,7 @@ class Graphics extends Component {
         return (
             <main >
                 <h6 style={{position: 'absolute', left:'1050px', top: '70px'}}>Check the box(es) to look up restaurants</h6>
-                <div className="svg-background"></div>
+                {/* <div className="svg-background"></div> */}
                 <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
             </main>
