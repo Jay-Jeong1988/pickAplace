@@ -629,7 +629,7 @@ class Graphics extends Component {
             .attr('stroke','#396392')
             .attr('stroke-width', '0.2')
             .attr('fill', '#635252')
-            .attr("dy", "3.5em")
+            .attr("dy", "4.5em")
 
 
         function insertLineBreaks(d) {
