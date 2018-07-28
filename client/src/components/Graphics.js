@@ -329,7 +329,7 @@ class Graphics extends Component {
                 }else {
                     newName = d.name;
                 }
-                    return `bar-container-${newName}`;
+                    return `bar-container-${replaceSpecialChars(newName)}`;
             })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
@@ -346,7 +346,7 @@ class Graphics extends Component {
                 // d3.event.target.style.fill = `url(#glow-${d.key})`;
                 d3.event.target.style.fill = this.zz(d.key)
 
-                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                d3.select(`#tooltip-container-${replaceSpecialChars(restaurant_name)}_${d.key}`)
                     .attr('visibility','visible')
             })
             .on('mouseout', d => {
@@ -355,7 +355,7 @@ class Graphics extends Component {
 
                 d3.event.target.style.fill = this.z(d.key)
             
-                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                d3.select(`#tooltip-container-${replaceSpecialChars(restaurant_name)}_${d.key}`)
                     .attr('visibility','hidden')
             })
             .attr('class','animate-bars-stroke')
@@ -381,7 +381,7 @@ class Graphics extends Component {
                 }else {
                     newName = d.name;
                 }
-                    return `tooltip-container-${newName}`;
+                    return `tooltip-container-${replaceSpecialChars(newName)}`;
             })
             .attr('transform', d => { 
                 return `translate(${this.x0(d.name)}, 0)`;
@@ -399,6 +399,13 @@ class Graphics extends Component {
             })
             .attr('transform', d => 'translate(' + this.x1(d.key) +',' + (this.y(d.value) + -100) + ')')
 
+        function replaceSpecialChars( str ){
+            let temp = '';
+                for(let char of str){
+                    temp += char.replace(/[^\w\s\-]/gi, '_');
+            }
+            return temp;
+        }
 
         tooltip.append('path')
             .attr('class','animate-tips-stroke')
