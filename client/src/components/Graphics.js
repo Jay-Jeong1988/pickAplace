@@ -219,7 +219,7 @@ class Graphics extends Component {
             .data(['M10,0h1100','M10,175h1100','M10,349h1100', 'M10,580h1100'])
             .enter()
         .append('g')
-            .attr('stroke','white')
+            .attr('stroke','rgba(20,20,20,0.5)')
             .attr('stroke-width','0.7')
         
         measureLines.append('path')
@@ -329,7 +329,7 @@ class Graphics extends Component {
                 }else {
                     newName = d.name;
                 }
-                    return `bar-container-${newName}`;
+                    return `bar-container-${replaceSpecialChars(newName)}`;
             })
             .attr('transform', d => { 
                 return 'translate(' + this.x0(d.name) + ', 0)';
@@ -346,7 +346,7 @@ class Graphics extends Component {
                 // d3.event.target.style.fill = `url(#glow-${d.key})`;
                 d3.event.target.style.fill = this.zz(d.key)
 
-                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                d3.select(`#tooltip-container-${replaceSpecialChars(restaurant_name)}_${d.key}`)
                     .attr('visibility','visible')
             })
             .on('mouseout', d => {
@@ -355,7 +355,7 @@ class Graphics extends Component {
 
                 d3.event.target.style.fill = this.z(d.key)
             
-                d3.select(`#tooltip-container-${restaurant_name}_${d.key}`)
+                d3.select(`#tooltip-container-${replaceSpecialChars(restaurant_name)}_${d.key}`)
                     .attr('visibility','hidden')
             })
             .attr('class','animate-bars-stroke')
@@ -381,7 +381,7 @@ class Graphics extends Component {
                 }else {
                     newName = d.name;
                 }
-                    return `tooltip-container-${newName}`;
+                    return `tooltip-container-${replaceSpecialChars(newName)}`;
             })
             .attr('transform', d => { 
                 return `translate(${this.x0(d.name)}, 0)`;
@@ -399,6 +399,13 @@ class Graphics extends Component {
             })
             .attr('transform', d => 'translate(' + this.x1(d.key) +',' + (this.y(d.value) + -100) + ')')
 
+        function replaceSpecialChars( str ){
+            let temp = '';
+                for(let char of str){
+                    temp += char.replace(/[^\w\s\-]/gi, '_');
+            }
+            return temp;
+        }
 
         tooltip.append('path')
             .attr('class','animate-tips-stroke')
@@ -541,7 +548,7 @@ class Graphics extends Component {
             const words = text.split('-');
             el.text('');
             for(let i=0; i < words.length; i++){
-                el.append('tspan').text(words[i]).attr('fill','white');
+                el.append('tspan').text(words[i]).attr('fill','rgb(40,40,40)');
             }
         }
 
@@ -616,7 +623,7 @@ class Graphics extends Component {
         this.svg.select('.x.axis')
         .selectAll('.tick')
         .selectAll('text')
-            .style("font-size", '25px')
+            .style("font-size", '15px')
             .style('font-family', 'tahoma')
             .style('font-weight', 200)
             .attr('stroke','#396392')
@@ -630,7 +637,7 @@ class Graphics extends Component {
             const words = d.split(' ');
             el.text('');
             for(let i = 0; i < words.length; i++){
-                let tspan = el.append('tspan').text(words[i]).attr('fill','white');
+                let tspan = el.append('tspan').text(words[i]).attr('fill','rgb(30,30,30)');
                 if( i > 0 ){
                     tspan.attr('x',0).attr('dy',20);
                 }
@@ -640,7 +647,7 @@ class Graphics extends Component {
 
         this.svg.select('.x.axis')
         .selectAll('line')
-            .attr('stroke','white')
+            .attr('stroke','rgb(20,20,20)')
             .attr('stroke-width','2px')
             .attr('y2','9')  //lengthen ticks
 
@@ -657,7 +664,7 @@ class Graphics extends Component {
             .data(yColor)
             .attr('stroke', c => c)
             .attr('stroke-width','2px')
-            .style('fill', 'white')
+            .style('fill', 'rgba(30,30,30,0.5)')
             .style('font-size', '30px')
             .style('font-weight', 'bold')
 
@@ -668,7 +675,7 @@ class Graphics extends Component {
 
         this.svg.select('.y.axis')
         .selectAll('line')
-            .attr('stroke','white')
+            .attr('stroke','rgb(20,20,20)')
             .attr('stroke-width','2px')
         
         
@@ -702,12 +709,12 @@ class Graphics extends Component {
             .attr("x", 30)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
-            .attr('fill','white')
+            .attr('fill','rgb(30,30,30)')
             .style('font-size','30px')
             .text( d => { 
                 if(d === 'recurrence') return 'Revisit';
                 else return `${d.charAt(0).toUpperCase() + d.slice(1)}`; 
-            });
+            })
         
         
     }
@@ -820,7 +827,7 @@ class Graphics extends Component {
             .attr("y",38 )
             .style('font-size','28px')
             .attr("id","mydropdown")
-            .attr('fill','white')
+            .attr('fill','rgb(30,30,30)')
             .text('Select mood')
   
         var options = select.selectAll(".myBars")
@@ -912,7 +919,7 @@ class Graphics extends Component {
 
         options.append("text")
             .style('font-size','28px')
-            .style('fill','white')
+            .style('fill','rgb(30,30,30)')
             .attr("x", -171)
 	        .attr("y", function(d,i){ 
                 return 37 + i*40;
@@ -927,13 +934,16 @@ class Graphics extends Component {
                 select.select("#mydropdown")
                     .text(`${d3.event.target.innerHTML}`);
             });
-        }
+    }
+
+    
 
     render() {
 
         return (
             <main >
-                <div className="svg-background"></div>
+                <h6 style={{position: 'absolute', left:'1050px', top: '70px'}}>Check the box(es) to look up restaurants</h6>
+                {/* <div className="svg-background"></div> */}
                 <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
             </main>
