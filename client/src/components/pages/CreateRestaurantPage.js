@@ -105,7 +105,7 @@ class CreateRestaurantPage extends Component {
                     </div>
                     <div className="form-group">
                         <label className="form-control" htmlFor="imgUrl"><h3>Restaurant Logo Url(Optional)</h3>
-                            <input className="form-control" type='text' name="imgUrl"/>
+                            <input className="form-control" type='text' name="imgUrl" style={{border: 'solid 0.5px rgb(120,120,120)'}}/>
                         </label>
                     </div>
 

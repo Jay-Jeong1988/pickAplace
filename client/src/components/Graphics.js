@@ -369,7 +369,7 @@ class Graphics extends Component {
             .attr('rx', this.x1.bandwidth()* Math.pow(0.87, 5))
             .attr('ry',this.x1.bandwidth()* Math.pow(0.87, 5))
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke', 'white')
+            .attr('stroke', 'rgba(60,60,60,0.5)')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
 
 
@@ -629,7 +629,7 @@ class Graphics extends Component {
             .attr('stroke','#396392')
             .attr('stroke-width', '0.2')
             .attr('fill', '#635252')
-            .attr("dy", "3.5em")
+            .attr("dy", "4.5em")
 
 
         function insertLineBreaks(d) {
@@ -664,7 +664,7 @@ class Graphics extends Component {
             .data(yColor)
             .attr('stroke', c => c)
             .attr('stroke-width','2px')
-            .style('fill', 'rgba(30,30,30,0.5)')
+            .style('fill', 'rgba(30,30,30,0.2)')
             .style('font-size', '30px')
             .style('font-weight', 'bold')
 
@@ -846,7 +846,7 @@ class Graphics extends Component {
             })
             .attr("width", l + 141)
             .attr("height", 40)
-            .attr('fill', '#847FC3')
+            .attr('fill', '#F7C7FE')
             
             this.previousElement = null;
             this.previousElementId = '';
@@ -942,7 +942,7 @@ class Graphics extends Component {
 
         return (
             <main >
-                <h6 style={{position: 'absolute', left:'1050px', top: '70px'}}>Check the box(es) to look up restaurants</h6>
+                <h5 style={{position: 'absolute', left:'350px', top: '70px', color: 'rgb(60,60,60)'}}>Check the box(es) on the right to look up restaurants</h5>
                 {/* <div className="svg-background"></div> */}
                 <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
