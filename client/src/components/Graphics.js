@@ -369,7 +369,7 @@ class Graphics extends Component {
             .attr('rx', this.x1.bandwidth()* Math.pow(0.87, 5))
             .attr('ry',this.x1.bandwidth()* Math.pow(0.87, 5))
             .attr('fill', d => this.z(d.key) )
-            .attr('stroke', 'white')
+            .attr('stroke', 'rgba(60,60,60,0.5)')
             .attr('stroke-width', d => this.x1.bandwidth()/70 )
 
 
