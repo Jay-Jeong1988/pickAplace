@@ -98,7 +98,7 @@ body {
 .CreateRestaurantPage label {
   background-color: transparent;
   border: none;
-  color: white;
+  color: rgb(80,80,80);
 }
 
 .CreateRestaurantPage .chosen-container a {
@@ -375,4 +375,8 @@ body {
   left: 638px;
   filter: brightness(500%);
   visibility: hidden;
+}
+
+.AddressAutoComplete .form-control {
+  border: solid 0.5px rgb(120,120,120);
 }

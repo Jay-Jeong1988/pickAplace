@@ -664,7 +664,7 @@ class Graphics extends Component {
             .data(yColor)
             .attr('stroke', c => c)
             .attr('stroke-width','2px')
-            .style('fill', 'rgba(30,30,30,0.5)')
+            .style('fill', 'rgba(30,30,30,0.2)')
             .style('font-size', '30px')
             .style('font-weight', 'bold')
 
@@ -846,7 +846,7 @@ class Graphics extends Component {
             })
             .attr("width", l + 141)
             .attr("height", 40)
-            .attr('fill', '#847FC3')
+            .attr('fill', '#F7C7FE')
             
             this.previousElement = null;
             this.previousElementId = '';
@@ -942,7 +942,7 @@ class Graphics extends Component {
 
         return (
             <main >
-                <h6 style={{position: 'absolute', left:'1050px', top: '70px'}}>Check the box(es) to look up restaurants</h6>
+                <h5 style={{position: 'absolute', left:'350px', top: '70px', color: 'rgb(60,60,60)'}}>Check the box(es) on the right to look up restaurants</h5>
                 {/* <div className="svg-background"></div> */}
                 <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
 
