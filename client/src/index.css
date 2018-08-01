@@ -274,8 +274,10 @@ body {
   top:30px;
   right: 0;
   bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
+  max-height: 100%;
+  filter: brightness(130%);
+  /* min-width: 100%; 
+  min-height: 100%; */
 }
 
 /* Add some content at the bottom of the video/page */
@@ -286,8 +288,35 @@ body {
   width: 20%;
   height: 100%;
   padding: 20px;
+  z-index: -4;
 }
 
+.HomeModal {
+  position: absolute;
+  top: 350px;
+  left: 700px;
+}
+
+.HomeModal .modal-content {
+  border: 0;
+  border-radius: 0;
+}
+.HomeModal .modal-body {
+  display: flex;
+  padding: 0;
+  border-radius: 0;
+}
+
+.HomeModal .left-container {
+  width: 300px;
+  height: 400px;
+  /* background-image: url(https://us.123rf.com/450wm/timolina/timolina1504/timolina150400378/39128783-big-juicy-hamburger-with-vegetables-and-beef-on-a-wooden-background-in-rustic-style.jpg?ver=6); */
+}
+.HomeModal .right-container {
+  width: 300px;
+  height: 400px;
+  background-color: white;
+}
 /* Style the button used to pause/play the video */
 #myBtn {
   width: 200px;

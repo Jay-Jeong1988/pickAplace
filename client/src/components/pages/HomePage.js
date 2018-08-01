@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HomeModal from '../HomeModal';
 
 class HomePage extends Component {
 
@@ -23,16 +24,16 @@ class HomePage extends Component {
 
         return (
             <main className="HomePage">
-                <video autoPlay muted loop id="myVideo" ref="video">
-                    <source src="/assets/videos/background_video.mp4" type="video/mp4"/>
-                </video>
-
+                {/* <video autoPlay muted loop id="myVideo" ref="video">
+                    <source src="/assets/videos/Video_Footage_Of_City.mp4" type="video/mp4"/>
+                </video> */}
                 <div className="content">
                     <h1>Idealio</h1>
                     <p>Idealio lets you look for the best restaurants based on your own search options</p>
-
+                    
                     <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button>
                 </div>
+                <HomeModal />
             </main>
         )
     }
