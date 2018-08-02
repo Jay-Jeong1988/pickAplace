@@ -6,18 +6,39 @@ class HomeModal extends Component {
     constructor(props){
         super(props);
         this.state = {
-            types: [ 'hamburgers','french','chinese','korean','franchise','japanese','vietnamese','spanish','brazilian','mexican','fine-dining','seafood','barbeque','fast-food','pizza','greek','ramen','buffet','food-court','steak-house','all-you-can-eat','food-truck','mongolian', 'breakfast', 'italian','sushi'],
-            selected_food_type: 'hamburgers',
-            img_url: 'https://us.123rf.com/450wm/timolina/timolina1504/timolina150400378/39128783-big-juicy-hamburger-with-vegetables-and-beef-on-a-wooden-background-in-rustic-style.jpg?ver=6'
+            types: [],
+            selected_food_type: null,
+            img_url: null,
+            clickedIcon: null,
+            isHovered: false
         }
-
-        this.renderFoodImage = this.renderFoodImage.bind(this);
     }
 
     componentDidMount(){
+        this.setState({
+            types: [ 'hamburgers','french','chinese','korean','franchise','japanese','vietnamese','spanish','brazilian','mexican','fine-dining','seafood','barbecue','fast-food','pizza','greek','ramen','buffet','food-court','steak-house','all-you-can-eat','food-truck','mongolian', 'breakfast', 'italian','sushi'],
+            selected_food_type: '',
+            img_url: '/assets/images/food_types/container_images/default-img.jpg',
+            clickedIcon: null,
+            isHovered: false,
+            hoveredId: 'hamburgers'
+        })
         this.renderFoodImage();
     }
-    renderFoodImage() {
+
+    componentDidUpdate(){
+        this.removeFoodImage();
+        this.renderFoodImage();
+        // this.ifHovered();
+    }
+
+    removeFoodImage = () => {
+        d3.select('.left-container')
+        .select('defs')
+        .remove();
+    }
+
+    renderFoodImage = () => {
 
         const { img_url } = this.state
         
@@ -35,6 +56,62 @@ class HomeModal extends Component {
             .attr('width','300')
             .attr('height','400')
             .attr('preserveAspectRatio','xMinYMin slice')
+    }
+
+    handleClick = (e) => {
+        const currentIcon = this.state.clickedIcon;
+        const clickedIcon = e.currentTarget.children[0];
+
+        this.setState({
+            ...this.state,
+            selected_food_type: clickedIcon.id,
+            img_url: `/assets/images/food_types/container_images/${clickedIcon.id}-img.jpg`,
+            clickedIcon: clickedIcon
+        })
+
+        if( currentIcon && clickedIcon !== currentIcon ){
+            this.animateIcon(currentIcon, clickedIcon);
+        }else if(!currentIcon) {
+            clickedIcon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${clickedIcon.id}_cl.png)`;
+            clickedIcon.parentNode.parentNode.style.paddingBottom = '1px';
+            clickedIcon.style.width = '60px';
+            clickedIcon.style.height = '60px';
+        }
+    }
+
+    animateIcon = (currentIcon, clickedIcon) => {
+            currentIcon.style.backgroundImage = `url(/assets/images/food_types/icons/${currentIcon.id}.png)`;
+            currentIcon.parentNode.parentNode.style.paddingBottom = '11px';
+            currentIcon.style.width = '50px';
+            currentIcon.style.height = '50px';
+
+            clickedIcon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${clickedIcon.id}_cl.png)`;
+            clickedIcon.parentNode.parentNode.style.paddingBottom = '1px';
+            clickedIcon.style.width = '60px';
+            clickedIcon.style.height = '60px';
+    }
+
+    ifHovered = () => {
+        const icon = document.getElementById(this.state.hoveredId);
+        if(this.state.isHovered){
+            icon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${icon.id}_cl.png)`;
+            icon.parentNode.parentNode.style.paddingBottom = '1px';
+            icon.style.width = '60px';
+            icon.style.height = '60px';
+        }else{
+            icon.style.backgroundImage = `url(/assets/images/food_types/icons/${icon.id}.png)`;
+            icon.parentNode.parentNode.style.paddingBottom = '11px';
+            icon.style.width = '50px';
+            icon.style.height = '50px';
+        }
+    }
+
+    handleHover = (e) => {
+        this.setState({
+            ...this.state,
+            isHovered: !this.state.isHovered,
+            hoveredId: e.currentTarget.children[0].id
+        })
     }
 
     render() {
@@ -60,14 +137,14 @@ class HomeModal extends Component {
                                         if( i % 2 === 0 ){
                                             return d ? (
                                                 <div key={i} className="rows">
-                                                    <div style={{width: '30%', textAlign: 'center', margin: '0 15px'}}>
-                                                        <div id={d} style={{width: '50px', height: '50px', marginLeft: '20%', backgroundImage: `url(/assets/images/food_types/${d}.png)`, backgroundSize: 'cover'}}></div>
+                                                    <div onClick={this.handleClick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+                                                        <div className="foodicons" id={d} style={{ backgroundImage: `url(/assets/images/food_types/icons/${d}.png)` }}></div>
                                                         <h6 style={{color: 'gray'}}>{d}</h6>
                                                     </div>
                                                     {
                                                         types[i+1] ? (
-                                                            <div style={{width: '30%', textAlign: 'center', margin: '0 15px'}}>
-                                                                <div id={ types[i+1] } style={{width: '50px', height: '50px', marginLeft: '20%', backgroundImage: `url(/assets/images/food_types/${types[i+1]}.png)`, backgroundSize: 'cover'}}></div>
+                                                            <div onClick={this.handleClick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+                                                                <div className="foodicons" id={ types[i+1] } style={{ backgroundImage: `url(/assets/images/food_types/icons/${types[i+1]}.png)` }}></div>
                                                                 <h6 style={{color: 'gray'}}>{types[i+1]}</h6>
                                                             </div>
                                                         )

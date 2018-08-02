@@ -324,6 +324,18 @@ body {
   justify-content: center;
   padding: 11px 0;
 }
+
+.right-container > .rows > div {
+  width: 30%;
+  text-align: center; 
+  margin: 0 15px;
+}
+.foodicons {
+  width: 50px;
+  height: 50px; 
+  margin-left: 20%;
+  background-size: cover; 
+}
 /* Style the button used to pause/play the video */
 #myBtn {
   width: 200px;
