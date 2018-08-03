@@ -322,13 +322,14 @@ body {
 .HomeModal .right-container > .rows {
   display: flex;
   justify-content: center;
-  padding: 11px 0;
+  /* padding: 11px 0; */
 }
 
 .right-container > .rows > div {
   width: 30%;
   text-align: center; 
   margin: 0 15px;
+  height: 106.2px;
 }
 .foodicons {
   width: 50px;

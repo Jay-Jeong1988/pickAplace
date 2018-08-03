@@ -39,7 +39,6 @@ class HomeModal extends Component {
     }
 
     renderFoodImage = () => {
-
         const { img_url } = this.state
         
         d3.select('.left-container')
@@ -79,15 +78,13 @@ class HomeModal extends Component {
 
     handleHover = (e) => {
         const hoveredIcon = e.currentTarget.children[0];
+
         if( !this.isHovered ) {
             this.animateIcon(hoveredIcon);
             this.isHovered = true;
         }else {
             if( hoveredIcon !== this.state.clickedIcon ){
                 this.resetIcon(hoveredIcon);
-                if( this.state.clickedIcon && hoveredIcon.parentNode.parentNode === this.state.clickedIcon.parentNode.parentNode ){
-                    hoveredIcon.parentNode.parentNode.style.paddingBottom = '1px';
-                }
             }
             this.isHovered = false;
         }
@@ -95,14 +92,12 @@ class HomeModal extends Component {
 
     animateIcon = (icon) => {
         icon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${icon.id}_cl.png)`;
-        icon.parentNode.parentNode.style.paddingBottom = '1px';
         icon.style.width = '60px';
         icon.style.height = '60px';
     }
 
     resetIcon = (icon) => {
         icon.style.backgroundImage = `url(/assets/images/food_types/icons/${icon.id}.png)`;
-        icon.parentNode.parentNode.style.paddingBottom = '11px';
         icon.style.width = '50px';
         icon.style.height = '50px';
     }
@@ -115,7 +110,7 @@ class HomeModal extends Component {
                     LET'S START!
                 </button>
                 <div id="home_modal" className="modal" tabIndex="-1" role="dialog">
-                    <div className="modal-dialog" role="document" style={{marginTop: '200px', maxWidth: '600px'}}>
+                    <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '600px'}}>
                         <div className="modal-content" style={{height: '400px', backgroundColor: 'white'}}>
                             <div className="modal-body" style={{backgroundColor: 'white'}}>
                                 <svg className="left-container">
