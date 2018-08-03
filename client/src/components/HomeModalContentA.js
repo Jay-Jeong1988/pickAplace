@@ -6,12 +6,12 @@ function HomeModalContentA(props) {
     return (
         <div className="modal-content" style={{height: '400px', backgroundColor: 'white'}}>
             <div className="modal-body" style={{backgroundColor: 'white'}}>
-                <svg className="left-container">
+                <svg className="left-container" id="svg_food">
                     <g stroke="black" strokeWidth="0.5" fill="url(#food-image)">
                         <path d="M0,0h300l-30,400h-270v-400"></path>
                     </g>
                 </svg>
-                <div className="right-container">
+                <div className="right-container" id="containerA">
 
                 {
                     types.map( (d, i) => {
@@ -36,11 +36,13 @@ function HomeModalContentA(props) {
                             )
                             :
                             ''
+                        }else{
+                            return '';
                         }
                     })
                 }
-                    <div style={{color: 'silver', fontSize: '8px'}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Meat">Meat</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-                    <div style={{color: 'silver', fontSize: '8px'}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Socrates">Socrates</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                    <div style={{color: 'silver', fontSize: '8px'}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Meat">Meat</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" >CC 3.0 BY</a></div>
+                    <div style={{color: 'silver', fontSize: '8px'}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Socrates">Socrates</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" >CC 3.0 BY</a></div>
                 </div>
             </div>
         </div>
