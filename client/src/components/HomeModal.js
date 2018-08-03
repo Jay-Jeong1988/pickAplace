@@ -10,8 +10,10 @@ class HomeModal extends Component {
             selected_food_type: null,
             img_url: null,
             clickedIcon: null,
-            isHovered: false
+            hoveredIcon: null,
         }
+
+        this.isHovered = false;
     }
 
     componentDidMount(){
@@ -20,8 +22,7 @@ class HomeModal extends Component {
             selected_food_type: '',
             img_url: '/assets/images/food_types/container_images/default-img.jpg',
             clickedIcon: null,
-            isHovered: false,
-            hoveredId: 'hamburgers'
+            hoveredIcon: null
         })
         this.renderFoodImage();
     }
@@ -29,7 +30,6 @@ class HomeModal extends Component {
     componentDidUpdate(){
         this.removeFoodImage();
         this.renderFoodImage();
-        // this.ifHovered();
     }
 
     removeFoodImage = () => {
@@ -59,7 +59,7 @@ class HomeModal extends Component {
     }
 
     handleClick = (e) => {
-        const currentIcon = this.state.clickedIcon;
+        const prevIcon = this.state.clickedIcon;
         const clickedIcon = e.currentTarget.children[0];
 
         this.setState({
@@ -69,49 +69,42 @@ class HomeModal extends Component {
             clickedIcon: clickedIcon
         })
 
-        if( currentIcon && clickedIcon !== currentIcon ){
-            this.animateIcon(currentIcon, clickedIcon);
-        }else if(!currentIcon) {
-            clickedIcon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${clickedIcon.id}_cl.png)`;
-            clickedIcon.parentNode.parentNode.style.paddingBottom = '1px';
-            clickedIcon.style.width = '60px';
-            clickedIcon.style.height = '60px';
-        }
-    }
-
-    animateIcon = (currentIcon, clickedIcon) => {
-            currentIcon.style.backgroundImage = `url(/assets/images/food_types/icons/${currentIcon.id}.png)`;
-            currentIcon.parentNode.parentNode.style.paddingBottom = '11px';
-            currentIcon.style.width = '50px';
-            currentIcon.style.height = '50px';
-
-            clickedIcon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${clickedIcon.id}_cl.png)`;
-            clickedIcon.parentNode.parentNode.style.paddingBottom = '1px';
-            clickedIcon.style.width = '60px';
-            clickedIcon.style.height = '60px';
-    }
-
-    ifHovered = () => {
-        const icon = document.getElementById(this.state.hoveredId);
-        if(this.state.isHovered){
-            icon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${icon.id}_cl.png)`;
-            icon.parentNode.parentNode.style.paddingBottom = '1px';
-            icon.style.width = '60px';
-            icon.style.height = '60px';
-        }else{
-            icon.style.backgroundImage = `url(/assets/images/food_types/icons/${icon.id}.png)`;
-            icon.parentNode.parentNode.style.paddingBottom = '11px';
-            icon.style.width = '50px';
-            icon.style.height = '50px';
+        if( prevIcon && clickedIcon !== prevIcon ){
+            this.resetIcon(prevIcon);
+            this.animateIcon(clickedIcon);
+        }else if(!prevIcon) {
+            this.animateIcon(clickedIcon);
         }
     }
 
     handleHover = (e) => {
-        this.setState({
-            ...this.state,
-            isHovered: !this.state.isHovered,
-            hoveredId: e.currentTarget.children[0].id
-        })
+        const hoveredIcon = e.currentTarget.children[0];
+        if( !this.isHovered ) {
+            this.animateIcon(hoveredIcon);
+            this.isHovered = true;
+        }else {
+            if( hoveredIcon !== this.state.clickedIcon ){
+                this.resetIcon(hoveredIcon);
+                if( this.state.clickedIcon && hoveredIcon.parentNode.parentNode === this.state.clickedIcon.parentNode.parentNode ){
+                    hoveredIcon.parentNode.parentNode.style.paddingBottom = '1px';
+                }
+            }
+            this.isHovered = false;
+        }
+    }
+
+    animateIcon = (icon) => {
+        icon.style.backgroundImage = `url(/assets/images/food_types/icons_coloured/${icon.id}_cl.png)`;
+        icon.parentNode.parentNode.style.paddingBottom = '1px';
+        icon.style.width = '60px';
+        icon.style.height = '60px';
+    }
+
+    resetIcon = (icon) => {
+        icon.style.backgroundImage = `url(/assets/images/food_types/icons/${icon.id}.png)`;
+        icon.parentNode.parentNode.style.paddingBottom = '11px';
+        icon.style.width = '50px';
+        icon.style.height = '50px';
     }
 
     render() {
