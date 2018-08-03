@@ -106,7 +106,7 @@ class HomeModal extends Component {
                 ...this.state,
                 selected_food_type: clickedIcon.id,
                 img_url: `/assets/images/food_types/container_images/${clickedIcon.id}-img.jpg`,
-                clickedIcon: clickedIcon,
+                clickedFoodIcon: clickedIcon,
             })
 
             if( prevFoodIcon && clickedIcon !== prevFoodIcon ){
@@ -120,7 +120,7 @@ class HomeModal extends Component {
                 ...this.state,
                 selected_food_type: clickedIcon.id,
                 img_url_mood: `/assets/images/food_types/container_images/${clickedIcon.id}-img.jpg`,
-                clickedIcon: clickedIcon,
+                clickedMoodIcon: clickedIcon,
             })
 
             if( prevMoodIcon && clickedIcon !== prevMoodIcon ){
@@ -139,7 +139,7 @@ class HomeModal extends Component {
             this.animateIcon(hoveredIcon);
             this.isHovered = true;
         }else {
-            if( hoveredIcon !== this.state.clickedIcon ){
+            if( hoveredIcon !== this.state.clickedFoodIcon && hoveredIcon !== this.state.clickedMoodIcon ){
                 this.resetIcon(hoveredIcon);
             }
             this.isHovered = false;
@@ -173,7 +173,7 @@ class HomeModal extends Component {
                     <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '600px'}}>
                         <Slider {...settings} >
                             <HomeModalContentA types={this.state.types} handleClick={this.handleClick} handleHover={this.handleHover} />
-                            <HomeModalContentB moods={this.state.moods} handleClick={this.handlClick} handleHover={this.handleHover} />
+                            <HomeModalContentB moods={this.state.moods} handleClick={this.handleClick} handleHover={this.handleHover} />
                         </Slider>
                     </div>
                 </div>
