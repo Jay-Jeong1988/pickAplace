@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick';
+import HomeModalContentA from './HomeModalContentA';
+import HomeModalContentB from './HomeModalContentB';
 
 class HomeModal extends Component {
 
@@ -11,6 +16,7 @@ class HomeModal extends Component {
             img_url: null,
             clickedIcon: null,
             hoveredIcon: null,
+            moods: []
         }
 
         this.isHovered = false;
@@ -22,7 +28,8 @@ class HomeModal extends Component {
             selected_food_type: '',
             img_url: '/assets/images/food_types/container_images/default-img.jpg',
             clickedIcon: null,
-            hoveredIcon: null
+            hoveredIcon: null,
+            moods: [ 'cozy', 'asdf']
         })
         this.renderFoodImage();
     }
@@ -103,54 +110,22 @@ class HomeModal extends Component {
     }
 
     render() {
-        const { types } = this.state;
+        const settings = {
+            dots: false,
+            infinite: true,
+            speed: 200,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+
         return (
             <main className="HomeModal">
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#home_modal">
-                    LET'S START!
-                </button>
                 <div id="home_modal" className="modal" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '600px'}}>
-                        <div className="modal-content" style={{height: '400px', backgroundColor: 'white'}}>
-                            <div className="modal-body" style={{backgroundColor: 'white'}}>
-                                <svg className="left-container">
-                                    <g stroke="black" strokeWidth="0.5" fill="url(#food-image)">
-                                        <path d="M0,0h300l-30,400h-270v-400"></path>
-                                    </g>
-                                </svg>
-                                <div className="right-container">
-
-                                {
-                                    types.map( (d, i) => {
-                                        if( i % 2 === 0 ){
-                                            return d ? (
-                                                <div key={i} className="rows">
-                                                    <div onClick={this.handleClick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                                                        <div className="foodicons" id={d} style={{ backgroundImage: `url(/assets/images/food_types/icons/${d}.png)` }}></div>
-                                                        <h6 style={{color: 'gray'}}>{d}</h6>
-                                                    </div>
-                                                    {
-                                                        types[i+1] ? (
-                                                            <div onClick={this.handleClick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                                                                <div className="foodicons" id={ types[i+1] } style={{ backgroundImage: `url(/assets/images/food_types/icons/${types[i+1]}.png)` }}></div>
-                                                                <h6 style={{color: 'gray'}}>{types[i+1]}</h6>
-                                                            </div>
-                                                        )
-                                                        :
-                                                        ''
-                                                    }
-                                                </div>
-                                            )
-                                            :
-                                            ''
-                                        }
-                                    })
-                                }
-                                    <div style={{color: 'silver', fontSize: '8px'}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Meat">Meat</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-                                    <div style={{color: 'silver', fontSize: '8px'}}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Socrates">Socrates</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-                                </div>
-                            </div>
-                        </div>
+                        <Slider {...settings} >
+                            <HomeModalContentA types={this.state.types} handleClick={this.handleClick} handleHover={this.handleHover} />
+                            <HomeModalContentB moods={this.state.moods} handleClick={this.handlClick} handleHover={this.handleHover} />
+                        </Slider>
                     </div>
                 </div>
             </main>

@@ -296,6 +296,11 @@ body {
   top: 350px;
   left: 700px;
 }
+#modal-btn {
+  position: absolute;
+  top: 350px;
+  left: 500px;
+}
 
 .HomeModal .modal-content {
   border: 0;

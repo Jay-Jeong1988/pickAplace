@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HomeModal from '../HomeModal';
 
+
 class HomePage extends Component {
 
     myFunction = (e) => {
@@ -20,8 +21,7 @@ class HomePage extends Component {
         }
     }
     render(){
-
-
+        
         return (
             <main className="HomePage">
                 {/* <video autoPlay muted loop id="myVideo" ref="video">
@@ -33,6 +33,9 @@ class HomePage extends Component {
                     
                     <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button>
                 </div>
+                <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal">
+                    LET'S START!
+                </button>
                 <HomeModal />
             </main>
         )
