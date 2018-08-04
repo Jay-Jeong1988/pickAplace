@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Evaluation } from '../../lib/requests';
 import Modal from '../Modal';
 import {Redirect} from 'react-router-dom';
+import './EvalRestaurantPage.css';
 
 class EvalRestaurantPage extends Component {
 

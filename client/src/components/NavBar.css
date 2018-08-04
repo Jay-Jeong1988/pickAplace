@@ -1,0 +1,26 @@
+/*------------------------------NavBar--------------------------*/
+
+.Navbar {
+    height: 45px;
+    background-color: #323232;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 16%;  
+}
+
+.Navbar a {
+    color: white;
+}
+.Navbar a:hover {
+    color: rgb(165, 165, 165);
+    text-decoration: none;
+}
+
+#home_icon {
+    filter: brightness(500%) contrast(500%);
+    width: 20px;
+}
+#home_icon:hover {
+     filter: grayscale(50%) brightness(80%);
+}

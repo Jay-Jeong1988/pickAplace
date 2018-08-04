@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { User } from '../../lib/requests';
+import './SignUpPage.css';
 
 const google = window.google;
 

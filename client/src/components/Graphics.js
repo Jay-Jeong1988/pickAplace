@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import { Restaurant } from '../lib/requests';
 import 'bootstrap/dist/js/bootstrap.js';
-import './style.css';
 
 const margin = { top: 120, right: 55, bottom: 150, left: 85};
 const width = 1275 - margin.left - margin.right;
@@ -941,11 +940,10 @@ class Graphics extends Component {
     render() {
 
         return (
-            <main >
+            <main className="Graphics">
                 <h5 style={{position: 'absolute', left:'350px', top: '70px', color: 'rgb(60,60,60)'}}>Check the box(es) on the right to look up restaurants</h5>
                 {/* <div className="svg-background"></div> */}
                 <svg ref="container" style={{filter: 'contrast(200%)'}}></svg>
-
             </main>
         )
     }

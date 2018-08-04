@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Chosen from '../Chosen';
 import { Restaurant } from '../../lib/requests';
 import { Button } from 'reactstrap';
+import './SearchRestaurantsPage.css';
 
 class SearchRestaurantsPage extends Component {
 

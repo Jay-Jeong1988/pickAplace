@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import HomeModal from '../HomeModal';
+import './HomePage.css';
 
 
 class HomePage extends Component {

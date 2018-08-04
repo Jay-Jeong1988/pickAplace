@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { User } from '../../lib/requests';
+import './SignInPage.css';
 
 class SignInPage extends Component {
 

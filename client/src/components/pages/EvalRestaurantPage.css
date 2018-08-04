@@ -1,0 +1,75 @@
+/*---------------------------EvalRestaurantPage------------------------*/
+
+.restaurant_ img {
+    display: block;
+    max-width: 50%;
+    max-height: 300px;
+  
+}
+
+
+/*----------------------------------Modal-----------------------------*/
+
+.modal-body {
+    text-align: center;
+}
+.modal-body > * {
+    color: white;
+}
+  
+.modal-body button {
+    margin: 15px 40px;
+}
+/* .axis g:not(:first-of-type):not(:last-of-type) {
+    display: none;
+} */
+  
+.modal-body > .prevPage {
+    position: absolute;
+    top: 150px;
+    left: -140px;
+}
+  
+.modal-body > .nextPage {
+    position: absolute;
+    top: 150px;
+    left: 600px;
+}
+  
+.arrow {
+    width: 40px;
+    display:block;
+}
+.arrow.prev {
+    transform: rotate(180deg);
+}
+  
+.modal-body > .submit {
+    position: absolute;
+    top: 150px;
+    left: 600px;
+}
+
+#clickSubmitPng {
+    width: 110px;
+    position: absolute;
+    top: 75px;
+    left: 645px;
+    filter: brightness(500%);
+    
+}
+  
+@keyframes hoverSubmit {
+    0% { top: 75px }
+    50% { top: 45px }
+    100% { top: 75px }
+}
+  
+#hoverImg {
+    width: 110px;
+    position: absolute;
+    top: 80px;
+    left: 638px;
+    filter: brightness(500%);
+    visibility: hidden;
+}

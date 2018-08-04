@@ -3,6 +3,7 @@ import { Restaurant } from '../../lib/requests';
 import Chosen from '../Chosen';
 import AddressAutoComplete from '../AddressAutoComplete';
 import RenderRestaurantDetail from '../RenderRestaurantDetail';
+import './CreateRestaurantPage.css';
 
 class CreateRestaurantPage extends Component {
 

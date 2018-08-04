@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
-import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage(chosen-js)';
+import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage';
 import EvalRestaurantsPage from './components/pages/EvalRestaurantPage';
-import Graphics from './components/Graphics';
+import LookUpRestaurantsPage from './components/pages/LookUpRestaurantsPage';
 import CreateRestaurantPage from './components/pages/CreateRestaurantPage';
 import Navbar from './components/Navbar';
 import jwtDecode from 'jwt-decode';
@@ -88,7 +88,7 @@ class App extends Component {
     <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
           <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
-          <Route path="/restaurants" exact component={Graphics} />
+          <Route path="/restaurants" exact component={LookUpRestaurantsPage} />
           <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
         </div>
       </Router>

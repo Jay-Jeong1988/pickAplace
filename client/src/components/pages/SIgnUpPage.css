@@ -1,0 +1,14 @@
+/*-----------------------------------SignUpPage-----------------------*/
+
+.SignUpPage form {
+    margin: 60px;
+}
+
+.SignUpPage div {
+    width: 70%;
+}
+  
+.SignUpPage p {
+    color: red;
+    margin-bottom: 2px;
+}
