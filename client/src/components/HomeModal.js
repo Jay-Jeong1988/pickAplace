@@ -17,7 +17,8 @@ class HomeModal extends Component {
             hoveredIcon: null,
             moods: [],
             img_url_mood: null,
-            clickedMoodIcon: null
+            clickedMoodIcon: null,
+            currentModalPage: null
         }
 
         this.isHovered = false;
@@ -31,7 +32,8 @@ class HomeModal extends Component {
             hoveredIcon: null,
             moods: [ 'cozy', 'loud', 'modern', 'friendly', 'romantic',],
             img_url_mood: '/assets/images/food_types/container_images/default2-img.jpg',
-            clickedMoodIcon: null
+            clickedMoodIcon: null,
+            currentModalPage: 0
         })
 
     }
@@ -41,6 +43,8 @@ class HomeModal extends Component {
         this.renderImage('svg_food', this.state.img_url_food);
         this.removeImage('svg_mood');
         this.renderImage('svg_mood', this.state.img_url_mood);
+        this.showHideArrows();
+        this.changePage();
     }
 
     removeImage = (container_id) => {
@@ -130,18 +134,58 @@ class HomeModal extends Component {
         icon.style.height = '50px';
     }
 
+    showHideArrows = () => {
+        const currentModalPage = this.state.currentModalPage;
+        const endPageNumbers = [0, 2];
+
+        if( !endPageNumbers.includes(currentModalPage) ){
+            d3.select('.slick-prev').style('visibility','visible');
+            if( this.state.clickedMoodIcon ) d3.select('.slick-next').style('visibility','visible');
+            else d3.select('.slick-next').style('visibility','hidden');
+        }else {
+            if( currentModalPage === 0 ) {
+                d3.select('.slick-prev').style('visibility','hidden');
+                if( this.state.clickedFoodIcon ) d3.select('.slick-next').style('visibility','visible');
+                else d3.select('.slick-next').style('visibility','hidden');
+            }else{
+                d3.select('.slick-next').style('visibility','hidden');
+            }
+        }
+    }
+
+
+    changePage = () => {
+        const prevArrow = document.getElementsByClassName('slick-prev')[0];
+        const nextArrow = document.getElementsByClassName('slick-next')[0];
+        const currentModalPage = this.state.currentModalPage;
+
+        d3.selectAll('.slick-arrow').on('click', () => {
+            if( d3.event.target === prevArrow && currentModalPage !== 0 ) {
+                this.setState({
+                    ...this.state,
+                    currentModalPage: currentModalPage - 1
+                })
+            }else if( d3.event.target === nextArrow && currentModalPage !== 2 ) {
+                this.setState({
+                    ...this.state,
+                    currentModalPage: currentModalPage + 1
+                })
+            }
+        })
+    }   
+
     render() {
         const settings = {
             dots: false,
             infinite: false,
             speed: 200,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
         };
 
         return (
             <main className="HomeModal">
-                <div id="home_modal" className="modal" tabIndex="-1" role="dialog">
+                <div id="home_modal" className="modal" tabIndex="-1" role="dialog" aria-labelledby="home_modal">
                     <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '600px'}}>
                         <div className="modal-content">
                             <Slider {...settings} >

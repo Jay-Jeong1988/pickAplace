@@ -33,7 +33,7 @@ class HomePage extends Component {
                     
                     <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button>
                 </div>
-                <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal">
+                <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal" aria-label="close">
                     LET'S START!
                 </button>
                 <HomeModal />

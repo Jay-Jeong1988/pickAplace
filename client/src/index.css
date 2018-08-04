@@ -330,6 +330,21 @@ body {
   /* padding: 11px 0; */
 }
 
+.HomeModal .slick-arrow {
+  width: 40px;
+  height: 40px;
+}
+
+.HomeModal .slick-prev {
+  left: -45px;
+}
+.HomeModal .slick-next {
+  right: -45px;
+}
+.HomeModal .slick-arrow:before {
+  font-size: 40px;
+}
+
 .right-container > .rows > div {
   width: 30%;
   text-align: center; 
