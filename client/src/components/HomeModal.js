@@ -83,7 +83,7 @@ class HomeModal extends Component {
                 this.animateIcon(clickedIcon);
             }
         }
-        
+
         if( category.id === 'containerA' ){
             this.setState({
                 ...this.state,
@@ -143,10 +143,12 @@ class HomeModal extends Component {
             <main className="HomeModal">
                 <div id="home_modal" className="modal" tabIndex="-1" role="dialog">
                     <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '600px'}}>
-                        <Slider {...settings} >
-                            <HomeModalContentA types={this.state.types} handleClick={this.handleClick} handleHover={this.handleHover} />
-                            <HomeModalContentB moods={this.state.moods} handleClick={this.handleClick} handleHover={this.handleHover} />
-                        </Slider>
+                        <div className="modal-content">
+                            <Slider {...settings} >
+                                <HomeModalContentA types={this.state.types} handleClick={this.handleClick} handleHover={this.handleHover} />
+                                <HomeModalContentB moods={this.state.moods} handleClick={this.handleClick} handleHover={this.handleHover} />
+                            </Slider>
+                        </div>
                     </div>
                 </div>
             </main>
