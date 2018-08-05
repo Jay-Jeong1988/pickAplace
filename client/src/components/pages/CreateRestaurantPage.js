@@ -32,7 +32,7 @@ class CreateRestaurantPage extends Component {
 
         Restaurant.types().then( data => {
             this.setState({
-                restaurant_types: ['izakaya','french','chinese','korean','franchise','japanese','asian','dimsum','pho','vietnamese','spanish','brazilian','bistro','fine dining','trattoria','seafood','barbeque','fast food','pizzeria','greek','ramen','buffet','food court','steak house','all you can eat','food truck','mongolian', 'breakfast & brunch', 'hamburgers', 'italian']
+                restaurant_types: [ 'hamburgers','french','chinese','korean','franchise','japanese','vietnamese','spanish','brazilian','mexican','fine-dining','seafood','barbecue','fast-food','pizza','greek','ramen','buffet','food-court','steak-house','all-you-can-eat','food-truck','mongolian', 'breakfast', 'italian','sushi']
             })
         })
 

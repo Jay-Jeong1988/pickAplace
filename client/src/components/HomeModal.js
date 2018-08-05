@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import HomeModalContentA from './HomeModalContentA';
 import HomeModalContentB from './HomeModalContentB';
+import HomeModalContentC from './HomeModalContentC';
 
 class HomeModal extends Component {
 
@@ -18,7 +19,10 @@ class HomeModal extends Component {
             moods: [],
             img_url_mood: null,
             clickedMoodIcon: null,
-            currentModalPage: null
+            currentModalPage: 0,
+            otherThings: [],
+            img_url_otherThings: null,
+            clickedOtherThingsIcon: null
         }
 
         this.isHovered = false;
@@ -33,7 +37,10 @@ class HomeModal extends Component {
             moods: [ 'cozy', 'loud', 'modern', 'friendly', 'romantic',],
             img_url_mood: '/assets/images/food_types/container_images/default2-img.jpg',
             clickedMoodIcon: null,
-            currentModalPage: 0
+            currentModalPage: 0,
+            otherThings: [ 'hygiene', 'price', 'taste', 'services', 'revisit' ],
+            img_url_otherThings: '/assets/images/food_types/container_images/default3-img.jpg',
+            clickedOtherThingsIcon: null
         })
 
     }
@@ -43,6 +50,8 @@ class HomeModal extends Component {
         this.renderImage('svg_food', this.state.img_url_food);
         this.removeImage('svg_mood');
         this.renderImage('svg_mood', this.state.img_url_mood);
+        this.removeImage('svg_otherThings');
+        this.renderImage('svg_otherThings', this.state.img_url_otherThings);
         this.showHideArrows();
         this.changePage();
     }
@@ -74,9 +83,10 @@ class HomeModal extends Component {
 
 
     handleClick = (e) => {
-        const prevFoodIcon = this.state.clickedFoodIcon;
         const clickedIcon = e.currentTarget.children[0];
+        const prevFoodIcon = this.state.clickedFoodIcon;
         const prevMoodIcon = this.state.clickedMoodIcon;
+        const prevOtherThingsIcon = this.state.clickedOtherThingsIcon
         const category = e.currentTarget.parentNode.parentNode;
 
         const handleAnimation = ( prevIcon, clickedIcon ) => {
@@ -94,16 +104,21 @@ class HomeModal extends Component {
                 img_url_food: `/assets/images/food_types/container_images/${clickedIcon.id}-img.jpg`,
                 clickedFoodIcon: clickedIcon,
             })
-
             handleAnimation(prevFoodIcon, clickedIcon);
-        }else{
+        }else if( category.id === 'containerB' ){
             this.setState({
                 ...this.state,
                 img_url_mood: `/assets/images/food_types/container_images/${clickedIcon.id}-img.jpg`,
                 clickedMoodIcon: clickedIcon,
             })
-
             handleAnimation(prevMoodIcon, clickedIcon);
+        }else {
+            this.setState({
+                ...this.state,
+                img_url_otherThings: `/assets/images/food_types/container_images/${clickedIcon.id}-img.jpg`,
+                clickedOtherThingsIcon: clickedIcon,
+            })
+            handleAnimation(prevOtherThingsIcon, clickedIcon);
         }
 
     }
@@ -181,6 +196,7 @@ class HomeModal extends Component {
             speed: 200,
             slidesToShow: 1,
             slidesToScroll: 1,
+            swipe: false
         };
 
         return (
@@ -191,6 +207,7 @@ class HomeModal extends Component {
                             <Slider {...settings} >
                                 <HomeModalContentA types={this.state.types} handleClick={this.handleClick} handleHover={this.handleHover} />
                                 <HomeModalContentB moods={this.state.moods} handleClick={this.handleClick} handleHover={this.handleHover} />
+                                <HomeModalContentC otherThings={this.state.otherThings} handleClick={this.handleClick} handleHover={this.handleHover} />
                             </Slider>
                         </div>
                     </div>
