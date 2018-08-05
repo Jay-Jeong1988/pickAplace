@@ -32,7 +32,7 @@ class HomePage extends Component {
                     <h1>Idealio</h1>
                     <p>Idealio lets you look for the best restaurants based on your own search options</p>
                     
-                    <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button>
+                    {/* <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button> */}
                 </div>
                 <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal" aria-label="close">
                     LET'S START!

@@ -70,14 +70,14 @@ class HomeModal extends Component {
         .append('pattern')
             .attr('id',`${type}-image`)
             .attr('patternUnits','userSpaceOnUse')
-            .attr('width','300')
-            .attr('height','400')
+            .attr('width','375')
+            .attr('height','500')
             .attr('x','0')
             .attr('y','0')
         .append('image')
             .attr('xlink:href', img_url)
-            .attr('width','300')
-            .attr('height','400')
+            .attr('width','375')
+            .attr('height','500')
             .attr('preserveAspectRatio','xMinYMin slice')
     }
 
@@ -202,7 +202,7 @@ class HomeModal extends Component {
         return (
             <main className="HomeModal">
                 <div id="home_modal" className="modal" tabIndex="-1" role="dialog" aria-labelledby="home_modal">
-                    <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '600px'}}>
+                    <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '750px'}}>
                         <div className="modal-content">
                             <Slider {...settings} >
                                 <HomeModalContentA types={this.state.types} handleClick={this.handleClick} handleHover={this.handleHover} />

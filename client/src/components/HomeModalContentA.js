@@ -7,7 +7,7 @@ function HomeModalContentA(props) {
         <div className="modal-body" style={{backgroundColor: 'white'}}>
             <svg className="left-container" id="svg_food">
                 <g stroke="black" strokeWidth="0.5" fill="url(#food-image)">
-                    <path d="M0,0h300l-30,400h-270v-400"></path>
+                    <path d="M0,0h375l-30,500h-345v-500"></path>
                 </g>
             </svg>
             <div className="right-container" id="containerA">

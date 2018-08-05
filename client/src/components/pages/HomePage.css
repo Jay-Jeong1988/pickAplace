@@ -10,7 +10,7 @@
     z-index: -4;
 }
 
-#myVideo {
+/* #myVideo {
     z-index: -5;
     position: fixed;
     top:30px;
@@ -18,12 +18,12 @@
     bottom: 0;
     max-height: 100%;
     filter: brightness(130%);
-    /* min-width: 100%; 
-    min-height: 100%; */
-}
+    //min-width: 100%; 
+    //min-height: 100%; 
+} */
   
   /* Style the button used to pause/play the video */
-#myBtn {
+/* #myBtn {
     width: 200px;
     font-size: 15px;
     position: fixed;
@@ -33,12 +33,12 @@
     background-color: transparent;
     color: #fff;
     cursor: pointer;
-}
+} */
   
-#myBtn:hover {
+/* #myBtn:hover {
     background: transparent;
     color: gray;
-}
+} */
 
 
 /*------------------------------------------HomeModal--------------------*/
@@ -96,13 +96,13 @@
 }
 
 .HomeModal .left-container {
-    width: 300px;
-    height: 400px;
+    width: 375px;
+    height: 500px;
     /* background-image: url(https://us.123rf.com/450wm/timolina/timolina1504/timolina150400378/39128783-big-juicy-hamburger-with-vegetables-and-beef-on-a-wooden-background-in-rustic-style.jpg?ver=6); */
 }
 .HomeModal .right-container {
-    width: 300px;
-    height: 400px;
+    width: 375px;
+    height: 500px;
     background-color: white;
     padding: 30px 0;
     overflow: scroll;
