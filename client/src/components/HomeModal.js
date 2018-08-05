@@ -125,12 +125,15 @@ class HomeModal extends Component {
 
     handleHover = (e) => {
         const hoveredIcon = e.currentTarget.children[0];
+        const {clickedFoodIcon} = this.state;
+        const {clickedMoodIcon} = this.state;
+        const {clickedOtherThingsIcon} = this.state;
 
         if( !this.isHovered ) {
             this.animateIcon(hoveredIcon);
             this.isHovered = true;
         }else {
-            if( hoveredIcon !== this.state.clickedFoodIcon && hoveredIcon !== this.state.clickedMoodIcon ){
+            if( hoveredIcon !== clickedFoodIcon && hoveredIcon !== clickedMoodIcon && hoveredIcon !== clickedOtherThingsIcon ){
                 this.resetIcon(hoveredIcon);
             }
             this.isHovered = false;
