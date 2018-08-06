@@ -1,7 +1,8 @@
 # Idealio
 Idealio is a web application that helps users to find the best restaurants perfectly matched to their own preferences.
 Search options can be price, hygiene, services, etc..
-Deployed here: <a href="http://34.213.242.132:3000/">Idealio</a>
+
+Idealio is deployed <a href="http://34.213.242.132:3000/">here</a>
 
 Note: 
 - It might not work properly in other browsers than Chrome.
