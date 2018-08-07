@@ -204,7 +204,7 @@ class HomeModal extends Component {
 
         return (
             <main className="HomeModal">
-                <div id="home_modal" className="modal" tabIndex="-1" role="dialog" aria-labelledby="home_modal">
+                <div id="home_modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="home_modal">
                     <div className="modal-dialog" role="document" style={{marginTop: '150px', maxWidth: '750px'}}>
                         <div className="modal-content">
                             <Slider {...settings} >

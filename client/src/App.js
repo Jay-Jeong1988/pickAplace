@@ -87,10 +87,9 @@ class App extends Component {
 
   toggleMenu = () => {
     const app = document.querySelector('.App');
-    const closeButton = document.querySelector('.LeftNavbar > .content > .controller > button');
     
     if( this.menu_bar ){
-      app.style.transform = 'translateX(0)';
+      app.style.transform = null;
       app.classList.remove('coverApp');
       this.menu_bar = false;
     }else {
@@ -104,7 +103,7 @@ class App extends Component {
     const app = document.querySelector('.App');
 
     if( e.target.classList.contains('coverApp') ){
-      app.style.transform = 'translate(0)';
+      app.style.transform = null;
       app.classList.remove('coverApp');
       this.menu_bar = false;
     }
