@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;  
+    padding: 0 2%;  
 }
 .Navbar > * {
     width: 131px;
@@ -17,6 +17,15 @@
     color: white;
     font-family: 'Baloo', cursive;
     margin: 0
+}
+
+.Navbar .signIn {
+    text-align: end;
+}
+
+.Navbar a {
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
 }
 
 .Navbar a:hover {
@@ -38,4 +47,8 @@
 #user_name > small {
     font-family: 'Dosis', sans-serif;
     font-size: 15px;
+}
+
+#nav-toggle {
+    cursor: pointer;
 }

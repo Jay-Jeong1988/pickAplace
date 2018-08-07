@@ -16,24 +16,22 @@ function LeftNavbar (props) {
                     <h1>Idealio</h1>
                     <p>&nbsp; helps you find the best restaurants perfectly matched to your own preferences.</p>
                 </div>
-                <div className="links">
-                    {
-                        props.user ?
-                        [
-                            <NavLink key={2} exact to="/search_rests" >Rate Restaurants</NavLink>,
-                            <NavLink key={3} exact to="/add_restaurant" >Add Restaurant</NavLink>,
-                            <NavLink key={4} exact to="/restaurants" >Look Up Restaurants</NavLink>,
-                            <NavLink key={7} exact to="/" onClick={props.signOut} >Sign Out</NavLink>
-                        ]
-                        :
-                        [   
-                            <NavLink key={5} exact to="/sign_in" >Sign In</NavLink>,
-                            <NavLink key={6} exact to="/sign_up" >Sign Up</NavLink>,
-                            <a href="#" key={4} onClick={props.guestSignIn} >Guest Sign In</a>
-                        ]
-                    
-                    }
-                </div>
+                {
+                    props.user ?
+                    [
+                        <div key={1}><NavLink exact to="/search_rests" >Rate Restaurants</NavLink></div>,
+                        <div key={2}><NavLink exact to="/add_restaurant" >Add Restaurant</NavLink></div>,
+                        <div key={3}><NavLink exact to="/restaurants" >Look Up Restaurants</NavLink></div>,
+                        <div key={4}><NavLink exact to="/" onClick={props.signOut} >Sign Out</NavLink></div>
+                    ]
+                    :
+                    [   
+                        <div key={1}><NavLink exact to="/sign_in" >Sign In</NavLink></div>,
+                        <div key={2}><NavLink exact to="/sign_up" >Sign Up</NavLink></div>,
+                        <div key={3}><a href="#" onClick={props.guestSignIn} >Guest Sign In</a></div>
+                    ]
+                
+                }
             </div>
         </main>
     )

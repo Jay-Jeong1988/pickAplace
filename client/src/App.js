@@ -86,23 +86,35 @@ class App extends Component {
   }
 
   toggleMenu = () => {
-    const leftNavbar = document.querySelector('.LeftNavbar');
+    const app = document.querySelector('.App');
     const closeButton = document.querySelector('.LeftNavbar > .content > .controller > button');
+    
     if( this.menu_bar ){
-      leftNavbar.style.transform = 'translateX(-300px)';
+      app.style.transform = 'translateX(0)';
+      app.classList.remove('coverApp');
       this.menu_bar = false;
     }else {
-      leftNavbar.style.transform = 'translateX(0)';
+      app.style.transform = 'translateX(300px)';
+      app.classList.add('coverApp');
       this.menu_bar = true;
     }
-    console.log(this.menu_bar)
-
   }
+
+  hideMenu = (e) => {
+    const app = document.querySelector('.App');
+
+    if( e.target.classList.contains('coverApp') ){
+      app.style.transform = 'translate(0)';
+      app.classList.remove('coverApp');
+      this.menu_bar = false;
+    }
+  }
+    
 
   render() {
     return (
       <Router>
-        <div className="App">
+        <div className="App" onClick={this.hideMenu}>
         <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
         <LeftNavbar user={this.state.user} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
           <Route path="/" exact component={HomePage}/>

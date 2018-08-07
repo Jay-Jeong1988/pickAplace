@@ -15,15 +15,17 @@ function Navbar(props) {
     return (
         <nav className="Navbar">
             <span>
-                <a id="nav-toggle" href="#" onClick={toggleMenu} >&#9776;</a>
+                <div id="nav-toggle" onClick={toggleMenu} >&#9776;</div>
             </span>
             <NavLink exact to="/" ><h1>Idealio</h1></NavLink>
-            {
-                user ?
-                <p id="user_name"><small>signed in as</small> { first_name }</p>
-                :
-                <p></p>
-            }
+            <div className="signIn">
+                {
+                    user ?
+                    <p id="user_name"><small>Signed in as</small> { first_name }</p>
+                    :
+                    <NavLink exact to="/sign_in" >Sign In</NavLink>
+                }
+            </div>
         </nav>
     )
 }
