@@ -1,15 +1,5 @@
 /*----------------------------------HomePage----------------------*/
 
-.HomePage .content {
-    position: fixed;
-    background: rgba(0, 0, 0, 0.5);
-    color: #f1f1f1;
-    width: 20%;
-    height: 100%;
-    padding: 20px;
-    z-index: -4;
-}
-
 /* #myVideo {
     z-index: -5;
     position: fixed;

@@ -4,28 +4,26 @@ import './Navbar.css';
 
 function Navbar(props) {
 
+    function upCase( name ){
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    }
 
+    const { user, toggleMenu } = props;
+    const first_name = user ? upCase( user.jwt.first_name ) : '';
+
+    
     return (
         <nav className="Navbar">
-        {
-            props.user ?
-                [
-                    <NavLink key={1} exact to="/" ><img alt="/" id="home_icon" src="/assets/images/home_icon.png"/></NavLink>,
-                    <NavLink key={2} exact to="/search_rests" >Rate Restaurants</NavLink>,
-                    <NavLink key={3} exact to="/add_restaurant" >Add Restaurant</NavLink>,
-                    <NavLink key={4} exact to="/restaurants" >Look Up Restaurants</NavLink>,
-                    <NavLink key={7} exact to="/" onClick={props.signOut} >Sign Out</NavLink>
-                ]
+            <span>
+                <a id="nav-toggle" href="#" onClick={toggleMenu} >&#9776;</a>
+            </span>
+            <NavLink exact to="/" ><h1>Idealio</h1></NavLink>
+            {
+                user ?
+                <p id="user_name"><small>signed in as</small> { first_name }</p>
                 :
-                [   
-                    <NavLink key={1} exact to="/" ><img alt="/" id="home_icon" src="/assets/images/home_icon.png"/></NavLink>,
-                    <NavLink key={5} exact to="/sign_in" >Sign In</NavLink>,
-                    <NavLink key={6} exact to="/sign_up" >Sign Up</NavLink>,
-                    <button href="#" key={4} onClick={props.guestSignIn} >Guest Sign In</button>
-                ]
-            
-        }
-        
+                <p></p>
+            }
         </nav>
     )
 }

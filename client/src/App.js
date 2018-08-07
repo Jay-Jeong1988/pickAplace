@@ -10,14 +10,21 @@ import Navbar from './components/Navbar';
 import jwtDecode from 'jwt-decode';
 import HomePage from './components/pages/HomePage';
 import { User } from './lib/requests';
+import LeftNavbar from './components/LeftNavbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 class App extends Component {
 
-  state = {
-    response: '',
-    user: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      response: '',
+      user: null
+    }
+
+    this.menu_bar = false;
+  }
 
   componentDidMount() {
   //   this.callApi()
@@ -78,14 +85,29 @@ class App extends Component {
     })
   }
 
+  toggleMenu = () => {
+    const leftNavbar = document.querySelector('.LeftNavbar');
+    const closeButton = document.querySelector('.LeftNavbar > .content > .controller > button');
+    if( this.menu_bar ){
+      leftNavbar.style.transform = 'translateX(-300px)';
+      this.menu_bar = false;
+    }else {
+      leftNavbar.style.transform = 'translateX(0)';
+      this.menu_bar = true;
+    }
+    console.log(this.menu_bar)
+
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
-        <Navbar user={this.state.user} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
+        <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
+        <LeftNavbar user={this.state.user} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
           <Route path="/" exact component={HomePage}/>
           <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
-    <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
+          <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
           <Route path="/search_rests" exact component={SearchRestaurantsPage} />
           <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
           <Route path="/restaurants" exact component={LookUpRestaurantsPage} />

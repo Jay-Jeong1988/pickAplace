@@ -1,0 +1,100 @@
+/*------------------------------App------------------------------------*/
+
+/*----------------------------LeftNavbar----------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Dosis|Rubik');
+
+.LeftNavbar {
+    position: fixed;
+    background: rgba(50, 50, 50);
+    color: #f1f1f1;
+    width: 300px;
+    height: 100%;
+    padding: 20px;
+    top: 0;
+    transform: translateX(-300px);
+    transition: transform 0.5s;
+}
+
+.LeftNavbar * {
+    overflow: hidden;
+}
+
+.content > div {
+    padding: 10px 0;
+}
+.content > .controller {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.content > .controller >  p {
+    margin: 0;
+}
+
+.content > .controller > .btn-close {
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding-right: 30px;
+
+}
+
+.content > .controller > .btn-close::before {
+    content: '';
+    position: absolute;
+    width: 23px;
+    height: 3px;
+    background-color: white;
+    transform: rotate(45deg);
+    left: 245px;
+    top: 42px;
+}
+.content > .controller > .btn-close::after {
+    content: '';
+    position: absolute;
+    width: 23px;
+    height: 3px;
+    background-color: white;
+    transform: rotate(135deg);
+    left: 245px;
+    top: 42px;
+}
+
+.content > .controller > *:hover {
+    color: rgb(165,165,165);
+}
+
+
+.content > .intro > h1 {
+    font-family: 'Baloo', cursive;
+    display: inline;
+    font-size: 35px;
+}
+
+.content > .intro > p {
+    display: inline;
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+}
+
+.content .links {
+    margin-top: 100px;
+    text-align: end;
+}
+
+.content .links > a {
+    color: white;
+    display: block;
+    margin: 10px 0;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 200;
+    font-size: 22px;
+}
+
+.content a:hover {
+    color: rgb(165, 165, 165);
+    text-decoration: none;
+}

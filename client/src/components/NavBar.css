@@ -1,26 +1,41 @@
 /*------------------------------NavBar--------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Baloo|Rubik|Dosis');
 
 .Navbar {
     height: 45px;
     background-color: #323232;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 16%;  
+    padding: 0 5%;  
+}
+.Navbar > * {
+    width: 131px;
 }
 
-.Navbar a {
+.Navbar * {
     color: white;
+    font-family: 'Baloo', cursive;
+    margin: 0
 }
+
 .Navbar a:hover {
     color: rgb(165, 165, 165);
     text-decoration: none;
 }
-
-#home_icon {
-    filter: brightness(500%) contrast(500%);
-    width: 20px;
+.Navbar p:hover {
+    color: rgb(165, 165, 165);
 }
-#home_icon:hover {
-     filter: grayscale(50%) brightness(80%);
+.Navbar h1:hover {
+    color: rgb(165, 165, 165);
+}
+
+#user_name {
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+}
+
+#user_name > small {
+    font-family: 'Dosis', sans-serif;
+    font-size: 15px;
 }
