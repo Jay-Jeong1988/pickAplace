@@ -5,7 +5,6 @@ Search options can be price, hygiene, services, etc..
 Idealio is deployed <a href="http://34.213.242.132:3000/">here</a>
 
 Note: 
-- It might not work properly in other browsers than Chrome.
 - Mobile compatibility has not been implemented yet.
 
 # Tech Stack
