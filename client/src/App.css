@@ -1,19 +1,26 @@
 /*------------------------------App------------------------------------*/
 .App {
    transition: all 0.5s;
+   width: 100%;
+   height: 100%;
 }
 
 .coverApp::before {
     content: '';
     opacity: 1;
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     left: 0;
     top: 0;
     z-index: 300;
     background-color: rgba(0, 0, 0, .75);
     transition: all 0.5s ease-in-out;
+}
+
+.App > * {
+    min-width: 1280px;
+    min-height: 730px;
 }
 
 
@@ -98,13 +105,48 @@
 }
 
 
-.content > .about > h1 {
-    font-family: 'Baloo', cursive;
-    display: inline;
-    font-size: 35px;
+/*-----------------------------------About---------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Gloria+Hallelujah');
+
+
+.About {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display:none;
+    padding: 7% 26% 10% 10%;
+    font-family: 'Gloria Hallelujah';
+    opacity: 0;
+    transition: all 1s ease-in-out;
 }
 
-.content > .about > p {
+.About > *{
     display: inline;
-    font-family: 'Dosis', sans-serif;
+}
+
+.About > h1 {
+    font-size: 80px;
+}
+
+.About > p {
+    font-size: 60px;
+}
+
+@media only screen and (max-width: 459px) {
+    .About {
+        width: 60px;
+        padding: 0;
+        overflow-wrap: break-word;
+    }
+    .About > h1 {
+        font-size: 18px;
+    }
+    .About > p {
+        font-size: 15px;
+    }
 }

@@ -13,6 +13,7 @@ import { User } from './lib/requests';
 import LeftNavbar from './components/LeftNavbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import About from './components/About';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
     }
 
     this.menu_bar = false;
+    this.about = false;
   }
 
   componentDidMount() {
@@ -87,11 +89,14 @@ class App extends Component {
 
   toggleMenu = () => {
     const app = document.querySelector('.App');
+    const about = document.querySelector('.About');
     
     if( this.menu_bar ){
       app.style.transform = null;
       app.classList.remove('coverApp');
+      about.style.display = null;
       this.menu_bar = false;
+      this.about = false;
     }else {
       app.style.transform = 'translateX(300px)';
       app.classList.add('coverApp');
@@ -101,30 +106,63 @@ class App extends Component {
 
   hideMenu = (e) => {
     const app = document.querySelector('.App');
+    const about = document.querySelector('.About');
 
     if( e.target.classList.contains('coverApp') ){
       app.style.transform = null;
       app.classList.remove('coverApp');
+      about.style.display = 'none';
       this.menu_bar = false;
+      this.about = false;
+    }else{
+      for(let el of document.querySelectorAll('a')){
+        if( e.target === el ){
+          app.style.transform = null;
+          app.classList.remove('coverApp');
+          about.style.display = 'none';
+          this.menu_bar = false;
+          this.about = false;
+        }
+      }
     }
   }
-    
+  
+  toggleAbout = () => {
+    const about = document.querySelector('.About');
+
+    if( this.about ){
+      setTimeout( function(){
+        about.style.display = 'none';
+      }, 1000);
+      about.style.opacity = 0;
+      this.about = false;
+    }else {
+      about.style.display = 'block';
+      setTimeout(function(){
+        about.style.opacity = 1;
+      },100)
+      this.about = true;
+    }
+  }
 
   render() {
     return (
-      <Router>
-        <div className="App" onClick={this.hideMenu}>
-        <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
-        <LeftNavbar user={this.state.user} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
-          <Route path="/" exact component={HomePage}/>
-          <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
-          <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
-          <Route path="/search_rests" exact component={SearchRestaurantsPage} />
-          <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
-          <Route path="/restaurants" exact component={LookUpRestaurantsPage} />
-          <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
-        </div>
-      </Router>
+      <div className="App" onClick={this.hideMenu}>
+        <About />
+        <Router>
+          <div className="routes">
+            <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
+            <LeftNavbar user={this.state.user} toggleAbout={this.toggleAbout} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
+            <Route path="/" exact component={HomePage}/>
+            <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
+            <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
+            <Route path="/search_rests" exact component={SearchRestaurantsPage} />
+            <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
+            <Route path="/restaurants" exact component={LookUpRestaurantsPage} />
+            <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
+          </div>
+        </Router>
+      </div>
     );
   }
 }

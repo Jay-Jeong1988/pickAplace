@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function LeftNavbar (props) {
 
-    const { toggleMenu } = props;
+    const { toggleMenu, toggleAbout } = props;
 
     return (
         <main className="LeftNavbar">
@@ -12,7 +12,7 @@ function LeftNavbar (props) {
                     <p>ENGLISH</p>
                     <div className="btn-close" onClick={toggleMenu}>CLOSE</div>
                 </div>
-                <div className="intro"><p>About</p></div>
+                <div className="intro"><p onClick={toggleAbout}>About</p></div>
                 {
                     props.user ?
                     [
@@ -25,7 +25,7 @@ function LeftNavbar (props) {
                     [   
                         <div key={1}><NavLink exact to="/sign_in" >Sign In</NavLink></div>,
                         <div key={2}><NavLink exact to="/sign_up" >Sign Up</NavLink></div>,
-                        <div key={3}><a href="#" onClick={props.guestSignIn} >Guest Sign In</a></div>
+                        <div key={3}><NavLink exact to="/" onClick={props.guestSignIn} >Guest Sign In</NavLink></div>
                     ]
                 
                 }
