@@ -12,10 +12,7 @@ function LeftNavbar (props) {
                     <p>ENGLISH</p>
                     <div className="btn-close" onClick={toggleMenu}>CLOSE</div>
                 </div>
-                <div className="intro">
-                    <h1>Idealio</h1>
-                    <p>&nbsp; helps you find the best restaurants perfectly matched to your own preferences.</p>
-                </div>
+                <div className="intro"><p>About</p></div>
                 {
                     props.user ?
                     [
@@ -32,6 +29,10 @@ function LeftNavbar (props) {
                     ]
                 
                 }
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </main>
     )
