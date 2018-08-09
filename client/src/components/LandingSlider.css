@@ -1,0 +1,49 @@
+/*-----------------------------------LandingSlider-----------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Baloo');
+
+.LandingSlider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index:100;
+    background-color: white;
+}
+
+.slides > div {
+    width: 100%;
+    height: 730px;
+    background-size: cover;
+    transform: scale(1.14, 1.14);
+    /* transition: transform 0, opacity 0; */
+    opacity: 0;
+    transition: transform 5000ms, opacity 5000ms;
+}
+
+.slick-current > div > div > div {
+    transform: scale(1, 1);
+    opacity: 1;
+    transition: transform 5000ms, opacity 5000ms;
+}
+
+#site-name {
+    position: fixed;
+    top: 280px;
+    left: 480px;
+    font-size: 120px;
+    font-family: 'Baloo', cursive; 
+    color: white;
+    z-index: 102;
+}
+#site-name > span {
+    opacity: 0;
+    transform: scale(1.9, 1.9);
+    /* margin-right: .5em; */
+    display: inline-block;
+}
+
+#site-name.show > span{
+    opacity: 1;
+    transform: scale(1, 1);
+    transition: opacity .5s ease-out, transform .5s ease-out;
+}

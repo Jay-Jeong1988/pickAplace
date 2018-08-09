@@ -14,6 +14,7 @@ import LeftNavbar from './components/LeftNavbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import About from './components/About';
+import LandingSlider from './components/LandingSlider';
 
 class App extends Component {
 
@@ -148,6 +149,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" onClick={this.hideMenu}>
+        <LandingSlider />
         <About />
         <Router>
           <div className="routes">

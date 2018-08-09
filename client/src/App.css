@@ -120,7 +120,7 @@
     z-index: 1000;
     display:none;
     padding: 7% 26% 10% 10%;
-    font-family: 'Gloria Hallelujah';
+    font-family: 'Gloria Hallelujah', sans-serif;
     opacity: 0;
     transition: all 1s ease-in-out;
 }
