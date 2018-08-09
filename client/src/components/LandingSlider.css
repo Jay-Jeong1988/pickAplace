@@ -29,8 +29,11 @@
 
 #site-name {
     position: fixed;
-    top: 40vh;
-    left: 37vw;
+    top: 45%;
+    left: 50%;
+    width: 90%;
+    margin-left: -45%;
+    text-align: center;
     font-size: 140px;
     font-family: 'Londrina Shadow', cursive; 
     color: white;
@@ -50,10 +53,11 @@
 
 #scroll-open {
     position: fixed;
-    top: 87vh;
-    left: 47vw;
+    top: 88%;
+    left: 50%;
     z-index: 102;
-    width: 100px;
+    width: 90%;
+    margin-left: -45%;
     text-align: center;
 }
 #scroll-open > a {
@@ -81,11 +85,6 @@
 @media only screen and (max-width: 352px) {
     #site-name {
         font-size: 70px;
-        left: 21vw;
-    }
-
-    #scroll-open {
-        left: 34vw;
     }
 
     #scroll-arrow::before {
@@ -96,11 +95,6 @@
 @media only screen and (min-width: 353px) and (max-width: 385px) {
     #site-name {
         font-size: 90px;
-        left: 20vw;
-    }
-
-    #scroll-open {
-        left: 37vw;
     }
 
     #scroll-arrow {
@@ -117,48 +111,23 @@
 }
 
 @media only screen and (min-width: 386px) and (max-width: 628px) {
+    
     #site-name {
         font-size: 100px;
-        left: 22vw;
-    }
-    
-    #scroll-open {
-        left: 40vw;
-    }
-
-}
-
-@media only screen and (min-width: 638px) and (max-width: 998px) {
-    #site-name {
-        left: 28vw;
-    }
-
-    #scroll-open {
-        left: 43vw;
     }
 }
 
-@media only screen and (min-width: 1320px) and (max-width: 2799px) {
+@media only screen and (min-width: 1320px) and (max-width: 3300px) {
     #site-name {
-        font-size: 250px;
-        left: 35vw;
+        font-size: 310px;
     }
 
     #scroll-arrow::before {
-        font-size:53px;
-    }
-}
-@media only screen and (min-width: 2800px) and (max-width: 3300px) {
-    #site-name {
-        font-size: 300px;
-    }
-
-    #scroll-arrow::before {
-        font-size: 57px;
+        font-size:56px;
     }
 }
 
-@media only screen and (min-width: 3301px) and (max-width: 5121px) {
+@media only screen and (min-width: 3301px) {
     #site-name {
         font-size: 550px;
     }
