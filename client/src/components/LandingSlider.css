@@ -12,8 +12,9 @@
 
 .slides > div {
     width: 100%;
-    height: 730px;
+    height: 100vh;
     background-size: cover;
+    background-position: center;
     transform: scale(1.14, 1.14);
     /* transition: transform 0, opacity 0; */
     opacity: 0;
@@ -75,4 +76,13 @@
 #scroll-arrow::before {
     content: '\21ea';
     font-size: 34px;
+}
+
+
+@media only screen and (max-width: 459px) {
+    #site-name {
+        top: 280px;
+        left: 80px;
+        font-size:70px;
+    }
 }
