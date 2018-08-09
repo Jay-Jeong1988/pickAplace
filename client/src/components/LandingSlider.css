@@ -63,15 +63,13 @@
 
 #scroll-arrow {
     opacity: 0;
-    -webkit-transform: rotateX(180deg) translateY(20px) scaleX(2.5);
-    transform: rotateX(180deg) translateY(20px) scaleX(2.5);
+    transform: rotateX(180deg) translateY(20px) scale(2.9, 0.5);
     transition: transform 1.3s ease-in-out, opacity 1.3s ease-in-out;
 }
 
 #scroll-arrow.scroll-animate {
-    -webkit-transform: rotateX(180deg) scaleX(2.5) translateY(0);
-    transform: rotateX(180deg) scaleX(2.5) translateY(0);
     opacity: 1;
+    transform: rotateX(180deg) scale(2.9, 0.5) translateY(0);
     transition: transform 1.3s ease-out, opacity 1.3s ease-out;
 }
 
