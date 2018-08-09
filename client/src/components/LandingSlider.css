@@ -137,3 +137,23 @@
         left: 43vw;
     }
 }
+
+@media only screen and (min-width: 2800px) and (max-width: 3300px) {
+    #site-name {
+        font-size: 300px;
+    }
+
+    #scroll-arrow::before {
+        font-size: 57px;
+    }
+}
+
+@media only screen and (min-width: 3301px) and (max-width: 5121px) {
+    #site-name {
+        font-size: 550px;
+    }
+
+    #scroll-arrow::before {
+        font-size: 90px;
+    }
+}
