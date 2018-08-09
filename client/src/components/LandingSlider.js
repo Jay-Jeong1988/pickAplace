@@ -84,13 +84,13 @@ class LandingSlider extends Component {
         return (
             <main className="LandingSlider">
                 <div id="site-name">
-                    <span className="c1" style={{transitionDelay: '500ms'}}>I</span>
-                    <span className="c2" style={{transitionDelay: '700ms'}}>d</span>
-                    <span className="c3" style={{transitionDelay: '100ms'}}>e</span>
-                    <span className="c4" style={{transitionDelay: '300ms'}}>a</span>
-                    <span className="c5" style={{transitionDelay: '400ms'}}>l</span>
-                    <span className="c6" style={{transitionDelay: '800ms'}}>i</span>
-                    <span className="c7" style={{transitionDelay: '1500ms'}}>o</span>
+                    <span className="c1" style={{transitionDelay: '900ms'}}>I</span>
+                    <span className="c2" style={{transitionDelay: '1100ms'}}>d</span>
+                    <span className="c3" style={{transitionDelay: '500ms'}}>e</span>
+                    <span className="c4" style={{transitionDelay: '700ms'}}>a</span>
+                    <span className="c5" style={{transitionDelay: '800ms'}}>l</span>
+                    <span className="c6" style={{transitionDelay: '1200ms'}}>i</span>
+                    <span className="c7" style={{transitionDelay: '1900ms'}}>o</span>
                 </div>
                 <Slider ref={slider => (this.slider = slider)} {...settings} className="slide-container">
                     {
