@@ -1,5 +1,5 @@
 /*-----------------------------------LandingSlider-----------------------------*/
-@import url('https://fonts.googleapis.com/css?family=Baloo');
+@import url('https://fonts.googleapis.com/css?family=Londrina+Solid|Londrina+Outline|Londrina+Shadow');
 
 .LandingSlider {
     position: fixed;
@@ -30,9 +30,9 @@
 #site-name {
     position: fixed;
     top: 40vh;
-    left: 36vw;
-    font-size: 120px;
-    font-family: 'Baloo', cursive; 
+    left: 37vw;
+    font-size: 140px;
+    font-family: 'Londrina Shadow', cursive; 
     color: white;
     z-index: 102;
 }
@@ -50,8 +50,8 @@
 
 #scroll-open {
     position: fixed;
+    top: 87vh;
     left: 47vw;
-    top: 90vh;
     z-index: 102;
     width: 100px;
     text-align: center;
@@ -78,19 +78,54 @@
     font-size: 34px;
 }
 
-
-@media only screen and (max-width: 459px) {
+@media only screen and (max-width: 352px) {
     #site-name {
-        top: 280px;
-        left: 80px;
-        font-size:70px;
+        font-size: 70px;
+        left: 21vw;
     }
 
     #scroll-open {
-        top: 88vh;
-        left: 130px;
+        left: 34vw;
     }
+
+    #scroll-arrow::before {
+        font-size: 27px;
+    }
+}
+
+@media only screen and (min-width: 353px) and (max-width: 385px) {
+    #site-name {
+        font-size: 90px;
+        left: 20vw;
+    }
+
+    #scroll-open {
+        left: 37vw;
+    }
+
     #scroll-arrow::before {
         font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 386px) and (max-width: 628px) {
+    #site-name {
+        font-size: 100px;
+        left: 22vw;
+    }
+    
+    #scroll-open {
+        left: 40vw;
+    }
+
+}
+
+@media only screen and (min-width: 638px) and (max-width: 998px) {
+    #site-name {
+        left: 28vw;
+    }
+
+    #scroll-open {
+        left: 43vw;
     }
 }
