@@ -85,4 +85,12 @@
         left: 80px;
         font-size:70px;
     }
+
+    #scroll-open {
+        top: 700px;
+        left: 130px;
+    }
+    #scroll-arrow::before {
+        font-size: 30px;
+    }
 }
