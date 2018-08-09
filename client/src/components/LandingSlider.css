@@ -138,6 +138,16 @@
     }
 }
 
+@media only screen and (min-width: 1320px) and (max-width: 2799px) {
+    #site-name {
+        font-size: 250px;
+        left: 35vw;
+    }
+
+    #scroll-arrow::before {
+        font-size:53px;
+    }
+}
 @media only screen and (min-width: 2800px) and (max-width: 3300px) {
     #site-name {
         font-size: 300px;
