@@ -29,8 +29,8 @@
 
 #site-name {
     position: fixed;
-    top: 280px;
-    left: 480px;
+    top: 40vh;
+    left: 36vw;
     font-size: 120px;
     font-family: 'Baloo', cursive; 
     color: white;
@@ -50,8 +50,8 @@
 
 #scroll-open {
     position: fixed;
-    left: 630px;
-    top: 665px;
+    left: 47vw;
+    top: 90vh;
     z-index: 102;
     width: 100px;
     text-align: center;
@@ -87,7 +87,7 @@
     }
 
     #scroll-open {
-        top: 700px;
+        top: 88vh;
         left: 130px;
     }
     #scroll-arrow::before {
