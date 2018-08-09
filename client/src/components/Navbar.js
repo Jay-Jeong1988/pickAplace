@@ -17,7 +17,7 @@ function Navbar(props) {
             <span>
                 <div id="nav-toggle" onClick={toggleMenu} >&#9776;</div>
             </span>
-            <NavLink exact to="/" ><h1>Idealio</h1></NavLink>
+            <NavLink exact to="/home" ><h1>Idealio</h1></NavLink>
             <div className="signIn">
                 {
                     user ?

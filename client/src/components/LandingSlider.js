@@ -40,12 +40,30 @@ class LandingSlider extends Component {
 
         const site_name = document.querySelector('#site-name');
         site_name.classList.add('show');
+
+        this.animateScroll();
     }
     
     componentDidUpdate() {
         
         // const currentSlide = document.querySelector('.slick-current');
         // currentSlide.firstChild.firstChild.firstChild.style.transform = 'scale(1, 1)';
+    }
+
+    animateScroll = () => {
+        const scroll_arrow = document.getElementById('scroll-arrow');
+        let sw = 0;
+        setInterval( () => {
+
+            if( sw ){
+                scroll_arrow.classList.remove('scroll-animate');
+                sw = 0;
+            }else {
+                scroll_arrow.classList.add('scroll-animate');
+                sw = 1;
+            }
+        }, 1450 );
+
     }
 
     render() {
@@ -88,6 +106,11 @@ class LandingSlider extends Component {
                     }
                 
                 </Slider>
+                <div id="scroll-open">
+                    <a href="/home">
+                        <div id="scroll-arrow"></div>
+                    </a>
+                </div>
             </main>
         )
     }

@@ -1,5 +1,9 @@
 /*----------------------------------HomePage----------------------*/
 
+.HomePage {
+    min-width: 1280px;
+    min-height: 730px;
+}
 /* #myVideo {
     z-index: -5;
     position: fixed;
@@ -36,7 +40,6 @@
     position: absolute;
     top: 50%;
     left:50%;
-    z-index: -30;
 }
 
 /* .HomeModal {

@@ -155,7 +155,7 @@ class App extends Component {
           <div className="routes">
             <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
             <LeftNavbar user={this.state.user} toggleAbout={this.toggleAbout} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
-            <Route path="/" exact component={HomePage}/>
+            <Route path="/home" exact component={HomePage}/>
             <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
             <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
             <Route path="/search_rests" exact component={SearchRestaurantsPage} />
