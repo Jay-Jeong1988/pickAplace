@@ -9,12 +9,16 @@ class LandingSlider extends Component {
 
         this.state = {
             slide_urls: [
-                '/assets/images/food_types/container_images/barbecue-img.jpg',
-                '/assets/images/food_types/container_images/breakfast-img.jpg',
-                '/assets/images/food_types/container_images/chinese-img.jpg',
-                '/assets/images/food_types/container_images/cozy-img.jpg',
-                '/assets/images/food_types/container_images/food-court-img.jpg',
-                '/assets/images/food_types/container_images/default3-img.png',
+                '/assets/images/landingImages/in_use/lpi-0.jpg',
+                '/assets/images/landingImages/in_use/lpi-1.jpg',
+                '/assets/images/landingImages/in_use/lpi-2.jpg',
+                '/assets/images/landingImages/in_use/lpi-3.jpg',
+                '/assets/images/landingImages/in_use/lpi-4.jpg',
+                '/assets/images/landingImages/in_use/lpi-5.jpg',
+                '/assets/images/landingImages/in_use/lpi-6.jpg',
+                '/assets/images/landingImages/in_use/lpi-7.jpg',
+                '/assets/images/landingImages/in_use/lpi-8.jpg',
+                '/assets/images/landingImages/in_use/lpi-9.jpg',
             ],
             interval_count: 0
         }
