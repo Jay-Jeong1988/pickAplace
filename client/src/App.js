@@ -146,10 +146,27 @@ class App extends Component {
     }
   }
 
+  redirectToHome = (e) => {
+        e.preventDefault();
+        const landingSlider = document.querySelector('.LandingSlider');
+        const landingImages = document.querySelectorAll('.slides > div');
+        const navbar = document.querySelector('.Navbar');
+        
+        landingSlider.classList.add('erase');
+        for(let node of landingImages){
+            node.classList.add('erase');
+        }
+        navbar.classList.add('showNavbar');
+
+        setTimeout(function() {
+            landingSlider.remove();
+        }, 2000);
+    }
+
   render() {
     return (
       <div className="App" onClick={this.hideMenu}>
-        <LandingSlider />
+        <LandingSlider redirectToHome={this.redirectToHome}/>
         <About />
         <Router>
           <div className="routes">

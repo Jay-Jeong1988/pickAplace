@@ -52,8 +52,8 @@ class LandingSlider extends Component {
             dots: false,
             infinite: true,
             autoplay: true,
-            autoplaySpeed: 5000,
-            speed: 5000,
+            autoplaySpeed: 2000,
+            speed: 3500,
             swipe: false,
             fade: true,
             pauseOnHover: false,
@@ -61,6 +61,7 @@ class LandingSlider extends Component {
             cssEase: 'cubic-bezier(.68, 0, .42, 1)',
         };
         const { slide_urls } = this.state;
+        const { redirectToHome } = this.props;
 
         return (
             <main className="LandingSlider">
@@ -88,7 +89,7 @@ class LandingSlider extends Component {
                 
                 </Slider>
                 <div id="scroll-open">
-                    <a href="/home">
+                    <a href="/home" onClick={redirectToHome}>
                         <div id="scroll-arrow"></div>
                     </a>
                 </div>
