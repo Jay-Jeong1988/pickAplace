@@ -16,7 +16,6 @@
     background-size: cover;
     background-position: center;
     transform: scale(1.14, 1.14);
-    /* transition: transform 0, opacity 0; */
     opacity: 0;
     transition: transform 5000ms, opacity 5000ms;
 }
@@ -24,7 +23,7 @@
 .slick-current > div > div > div {
     transform: scale(1, 1);
     opacity: 1;
-    transition: transform 5000ms, opacity 5000ms;
+    transition: transform 5000ms, opacity 4000ms;
 }
 
 #site-name {
