@@ -25,29 +25,10 @@ class LandingSlider extends Component {
     }
 
     componentDidMount() {
-        
-        // let i = 0;
-        // const updateEveryOneSecond = setInterval( () => {
-        //     this.setState({
-        //         ...this.state,
-        //         interval_count: i++
-        //     })
-        // }, 1000);
-
-        // const slickNextId = setInterval( () => {
-        //     this.slider.slickNext();
-        // }, 5100);
-
         const site_name = document.querySelector('#site-name');
         site_name.classList.add('show');
 
         this.animateScroll();
-    }
-    
-    componentDidUpdate() {
-        
-        // const currentSlide = document.querySelector('.slick-current');
-        // currentSlide.firstChild.firstChild.firstChild.style.transform = 'scale(1, 1)';
     }
 
     animateScroll = () => {
