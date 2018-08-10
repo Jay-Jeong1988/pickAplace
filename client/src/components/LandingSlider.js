@@ -89,7 +89,7 @@ class LandingSlider extends Component {
                 
                 </Slider>
                 <div id="scroll-open">
-                    <a href="/home" onClick={redirectToHome}>
+                    <a href="/home" onClick={redirectToHome} onWheel={redirectToHome}>
                         <div id="scroll-arrow"></div>
                     </a>
                 </div>
