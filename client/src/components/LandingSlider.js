@@ -20,13 +20,14 @@ class LandingSlider extends Component {
                 '/assets/images/landingImages/in_use/lpi-8.jpg',
                 '/assets/images/landingImages/in_use/lpi-9.jpg',
             ],
-            interval_count: 0
         }
     }
 
     componentDidMount() {
         const site_name = document.querySelector('#site-name');
+        const slides = document.querySelectorAll('.slick-slide:not(.slick-active)');
         site_name.classList.add('show');
+        slides.forEach( slide => slide.classList.add('reset') );
 
         this.animateScroll();
     }
@@ -44,7 +45,6 @@ class LandingSlider extends Component {
                 sw = 1;
             }
         }, 1450 );
-
     }
 
     render() {
@@ -52,13 +52,21 @@ class LandingSlider extends Component {
             dots: false,
             infinite: true,
             autoplay: true,
-            autoplaySpeed: 2000,
-            speed: 3500,
-            swipe: false,
+            autoplaySpeed: 4000,
+            speed: 4000,
+            swipe: true,
             fade: true,
             pauseOnHover: false,
             arrows: false,
             cssEase: 'cubic-bezier(.68, 0, .42, 1)',
+            afterChange: (current) => {
+                const currentSlide = document.querySelector(`.slick-slide[data-index='${current}'`);
+                const previousSlide = currentSlide.previousSibling;
+                const firstSlide = currentSlide.parentNode.firstChild;
+                const lastSlide = currentSlide.parentNode.lastChild;
+                if( currentSlide === firstSlide ) lastSlide.classList.add('reset');
+                else previousSlide.classList.add('reset');
+            }
         };
         const { slide_urls } = this.state;
         const { redirectToHome } = this.props;

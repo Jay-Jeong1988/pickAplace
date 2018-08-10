@@ -15,15 +15,15 @@
     height: 100vh;
     background-size: cover;
     background-position: center;
-    transform: scale(1.14, 1.14);
-    opacity: 0;
-    transition: transform 3500ms, opacity 3500ms;
 }
 
 .slick-current > div > div > div {
     transform: scale(1, 1);
-    opacity: 1;
-    transition: transform 3500ms, opacity 2500ms;
+    transition: transform 4500ms
+}
+
+.slick-slide.reset > div > div > div {
+    transform: scale(1.14, 1.14);
 }
 
 #site-name {
