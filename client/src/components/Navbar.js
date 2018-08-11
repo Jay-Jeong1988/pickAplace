@@ -14,14 +14,20 @@ function Navbar(props) {
     
     return (
         <nav className="Navbar">
-            <span>
+            <div>
                 <div id="nav-toggle" onClick={toggleMenu} >&#9776;</div>
-            </span>
-            <NavLink exact to="/home" ><h1>Idealio</h1></NavLink>
+            </div>
+
+            <div>
+                <a href="/">
+                    <h1 id="logo">Idealio</h1>
+                </a>
+            </div>
+
             <div className="signIn">
                 {
                     user ?
-                    <p id="user_name"><small>Signed in as</small> { first_name }</p>
+                    <p>{ first_name }</p>
                     :
                     <NavLink exact to="/sign_in" >Sign In</NavLink>
                 }

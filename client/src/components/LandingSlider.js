@@ -47,6 +47,10 @@ class LandingSlider extends Component {
         }, 1450 );
     }
 
+    test = (e) => {
+        console.log(e.type);
+    }
+
     render() {
         const settings = {
             dots: false,
@@ -61,11 +65,11 @@ class LandingSlider extends Component {
             cssEase: 'cubic-bezier(.68, 0, .42, 1)',
             afterChange: (current) => {
                 const currentSlide = document.querySelector(`.slick-slide[data-index='${current}'`);
-                const previousSlide = currentSlide.previousSibling;
-                const firstSlide = currentSlide.parentNode.firstChild;
-                const lastSlide = currentSlide.parentNode.lastChild;
-                if( currentSlide === firstSlide ) lastSlide.classList.add('reset');
-                else previousSlide.classList.add('reset');
+                const previousSlide = currentSlide ? currentSlide.previousSibling : null;
+                const firstSlide = currentSlide ? currentSlide.parentNode.firstChild : null;
+                const lastSlide = currentSlide ? currentSlide.parentNode.lastChild : null;
+                if( currentSlide && currentSlide === firstSlide ) lastSlide.classList.add('reset');
+                else if( currentSlide !== firstSlide ) previousSlide.classList.add('reset');
             }
         };
         const { slide_urls } = this.state;
@@ -97,7 +101,7 @@ class LandingSlider extends Component {
                 
                 </Slider>
                 <div id="scroll-open">
-                    <a href="/home" onClick={redirectToHome} onWheel={redirectToHome}>
+                    <a href="/home" onClick={redirectToHome} onTouchStart={this.test} onTouchMove={this.test} onTouchEnd={this.test} onWheel={redirectToHome}>
                         <div id="scroll-arrow"></div>
                     </a>
                 </div>

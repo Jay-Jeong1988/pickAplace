@@ -132,16 +132,12 @@ class App extends Component {
     const about = document.querySelector('.About');
 
     if( this.about ){
-      setTimeout( function(){
-        about.style.display = 'none';
-      }, 1000);
-      about.style.opacity = 0;
+      about.classList.remove('show')
+      setTimeout(() => {about.style.display = 'none'}, 500);
       this.about = false;
     }else {
-      about.style.display = 'block';
-      setTimeout(function(){
-        about.style.opacity = 1;
-      },100)
+      about.style.display = 'block'
+      setTimeout(() => {about.classList.add('show')}, 100);
       this.about = true;
     }
   }

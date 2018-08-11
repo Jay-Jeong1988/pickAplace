@@ -9,46 +9,58 @@
     align-items: center;
     padding: 0 2%;  
 }
-.Navbar > * {
-    width: 131px;
+.Navbar > div {
+    width: 30%;
+    text-align: end;
+    cursor: pointer;
 }
 
 .Navbar * {
     color: white;
-    font-family: 'Londrina Outline', cursive;
-    margin: 0
 }
 
-.Navbar .signIn {
-    text-align: end;
-}
-
-.Navbar a {
-    font-family: 'Rubik', sans-serif;
-    font-size: 15px;
-}
-
-.Navbar a:hover {
+.Navbar > div *:hover {
     color: rgb(165, 165, 165);
     text-decoration: none;
 }
-.Navbar p:hover {
-    color: rgb(165, 165, 165);
-}
-.Navbar h1:hover {
-    color: rgb(165, 165, 165);
+
+.Navbar > div:nth-child(2){
+    text-align: center;
 }
 
-#user_name {
+#logo {
+    font-family: 'Londrina Outline', cursive;
+    margin: 0;
+}
+
+.Navbar > .signIn {
     font-family: 'Rubik', sans-serif;
-    font-size: 19px;
+    font-size: 17px;
 }
 
-#user_name > small {
+.Navbar > .signIn > p {
+    margin: 0;
+}
+
+.Navbar > .signIn > p::before {
+    content: 'signed in as ';
     font-family: 'Dosis', sans-serif;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #nav-toggle {
-    cursor: pointer;
+    width: 19%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+    .Navbar > .signIn > p::before {
+        content: '';
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .Navbar > .signIn {
+        font-size: 25px;
+    }
 }
