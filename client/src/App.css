@@ -19,7 +19,7 @@
 }
 
 .erase {
-    height: 0 !important;
+    height: 0px !important;
     transition: height 1.2s !important;
 }
 

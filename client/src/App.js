@@ -150,6 +150,7 @@ class App extends Component {
         
         landingSlider.classList.add('erase');
         for(let node of landingImages){
+            node.parentNode.style.display = 'block';
             node.classList.add('erase');
         }
         navbar.classList.add('showNavbar');
