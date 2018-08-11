@@ -10,13 +10,15 @@
     padding: 0 2%;  
 }
 .Navbar > div {
-    width: 30%;
-    text-align: end;
-    cursor: pointer;
+    display: flex;
 }
 
 .Navbar * {
     color: white;
+}
+
+.Navbar > div * {
+    cursor: pointer;
 }
 
 .Navbar > div *:hover {
@@ -24,8 +26,12 @@
     text-decoration: none;
 }
 
-.Navbar > div:nth-child(2){
-    text-align: center;
+.Navbar > div:first-child {
+    width: 13%;
+}
+
+.Navbar > div:nth-child(2) {
+    justify-content: center;
 }
 
 #logo {
@@ -34,33 +40,25 @@
 }
 
 .Navbar > .signIn {
+    display: flex;
+    flex-direction: row-reverse;
     font-family: 'Rubik', sans-serif;
-    font-size: 17px;
+    width: 13%;
 }
 
-.Navbar > .signIn > p {
+.Navbar > .signIn > h6 {
     margin: 0;
 }
 
-.Navbar > .signIn > p::before {
+.Navbar > .signIn > h6::before {
     content: 'signed in as ';
     font-family: 'Dosis', sans-serif;
-    font-size: 13px;
-}
-
-#nav-toggle {
-    width: 19%;
-    text-align: center;
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 800px) {
-    .Navbar > .signIn > p::before {
+    .Navbar > .signIn > h6::before {
         content: '';
     }
 }
 
-@media only screen and (min-width: 1400px) {
-    .Navbar > .signIn {
-        font-size: 25px;
-    }
-}
