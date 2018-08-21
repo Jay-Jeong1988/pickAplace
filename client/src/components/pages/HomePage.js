@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HomeModal from '../HomeModal';
 import './HomePage.css';
+import Places from '../Places';
 
 
 class HomePage extends Component {
@@ -29,9 +30,10 @@ class HomePage extends Component {
                     <source src="/assets/videos/Video_Footage_Of_City.mp4" type="video/mp4"/>
                 </video> */}
                 {/* <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button> */}
-                <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal" aria-label="close">
+                {/* <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal" aria-label="close">
                     LET'S START!
-                </button>
+                </button> */}
+                <Places />
                 <HomeModal />
             </main>
         )

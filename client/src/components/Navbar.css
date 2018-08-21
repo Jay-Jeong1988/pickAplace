@@ -27,7 +27,7 @@
 }
 
 .Navbar > div:first-child {
-    width: 13%;
+    width: 15%;
 }
 
 .Navbar > div:nth-child(2) {
@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: row-reverse;
     font-family: 'Rubik', sans-serif;
-    width: 13%;
+    width: 15%;
 }
 
 .Navbar > .signIn > h6 {
