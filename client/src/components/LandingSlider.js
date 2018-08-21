@@ -58,20 +58,13 @@ class LandingSlider extends Component {
         
     }
 
-    handleTouchMove = (e) => {
-
-        // console.log('touchMove: ' + e.changedTouches[0].clientY)
-    }
-
     handleTouchEnd = (e) => {
         const swipeEnd = {
             x: e.changedTouches[0].pageX,
             y: e.changedTouches[0].pageY
         }
 
-        if(this.swipeStart.y - swipeEnd.y > 55 || this.swipeStart.y - swipeEnd.y < -55){
-
-            console.log(this.swipeStart.y - swipeEnd.y)
+        if(this.swipeStart.y - swipeEnd.y > 15 || this.swipeStart.y - swipeEnd.y < -15){
             this.props.redirectToHome(e);
         }
     }
