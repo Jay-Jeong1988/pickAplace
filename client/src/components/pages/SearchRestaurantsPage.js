@@ -51,7 +51,7 @@ class SearchRestaurantsPage extends Component {
             <main className="SearchRestaurantsPage" style={{textAlign: 'center'}}>
             <h6 style={{marginTop: '280px'}}>Can't find restaurant you know? You can add new restaurants <a href="/add_restaurant">here!</a></h6>
                 <form className="evalRestaurant" onSubmit={this.redirectToEvalPage}>
-                    <Chosen w="60%" placeholder="Search for restaurant.." className="Chosen-select" onChange={ value => console.log(value) }>
+                    <Chosen placeholder="Search for restaurant.." className="Chosen-select" onChange={ value => console.log(value) }>
                         <option></option>
                         {    
                             restaurants.map( restaurant => {
@@ -71,7 +71,7 @@ class SearchRestaurantsPage extends Component {
                         }
                     </Chosen>
                     
-                    <Button color='success' type="submit" style={{width: '20%', marginTop: '2em'}} onMouseOver={this.changePhrase} onMouseLeave={this.changePhraseBack}><small>Rate the restaurant?</small></Button>
+                    <Button color='success' type="submit" onMouseOver={this.changePhrase} onMouseLeave={this.changePhraseBack}><small>Rate the restaurant?</small></Button>
                     
                 </form>
             </main>

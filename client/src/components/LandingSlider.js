@@ -21,6 +21,8 @@ class LandingSlider extends Component {
                 '/assets/images/landingImages/in_use/lpi-9.jpg',
             ],
         }
+        this.swipeStart = {};
+
     }
 
     componentDidMount() {
@@ -47,8 +49,31 @@ class LandingSlider extends Component {
         }, 1450 );
     }
 
-    test = (e) => {
-        console.log(e.type);
+    handleTouchStart = (e) => {
+        e.preventDefault();
+        this.swipeStart = {
+            x: e.touches[0].pageX,
+            y: e.touches[0].pageY
+        }
+        
+    }
+
+    handleTouchMove = (e) => {
+
+        // console.log('touchMove: ' + e.changedTouches[0].clientY)
+    }
+
+    handleTouchEnd = (e) => {
+        const swipeEnd = {
+            x: e.changedTouches[0].pageX,
+            y: e.changedTouches[0].pageY
+        }
+
+        if(this.swipeStart.y - swipeEnd.y > 15 || this.swipeStart.y - swipeEnd.y < -15){
+
+            console.log(this.swipeStart.y - swipeEnd.y)
+            this.props.redirectToHome(e);
+        }
     }
 
     render() {
@@ -100,8 +125,8 @@ class LandingSlider extends Component {
                     }
                 
                 </Slider>
-                <div id="scroll-open">
-                    <a href="/home" onClick={redirectToHome} onTouchStart={this.test} onTouchMove={this.test} onTouchEnd={this.test} onWheel={redirectToHome}>
+                <div id="scroll-open" style={{touchAction: 'none'}}>
+                    <a href="/home" onClick={redirectToHome} onTouchStart={this.handleTouchStart}  onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} onWheel={redirectToHome}>
                         <div id="scroll-arrow"></div>
                     </a>
                 </div>
