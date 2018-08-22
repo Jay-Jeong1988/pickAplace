@@ -56,6 +56,24 @@ class Places extends Component {
                 }
             }
         })
+
+
+    }
+
+    playOnHover = (e) => {
+        const container = e.currentTarget;
+        const video = container.firstChild;
+        container.style.filter = 'none';
+        video.play();
+        video.muted = false;
+    }
+
+    pauseOnHover = (e) => {
+        const container = e.currentTarget;
+        const video = e.currentTarget.firstChild;
+        container.style.filter = 'grayscale(90%)';
+        video.pause();
+        video.muted = true;
     }
 
     render(){
@@ -66,10 +84,11 @@ class Places extends Component {
                 {
                     Object.keys(places).map( (placeName, i) => {
                         return (
-                            <div key={i} className={ "place_container " + placeName }>
+                            <div key={i} className={ "place_container " + placeName } onMouseEnter={this.playOnHover} onMouseLeave={this.pauseOnHover}>
                                 <video loop className="videos" id={ "video_" + placeName } ref="video">
                                     <source src={ places[placeName]['video_url'] } type="video/mp4"/>
                                 </video>
+                                <div className="placeTitle" style={{position: 'absolute', left: '50%'}}>{placeName}</div>
                             </div>
                         )
                     })

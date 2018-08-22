@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import SearchRestaurantsPage from './components/pages/SearchRestaurantsPage';
@@ -143,22 +143,31 @@ class App extends Component {
   }
 
   redirectToHome = (e) => {
-        e.preventDefault();
-        const landingSlider = document.querySelector('.LandingSlider');
-        const landingImages = document.querySelectorAll('.slides > div');
-        const navbar = document.querySelector('.Navbar');
-        
-        landingSlider.classList.add('erase');
-        for(let node of landingImages){
-            node.parentNode.style.display = 'block';
-            node.classList.add('erase');
-        }
-        navbar.classList.add('showNavbar');
+      e.preventDefault();
+      const landingSlider = document.querySelector('.LandingSlider');
+      const landingImages = document.querySelectorAll('.slides > div');
+      const navbar = document.querySelector('.Navbar');
+      const places = document.querySelector('.Places').children;
+      
+      landingSlider.classList.add('erase');
+      for(let node of landingImages){
+          node.parentNode.style.display = 'block';
+          node.classList.add('erase');
+      }
+      navbar.classList.add('showNavbar');
 
-        setTimeout(function() {
-            landingSlider.remove();
-        }, 2000);
-    }
+      for(let i = 1; i <= places.length; i++){
+        places[i-1].classList.add('expandPlaces');
+        setTimeout(() => {
+          places[i-1].classList.remove('expandPlaces');
+          places[i-1].classList.add('shrinkPlaces');
+        }, i * 2000)
+      }
+
+      setTimeout(function() {
+          landingSlider.remove();
+      }, 2000);
+  }
 
   render() {
     return (
@@ -169,7 +178,7 @@ class App extends Component {
           <div className="routes">
             <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
             <LeftNavbar user={this.state.user} toggleAbout={this.toggleAbout} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
-            <Route path="/home" exact component={HomePage}/>
+            <Route path="/" exact component={HomePage}/>
             <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
             <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
             <Route path="/search_rests" exact component={SearchRestaurantsPage} />

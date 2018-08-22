@@ -119,7 +119,7 @@ class LandingSlider extends Component {
                 
                 </Slider>
                 <div id="scroll-open" style={{touchAction: 'none'}}>
-                    <a href="/home" onClick={redirectToHome} onTouchStart={this.handleTouchStart}  onTouchMove={this.handleTouchMove} onTouchEnd={this.handleTouchEnd} onWheel={redirectToHome}>
+                    <a href="/" onClick={redirectToHome} onTouchStart={this.handleTouchStart} onTouchEnd={this.handleTouchEnd} onWheel={redirectToHome}>
                         <div id="scroll-arrow"></div>
                     </a>
                 </div>
