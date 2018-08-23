@@ -142,8 +142,11 @@
 
 @media only screen and (max-width: 1079px) {
     .placeTitle {
-        width: inherit;
-        font-size: 1rem;
+        font-size: 1.7rem;
+    }
+    .place_container.expandPlaces > .placeTitle{
+        top: 30%;
+        font-size: 2.3rem;
     }
 }
 
@@ -169,4 +172,34 @@
 
 .place_container.shrinkPlaces > .placeTitle{
     transition: top 1s ease-out;
+}
+
+.powerBtn {
+    position: absolute;
+    top: 70%;
+    left: 45%;
+    visibility: hidden;
+    
+}
+.powerBtn > img {
+    width: 18%;
+    filter: invert(100%);
+}
+.powerBtn > img:hover {
+    cursor: pointer;
+    filter: brightness(100%);
+}
+.powerBtn.show {
+    visibility: visible;
+}
+
+@media only screen and (max-width: 600px) {
+    .powerBtn {
+        left: 40%;
+        top: 55%;
+    }
+    .powerBtn > img {
+        width: 40%;
+    }
+    
 }
