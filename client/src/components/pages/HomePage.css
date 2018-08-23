@@ -120,6 +120,7 @@
     border: solid 10px rgb(0,0,0);
     overflow: hidden;
     filter: grayscale(100%);
+    position: relative;
 }
 
 .videos {
@@ -130,6 +131,7 @@
 
 .placeTitle {
     position: absolute;
+    top: 1%;
     width: 100%;
     font-family: 'Righteous', cursive;
     font-size: 140px;
@@ -153,9 +155,18 @@
 .place_container.expandPlaces {
     filter: none;
     height: 80vh;
-    transition: height 3s ease-out;
+    transition: height 1s ease-out;
 }
 .place_container.shrinkPlaces {
     height: 30vh;
     transition: height 1s ease-out;
+}
+
+.place_container.expandPlaces > .placeTitle{
+    top: 30%;
+    transition: top 1s ease-out;
+}
+
+.place_container.shrinkPlaces > .placeTitle{
+    transition: top 1s ease-out;
 }

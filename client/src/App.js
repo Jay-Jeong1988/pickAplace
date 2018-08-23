@@ -73,8 +73,8 @@ class App extends Component {
 
   guestSignIn = () => {
     const login = {
-      email: 'admin@admin.com',
-      password: 'admin'
+      email: 'guest@idealio.com',
+      password: 'asdfasdf'
     }
     User.signIn(login).then( res => {
       if(!res.errors) {
@@ -158,12 +158,12 @@ class App extends Component {
       navbar.classList.add('showNavbar');
 
       for(let i = 1; i <= places.length; i++){
-        places[i-1].classList.add('expandPlaces');
+        // places[i-1].classList.add('expandPlaces');
         setTimeout(() => {
-          places[i-1].classList.remove('expandPlaces');
+          // places[i-1].classList.remove('expandPlaces');
           places[i-1].classList.add('shrinkPlaces');
           placeTitles[i-1].classList.add('show');
-        }, i * 2000)
+        }, i * 1500)
       }
 
       setTimeout(function() {

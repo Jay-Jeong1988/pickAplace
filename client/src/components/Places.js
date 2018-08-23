@@ -43,7 +43,7 @@ class Places extends Component {
                     video_url: '/assets/videos/places/supermarket.mp4',
                     icon_url: ''
                 },
-                hairsalon: {
+                hairSalon: {
                     video_url: '/assets/videos/places/salon.mp4',
                     icon_url: ''
                 },
@@ -67,6 +67,8 @@ class Places extends Component {
         }else{
             container.style.filter = 'none';
         }
+        container.classList.remove('shrinkPlaces');
+        container.classList.add('expandPlaces');
         video.play();
         video.muted = false;
     }
@@ -76,6 +78,8 @@ class Places extends Component {
         const video = e.currentTarget.firstChild;
         container.style.filter = 'grayscale(100%)';
         container.lastChild.innerHTML = container.classList[1].charAt(0).toUpperCase() + container.classList[1].slice(1);
+        container.classList.remove('expandPlaces');
+        container.classList.add('shrinkPlaces');
         video.pause();
         video.muted = true;
     }
@@ -92,7 +96,7 @@ class Places extends Component {
                                 <video loop className="videos" id={ "video_" + placeName } ref="video">
                                     <source src={ places[placeName]['video_url'] } type="video/mp4"/>
                                 </video>
-                                <div className="placeTitle" style={{top: `${i * 30 + 8.5}vh`}} >{`${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}</div>
+                                <div className="placeTitle">{`${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}</div>
                             </div>
                         )
                     })
