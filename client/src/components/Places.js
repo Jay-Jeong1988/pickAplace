@@ -29,6 +29,7 @@ class Places extends Component {
                 }
             }
         }
+
     }
 
     componentDidMount() {
@@ -61,7 +62,11 @@ class Places extends Component {
     playOnHover = (e) => {
         const container = e.currentTarget;
         const video = container.firstChild;
-        container.style.filter = 'none';
+        if(!container.classList.contains('restaurant')) {
+            container.lastChild.innerHTML = 'Soon!';
+        }else{
+            container.style.filter = 'none';
+        }
         video.play();
         video.muted = false;
     }
@@ -70,6 +75,7 @@ class Places extends Component {
         const container = e.currentTarget;
         const video = e.currentTarget.firstChild;
         container.style.filter = 'grayscale(100%)';
+        container.lastChild.innerHTML = container.classList[1].charAt(0).toUpperCase() + container.classList[1].slice(1);
         video.pause();
         video.muted = true;
     }
@@ -82,11 +88,11 @@ class Places extends Component {
                 {
                     Object.keys(places).map( (placeName, i) => {
                         return (
-                            <div key={i} className={ "place_container " + placeName } onMouseEnter={this.playOnHover} onMouseLeave={this.pauseOnHover}>
+                            <div key={i} className={ "place_container " + placeName } onMouseEnter={this.playOnHover} onMouseLeave={this.pauseOnHover} >
                                 <video loop className="videos" id={ "video_" + placeName } ref="video">
                                     <source src={ places[placeName]['video_url'] } type="video/mp4"/>
                                 </video>
-                                <div className="placeTitle" style={{top: `${i * 30 + 7}vh`}} >{`${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}</div>
+                                <div className="placeTitle" style={{top: `${i * 30 + 8.5}vh`}} >{`${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}</div>
                             </div>
                         )
                     })

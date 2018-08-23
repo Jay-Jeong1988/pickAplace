@@ -24,7 +24,7 @@
 }
 
 .showNavbar {
-    height: 7vh;
+    height: 8.5vh;
     transition: height 1.2s ease-out;
     transition-delay: 1.2s;
 }
@@ -61,7 +61,8 @@
     justify-content: space-between;
     padding: 10px;
     font-size: 13px;
-    height: 45px;
+    height: 8.5vh;
+    align-items: center;
 }
 
 .content > .controller > * {
@@ -96,7 +97,7 @@
     background-color: rgb(43, 43, 43);
     transform: rotate(45deg);
     left: 265px;
-    top: 20px;
+    top: 29px;
 }
 .content > .controller > .btn-close::after {
     content: '';
@@ -106,7 +107,7 @@
     background-color: rgb(46, 45, 45);
     transform: rotate(135deg);
     left: 265px;
-    top: 20px;
+    top: 29px;
 }
 
 

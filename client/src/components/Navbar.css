@@ -3,7 +3,7 @@
 
 .Navbar {
     height: 0;
-    background-color: #323232;
+    background-color: #F4F7F6;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .Navbar * {
-    color: white;
+    color: black;
 }
 
 .Navbar > div * {
