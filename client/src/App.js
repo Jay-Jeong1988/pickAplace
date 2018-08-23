@@ -148,6 +148,7 @@ class App extends Component {
       const landingImages = document.querySelectorAll('.slides > div');
       const navbar = document.querySelector('.Navbar');
       const places = document.querySelector('.Places').children;
+      const placeTitles = document.querySelectorAll('.placeTitle');
       
       landingSlider.classList.add('erase');
       for(let node of landingImages){
@@ -161,6 +162,7 @@ class App extends Component {
         setTimeout(() => {
           places[i-1].classList.remove('expandPlaces');
           places[i-1].classList.add('shrinkPlaces');
+          placeTitles[i-1].classList.add('show');
         }, i * 2000)
       }
 

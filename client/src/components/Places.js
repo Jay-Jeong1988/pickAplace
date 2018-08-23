@@ -15,7 +15,7 @@ class Places extends Component {
                     video_url: '',
                     icon_url: ''
                 },
-                hairsalon: {
+                hairSalon: {
                     video_url: '',
                     icon_url: ''
                 },
@@ -56,10 +56,8 @@ class Places extends Component {
                 }
             }
         })
-
-
     }
-
+    
     playOnHover = (e) => {
         const container = e.currentTarget;
         const video = container.firstChild;
@@ -71,7 +69,7 @@ class Places extends Component {
     pauseOnHover = (e) => {
         const container = e.currentTarget;
         const video = e.currentTarget.firstChild;
-        container.style.filter = 'grayscale(90%)';
+        container.style.filter = 'grayscale(100%)';
         video.pause();
         video.muted = true;
     }
@@ -88,7 +86,7 @@ class Places extends Component {
                                 <video loop className="videos" id={ "video_" + placeName } ref="video">
                                     <source src={ places[placeName]['video_url'] } type="video/mp4"/>
                                 </video>
-                                <div className="placeTitle" style={{position: 'absolute', left: '50%'}}>{placeName}</div>
+                                <div className="placeTitle" style={{top: `${i * 30 + 7}vh`}} >{`${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}</div>
                             </div>
                         )
                     })
