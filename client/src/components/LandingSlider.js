@@ -109,7 +109,7 @@ class LandingSlider extends Component {
                         slide_urls.map( (url, i) => {
                             return url ? (
                                 <div key={i} className="slides">
-                                    <div style={{ backgroundImage: `url(${url})` }}></div>
+                                    <div className="bg_img" style={{ backgroundImage: `url(${url})` }}></div>
                                 </div>
                             )
                             :

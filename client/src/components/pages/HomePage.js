@@ -26,13 +26,6 @@ class HomePage extends Component {
         
         return (
             <main className="HomePage">
-                {/* <video autoPlay muted loop id="myVideo" ref="video">
-                    <source src="/assets/videos/Video_Footage_Of_City.mp4" type="video/mp4"/>
-                </video> */}
-                {/* <button id="myBtn" onClick={this.myFunction} ref="button">Pause autoplay</button> */}
-                {/* <button type="button" id="modal-btn" className="btn btn-primary" data-toggle="modal" data-target="#home_modal" aria-label="close">
-                    LET'S START!
-                </button> */}
                 <Places />
                 <HomeModal />
             </main>

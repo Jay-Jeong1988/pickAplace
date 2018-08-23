@@ -89,6 +89,11 @@ class Places extends Component {
     }
 
     replaceImg = (e) => {
+        if(e.currentTarget.parentNode.id === 'power_restaurant') {
+            e.currentTarget.dataset.toggle = "modal";
+            e.currentTarget.dataset.target = "#home_modal";
+            e.currentTarget.setAttribute('aria-label', 'close');
+        }
         if(!this.powerHovered) {
             e.currentTarget.src = '/assets/images/power_hover.png';
             this.powerHovered = true;
@@ -110,7 +115,7 @@ class Places extends Component {
                                 <video loop className="videos" id={ "video_" + placeName } ref="video">
                                     <source src={ places[placeName]['video_url'] } type="video/mp4"/>
                                 </video>
-                                <div className="powerBtn"><img onMouseEnter={this.replaceImg} onMouseLeave={this.replaceImg} src="/assets/images/power.png" alt="power button"/></div>
+                                <div id={`power_${placeName}`} className="powerBtn"><img onMouseEnter={this.replaceImg} onMouseLeave={this.replaceImg} src="/assets/images/power.png" alt="power button"/></div>
                                 <div className="placeTitle">{`${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}</div>
                             </div>
                         )
