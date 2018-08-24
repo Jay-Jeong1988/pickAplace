@@ -60,32 +60,36 @@ class Places extends Component {
     }
     
     playOnHover = (e) => {
-        const container = e.currentTarget;
-        const video = container.firstChild;
-        const powerBtn = video.nextSibling;
-        if(!container.classList.contains('restaurant')) {
-            container.lastChild.innerHTML = 'Soon!';
-        }else{
-            container.style.filter = 'none';
+        if(this.props.isTransitionOver){
+            const container = e.currentTarget;
+            const video = container.firstChild;
+            const powerBtn = video.nextSibling;
+            if(!container.classList.contains('restaurant')) {
+                container.lastChild.innerHTML = 'Soon!';
+            }else{
+                container.style.filter = 'none';
+            }
+            container.classList.remove('shrinkPlaces');
+            container.classList.add('expandPlaces');
+            powerBtn.classList.add('show');
+            video.play();
+            video.muted = false;
         }
-        container.classList.remove('shrinkPlaces');
-        container.classList.add('expandPlaces');
-        powerBtn.classList.add('show');
-        video.play();
-        video.muted = false;
     }
 
     pauseOnHover = (e) => {
-        const container = e.currentTarget;
-        const video = e.currentTarget.firstChild;
-        const powerBtn = video.nextSibling;
-        container.style.filter = 'grayscale(100%)';
-        container.lastChild.innerHTML = container.classList[1].charAt(0).toUpperCase() + container.classList[1].slice(1);
-        container.classList.remove('expandPlaces');
-        container.classList.add('shrinkPlaces');
-        powerBtn.classList.remove('show');
-        video.pause();
-        video.muted = true;
+        if(this.props.isTransitionOver){
+            const container = e.currentTarget;
+            const video = e.currentTarget.firstChild;
+            const powerBtn = video.nextSibling;
+            container.style.filter = 'grayscale(100%)';
+            container.lastChild.innerHTML = container.classList[1].charAt(0).toUpperCase() + container.classList[1].slice(1);
+            container.classList.remove('expandPlaces');
+            container.classList.add('shrinkPlaces');
+            powerBtn.classList.remove('show');
+            video.pause();
+            video.muted = true;
+        }
     }
 
     replaceImg = (e) => {

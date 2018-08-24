@@ -18,6 +18,7 @@ class SignUpPage extends Component {
 
     componentDidMount() {
         this.autoComplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+        document.querySelector('.Navbar').style.height = '8.5vh';
     }
 
     

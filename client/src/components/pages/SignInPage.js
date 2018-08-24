@@ -13,6 +13,10 @@ class SignInPage extends Component {
         }
     }
 
+    componentDidMount() {
+        document.querySelector('.Navbar').style.height = '8.5vh';
+    }
+
     signIn(event) {
         event.preventDefault();
 

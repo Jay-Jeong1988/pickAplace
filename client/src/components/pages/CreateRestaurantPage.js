@@ -29,7 +29,7 @@ class CreateRestaurantPage extends Component {
     }
 
     componentDidMount(){
-
+        document.querySelector('.Navbar').style.height = '8.5vh';
         Restaurant.types().then( data => {
             this.setState({
                 restaurant_types: [ 'hamburgers','french','chinese','korean','franchise','japanese','vietnamese','spanish','brazilian','mexican','fine-dining','seafood','barbecue','fast-food','pizza','greek','ramen','buffet','food-court','steak-house','all-you-can-eat','food-truck','mongolian', 'breakfast', 'italian','sushi']

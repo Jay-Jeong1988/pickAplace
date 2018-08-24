@@ -16,6 +16,7 @@ class SearchRestaurantsPage extends Component {
     }
 
     componentDidMount() {
+        document.querySelector('.Navbar').style.height = '8.5vh';
         Restaurant.all().then( rests => {
             this.setState({
                 restaurants: rests

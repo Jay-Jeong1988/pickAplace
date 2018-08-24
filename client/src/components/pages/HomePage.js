@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import HomeModal from '../HomeModal';
 import './HomePage.css';
 import Places from '../Places';
+import LandingSlider from '../LandingSlider';
 
 
 class HomePage extends Component {
+
+    constructor(props){
+        super(props);
+    }
 
     myFunction = (e) => {
         e.preventDefault();
@@ -26,7 +31,8 @@ class HomePage extends Component {
         
         return (
             <main className="HomePage">
-                <Places />
+                <LandingSlider redirectToHome={this.props.redirectToHome}/>
+                <Places isTransitionOver={this.props.isTransitionOver}/>
                 <HomeModal />
             </main>
         )

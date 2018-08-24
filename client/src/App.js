@@ -14,7 +14,7 @@ import LeftNavbar from './components/LeftNavbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import About from './components/About';
-import LandingSlider from './components/LandingSlider';
+import RestaurantResultPage from './components/pages/RestaurantResultPage';
 
 class App extends Component {
 
@@ -22,7 +22,8 @@ class App extends Component {
     super(props);
     this.state = {
       response: '',
-      user: null
+      user: null,
+      isTransitionOver: false,
     }
 
     this.menu_bar = false;
@@ -30,20 +31,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-  //   this.callApi()
-  //     .then( res => this.setState({ response: res.express }))
-  //     .catch( err => console.log(err));
-  // }
-
-  // callApi = async() => {
-  //   const response = await fetch('/hello-world');
-  //   const body = await response.json();
-
-  //   if ( response.status !== 200 ) throw Error(body.message);
-
-  //   return body;                //ANOTHER WAY TO MAKE ASYNC FUNCTION EXAMPLE
-  // };
-    
     this.saveUser();
   }
 
@@ -158,12 +145,16 @@ class App extends Component {
       navbar.classList.add('showNavbar');
 
       for(let i = 1; i <= places.length; i++){
-        // places[i-1].classList.add('expandPlaces');
         setTimeout(() => {
-          // places[i-1].classList.remove('expandPlaces');
           places[i-1].classList.add('shrinkPlaces');
           placeTitles[i-1].classList.add('show');
-        }, i * 1500)
+          if(i >= places.length -1){
+            this.setState({
+              ...this.state,
+              isTransitionOver: true
+            })
+          }
+        }, i * 800)
       }
 
       setTimeout(function() {
@@ -173,23 +164,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" onClick={this.hideMenu}>
-        <LandingSlider redirectToHome={this.redirectToHome}/>
-        <About />
-        <Router>
+      <Router>
+        <div className="App" onClick={this.hideMenu}>  
+          <About />
+          <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
           <div className="routes">
-            <Navbar user={this.state.user} toggleMenu={this.toggleMenu}/>
             <LeftNavbar user={this.state.user} toggleAbout={this.toggleAbout} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
-            <Route path="/" exact component={HomePage}/>
+            <Route path="/" exact render={ props => <HomePage {...props} redirectToHome={this.redirectToHome} isTransitionOver={this.state.isTransitionOver} /> }/>
             <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
             <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
             <Route path="/search_rests" exact component={SearchRestaurantsPage} />
             <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
             <Route path="/restaurants" exact component={LookUpRestaurantsPage} />
             <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
+            <Route path="/restaurant_result" exact component={RestaurantResultPage} />
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     );
   }
 }

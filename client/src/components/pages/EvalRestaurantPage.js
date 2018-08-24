@@ -16,6 +16,10 @@ class EvalRestaurantPage extends Component {
         this.evaluate = this.evaluate.bind(this);
     }
 
+    componentDidMount() {
+        document.querySelector('.Navbar').style.height = '8.5vh';
+    }
+
     evaluate( data ) {
         const restaurantId = this.props.match.params.id;
         const evaluation_score = {
