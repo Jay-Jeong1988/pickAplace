@@ -6,6 +6,7 @@ import Slider from 'react-slick';
 import HomeModalContentA from './HomeModalContentA';
 import HomeModalContentB from './HomeModalContentB';
 import HomeModalContentC from './HomeModalContentC';
+import { Link } from 'react-router-dom';
 
 class HomeModal extends Component {
 
@@ -167,10 +168,10 @@ class HomeModal extends Component {
                 else d3.select('.slick-next').style('visibility','hidden');
             }else{
                 d3.select('.slick-next').style('visibility','hidden');
+                if( this.state.clickedOtherThingsIcon ) document.querySelector('.goIcon').style.display = 'block';
             }
         }
     }
-
 
     changePage = () => {
         const prevArrow = document.getElementsByClassName('slick-prev')[0];
@@ -201,7 +202,8 @@ class HomeModal extends Component {
             slidesToScroll: 1,
             swipe: false
         };
-
+        const { clickedFoodIcon: cFI, clickedMoodIcon: cMI, clickedOtherThingsIcon: cTI } = this.state;
+        const params = cFI && cMI && cTI ? [ cFI.id, cMI.id, cTI.id ] : [];
         return (
             <main className="HomeModal">
                 <div id="home_modal" className="modal fade" tabIndex="-1" role="dialog" aria-labelledby="home_modal">
@@ -212,6 +214,9 @@ class HomeModal extends Component {
                                 <HomeModalContentB moods={this.state.moods} handleClick={this.handleClick} handleHover={this.handleHover} />
                                 <HomeModalContentC otherThings={this.state.otherThings} handleClick={this.handleClick} handleHover={this.handleHover} />
                             </Slider>
+                            <Link className="goIcon" to={`/restaurant_result/${params}`}>
+                                <img src="/assets/images/go_icon.png" alt="go_icon" style={{width: "55px", height: "55px"}}/>
+                            </Link>
                         </div>
                     </div>
                 </div>

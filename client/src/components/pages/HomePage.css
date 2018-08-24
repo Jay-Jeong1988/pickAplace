@@ -68,6 +68,13 @@
     font-size: 40px;
 }
 
+.goIcon {
+    display: none;
+    position: absolute;
+    top: 45%;
+    right: -65px;
+}
+
 /*--------------------------------HomeModalContentA & B--------------------*/
 
 .right-container > .rows > div {

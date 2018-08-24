@@ -148,7 +148,7 @@ class App extends Component {
         setTimeout(() => {
           places[i-1].classList.add('shrinkPlaces');
           placeTitles[i-1].classList.add('show');
-          if(i >= places.length -1){
+          if(i >= places.length -2){
             this.setState({
               ...this.state,
               isTransitionOver: true
@@ -177,7 +177,7 @@ class App extends Component {
             <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
             <Route path="/restaurants" exact component={LookUpRestaurantsPage} />
             <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
-            <Route path="/restaurant_result" exact component={RestaurantResultPage} />
+            <Route path="/restaurant_result/:options" exact component={RestaurantResultPage} />
           </div>
         </div>
       </Router>
