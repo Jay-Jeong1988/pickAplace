@@ -127,7 +127,7 @@ app.post('/eval_rest/:restaurant_id', (req, res) => {
     });
 });
 
-app.get("/top_ten/:eval_types", (req, res) => {
+app.get("/top_ten/:eval_types/:numOfResult", (req, res) => {
 
     const getData = () => {
         if(req.params.eval_types.split(',').includes('empty')) res.send({'errors': 'no data'});
@@ -144,11 +144,21 @@ app.get("/top_ten/:eval_types", (req, res) => {
                 else queryString += `${receivedDataArray[i]} + `;
             }
             // console.log(`(${queryString}/${receivedDataArray.length}) desc`)
-            return knex('restaurants')
-                .select(receivedParams)
-                .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
-                .limit(10)
-                .then( data => data )
+            if( req.query.rest_type === 'undefined' ){
+                return knex('restaurants')
+                    .select(receivedParams)
+                    .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
+                    .limit(req.params.numOfResult)
+                    .then( data => data )
+            }else{
+                return knex('restaurants')
+                    .select(receivedParams)
+                    .where({ type: req.query.rest_type })
+                    .orderBy(knex.raw(`${queryString}/${receivedDataArray.length}`),'desc')
+                    .limit(req.params.numOfResult)
+                    .then( data => data )
+            }
+            
         }
     }
 

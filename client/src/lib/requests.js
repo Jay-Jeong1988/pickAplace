@@ -27,9 +27,9 @@ const Restaurant = {
         }).then( res => res.json() )
     },
 
-    request_ten( eval_types ) {
-        return fetch(`/top_ten/${eval_types}`).then( res => res.json() )
-    }
+    request_ten( eval_types, numOfResult, rest_type ) {
+        return fetch(`/top_ten/${eval_types}/${numOfResult}?rest_type=${rest_type}`).then( res => res.json() )
+    },
 }
 
 const User = {

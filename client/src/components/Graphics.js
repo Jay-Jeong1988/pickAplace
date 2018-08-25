@@ -769,7 +769,7 @@ class Graphics extends Component {
             .style('font-size','20px')
             .on('click', (d,i) => {
                 if(!this.selected_options[0]) this.selected_options = ['empty'];
-                Restaurant.request_ten(this.selected_options).then( data => {
+                Restaurant.request_ten(this.selected_options, 10).then( data => {
                     if(data.errors) {
                         console.log(data.errors);
                         this.selected_options.shift();
