@@ -19,7 +19,7 @@
 
 .slick-current > div > div > .bg_img {
     transform: scale(1, 1);
-    transition: transform 4000ms
+    transition: transform 3000ms
 }
 
 .slick-slide.reset > div > div > .bg_img {
