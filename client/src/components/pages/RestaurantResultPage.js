@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Restaurant } from '../../lib/requests';
+import { Restaurant, Evaluation } from '../../lib/requests';
 import $ from 'jquery';
 import './RestaurantResultPage.css';
 
@@ -22,7 +22,7 @@ class RestaurantResultPage extends Component {
         const options = params.slice(1);
 
         if( options.includes('hygiene') ) options[options.indexOf('hygiene')] = 'luxury';
-        Restaurant.request_ten(options, 20, type).then( data => {
+        Evaluation.request_ten(options, 20, type).then( data => {
             this.setState({
                 restaurants: data
             })

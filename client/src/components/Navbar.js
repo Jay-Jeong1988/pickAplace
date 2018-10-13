@@ -29,7 +29,7 @@ function Navbar(props) {
                     user ?
                     <h6>{ first_name }</h6>
                     :
-                    <NavLink exact to="/sign_in" >Sign In</NavLink>
+                    <NavLink exact to="/sign-in" >Sign In</NavLink>
                 }
             </div>
         </nav>

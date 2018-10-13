@@ -20,16 +20,13 @@ const Restaurant = {
     },
 
     create(params) {
-        return fetch('/add_restaurant', {
+        return fetch('/restaurants/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params)
         }).then( res => res.json() )
     },
 
-    request_ten( eval_types, numOfResult, rest_type ) {
-        return fetch(`/top_ten/${eval_types}/${numOfResult}?rest_type=${rest_type}`).then( res => res.json() )
-    },
 }
 
 const User = {
@@ -53,12 +50,15 @@ const User = {
 
 const Evaluation = {
     create(restaurant_id, params) {
-        return fetch(`/eval_rest/${restaurant_id}`, {
+        return fetch(`/evaluations/${restaurant_id}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(params)
         }).then( res => res.json() )
-    }
+    },
+    request_ten( eval_types, numOfResult, rest_type ) {
+        return fetch(`/evaluations/get_ten/${eval_types}/${numOfResult}?rest_type=${rest_type}`).then( res => res.json() )
+    },
 }
 
 export { User, Restaurant, Evaluation };

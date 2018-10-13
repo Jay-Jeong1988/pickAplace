@@ -171,12 +171,12 @@ class App extends Component {
           <div className="routes">
             <LeftNavbar user={this.state.user} toggleAbout={this.toggleAbout} toggleMenu={this.toggleMenu} signOut={this.signOut} guestSignIn={this.guestSignIn}/>
             <Route path="/" exact render={ props => <HomePage {...props} redirectToHome={this.redirectToHome} isTransitionOver={this.state.isTransitionOver} /> }/>
-            <Route path="/sign_up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
-            <Route path="/sign_in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
+            <Route path="/sign-up" render={ props => <SignUpPage {...props} onSignUp={this.saveUser} /> }/>
+            <Route path="/sign-in" render={ props => <SignInPage {...props} onSignIn={this.saveUser} /> }/>
             <Route path="/search_rests" exact component={SearchRestaurantsPage} />
-            <Route path="/eval_rest/:id" exact component={EvalRestaurantsPage} />
+            <Route path="/evaluations/:id" exact component={EvalRestaurantsPage} />
             <Route path="/restaurants" exact component={LookUpRestaurantsPage} />
-            <Route path="/add_restaurant" exact component={CreateRestaurantPage} />
+            <Route path="/restaurants/add" exact component={CreateRestaurantPage} />
             <Route path="/restaurant_result/:options" exact component={RestaurantResultPage} />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import { Restaurant } from '../lib/requests';
+import { Restaurant, Evaluation } from '../lib/requests';
 import 'bootstrap/dist/js/bootstrap.js';
 
 const margin = { top: 120, right: 55, bottom: 150, left: 85};
@@ -769,7 +769,7 @@ class Graphics extends Component {
             .style('font-size','20px')
             .on('click', (d,i) => {
                 if(!this.selected_options[0]) this.selected_options = ['empty'];
-                Restaurant.request_ten(this.selected_options, 10).then( data => {
+                Evaluation.request_ten(this.selected_options, 10).then( data => {
                     if(data.errors) {
                         console.log(data.errors);
                         this.selected_options.shift();

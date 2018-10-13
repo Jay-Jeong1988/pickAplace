@@ -39,7 +39,7 @@ class SearchRestaurantsPage extends Component {
         const restaurantId = document.getElementsByClassName('Chosen-select')[0].options[selectedIndex].getAttribute('data-key');
         Restaurant.one(restaurantId).then( data => { 
             localStorage.setItem('restaurant', JSON.stringify(data) );
-            this.props.history.push(`/eval_rest/${restaurantId}`);
+            this.props.history.push(`/evaluations/${restaurantId}`);
         })
     }
 
