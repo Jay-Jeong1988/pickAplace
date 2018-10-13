@@ -5,9 +5,6 @@ import Places from "../Places";
 import LandingSlider from "../LandingSlider";
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   myFunction = e => {
     e.preventDefault();

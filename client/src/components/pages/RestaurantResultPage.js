@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Restaurant, Evaluation } from '../../lib/requests';
+import { Evaluation } from '../../lib/requests';
 import $ from 'jquery';
 import './RestaurantResultPage.css';
 
@@ -44,7 +44,7 @@ class RestaurantResultPage extends Component {
                                         <div className="logo">
                                             {
                                                 restaurant.imgUrl ?
-                                                <img src={restaurant.imgUrl} style={{width: '50px', height: '50px'}}/>
+                                                <img src={restaurant.imgUrl} style={{width: '50px', height: '50px'}} alt="restaurant_image"/>
                                                 :
                                                 <div style={{width: '50px', height: '50px'}}></div>
                                             }

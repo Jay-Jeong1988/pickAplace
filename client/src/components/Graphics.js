@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import { Restaurant, Evaluation } from '../lib/requests';
+import { Evaluation } from '../lib/requests';
 import 'bootstrap/dist/js/bootstrap.js';
 
 const margin = { top: 120, right: 55, bottom: 150, left: 85};
