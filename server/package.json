@@ -15,25 +15,14 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "bookshelf": "^0.13.3",
-    "bootstrap": "^4.1.2",
-    "chosen-js": "^1.8.5",
-    "d3": "^5.5.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-validator": "^5.2.0",
-    "jquery": "^3.3.1",
     "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
     "knex": "^0.14.6",
     "morgan": "^1.9.0",
-    "pg": "^7.4.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router-dom": "^4.3.1",
-    "react-select": "^2.0.0-beta.6",
-    "react-slick": "^0.23.1",
-    "reactstrap": "^6.1.0",
-    "slick-carousel": "^1.8.1"
+    "pg": "^7.4.3"
   },
   "repository": {
     "type": "git",
